@@ -14,7 +14,7 @@
         <ComboBox x:Name="cbDifficulty" HorizontalAlignment="Left" Margin="164,168,0,0" VerticalAlignment="Top" Width="193"/>
         <Button Content="Salir"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="380,348,0,0" VerticalAlignment="Top" Width="74" Click="ClicExit"/>
         <Button Content="Iniciar juego"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="222,348,0,0" VerticalAlignment="Top" Width="118" Click="ClicStartGame"/>
-        <ListBox x:Name="list" HorizontalAlignment="Left" Height="196" Margin="550,101,0,0" VerticalAlignment="Top" Width="161"/>
+        <ListBox x:Name="listFriends" HorizontalAlignment="Left" Height="196" Margin="550,101,0,0" VerticalAlignment="Top" Width="161"/>
         <Label Content="Invitar amigo" HorizontalAlignment="Left" Margin="589,59,0,0" VerticalAlignment="Top"/>
         <Button Content="Incluir"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="637,318,0,0" VerticalAlignment="Top" Width="74" Click="ClicAdd"/>
 

@@ -96,6 +96,41 @@ namespace Logic
             return users;
         }
 
+        public List<UserGame> GetConnectedFriends(int idUser)
+        {
+            List<UserGame> users = new List<UserGame>();
+            try
+            {
+                using (var context = new MemoryModel())
+                {
+                    var coincidences = (from Friend in context.Friends where Friend.idUser == idUser || Friend.idFriend == idUser select Friend).ToList();
+                    UserLogic userLogic = new UserLogic();
+                    for (int i = 0; i < coincidences.Count(); i++)
+                    {
+                        UserGame userGame = new UserGame();
+                        if (coincidences[i].idUser == idUser)
+                        {
+                            userGame = userLogic.GetUserGameById(coincidences[i].idFriend);
+                        }
+                        else
+                        {
+                            userGame = userLogic.GetUserGameById(coincidences[i].idUser);
+                        }
+
+                        if (userGame.status.Equals("Activo"))
+                        {
+                            users.Add(userGame);
+                        }
+                    }
+                }
+            }
+            catch (DbException)
+            {
+
+            }
+            return users;
+        }
+
         public bool ExistsFriendship(int idUser, int idFriend)
         {
             bool exists = false;

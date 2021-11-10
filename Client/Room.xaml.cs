@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Data;
+using Host;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,25 @@ namespace Client
     /// </summary>
     public partial class Room : Window
     {
-        public Room()
+        UserGame usergame = new UserGame();
+        MemoryServer service;
+
+        public Room(UserGame _user)
         {
+            usergame = _user;
             InitializeComponent();
+            initializeListFriends();
+        }
+
+        private void initializeListFriends()
+        {
+            service = new MemoryServer();
+            List<UserGame> friendsConnected = service.GetConnectedFriends(usergame.id);
+            for (int i = 0; i < friendsConnected.Count(); i++)
+            {
+                string nametag = friendsConnected[i].nametag;
+                listFriends.Items.Add(nametag);
+            }
         }
 
         private void ClicExit(object sender, RoutedEventArgs e)

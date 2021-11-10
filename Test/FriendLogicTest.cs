@@ -15,7 +15,7 @@ namespace Test
         public void TestAddFriend()
         {
             FriendLogic friendLogic = new FriendLogic();
-            Status status = friendLogic.AddFriend(6, 1);
+            Status status = friendLogic.AddFriend(6, 2);
             bool saved = false;
             if (status == Status.Success)
             {
@@ -43,6 +43,14 @@ namespace Test
             FriendLogic friendLogic = new FriendLogic();
             List<UserGame> users = friendLogic.GetFriendsList(1);
             Assert.AreEqual(0, users.Count);
+        }
+
+        [TestMethod]
+        public void TestGetConnectedFriends()
+        {
+            FriendLogic friendLogic = new FriendLogic();
+            List<UserGame> usersConnected = friendLogic.GetConnectedFriends(1);
+            Assert.AreEqual(0, usersConnected.Count);
         }
 
         [TestMethod]

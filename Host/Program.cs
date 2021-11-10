@@ -89,6 +89,9 @@ namespace Host
         List<UserGame> GetFriendsList(int idUser);
 
         [OperationContract]
+        List<UserGame> GetConnectedFriends(int idUser);
+
+        [OperationContract]
         bool ExistsFriendship(int idUser, int idFriend);
     }
 
@@ -348,6 +351,13 @@ namespace Host
             FriendLogic friendLogic = new FriendLogic();
             List<UserGame> users = friendLogic.GetFriendsList(idUser);
             return users;
+        }
+
+        public List<UserGame> GetConnectedFriends(int idUser)
+        {
+            FriendLogic friendLogic = new FriendLogic();
+            List<UserGame> usersConnected = friendLogic.GetConnectedFriends(idUser);
+            return usersConnected;
         }
 
         public bool ExistsFriendship(int idUser, int idFriend)
