@@ -39,7 +39,7 @@ namespace Client
                 UserGame user = service.GetLoggerUser(email, password);
                 if (user != null)
                 {
-                    service.updateUserStatus(user.id, "Activo");
+                    service.UpdateUserStatus(user.id, "Activo");
                     Home windowHome = new Home(user);
                     windowHome.Show();
                     this.Close();

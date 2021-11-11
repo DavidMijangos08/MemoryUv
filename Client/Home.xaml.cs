@@ -41,7 +41,7 @@ namespace Client
         private void ExitClick(object sender, RoutedEventArgs e)
         {
             service = new MemoryServer();
-            service.updateUserStatus(usergame.id, "Inactivo");
+            service.UpdateUserStatus(usergame.id, "Inactivo");
             this.Close();
         }
 
@@ -66,6 +66,20 @@ namespace Client
         {
             Friends windowFriends = new Friends(usergame);
             windowFriends.Show();
+            this.Close();
+        }
+
+        private void RankingClick(object sender, RoutedEventArgs e)
+        {
+            Ranking ranking = new Ranking(usergame);
+            ranking.Show();
+            this.Close();
+        }
+
+        private void RoomClick(object sender, RoutedEventArgs e)
+        {
+            Room room = new Room(usergame);
+            room.Show();
             this.Close();
         }
     }

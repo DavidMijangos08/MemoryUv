@@ -16,8 +16,8 @@
         <Button Content="Personalizar" HorizontalAlignment="Left" Margin="24,268,0,0" VerticalAlignment="Top" Width="74" Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun"/>
         <Label Content="Bienvenido al juego " HorizontalAlignment="Left" Margin="266,82,0,0" VerticalAlignment="Top"/>
         <StackPanel Background="White"  HorizontalAlignment="Left" Height="282" Margin="570,60,0,0" VerticalAlignment="Top" Width="114"/>
-        <Button Content="Ranking" HorizontalAlignment="Left" Margin="589,112,0,0" VerticalAlignment="Top" Width="74"  Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun" RenderTransformOrigin="0.399,0.667"/>
-        <Button Content="Crear sala" HorizontalAlignment="Left" Margin="589,185,0,0" VerticalAlignment="Top" Width="74"  Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun"/>
+        <Button Content="Ranking" HorizontalAlignment="Left" Margin="589,112,0,0" VerticalAlignment="Top" Width="74"  Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun" RenderTransformOrigin="0.399,0.667" Click="RankingClick"/>
+        <Button Content="Crear sala" HorizontalAlignment="Left" Margin="589,185,0,0" VerticalAlignment="Top" Width="74"  Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun" Click="RoomClick"/>
         <Button Content="Chat" HorizontalAlignment="Left" Margin="589,268,0,0" VerticalAlignment="Top" Width="74" FontFamily="SimSun" Click="ChatClick" Background="White" BorderBrush="#FFC5C2C2"/>
         <TextBlock x:Name="lbUsername" HorizontalAlignment="Left" Margin="389,92,0,0" VerticalAlignment="Top" Height="26" Width="98"/>
 
