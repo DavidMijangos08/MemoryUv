@@ -8,8 +8,20 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
+
+    /// <summary>
+    /// Clase que controla la lógica de las solicitudes de amistad en el juego
+    /// </summary>
+    
     public class FriendRequestLogic
     {
+
+        /// <summary>
+        /// Método que registra una nueva solicitud de amistad en el juego
+        /// </summary>
+        /// <param name="idApplicant"> Identificador del usuario que desea enviar la solicitud </param>
+        /// <param name="idReceiver"> Identificador del usuario que recibe la solicitud </param>
+        /// <returns> Retorna el estado del procesamiento del método </returns>
 
         public Status AddFriendRequest(int idApplicant, int idReceiver)
         {
@@ -39,6 +51,13 @@ namespace Logic
             return status;
         }
 
+        /// <summary>
+        /// Método que permite aceptar una solicitud pendiente en el sistema
+        /// </summary>
+        /// <param name="idApplicant"> Identificador del usuario que envío la solicitud de amistad </param>
+        /// <param name="idReceiver"> Identificador del usuario que aceptó la solicitud de amistad </param>
+        /// <returns> Retorna el estado del procesamiento del método </returns>
+
         public Status AcceptFriendRequest(int idApplicant, int idReceiver)
         {
             Status status = Status.Failed;
@@ -66,6 +85,13 @@ namespace Logic
             return status;
         }
 
+        /// <summary>
+        /// Método que permite rechazar una solicitud pendeinte en el sistema
+        /// </summary>
+        /// <param name="idApplicant"> Identificador del usuario que envío la solicitud de amistad </param>
+        /// <param name="idReceiver"> Identificador del usuario que desea rechazar la solicitud de amistad </param>
+        /// <returns></returns>
+        
         public Status RejectFriendRequest(int idApplicant, int idReceiver)
         {
             Status status = Status.Failed;
@@ -93,6 +119,12 @@ namespace Logic
             return status;
         }
 
+        /// <summary>
+        /// Método que recupera las solicitudes de amistad pendientes de un usuario
+        /// </summary>
+        /// <param name="idUser"> Identificador del usuario que desea recuperar sus solicitudes de amistad pendientes </param>
+        /// <returns> Lista con las solicitudes pendientes del usuario </returns>
+
         public List<UserGame> GetUsersRequesting(int idUser)
         {
             List<UserGame> users = new List<UserGame>();
@@ -117,6 +149,13 @@ namespace Logic
             return users;
         }
 
+        /// <summary>
+        /// Método que permite verificar si dos usuarios ya tienen una solicitud de amistad pendiente 
+        /// </summary>
+        /// <param name="idApplicant"> Identificador del usuario que requiere verificar la solicitud </param>
+        /// <param name="idReceiver"> Identificador del usuario a verificar si existe una solicitud pendiente </param>
+        /// <returns> Booleano con el resultado de la verificación, true si existe solicitud pendiente, de lo contrario, false </returns>
+
         public bool ExistsPendingRequest(int idApplicant, int idReceiver)
         {
             bool exists = false;
@@ -139,6 +178,10 @@ namespace Logic
             }
             return exists;
         }
+
+        /// <summary>
+        /// Enumerador que contiene dos estados (ÉXITO, FALLADO) para el retorno de diversos métodos
+        /// </summary>
 
         public enum Status
         {

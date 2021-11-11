@@ -53,15 +53,18 @@ namespace Logic
             return user;
         }
 
+        /// <summary>
+        /// Método que permite hashear una cadena a SHA256
+        /// </summary>
+        /// <param name="input"> Es la cadena a hashear </param>
+        /// <returns> El método retorna la cadena hasheada </returns>
+
         public string ComputeSHA256Hash(string input)
-        {
-            // Create a SHA256   
+        {   
             using (SHA256 sha256Hash = SHA256.Create())
             {
-                // ComputeHash - returns byte array  
                 byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
 
-                // Convert byte array to a string   
                 StringBuilder builder = new StringBuilder();
                 for (int i = 0; i < bytes.Length; i++)
                 {
@@ -69,11 +72,18 @@ namespace Logic
                 }
                 return builder.ToString();
             }
-        }       
+        }
 
         private static Random random = new Random();
+
+        /// <summary>
+        /// Método que permite crear una cadena con caracteres definidos aleatorios
+        /// </summary>
+        /// <returns> Retorna la cadena con 4 caracteres aleatorios </returns>
+
         public string RandomString()
         {
+
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             return new string(Enumerable.Repeat(chars, 4)
               .Select(s => s[random.Next(s.Length)]).ToArray());

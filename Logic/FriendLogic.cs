@@ -8,8 +8,21 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
+
+    /// <summary>
+    /// Clase que permite manejar la lógica de amigos para el sistema
+    /// </summary>
+
     public class FriendLogic
     {
+        
+        /// <summary>
+        /// Método que permite agregar una nueva amistad al juego
+        /// </summary>
+        /// <param name="idUser"> Se refiere al identificador del usuario que tendrá un nuevo amigo </param>
+        /// <param name="idFriend"> Se refiere al identificador del usuario que será un nuevo amigo de otro usuario </param>
+        /// <returns> Retorna el estado del procesamiento del método </returns>
+
         public Status AddFriend(int idUser, int idFriend)
         {
             Status status = Status.Failed;
@@ -36,6 +49,13 @@ namespace Logic
             }
             return status;
         }
+
+        /// <summary>
+        /// Método que permite eliminar una amistad del juego
+        /// </summary>
+        /// <param name="idUser"> Identificador del usuario que quiere eliminar un amigo </param>
+        /// <param name="idFriend"> Identificador del usuario a eliminar </param>
+        /// <returns> Retorna el estado del procesamiento del método </returns>
 
         public Status DeleteFriend(int idUser, int idFriend)
         {
@@ -64,6 +84,12 @@ namespace Logic
 
             return status;
         }
+
+        /// <summary>
+        /// Método que permite recuperar la lista de amigos de un jugador
+        /// </summary>
+        /// <param name="idUser"> Identificado del usuario que desea recuperar su lista de amigos </param>
+        /// <returns> Lista con los usuarios que son amigos del jugador </returns>
 
         public List<UserGame> GetFriendsList(int idUser)
         {
@@ -96,6 +122,12 @@ namespace Logic
             return users;
         }
 
+        /// <summary>
+        /// Método que recupera los amigos que estan activos en el juego de cierto jugador
+        /// </summary>
+        /// <param name="idUser"> Identificador del usuario que desea recuperar la lista de amigos conectados en el juego </param>
+        /// <returns> Lista con los usuarios conectados en el juego que son amigos del jugador </returns>
+ 
         public List<UserGame> GetConnectedFriends(int idUser)
         {
             List<UserGame> users = new List<UserGame>();
@@ -131,6 +163,13 @@ namespace Logic
             return users;
         }
 
+        /// <summary>
+        /// Método que verifica si existe una relación de amistad entre dos jugadores
+        /// </summary>
+        /// <param name="idUser"> Identificador del jugador que desea verificar la amistad </param>
+        /// <param name="idFriend"> Identificador del jugador con el que se verificará la amistad </param>
+        /// <returns> Booleano con el resultado de la verificación </returns>
+
         public bool ExistsFriendship(int idUser, int idFriend)
         {
             bool exists = false;
@@ -151,6 +190,10 @@ namespace Logic
             }
             return exists;
         }
+
+        /// <summary>
+        /// Enumerador que contiene dos estados (ÉXITO, FALLADO) para el retorno de diversos métodos
+        /// </summary>
 
         public enum Status
         {
