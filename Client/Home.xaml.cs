@@ -41,7 +41,7 @@ namespace Client
         private void ExitClick(object sender, RoutedEventArgs e)
         {
             service = new MemoryServer();
-            service.updateUserStatus(usergame.id, "Inactivo");
+            service.UpdateUserStatus(usergame.id, "Inactivo");
             this.Close();
         }
 
