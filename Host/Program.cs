@@ -73,7 +73,7 @@ namespace Host
         List<UserGame> GetUsersByInitialesOfNametag(string nametag);
 
         [OperationContract]
-        bool updateUserStatus(int idUser, string userStatus);
+        bool UpdateUserStatus(int idUser, string userStatus);
     }
 
     [ServiceContract]
@@ -289,7 +289,7 @@ namespace Host
             return updated;
         }
 
-        public bool updateUserStatus(int idUser, string userStatus)
+        public bool UpdateUserStatus(int idUser, string userStatus)
         {
             bool updated = false;
             UserLogic userLogic = new UserLogic();
