@@ -20,10 +20,9 @@ namespace Client
     /// Lógica de interacción para Room.xaml
     /// </summary>
     public partial class Room : Window
-    {
+    { 
         UserGame usergame = new UserGame();
         MemoryServer service;
-
         public Room(UserGame _user)
         {
             usergame = _user;

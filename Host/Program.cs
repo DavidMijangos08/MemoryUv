@@ -25,6 +25,13 @@ namespace Host
         void UsersUpdate(Dictionary<IChatClient, string>.ValueCollection users);
     }
 
+    [ServiceContract]
+    public interface IUserClient
+    {
+        [OperationContract(IsOneWay = true)]
+        void RecieveInvitation(UserGame usergameApplicant);
+    }
+
     [ServiceContract(CallbackContract = typeof(IChatClient))]
     public interface IChatService
     {
@@ -39,7 +46,19 @@ namespace Host
 
         [OperationContract(IsOneWay = true)]
         void PrivateSendMessage(string message, string username);
+    }
 
+    [ServiceContract(CallbackContract = typeof(IUserClient))]
+    public interface IRoomService
+    {
+        [OperationContract(IsOneWay = true)]
+        void ConnectRoom(UserGame userGameConnect, UserGame userGameApplicant);
+
+        [OperationContract(IsOneWay = true)]
+        void DisconnectRoom(UserGame usergame);
+
+        [OperationContract(IsOneWay = true)]
+        void SendInvitation(UserGame usergameApplicant, UserGame usergameReceiver);
     }
 
     [ServiceContract]
@@ -133,9 +152,10 @@ namespace Host
     }
 
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single, InstanceContextMode = InstanceContextMode.Single)]
-    public class MemoryServer : IChatService, IUserService, IFriendService, IFriendRequestService
+    public class MemoryServer : IChatService, IRoomService, IUserService, IFriendService, IFriendRequestService
     {
         Dictionary<IChatClient, string> _users = new Dictionary<IChatClient, string>();
+        Dictionary<IUserClient, UserGame> usersRoom = new Dictionary<IUserClient, UserGame>();
         public void Join(string username)
         {
             var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
@@ -162,7 +182,6 @@ namespace Host
                     other.RecieveMessage(user, message);
                 }
                 other.RecieveMessage(user, message);
-                //implementar junto a private...
             }
         }
         public void Leave(string username)
@@ -197,6 +216,25 @@ namespace Host
                     
                 }
             }
+        }
+
+        public void ConnectRoom(UserGame userGameConnect, UserGame userGameApplicant)
+        {
+            var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
+            usersRoom[connection] = userGameConnect;
+            Console.WriteLine("El usuario " + usersRoom[connection] + "se conecto a la sala de" + userGameApplicant.nametag);
+        }
+
+        public void DisconnectRoom(UserGame usergame)
+        {
+            var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
+            usersRoom.Remove(connection);
+            Console.WriteLine("El usuario " + usersRoom[connection] + "se desconecto de una sala de juego");
+        }
+
+        public void SendInvitation(UserGame usergameApplicant, UserGame usergameReceiver)
+        {
+            var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
 
         }
 
@@ -431,8 +469,6 @@ namespace Host
 
             return true;
         }
-
-
     }
 
     class Program

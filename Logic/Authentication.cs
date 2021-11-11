@@ -9,11 +9,24 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
+    /// <summary>
+    /// Clase lógica para la autenticación de usuarios en el sistema
+    /// </summary>
     public partial class Authentication
     {
+        /// <summary>
+        /// Constructor vacío de la clase Authentication
+        /// </summary>
         public Authentication()
         {
         }
+
+        /// <summary>
+        /// Método para recuperar un usuario del sistema
+        /// </summary>
+        /// <param name="email"> Corresponde al correo del usuario a recuperar </param>
+        /// <param name="password"> Corresponde a la contraseña del usuario a recuperar </param>
+        /// <returns> El método retorna el usuario recuperado que corresponde a los parametros </returns>
 
         public UserGame Login(string email, string password)
         {

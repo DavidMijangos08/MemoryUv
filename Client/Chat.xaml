@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
-        Closing="Window_Closing"
+        Closing="WindowClosing"
         Title="Chat" Height="450" Width="800">
     <Grid Background="BlanchedAlmond">
         <TextBlock x:Name="lbId"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="34" Margin="170,1,415.6,385" Width="208" />
