@@ -235,7 +235,23 @@ namespace Host
         public void SendInvitation(UserGame usergameApplicant, UserGame usergameReceiver)
         {
             var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
+            UserGame usergame;
+            UserGame usergameReceiverAux;
+            if (!usersRoom.TryGetValue(connection, out usergame))
+            {
+                return;
+            }
 
+            foreach(var userReceiver in usersRoom.Keys)
+            {
+                if(usersRoom.TryGetValue(userReceiver, out usergameReceiverAux))
+                {
+                    if(usergameReceiverAux == usergameReceiver)
+                    {
+                        userReceiver.RecieveInvitation(usergameApplicant);
+                    }
+                }
+            }
         }
 
         public UserGame GetLoggerUser(string email, string password)
