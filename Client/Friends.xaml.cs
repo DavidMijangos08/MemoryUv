@@ -78,8 +78,6 @@ namespace Client
         {
             bool exists = false;
             service = new MemoryServer();
-            MessageBox.Show(addressee.nametag);
-            MessageBox.Show(userGame.nametag);
             if (addressee.nametag.Equals(userGame.nametag))
             {
                 exists = true;

@@ -65,7 +65,7 @@ namespace Logic
             {
                 using (var context = new MemoryModel())
                 {
-                    var coincidences = from FriendRequest in context.FriendRequests where FriendRequest.idApplicant == idApplicant && FriendRequest.idReceiver == idReceiver select FriendRequest;
+                    var coincidences = from FriendRequest in context.FriendRequests where (FriendRequest.idApplicant == idApplicant && FriendRequest.idReceiver == idReceiver) && FriendRequest.requestStatus == "Pendiente" select FriendRequest;
                     if(coincidences.Count() > 0)
                     {
                         FriendRequest friendRequest = coincidences.First();
