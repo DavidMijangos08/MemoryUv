@@ -43,7 +43,9 @@ namespace Client
 
         private void ClicExit(object sender, RoutedEventArgs e)
         {
-
+            Home windowHome = new Home(usergame);
+            windowHome.Show();
+            this.Close();
         }
 
         private void ClicStartGame(object sender, RoutedEventArgs e)

@@ -10,8 +10,15 @@
         <Label Content="Sala" HorizontalAlignment="Left" Margin="318,10,0,0" VerticalAlignment="Top" Width="244" FontSize="36" FontFamily="Segoe Script" FontWeight="Bold"/>
         <Label Content="Seleccionar sección:" HorizontalAlignment="Left" Margin="28,101,0,0" VerticalAlignment="Top"/>
         <Label Content="Seleccionar dificultad:" HorizontalAlignment="Left" Margin="28,164,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbSection" HorizontalAlignment="Left" Margin="164,105,0,0" VerticalAlignment="Top" Width="193"/>
-        <ComboBox x:Name="cbDifficulty" HorizontalAlignment="Left" Margin="164,168,0,0" VerticalAlignment="Top" Width="193"/>
+        <ComboBox x:Name="cbSection" HorizontalAlignment="Left" Margin="164,105,0,0" VerticalAlignment="Top" Width="193" >
+            <ComboBoxItem>AFEL</ComboBoxItem>
+            <ComboBoxItem>Licenciaturas</ComboBoxItem>
+        </ComboBox>
+        <ComboBox x:Name="cbDifficulty" HorizontalAlignment="Left" Margin="164,168,0,0" VerticalAlignment="Top" Width="193" >
+            <ComboBoxItem>Facil (4x4)</ComboBoxItem>
+            <ComboBoxItem>Normal (6x6)</ComboBoxItem>
+            <ComboBoxItem>Dificil (8x8)</ComboBoxItem>
+        </ComboBox>
         <Button Content="Salir"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="380,348,0,0" VerticalAlignment="Top" Width="74" Click="ClicExit"/>
         <Button Content="Iniciar juego"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="222,348,0,0" VerticalAlignment="Top" Width="118" Click="ClicStartGame"/>
         <ListBox x:Name="listFriends" HorizontalAlignment="Left" Height="196" Margin="550,101,0,0" VerticalAlignment="Top" Width="161"/>

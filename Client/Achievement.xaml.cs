@@ -26,15 +26,17 @@ namespace Client
 
         public Logros(UserGame _user)
         {
+            userGame = _user;
             InitializeComponent();
             InitializeArchievement();
-            userGame = _user;
+            
+            MessageBox.Show("Entro" + userGame.id);
         }
 
         private void InitializeArchievement()
         {
             service = new MemoryServer();
-            if (service.GetStatisticUser(userGame.id, 1))
+            if (service.GetStatisticUser(userGame.id, 1) == true)
             {
                 lbAchievement1.IsEnabled = true;
                 imgAchievement1.Opacity = 100;

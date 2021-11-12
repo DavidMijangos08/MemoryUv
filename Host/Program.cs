@@ -465,9 +465,10 @@ namespace Host
         public bool GetStatisticUser(int idUser, int numAchievement)
         {
             StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
+            
             bool value = statisticUserLogic.GetStatisticUser(idUser, numAchievement);
 
-            return true;
+            return value;
         }
     }
 
