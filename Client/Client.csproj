@@ -93,6 +93,9 @@
     <Compile Include="Achievement.xaml.cs">
       <DependentUpon>Achievement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Procesos.xaml.cs">
+      <DependentUpon>Procesos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ranking.xaml.cs">
       <DependentUpon>Ranking.xaml</DependentUpon>
     </Compile>
@@ -183,6 +186,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Achievement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Procesos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -323,6 +330,10 @@
     <Resource Include="Resources\Carreras\Sociologia1.jpg" />
     <Resource Include="Resources\Carreras\Teatro1.png" />
     <Resource Include="Resources\Carreras\TecnologiasComputacionales1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Sound\GameSoundtrack.mp3" />
+    <Content Include="Resources\Sound\song.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

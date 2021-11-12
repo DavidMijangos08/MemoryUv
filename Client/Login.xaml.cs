@@ -39,10 +39,15 @@ namespace Client
                 UserGame user = service.GetLoggerUser(email, password);
                 if (user != null)
                 {
+                    Procesos procesos = new Procesos();
+                    procesos.Show();
+
                     service.UpdateUserStatus(user.id, "Activo");
                     Home windowHome = new Home(user);
                     windowHome.Show();
                     this.Close();
+
+                    
                 }
                 else
                 {
