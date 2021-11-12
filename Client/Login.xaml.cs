@@ -26,6 +26,7 @@ namespace Client
         public Login()
         {
             InitializeComponent();
+            
         }
 
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
@@ -39,13 +40,15 @@ namespace Client
                 UserGame user = service.GetLoggerUser(email, password);
                 if (user != null)
                 {
+
                     Procesos procesos = new Procesos();
                     procesos.Show();
+                    procesos.Hide();
 
                     service.UpdateUserStatus(user.id, "Activo");
                     Home windowHome = new Home(user);
                     windowHome.Show();
-                    this.Close();
+                    this.Hide();
 
                     
                 }

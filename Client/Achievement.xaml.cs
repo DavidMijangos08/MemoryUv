@@ -30,7 +30,7 @@ namespace Client
             InitializeComponent();
             InitializeArchievement();
             
-            MessageBox.Show("Entro" + userGame.id);
+            
         }
 
         private void InitializeArchievement()

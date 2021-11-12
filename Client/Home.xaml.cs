@@ -30,6 +30,8 @@ namespace Client
             username = _user.nametag;
             lbUsername.Text = "" + username;
             usergame = _user;
+
+            
         }
 
         private void ChatClick(object sender, RoutedEventArgs e)
