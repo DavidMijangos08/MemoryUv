@@ -57,5 +57,10 @@ namespace Client
         {
 
         }
+
+        private void ClickAccept(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -24,6 +24,11 @@
         <ListBox x:Name="listFriends" HorizontalAlignment="Left" Height="196" Margin="550,101,0,0" VerticalAlignment="Top" Width="161"/>
         <Label Content="Invitar amigo" HorizontalAlignment="Left" Margin="589,59,0,0" VerticalAlignment="Top"/>
         <Button Content="Incluir"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="637,318,0,0" VerticalAlignment="Top" Width="74" Click="ClicAdd"/>
+        <Grid x:Name="gridInvitation" HorizontalAlignment="Left" Height="131" Margin="254,164,0,0" VerticalAlignment="Top" Width="256" Visibility="Hidden">
+            <Label Content="Label" HorizontalAlignment="Left" Margin="108,10,0,0" VerticalAlignment="Top"/>
+            <Button Content="Aceptar" HorizontalAlignment="Left" Margin="23,101,0,0" Click="ClickAccept" VerticalAlignment="Top" Width="74"/>
+            <Button Content="Rechazar" HorizontalAlignment="Left" Margin="171,101,0,0" Click="ClicRejeact"  VerticalAlignment="Top" Width="75"/>
+        </Grid>
 
     </Grid>
 </Window>
