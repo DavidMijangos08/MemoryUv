@@ -9,9 +9,18 @@ using System.Threading.Tasks;
 
 namespace Test
 {
+    /// <summary>
+    /// Clase que permite manejar las pruebas de la lógica de autenticación 
+    /// </summary>
+
     [TestClass]
     public class AuthenticationTest
     {
+
+        /// <summary>
+        /// Método que realiza prueba al método de login
+        /// </summary>
+
         [TestMethod]
         public void TestLogin()
         {
@@ -19,6 +28,10 @@ namespace Test
             UserGame user = authentication.Login("david.mijangos.08@gmail.com", "Mijangos12");
             Assert.AreEqual(user.nametag, "Mijangos08");
         }
+
+        /// <summary>
+        /// Método que realiza prueba al método para hashear un string
+        /// </summary>
 
         [TestMethod]
         public void TestComputeSHA256Hash()

@@ -85,7 +85,7 @@ namespace Client
             isDataDirty = true;
             if (this.isDataDirty)
             {
-                client.leave(userName);
+                client.Leave(userName);
             }
         }
     }

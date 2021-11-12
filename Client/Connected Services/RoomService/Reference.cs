@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.ChatService {
+namespace Client.RoomService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ChatService.IChatService", CallbackContract=typeof(Client.ChatService.IChatServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName = "ChatService.IChatService", CallbackContract = typeof(Client.ChatService.IChatServiceCallback))]
     public interface IChatService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/Join")]
@@ -51,12 +51,12 @@ namespace Client.ChatService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IChatServiceChannel : Client.ChatService.IChatService, System.ServiceModel.IClientChannel {
+    public interface IChatServiceChannel : Client.RoomService.IChatService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ChatServiceClient : System.ServiceModel.DuplexClientBase<Client.ChatService.IChatService>, Client.ChatService.IChatService {
+    public partial class ChatServiceClient : System.ServiceModel.DuplexClientBase<Client.RoomService.IChatService>, Client.RoomService.IChatService {
         
         public ChatServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
@@ -112,7 +112,7 @@ namespace Client.ChatService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ChatService.IRoomService", CallbackContract=typeof(Client.ChatService.IRoomServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="RoomService.IRoomService", CallbackContract=typeof(Client.RoomService.IRoomServiceCallback))]
     public interface IRoomService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/ConnectRoom")]
@@ -142,12 +142,12 @@ namespace Client.ChatService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IRoomServiceChannel : Client.ChatService.IRoomService, System.ServiceModel.IClientChannel {
+    public interface IRoomServiceChannel : Client.RoomService.IRoomService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class RoomServiceClient : System.ServiceModel.DuplexClientBase<Client.ChatService.IRoomService>, Client.ChatService.IRoomService {
+    public partial class RoomServiceClient : System.ServiceModel.DuplexClientBase<Client.RoomService.IRoomService>, Client.RoomService.IRoomService {
         
         public RoomServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {

@@ -3,6 +3,7 @@ using Host;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,15 +20,20 @@ namespace Client
     /// <summary>
     /// Lógica de interacción para Room.xaml
     /// </summary>
-    public partial class Room : Window
+    public partial class Room : Window, RoomService.IRoomServiceCallback
     { 
         UserGame usergame = new UserGame();
         MemoryServer service;
+        public RoomService.RoomServiceClient client;
+
         public Room(UserGame _user)
         {
             usergame = _user;
             InitializeComponent();
             initializeListFriends();
+            InstanceContext context = new InstanceContext(this);
+            client = new RoomService.RoomServiceClient(context);
+            client.ConnectRoom(usergame, usergame);
         }
 
         private void initializeListFriends()
@@ -61,6 +67,16 @@ namespace Client
         private void ClickAccept(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ClicRejeact(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public void RecieveInvitation(UserGame usergameApplicant)
+        {
+            throw new NotImplementedException();
         }
     }
 }

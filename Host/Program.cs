@@ -222,14 +222,14 @@ namespace Host
         {
             var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
             usersRoom[connection] = userGameConnect;
-            Console.WriteLine("El usuario " + usersRoom[connection] + "se conecto a la sala de" + userGameApplicant.nametag);
+            Console.WriteLine("El usuario " + userGameConnect.nametag + "se conecto a la sala de" + userGameApplicant.nametag);
         }
 
         public void DisconnectRoom(UserGame usergame)
         {
             var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
             usersRoom.Remove(connection);
-            Console.WriteLine("El usuario " + usersRoom[connection] + "se desconecto de una sala de juego");
+            Console.WriteLine("El usuario " + usergame.nametag + "se desconecto de una sala de juego");
         }
 
         public void SendInvitation(UserGame usergameApplicant, UserGame usergameReceiver)

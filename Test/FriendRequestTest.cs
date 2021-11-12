@@ -10,9 +10,19 @@ using static Logic.FriendRequestLogic;
 
 namespace Test
 {
+
+    /// <summary>
+    /// Clase que permite manejar las pruebas a la lógica de la clase FriendRequest
+    /// </summary>
+
     [TestClass]
     public class FriendRequestTest
     {
+
+        /// <summary>
+        /// Método que realiza prueba del método para agregar una nueva solicitud de amistad
+        /// </summary>
+
         [TestMethod]
         public void TestAddFriendRequest()
         {
@@ -25,6 +35,10 @@ namespace Test
             }
             Assert.IsTrue(saved);
         }
+
+        /// <summary>
+        /// Método que realiza prueba al método para aceptar una solicitud de amistad
+        /// </summary>
 
         [TestMethod]
         public void TestAcceptFriendRequest()
@@ -39,6 +53,10 @@ namespace Test
             Assert.IsTrue(accepted);
         }
 
+        /// <summary>
+        /// Método que realiza prueba al método para rechazar una solicitud de amistad
+        /// </summary>
+
         [TestMethod]
         public void TestRejectFriendRequest()
         {
@@ -52,6 +70,10 @@ namespace Test
             Assert.IsTrue(rejected);
         }
 
+        /// <summary>
+        /// Método que realiza prueba al método para obtener los usuarios que solicitan una amistad
+        /// </summary>
+
         [TestMethod]
         public void TestGetUsersRequesting()
         {
@@ -59,6 +81,10 @@ namespace Test
             List<UserGame> usersRequesting = friendRequestLogic.GetUsersRequesting(6);
             Assert.AreEqual(usersRequesting.Count(), 1);
         }
+
+        /// <summary>
+        /// Método que realiza prueba al método para verificar la existencia de una solicitud pendiente entre dos usuarios
+        /// </summary>
 
         [TestMethod]
         public void TestExistsPendingRequest()

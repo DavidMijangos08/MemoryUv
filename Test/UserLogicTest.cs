@@ -7,10 +7,19 @@ using static Logic.UserLogic;
 
 namespace Test
 {
+
+    /// <summary>
+    /// Clase que permite manejar las pruebas a la lógica de la clase UserLogic
+    /// </summary>
+
     [TestClass]
     public class UserLogicTest
     {
        
+        /// <summary>
+        /// Método que realiza prueba al método para registrar un nuevo usuario
+        /// </summary>
+
         [TestMethod]
         public void TestAddUser()
         {
@@ -23,6 +32,10 @@ namespace Test
             }
             Assert.IsTrue(saved);
         }
+
+        /// <summary>
+        /// Método que realiza prueba al método para actualizar la contraseña de un usuario
+        /// </summary>
 
         [TestMethod]
         public void TestUpdatePasswordUser()
@@ -37,6 +50,10 @@ namespace Test
             Assert.IsTrue(modified);
         }
 
+        /// <summary>
+        /// Método que realiza prueba al método para actualizar el estado de un usuario
+        /// </summary>
+
         [TestMethod]
         public void TestUpdateUserStatus()
         {
@@ -50,6 +67,10 @@ namespace Test
             Assert.IsTrue(modified);
         }
 
+        /// <summary>
+        /// Método que realiza prueba al método para obtener un usuario mediante su identificador
+        /// </summary>
+
         [TestMethod]
         public void TestGetUserGameById()
         {
@@ -58,6 +79,10 @@ namespace Test
             Assert.AreEqual("david", userGame.nametag);
         }
 
+        /// <summary>
+        /// Método que realiza prueba al método para obtener un usuario mediante su correo
+        /// </summary>
+
         [TestMethod]
         public void TestGetUserGameByEmail()
         {
@@ -65,6 +90,10 @@ namespace Test
             UserGame userGame = userLogic.GetUserGameByEmail("david.mijangos@gmail.com");
             Assert.AreEqual("david", userGame.nametag);
         }
+
+        /// <summary>
+        /// Método que realiza prueba al método para verificar la existencia de un correo en el sistema
+        /// </summary>
 
         [TestMethod]
         public void TestVerifyMailExisting()
@@ -81,6 +110,10 @@ namespace Test
             ;
         }
 
+        /// <summary>
+        /// Método que realiza prueba al método para obtener los usuarios que coincidan con ciertas iniciales
+        /// </summary>
+
         [TestMethod]
         public void TestGetUsersByInitialesOfNametag()
         {
@@ -88,6 +121,10 @@ namespace Test
             List<UserGame> users = userLogic.GetUsersByInitialesOfNametag("M");
             Assert.AreEqual(users.Count, 2);
         }
+
+        /// <summary>
+        /// Método que realiza prueba al método para verificar la existencia de un nametag que no está en el sistema
+        /// </summary>
 
         [TestMethod]
         public void TestVerifyMailNonExistent()
@@ -101,6 +138,10 @@ namespace Test
             }
             Assert.IsFalse(exists);
         }
+
+        /// <summary>
+        /// Método que realiza prueba al método para verificar la existencia de un nametag que está en el sistema 
+        /// </summary>
 
         [TestMethod]
         public void TestVerifyNametagExistence()

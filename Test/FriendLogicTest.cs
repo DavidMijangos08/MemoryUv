@@ -7,9 +7,18 @@ using static Logic.FriendLogic;
 
 namespace Test
 {
+
+    /// <summary>
+    /// Clase que permite manejar las pruebas de la lógica de la clase de FriendLogic
+    /// </summary>
+
     [TestClass]
     public class FriendLogicTest
     {
+
+        /// <summary>
+        /// Método que realiza prueba del método para agregar un amigo
+        /// </summary>
 
         [TestMethod]
         public void TestAddFriend()
@@ -24,6 +33,10 @@ namespace Test
             Assert.IsTrue(saved);
         }
 
+        /// <summary>
+        /// Método que realiza prueba del método para eliminar un amigo
+        /// </summary>
+
         [TestMethod]
         public void TestDeleteFriend()
         {
@@ -37,6 +50,10 @@ namespace Test
             Assert.IsTrue(deleted);
         }
 
+        /// <summary>
+        /// Método que realiza prueba del método para obtener la lista de amigos de un jugador
+        /// </summary>
+
         [TestMethod]
         public void TestGetFriendsList()
         {
@@ -44,6 +61,10 @@ namespace Test
             List<UserGame> users = friendLogic.GetFriendsList(1);
             Assert.AreEqual(0, users.Count);
         }
+
+        /// <summary>
+        /// Método que realiza prueba del método para obtener la lista de amigos conectados de un jugador
+        /// </summary>
 
         [TestMethod]
         public void TestGetConnectedFriends()
@@ -53,6 +74,10 @@ namespace Test
             Assert.AreEqual(0, usersConnected.Count);
         }
 
+        /// <summary>
+        /// Método que realiza prueba del método para verificar la existencia de una amistad
+        /// </summary>
+
         [TestMethod]
         public void TestExistsFriendship()
         {
@@ -60,6 +85,10 @@ namespace Test
             bool exists = friendLogic.ExistsFriendship(6, 1);
             Assert.IsTrue(exists);
         }
+
+        /// <summary>
+        /// Segundo método que realiza prueba del método para verificar la existencia de una amistad pero con parametros invertidos
+        /// </summary>
 
         [TestMethod]
         public void SecondTestExistsFriendship()
