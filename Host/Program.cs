@@ -29,7 +29,7 @@ namespace Host
     public interface IUserClient
     {
         [OperationContract(IsOneWay = true)]
-        void RecieveInvitation(UserGame usergameApplicant);
+        void RecieveInvitation(string usergameApplicant);
     }
 
     [ServiceContract(CallbackContract = typeof(IChatClient))]
@@ -52,13 +52,13 @@ namespace Host
     public interface IRoomService
     {
         [OperationContract(IsOneWay = true)]
-        void ConnectRoom(UserGame userGameConnect, UserGame userGameApplicant);
+        void ConnectRoom(string userGameConnect, string userGameApplicant);
 
         [OperationContract(IsOneWay = true)]
-        void DisconnectRoom(UserGame usergame);
+        void DisconnectRoom(string usergame);
 
         [OperationContract(IsOneWay = true)]
-        void SendInvitation(UserGame usergameApplicant, UserGame usergameReceiver);
+        void SendInvitation(string usergameApplicant, string usergameReceiver);
     }
 
     [ServiceContract]
@@ -155,7 +155,7 @@ namespace Host
     public class MemoryServer : IChatService, IRoomService, IUserService, IFriendService, IFriendRequestService
     {
         Dictionary<IChatClient, string> _users = new Dictionary<IChatClient, string>();
-        Dictionary<IUserClient, UserGame> usersRoom = new Dictionary<IUserClient, UserGame>();
+        Dictionary<IUserClient, string> usersRoom = new Dictionary<IUserClient, string>();
         public void Join(string username)
         {
             var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
@@ -218,25 +218,25 @@ namespace Host
             }
         }
 
-        public void ConnectRoom(UserGame userGameConnect, UserGame userGameApplicant)
+        public void ConnectRoom(string userGameConnect, string userGameApplicant)
         {
             var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
             usersRoom[connection] = userGameConnect;
-            Console.WriteLine("El usuario " + userGameConnect.nametag + "se conecto a la sala de" + userGameApplicant.nametag);
+            Console.WriteLine("El usuario " + userGameConnect + "se conecto a la sala de" + userGameApplicant);
         }
 
-        public void DisconnectRoom(UserGame usergame)
+        public void DisconnectRoom(string usergame)
         {
             var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
             usersRoom.Remove(connection);
-            Console.WriteLine("El usuario " + usergame.nametag + "se desconecto de una sala de juego");
+            Console.WriteLine("El usuario " + usergame + "se desconecto de una sala de juego");
         }
 
-        public void SendInvitation(UserGame usergameApplicant, UserGame usergameReceiver)
+        public void SendInvitation(string usergameApplicant, string usergameReceiver)
         {
             var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
-            UserGame usergame;
-            UserGame usergameReceiverAux;
+            string usergame;
+            string usergameReceiverAux;
             if (!usersRoom.TryGetValue(connection, out usergame))
             {
                 return;

@@ -33,7 +33,7 @@ namespace Client
             initializeListFriends();
             InstanceContext context = new InstanceContext(this);
             client = new RoomService.RoomServiceClient(context);
-            client.ConnectRoom(usergame, usergame);
+            client.ConnectRoom(usergame.nametag, usergame.nametag);
         }
 
         private void initializeListFriends()
@@ -61,7 +61,11 @@ namespace Client
 
         private void ClicAdd(object sender, RoutedEventArgs e)
         {
-
+            object itemSelected = listFriends.SelectedItem;
+            string userSelected = itemSelected.ToString();
+            service = new MemoryServer();
+            List<UserGame> userReceiver = service.GetUsersByInitialesOfNametag(userSelected);
+            client.SendInvitation(usergame.nametag, userSelected);
         }
 
         private void ClickAccept(object sender, RoutedEventArgs e)
@@ -74,9 +78,11 @@ namespace Client
 
         }
 
-        public void RecieveInvitation(UserGame usergameApplicant)
+        public void RecieveInvitation(string usergameApplicant)
         {
-            throw new NotImplementedException();
+            string messageInvitation = "El usuario" + usergameApplicant + "te está invitando a su sala";
+            gridInvitation.IsEnabled = true;
+            lbInvitation.Text = messageInvitation;
         }
     }
 }
