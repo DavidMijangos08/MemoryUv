@@ -33,6 +33,12 @@ namespace Client
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Método que finaliza ventana
+        /// </summary>
+        /// <param name="sender"> Identificador del usuario que desea enviar la solicitud </param>
+        /// <param name="e"> Identificador del usuario que recibe la solicitud </param>
+        /// <returns> No retorna </returns>
         private void ButtonSalir_Click(object sender, RoutedEventArgs e)
         {
             Login login = new Login();
@@ -40,23 +46,33 @@ namespace Client
             this.Hide();
         }
 
+        /// <summary>
+        /// Método que habilita los campos de texto de codigo, nametag y envia un codigo de verificacion al correo del usuario.
+        /// </summary>
+        /// <param name="sender"> Identificador del usuario que desea enviar la solicitud </param>
+        /// <param name="e"> Identificador del usuario que recibe la solicitud </param>
+        /// <returns> No retorna </returns>
         private void ButtonContinuar_Click(object sender, RoutedEventArgs e)
         {
             service = new MemoryServer();            
             string email = tbCorreo.Text;
             string password = pbPassword.Password.ToString();
-            
-             
+                         
             if (!ExistsInvalidFields(email, password))
             {
                 MessageBox.Show("Codigo enviado...");
                 codex = service.SendEmail(email);
                 tbCodigo.IsEnabled = true;
                 tbNametag.IsEnabled = true;
-                
             }
         }
 
+        /// <summary>
+        /// Método que regresa guarda un UserGame en la base de datos y regresa a la ventana Login
+        /// </summary>
+        /// <param name="sender"> Identificador del usuario que desea enviar la solicitud </param>
+        /// <param name="e"> Identificador del usuario que recibe la solicitud </param>
+        /// <returns> No retorna </returns>
         private void ButtonAceptar_Click(object sender, RoutedEventArgs e)
         {
             service = new MemoryServer();
@@ -80,11 +96,9 @@ namespace Client
                     MessageBox.Show("Codigo incorrecto");
                 }
                 
-
                 Login login = new Login();
                 login.Show();
-                this.Hide();
-                
+                this.Hide();         
                 
             }
             else
@@ -93,6 +107,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que verifica si existen campos invalidos
+        /// </summary>
+        /// <param name="email"> Correo electronico del usuario  </param>
+        /// <param name="password"> Identificador del usuario que recibe la solicitud </param>
+        /// <returns> No retorna </returns>
         private Boolean ExistsInvalidFields(string email, string password)
         {
             bool exists = false;

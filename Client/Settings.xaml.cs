@@ -33,8 +33,13 @@ namespace Client
 
         }
 
-        
 
+        /// <summary>
+        /// Método que regresa a la ventana Home
+        /// </summary>
+        /// <param name="sender"> Identificador del usuario que desea enviar la solicitud </param>
+        /// <param name="e"> Identificador del usuario que recibe la solicitud </param>
+        /// <returns> No retorna </returns>
         private void CerrarSesionClick(object sender, RoutedEventArgs e)
         {
             Login login = new Login();
@@ -42,15 +47,17 @@ namespace Client
             this.Hide();
         }
 
+        /// <summary>
+        /// Método que regresa a la ventana Home
+        /// </summary>
+        /// <param name="sender"> Identificador del usuario que desea enviar la solicitud </param>
+        /// <param name="e"> Identificador del usuario que recibe la solicitud </param>
+        /// <returns> No retorna </returns>
         private void RegresarClick(object sender, RoutedEventArgs e)
         {
-            
-
             Home windowHome = new Home(userGame);
             windowHome.Show();
             this.Close();
-            
-
         }
 
         
