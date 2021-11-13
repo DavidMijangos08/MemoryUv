@@ -156,9 +156,6 @@
     <None Include="Connected Services\ChatService\item3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ChatService\item4.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\ChatService\MemoryServer.wsdl" />
     <None Include="Connected Services\RoomService\item.xsd">
       <SubType>Designer</SubType>
@@ -170,9 +167,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\RoomService\item3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\RoomService\item4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\RoomService\MemoryServer.wsdl" />

@@ -12,7 +12,7 @@ namespace Client.RoomService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName = "ChatService.IChatService", CallbackContract = typeof(Client.ChatService.IChatServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="RoomService.IChatService", CallbackContract=typeof(Client.RoomService.IChatServiceCallback))]
     public interface IChatService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/Join")]
@@ -116,29 +116,29 @@ namespace Client.RoomService {
     public interface IRoomService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/ConnectRoom")]
-        void ConnectRoom(Data.UserGame userGameConnect, Data.UserGame userGameApplicant);
+        void ConnectRoom(string userGameConnect, string userGameApplicant);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/ConnectRoom")]
-        System.Threading.Tasks.Task ConnectRoomAsync(Data.UserGame userGameConnect, Data.UserGame userGameApplicant);
+        System.Threading.Tasks.Task ConnectRoomAsync(string userGameConnect, string userGameApplicant);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/DisconnectRoom")]
-        void DisconnectRoom(Data.UserGame usergame);
+        void DisconnectRoom(string usergame);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/DisconnectRoom")]
-        System.Threading.Tasks.Task DisconnectRoomAsync(Data.UserGame usergame);
+        System.Threading.Tasks.Task DisconnectRoomAsync(string usergame);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/SendInvitation")]
-        void SendInvitation(Data.UserGame usergameApplicant, Data.UserGame usergameReceiver);
+        void SendInvitation(string usergameApplicant, string usergameReceiver);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/SendInvitation")]
-        System.Threading.Tasks.Task SendInvitationAsync(Data.UserGame usergameApplicant, Data.UserGame usergameReceiver);
+        System.Threading.Tasks.Task SendInvitationAsync(string usergameApplicant, string usergameReceiver);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IRoomServiceCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/RecieveInvitation")]
-        void RecieveInvitation(Data.UserGame usergameApplicant);
+        void RecieveInvitation(string usergameApplicant);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -169,27 +169,27 @@ namespace Client.RoomService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void ConnectRoom(Data.UserGame userGameConnect, Data.UserGame userGameApplicant) {
+        public void ConnectRoom(string userGameConnect, string userGameApplicant) {
             base.Channel.ConnectRoom(userGameConnect, userGameApplicant);
         }
         
-        public System.Threading.Tasks.Task ConnectRoomAsync(Data.UserGame userGameConnect, Data.UserGame userGameApplicant) {
+        public System.Threading.Tasks.Task ConnectRoomAsync(string userGameConnect, string userGameApplicant) {
             return base.Channel.ConnectRoomAsync(userGameConnect, userGameApplicant);
         }
         
-        public void DisconnectRoom(Data.UserGame usergame) {
+        public void DisconnectRoom(string usergame) {
             base.Channel.DisconnectRoom(usergame);
         }
         
-        public System.Threading.Tasks.Task DisconnectRoomAsync(Data.UserGame usergame) {
+        public System.Threading.Tasks.Task DisconnectRoomAsync(string usergame) {
             return base.Channel.DisconnectRoomAsync(usergame);
         }
         
-        public void SendInvitation(Data.UserGame usergameApplicant, Data.UserGame usergameReceiver) {
+        public void SendInvitation(string usergameApplicant, string usergameReceiver) {
             base.Channel.SendInvitation(usergameApplicant, usergameReceiver);
         }
         
-        public System.Threading.Tasks.Task SendInvitationAsync(Data.UserGame usergameApplicant, Data.UserGame usergameReceiver) {
+        public System.Threading.Tasks.Task SendInvitationAsync(string usergameApplicant, string usergameReceiver) {
             return base.Channel.SendInvitationAsync(usergameApplicant, usergameReceiver);
         }
     }
