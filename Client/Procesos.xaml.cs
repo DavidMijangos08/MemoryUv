@@ -37,16 +37,7 @@ namespace Client
 
         public void InitializeMusic()
         {
-            /*OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "MP3 files (*.mp3)|*.mp3|All files (*.*)|*.*";
             
-                mediaPlayer.Open(new Uri(filename));
-                mediaPlayer.Play();
-            */
-            /*SoundPlayer player = new SoundPlayer("/Resources/Sound/song.wav");
-            player.LoadAsync();
-            player.Play(); */
-
             SoundPlayer player = new SoundPlayer();
             player.Stream = Properties.Resources.song;
             try
@@ -54,7 +45,7 @@ namespace Client
                 player.Load();
                 player.Play();
             }
-            catch (Exception E) { }
+            catch (Exception) { }
 
         }
         public void test()
@@ -67,26 +58,6 @@ namespace Client
             Sound1.Play();
         }
 
-        private void btnOpenAudioFile_Click(object sender, RoutedEventArgs e)
-        {
-            /*OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "MP3 files (*.mp3)|*.mp3|All files (*.*)|*.*";
-            
-                mediaPlayer.Open(new Uri(openFileDialog.FileName));
-                mediaPlayer.Play();  */
-
-            /*SoundPlayer player = new SoundPlayer();
-            var direct = Environment.CurrentDirectory + "Resources/Sound/song.wav";
-            player.SoundLocation = direct;
-            try
-            {
-                player.Load();
-                player.Play();
-            }
-            catch (Exception E) { } */
-
-            
-
-        }
+        
     }
 }

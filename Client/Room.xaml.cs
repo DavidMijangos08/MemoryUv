@@ -70,18 +70,20 @@ namespace Client
 
         private void ClickAccept(object sender, RoutedEventArgs e)
         {
-
+            gridInvitation.Visibility = Visibility.Collapsed;
+            gridPlayers.Visibility = Visibility.Visible;
         }
 
         private void ClicRejeact(object sender, RoutedEventArgs e)
         {
-
+            gridInvitation.Visibility = Visibility.Collapsed;
         }
 
         public void RecieveInvitation(string usergameApplicant)
         {
             string messageInvitation = "El usuario" + usergameApplicant + "te está invitando a su sala";
-            gridInvitation.IsEnabled = true;
+            
+            gridInvitation.Visibility = Visibility.Visible;
             lbInvitation.Text = messageInvitation;
         }
     }

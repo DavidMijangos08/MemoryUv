@@ -5,30 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
-        Title="Sala" Height="408" Width="744.5">
+        Title="Sala" Height="380" Width="700">
     <Grid Background="#DCDCDC" Margin="0,0,2,1">
         <Label Content="Sala" HorizontalAlignment="Left" Margin="318,10,0,0" VerticalAlignment="Top" Width="244" FontSize="36" FontFamily="Segoe Script" FontWeight="Bold"/>
-        <Label Content="Seleccionar sección:" HorizontalAlignment="Left" Margin="28,101,0,0" VerticalAlignment="Top"/>
-        <Label Content="Seleccionar dificultad:" HorizontalAlignment="Left" Margin="28,164,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbSection" HorizontalAlignment="Left" Margin="164,105,0,0" VerticalAlignment="Top" Width="193" >
+        <Label Content="Seleccionar sección:" HorizontalAlignment="Left" Margin="28,73,0,0" VerticalAlignment="Top"/>
+        <Label Content="Seleccionar dificultad:" HorizontalAlignment="Left" Margin="28,113,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbSection" HorizontalAlignment="Left" Margin="164,75,0,0" VerticalAlignment="Top" Width="193" >
             <ComboBoxItem>AFEL</ComboBoxItem>
             <ComboBoxItem>Licenciaturas</ComboBoxItem>
         </ComboBox>
-        <ComboBox x:Name="cbDifficulty" HorizontalAlignment="Left" Margin="164,168,0,0" VerticalAlignment="Top" Width="193" >
+        <ComboBox x:Name="cbDifficulty" HorizontalAlignment="Left" Margin="164,116,0,0" VerticalAlignment="Top" Width="193" >
             <ComboBoxItem>Facil (4x4)</ComboBoxItem>
             <ComboBoxItem>Normal (6x6)</ComboBoxItem>
             <ComboBoxItem>Dificil (8x8)</ComboBoxItem>
         </ComboBox>
-        <Button Content="Salir"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="380,348,0,0" VerticalAlignment="Top" Width="74" Click="ClicExit"/>
-        <Button Content="Iniciar juego"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="222,348,0,0" VerticalAlignment="Top" Width="118" Click="ClicStartGame"/>
-        <ListBox x:Name="listFriends" HorizontalAlignment="Left" Height="196" Margin="550,101,0,0" VerticalAlignment="Top" Width="161"/>
-        <Label Content="Invitar amigo" HorizontalAlignment="Left" Margin="589,59,0,0" VerticalAlignment="Top"/>
-        <Button Content="Incluir"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="637,318,0,0" VerticalAlignment="Top" Width="74" Click="ClicAdd"/>
-        <Grid x:Name="gridInvitation" HorizontalAlignment="Left" Height="131" Margin="254,164,0,0" VerticalAlignment="Top" Width="256">
+        <Button Content="Salir"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="28,28,0,0" VerticalAlignment="Top" Width="74" Click="ClicExit">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+
+        <ListBox x:Name="listFriends" HorizontalAlignment="Left" Height="196" Margin="484,101,0,0" VerticalAlignment="Top" Width="161"/>
+        <Label Content="Invitar amigo" HorizontalAlignment="Left" Margin="523,59,0,0" VerticalAlignment="Top"/>
+        <Button Content="Incluir"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="571,318,0,0" VerticalAlignment="Top" Width="74" Click="ClicAdd">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Grid x:Name="gridInvitation" HorizontalAlignment="Left" Height="131" Margin="113,179,0,0" VerticalAlignment="Top" Width="256" Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" Visibility="Hidden">
+            <Grid.Effect>
+                <DropShadowEffect Color="#FF101354"/>
+            </Grid.Effect>
             <Button Content="Aceptar" HorizontalAlignment="Left" Margin="23,101,0,0" Click="ClickAccept" VerticalAlignment="Top" Width="74"/>
             <Button Content="Rechazar" HorizontalAlignment="Left" Margin="171,101,0,0" Click="ClicRejeact"  VerticalAlignment="Top" Width="75"/>
             <TextBlock x:Name="lbInvitation" HorizontalAlignment="Left" Margin="23,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="38" Width="223"/>
         </Grid>
+        <Grid x:Name="gridPlayers" Visibility="Hidden" >
+            <Image HorizontalAlignment="Left" Height="100" Margin="83,174,0,0" VerticalAlignment="Top" Width="100" Source="Resources/Images/user0.png"/>
+            <Image HorizontalAlignment="Left" Height="100" Margin="266,174,0,0" VerticalAlignment="Top" Width="100" Source="Resources/Images/user0.png"/>
+            <Image HorizontalAlignment="Left" Height="100" Margin="174,174,0,0" VerticalAlignment="Top" Width="100" Source="Resources/Images/vs0.png"/>
+            <Button Content="Iniciar juego"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="160,318,0,0" VerticalAlignment="Top" Width="118" Click="ClicStartGame">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+        </Grid>
+
 
     </Grid>
 </Window>

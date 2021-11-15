@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Data;
+using Host;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,27 @@ namespace Client
     /// </summary>
     public partial class Game : Window
     {
-        public Game()
+        UserGame usergame = new UserGame();
+        MemoryServer service;
+       
+
+        public Game(UserGame _user)
         {
             InitializeComponent();
         }
+
+        private void changeTextBlock(int lb)
+        {
+            if (lb == 0)
+            {
+                //lbUserTurn.Text = userSelected.nametag;
+            }
+            if (lb == 1)
+            {
+                lbUserTurn.Text = usergame.nametag;
+            }
+        }
+
+        
     }
 }

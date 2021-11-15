@@ -106,6 +106,9 @@
     <Compile Include="Achievement.xaml.cs">
       <DependentUpon>Achievement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Personalize.xaml.cs">
+      <DependentUpon>Personalize.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Procesos.xaml.cs">
       <DependentUpon>Procesos.xaml</DependentUpon>
     </Compile>
@@ -209,6 +212,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Achievement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Personalize.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -354,6 +361,14 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Resource Include="Resources\Images\user0.png" />
+    <Resource Include="Resources\Images\vs0.png" />
+    <Resource Include="Resources\Background\backgroundDefault.png" />
+    <Resource Include="Resources\Background\backgroundGreen.png" />
+    <Resource Include="Resources\Background\backgroundIce.png" />
+    <Resource Include="Resources\Background\backgroundPink.jpg" />
+    <Resource Include="Resources\Background\backgroundRed.jpg" />
+    <Resource Include="Resources\Background\backgroundX.jpg" />
     <Content Include="Resources\Sound\GameSoundtrack.mp3" />
     <Content Include="Resources\Sound\song.wav" />
   </ItemGroup>

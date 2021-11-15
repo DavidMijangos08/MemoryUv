@@ -13,7 +13,7 @@
         <StackPanel Background="White"  HorizontalAlignment="Left" Height="282" Margin="14,60,0,0" VerticalAlignment="Top" Width="114"/>
         <Button Content="Amigos" HorizontalAlignment="Left" Margin="24,112,0,0" VerticalAlignment="Top" Width="74"  Click="FriendsClick" Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun"/>
         <Button Content="Logros" HorizontalAlignment="Left" Margin="24,185,0,0" VerticalAlignment="Top" Width="74"  Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun" Click="ArchievementClick"/>
-        <Button Content="Personalizar" HorizontalAlignment="Left" Margin="24,268,0,0" VerticalAlignment="Top" Width="74" Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun"/>
+        <Button Content="Personalizar" HorizontalAlignment="Left" Margin="24,268,0,0" VerticalAlignment="Top" Width="74" Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun" Click="PersonalizeClick"/>
         <Label Content="Bienvenido al juego " HorizontalAlignment="Left" Margin="266,82,0,0" VerticalAlignment="Top"/>
         <StackPanel Background="White"  HorizontalAlignment="Left" Height="282" Margin="570,60,0,0" VerticalAlignment="Top" Width="114"/>
         <Button Content="Ranking" HorizontalAlignment="Left" Margin="589,112,0,0" VerticalAlignment="Top" Width="74"  Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun" RenderTransformOrigin="0.399,0.667" Click="RankingClick"/>

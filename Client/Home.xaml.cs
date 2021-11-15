@@ -84,5 +84,21 @@ namespace Client
             room.Show();
             this.Close();
         }
+
+        
+
+        private void PersonalizeClick(object sender, RoutedEventArgs e)
+        {
+            Game game = new Game(usergame);
+            game.Show();
+            this.Close();
+
+            Personalize personalize = new Personalize();
+            personalize.Show();
+            this.Close();
+            
+
+            
+        }
     }
 }
