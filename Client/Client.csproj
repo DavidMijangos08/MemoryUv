@@ -109,6 +109,9 @@
     <Compile Include="Personalize.xaml.cs">
       <DependentUpon>Personalize.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PreGame.xaml.cs">
+      <DependentUpon>PreGame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Procesos.xaml.cs">
       <DependentUpon>Procesos.xaml</DependentUpon>
     </Compile>
@@ -216,6 +219,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Personalize.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PreGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

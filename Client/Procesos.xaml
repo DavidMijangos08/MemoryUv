@@ -6,7 +6,5 @@
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
         Title="Procesos" Height="450" Width="800">
-    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-        <Button Name="btnOpenAudioFile" Click="btnOpenAudioFile_Click">Open Audio file</Button>
-    </Grid>
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center"/>
 </Window>

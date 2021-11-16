@@ -49,6 +49,8 @@
                     <DropShadowEffect/>
                 </Button.Effect>
             </Button>
+            <TextBlock x:Name="lbUsergame" Margin="83,279,523,52.6" />
+            <TextBlock x:Name="lbUsergameAplicant" Margin="266,279,340,52.6" />
         </Grid>
 
 

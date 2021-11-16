@@ -30,6 +30,8 @@ namespace Host
     {
         [OperationContract(IsOneWay = true)]
         void RecieveInvitation(string usergameApplicant);
+
+
     }
 
     [ServiceContract(CallbackContract = typeof(IChatClient))]

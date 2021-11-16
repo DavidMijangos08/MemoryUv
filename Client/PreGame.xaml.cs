@@ -15,16 +15,21 @@ using System.Windows.Shapes;
 namespace Client
 {
     /// <summary>
-    /// Lógica de interacción para Personalize.xaml
+    /// Lógica de interacción para PreGame.xaml
     /// </summary>
-    public partial class Personalize : Window
+    public partial class PreGame : Window
     {
-        public Personalize()
+        public PreGame()
         {
             InitializeComponent();
         }
 
         private void ExitClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ClicStartGame(object sender, RoutedEventArgs e)
         {
 
         }

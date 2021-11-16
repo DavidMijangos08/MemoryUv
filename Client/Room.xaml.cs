@@ -72,6 +72,9 @@ namespace Client
         {
             gridInvitation.Visibility = Visibility.Collapsed;
             gridPlayers.Visibility = Visibility.Visible;
+            PreGame pregame = new PreGame();
+            pregame.Show();
+            this.Close();
         }
 
         private void ClicRejeact(object sender, RoutedEventArgs e)
