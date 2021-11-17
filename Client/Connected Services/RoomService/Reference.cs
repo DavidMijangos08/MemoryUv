@@ -115,11 +115,11 @@ namespace Client.RoomService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="RoomService.IRoomService", CallbackContract=typeof(Client.RoomService.IRoomServiceCallback))]
     public interface IRoomService {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/ConnectRoom")]
-        void ConnectRoom(string userGameConnect, string userGameApplicant);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/ConnectWaitingRoom")]
+        void ConnectWaitingRoom(string userGameConnect);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/ConnectRoom")]
-        System.Threading.Tasks.Task ConnectRoomAsync(string userGameConnect, string userGameApplicant);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/ConnectWaitingRoom")]
+        System.Threading.Tasks.Task ConnectWaitingRoomAsync(string userGameConnect);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/DisconnectRoom")]
         void DisconnectRoom(string usergame);
@@ -132,6 +132,12 @@ namespace Client.RoomService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/SendInvitation")]
         System.Threading.Tasks.Task SendInvitationAsync(string usergameApplicant, string usergameReceiver);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/SendAcceptance")]
+        void SendAcceptance(string usergameApplicant, string usergameReceiver);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/SendAcceptance")]
+        System.Threading.Tasks.Task SendAcceptanceAsync(string usergameApplicant, string usergameReceiver);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -139,6 +145,9 @@ namespace Client.RoomService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/RecieveInvitation")]
         void RecieveInvitation(string usergameApplicant);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/RecieveAnswer")]
+        void RecieveAnswer();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -169,12 +178,12 @@ namespace Client.RoomService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void ConnectRoom(string userGameConnect, string userGameApplicant) {
-            base.Channel.ConnectRoom(userGameConnect, userGameApplicant);
+        public void ConnectWaitingRoom(string userGameConnect) {
+            base.Channel.ConnectWaitingRoom(userGameConnect);
         }
         
-        public System.Threading.Tasks.Task ConnectRoomAsync(string userGameConnect, string userGameApplicant) {
-            return base.Channel.ConnectRoomAsync(userGameConnect, userGameApplicant);
+        public System.Threading.Tasks.Task ConnectWaitingRoomAsync(string userGameConnect) {
+            return base.Channel.ConnectWaitingRoomAsync(userGameConnect);
         }
         
         public void DisconnectRoom(string usergame) {
@@ -191,6 +200,100 @@ namespace Client.RoomService {
         
         public System.Threading.Tasks.Task SendInvitationAsync(string usergameApplicant, string usergameReceiver) {
             return base.Channel.SendInvitationAsync(usergameApplicant, usergameReceiver);
+        }
+        
+        public void SendAcceptance(string usergameApplicant, string usergameReceiver) {
+            base.Channel.SendAcceptance(usergameApplicant, usergameReceiver);
+        }
+        
+        public System.Threading.Tasks.Task SendAcceptanceAsync(string usergameApplicant, string usergameReceiver) {
+            return base.Channel.SendAcceptanceAsync(usergameApplicant, usergameReceiver);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="RoomService.IPreGameService", CallbackContract=typeof(Client.RoomService.IPreGameServiceCallback))]
+    public interface IPreGameService {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/ConnectPlayer")]
+        void ConnectPlayer(string usergameConnected, string usergameAdmin);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/ConnectPlayer")]
+        System.Threading.Tasks.Task ConnectPlayerAsync(string usergameConnected, string usergameAdmin);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/DisconnectPlayer")]
+        void DisconnectPlayer(string usergame);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/DisconnectPlayer")]
+        System.Threading.Tasks.Task DisconnectPlayerAsync(string usergame);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/SendAccessGame")]
+        void SendAccessGame(string usergam1, string usergame2);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/SendAccessGame")]
+        System.Threading.Tasks.Task SendAccessGameAsync(string usergam1, string usergame2);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IPreGameServiceCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/UpdateUsersRoom")]
+        void UpdateUsersRoom(System.Collections.Generic.Dictionary<object, string>.ValueCollection usersPreGame);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/RecieveAccessGame")]
+        void RecieveAccessGame(string user1, string user2);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IPreGameServiceChannel : Client.RoomService.IPreGameService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class PreGameServiceClient : System.ServiceModel.DuplexClientBase<Client.RoomService.IPreGameService>, Client.RoomService.IPreGameService {
+        
+        public PreGameServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public PreGameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public PreGameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public PreGameServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public PreGameServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void ConnectPlayer(string usergameConnected, string usergameAdmin) {
+            base.Channel.ConnectPlayer(usergameConnected, usergameAdmin);
+        }
+        
+        public System.Threading.Tasks.Task ConnectPlayerAsync(string usergameConnected, string usergameAdmin) {
+            return base.Channel.ConnectPlayerAsync(usergameConnected, usergameAdmin);
+        }
+        
+        public void DisconnectPlayer(string usergame) {
+            base.Channel.DisconnectPlayer(usergame);
+        }
+        
+        public System.Threading.Tasks.Task DisconnectPlayerAsync(string usergame) {
+            return base.Channel.DisconnectPlayerAsync(usergame);
+        }
+        
+        public void SendAccessGame(string usergam1, string usergame2) {
+            base.Channel.SendAccessGame(usergam1, usergame2);
+        }
+        
+        public System.Threading.Tasks.Task SendAccessGameAsync(string usergam1, string usergame2) {
+            return base.Channel.SendAccessGameAsync(usergam1, usergame2);
         }
     }
 }

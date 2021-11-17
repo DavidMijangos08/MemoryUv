@@ -45,11 +45,10 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ConnectRoom">
+  <xs:element name="ConnectWaitingRoom">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="userGameConnect" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="userGameApplicant" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -68,10 +67,62 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="SendInvitationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SendInvitationResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="RecieveInvitation">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="usergameApplicant" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecieveInvitationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RecieveInvitationResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConnectPlayer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="usergameConnected" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="usergameAdmin" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisconnectPlayer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="usergame" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendAccessGame">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="usergam1" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="usergame2" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateUsersRoom">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System.Collections.Generic" minOccurs="0" name="usersPreGame" nillable="true" type="q2:Dictionary.ValueCollectionOfanyTypestringzwHo_PEFv" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecieveAccessGame">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="user1" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user2" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

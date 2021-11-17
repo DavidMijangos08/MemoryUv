@@ -25,6 +25,8 @@ namespace Client
         UserGame usergame = new UserGame();
         MemoryServer service;
         public RoomService.RoomServiceClient client;
+        string usergameApplicant;
+        string usergameInvited;
 
         public Room(UserGame _user)
         {
@@ -33,7 +35,7 @@ namespace Client
             initializeListFriends();
             InstanceContext context = new InstanceContext(this);
             client = new RoomService.RoomServiceClient(context);
-            client.ConnectRoom(usergame.nametag, usergame.nametag);
+            client.ConnectWaitingRoom(usergame.nametag);
         }
 
         private void initializeListFriends()
@@ -54,25 +56,20 @@ namespace Client
             this.Close();
         }
 
-        private void ClicStartGame(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void ClicAdd(object sender, RoutedEventArgs e)
         {
             object itemSelected = listFriends.SelectedItem;
-            string userSelected = itemSelected.ToString();
-            service = new MemoryServer();
-            List<UserGame> userReceiver = service.GetUsersByInitialesOfNametag(userSelected);
-            client.SendInvitation(usergame.nametag, userSelected);
+            usergameInvited = itemSelected.ToString();
+            client.SendInvitation(usergame.nametag, usergameInvited);
         }
 
         private void ClickAccept(object sender, RoutedEventArgs e)
         {
             gridInvitation.Visibility = Visibility.Collapsed;
-            gridPlayers.Visibility = Visibility.Visible;
-            PreGame pregame = new PreGame();
+            client.SendAcceptance(this.usergameApplicant, usergame.nametag);
+            service = new MemoryServer();
+            List<UserGame> userAdmin = service.GetUsersByInitialesOfNametag(this.usergameApplicant);
+            PreGame pregame = new PreGame(usergame, usergame, userAdmin[0]);
             pregame.Show();
             this.Close();
         }
@@ -84,10 +81,25 @@ namespace Client
 
         public void RecieveInvitation(string usergameApplicant)
         {
-            string messageInvitation = "El usuario" + usergameApplicant + "te está invitando a su sala";
-            
+            this.usergameApplicant = usergameApplicant;
+            string messageInvitation = "El usuario " + usergameApplicant + " te está invitando a su sala";
             gridInvitation.Visibility = Visibility.Visible;
             lbInvitation.Text = messageInvitation;
+        }
+
+        public void RecieveAnswer()
+        {
+            service = new MemoryServer();
+            List<UserGame> userInvited = service.GetUsersByInitialesOfNametag(this.usergameInvited);
+            PreGame preGame = new PreGame(usergame, userInvited[0], usergame);
+            preGame.Show();
+            this.Close();
+        }
+
+        private void RecharchClick(object sender, RoutedEventArgs e)
+        {
+            listFriends.Items.Clear();
+            initializeListFriends();
         }
     }
 }

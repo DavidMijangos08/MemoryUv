@@ -11,13 +11,20 @@
             <Image HorizontalAlignment="Left" Height="100" Margin="83,174,0,0" VerticalAlignment="Top" Width="100" Source="Resources/Images/user0.png"/>
             <Image HorizontalAlignment="Left" Height="100" Margin="266,174,0,0" VerticalAlignment="Top" Width="100" Source="Resources/Images/user0.png"/>
             <Image HorizontalAlignment="Left" Height="100" Margin="174,174,0,0" VerticalAlignment="Top" Width="100" Source="Resources/Images/vs0.png"/>
-            <Button Content="Iniciar juego"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="160,318,0,0" VerticalAlignment="Top" Width="118" Click="ClicStartGame">
+            <Button x:Name="btnStartGame" Content="Iniciar juego"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="160,318,0,0" VerticalAlignment="Top" Width="118" Click="ClicStartGame">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
             </Button>
-            <TextBlock x:Name="lbUsergame" Margin="83,279,523,52.6" />
-            <TextBlock x:Name="lbUsergameAplicant" Margin="266,279,340,52.6" />
+            <Grid x:Name="gridNotification" HorizontalAlignment="Left" Height="131" Margin="113,179,0,0" VerticalAlignment="Top" Width="256" Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" Visibility="Hidden">
+                <Grid.Effect>
+                    <DropShadowEffect Color="#FF101354"/>
+                </Grid.Effect>
+                <Button Content="Aceptar" HorizontalAlignment="Left" Margin="94,101,0,0" Click="ClickAccept" VerticalAlignment="Top" Width="74"/>
+                <TextBlock x:Name="lbNotification" HorizontalAlignment="Left" Margin="23,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="38" Width="223"/>
+            </Grid>
+            <TextBlock x:Name="lbUsergame1" Margin="96,82,259,250" />
+            <TextBlock x:Name="lbUsergame2" Margin="280,81,73,250" />
             <Button Content="salir" HorizontalAlignment="Left" Margin="249,371,0,0" VerticalAlignment="Top" Width="75" Click="ExitClick"/>
         </Grid>
     </Grid>

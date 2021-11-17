@@ -146,6 +146,9 @@
   <wsdl:message name="IPreGameService_RecieveAccessGame_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:RecieveAccessGame" />
   </wsdl:message>
+  <wsdl:message name="IPreGameService_RecieveExitNotification_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RecieveExitNotification" />
+  </wsdl:message>
   <wsdl:portType name="IChatService">
     <wsdl:operation name="Join">
       <wsdl:input wsaw:Action="http://tempuri.org/IChatService/Join" message="tns:IChatService_Join_InputMessage" />
@@ -201,6 +204,9 @@
     </wsdl:operation>
     <wsdl:operation name="RecieveAccessGame">
       <wsdl:output wsaw:Action="http://tempuri.org/IPreGameService/RecieveAccessGame" message="tns:IPreGameService_RecieveAccessGame_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecieveExitNotification">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPreGameService/RecieveExitNotification" message="tns:IPreGameService_RecieveExitNotification_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IChatService" type="tns:IChatService">
@@ -312,6 +318,12 @@
     </wsdl:operation>
     <wsdl:operation name="RecieveAccessGame">
       <soap12:operation soapAction="http://tempuri.org/IPreGameService/RecieveAccessGame" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecieveExitNotification">
+      <soap12:operation soapAction="http://tempuri.org/IPreGameService/RecieveExitNotification" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

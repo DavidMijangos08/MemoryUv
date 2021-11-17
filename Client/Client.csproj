@@ -86,6 +86,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\PreGameService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\RoomService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -166,6 +171,19 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ChatService\MemoryServer.wsdl" />
+    <None Include="Connected Services\PreGameService\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PreGameService\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PreGameService\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PreGameService\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PreGameService\MemoryServer.wsdl" />
     <None Include="Connected Services\RoomService\item.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -354,6 +372,14 @@
     <Resource Include="Resources\Carreras\TecnologiasComputacionales1.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Images\user0.png" />
+    <Resource Include="Resources\Images\vs0.png" />
+    <Resource Include="Resources\Background\backgroundDefault.png" />
+    <Resource Include="Resources\Background\backgroundGreen.png" />
+    <Resource Include="Resources\Background\backgroundIce.png" />
+    <Resource Include="Resources\Background\backgroundPink.jpg" />
+    <Resource Include="Resources\Background\backgroundRed.jpg" />
+    <Resource Include="Resources\Background\backgroundX.jpg" />
     <None Include="Connected Services\ChatService\item.disco" />
     <None Include="Connected Services\ChatService\configuration91.svcinfo" />
     <None Include="Connected Services\ChatService\configuration.svcinfo" />
@@ -368,19 +394,19 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Resource Include="Resources\Images\user0.png" />
-    <Resource Include="Resources\Images\vs0.png" />
-    <Resource Include="Resources\Background\backgroundDefault.png" />
-    <Resource Include="Resources\Background\backgroundGreen.png" />
-    <Resource Include="Resources\Background\backgroundIce.png" />
-    <Resource Include="Resources\Background\backgroundPink.jpg" />
-    <Resource Include="Resources\Background\backgroundRed.jpg" />
-    <Resource Include="Resources\Background\backgroundX.jpg" />
+    <None Include="Connected Services\PreGameService\item.disco" />
+    <None Include="Connected Services\PreGameService\configuration91.svcinfo" />
+    <None Include="Connected Services\PreGameService\configuration.svcinfo" />
+    <None Include="Connected Services\PreGameService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Resources\Sound\GameSoundtrack.mp3" />
     <Content Include="Resources\Sound\song.wav" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ChatService\" />
+    <WCFMetadataStorage Include="Connected Services\PreGameService\" />
     <WCFMetadataStorage Include="Connected Services\RoomService\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

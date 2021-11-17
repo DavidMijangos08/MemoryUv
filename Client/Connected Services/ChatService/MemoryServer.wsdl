@@ -58,6 +58,35 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IPreGameService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8082/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -84,8 +113,8 @@
   <wsdl:message name="IChatService_UsersUpdate_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:UsersUpdate" />
   </wsdl:message>
-  <wsdl:message name="IRoomService_ConnectRoom_InputMessage">
-    <wsdl:part name="parameters" element="tns:ConnectRoom" />
+  <wsdl:message name="IRoomService_ConnectWaitingRoom_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConnectWaitingRoom" />
   </wsdl:message>
   <wsdl:message name="IRoomService_DisconnectRoom_InputMessage">
     <wsdl:part name="parameters" element="tns:DisconnectRoom" />
@@ -93,8 +122,29 @@
   <wsdl:message name="IRoomService_SendInvitation_InputMessage">
     <wsdl:part name="parameters" element="tns:SendInvitation" />
   </wsdl:message>
+  <wsdl:message name="IRoomService_SendInvitation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendInvitationResponse" />
+  </wsdl:message>
   <wsdl:message name="IRoomService_RecieveInvitation_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:RecieveInvitation" />
+  </wsdl:message>
+  <wsdl:message name="IRoomService_RecieveInvitation_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RecieveInvitationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPreGameService_ConnectPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConnectPlayer" />
+  </wsdl:message>
+  <wsdl:message name="IPreGameService_DisconnectPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:DisconnectPlayer" />
+  </wsdl:message>
+  <wsdl:message name="IPreGameService_SendAccessGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendAccessGame" />
+  </wsdl:message>
+  <wsdl:message name="IPreGameService_UpdateUsersRoom_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUsersRoom" />
+  </wsdl:message>
+  <wsdl:message name="IPreGameService_RecieveAccessGame_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RecieveAccessGame" />
   </wsdl:message>
   <wsdl:portType name="IChatService">
     <wsdl:operation name="Join">
@@ -117,17 +167,36 @@
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IRoomService">
-    <wsdl:operation name="ConnectRoom">
-      <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/ConnectRoom" message="tns:IRoomService_ConnectRoom_InputMessage" />
+    <wsdl:operation name="ConnectWaitingRoom">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/ConnectWaitingRoom" message="tns:IRoomService_ConnectWaitingRoom_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DisconnectRoom">
       <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/DisconnectRoom" message="tns:IRoomService_DisconnectRoom_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendInvitation">
       <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/SendInvitation" message="tns:IRoomService_SendInvitation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/SendInvitationResponse" message="tns:IRoomService_SendInvitation_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="RecieveInvitation">
       <wsdl:output wsaw:Action="http://tempuri.org/IRoomService/RecieveInvitation" message="tns:IRoomService_RecieveInvitation_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IRoomService/RecieveInvitationResponse" message="tns:IRoomService_RecieveInvitation_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IPreGameService">
+    <wsdl:operation name="ConnectPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPreGameService/ConnectPlayer" message="tns:IPreGameService_ConnectPlayer_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DisconnectPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPreGameService/DisconnectPlayer" message="tns:IPreGameService_DisconnectPlayer_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendAccessGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPreGameService/SendAccessGame" message="tns:IPreGameService_SendAccessGame_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUsersRoom">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPreGameService/UpdateUsersRoom" message="tns:IPreGameService_UpdateUsersRoom_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecieveAccessGame">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPreGameService/RecieveAccessGame" message="tns:IPreGameService_RecieveAccessGame_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IChatService" type="tns:IChatService">
@@ -173,8 +242,8 @@
   <wsdl:binding name="NetTcpBinding_IRoomService" type="tns:IRoomService">
     <wsp:PolicyReference URI="#NetTcpBinding_IRoomService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="ConnectRoom">
-      <soap12:operation soapAction="http://tempuri.org/IRoomService/ConnectRoom" style="document" />
+    <wsdl:operation name="ConnectWaitingRoom">
+      <soap12:operation soapAction="http://tempuri.org/IRoomService/ConnectWaitingRoom" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -190,9 +259,49 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="RecieveInvitation">
       <soap12:operation soapAction="http://tempuri.org/IRoomService/RecieveInvitation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IPreGameService" type="tns:IPreGameService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IPreGameService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="ConnectPlayer">
+      <soap12:operation soapAction="http://tempuri.org/IPreGameService/ConnectPlayer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="DisconnectPlayer">
+      <soap12:operation soapAction="http://tempuri.org/IPreGameService/DisconnectPlayer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="SendAccessGame">
+      <soap12:operation soapAction="http://tempuri.org/IPreGameService/SendAccessGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUsersRoom">
+      <soap12:operation soapAction="http://tempuri.org/IPreGameService/UpdateUsersRoom" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecieveAccessGame">
+      <soap12:operation soapAction="http://tempuri.org/IPreGameService/RecieveAccessGame" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
@@ -209,6 +318,15 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IRoomService" binding="tns:NetTcpBinding_IRoomService">
+      <soap12:address location="net.tcp://localhost:8081/MemoryService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8081/MemoryService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-A5PQ7FAR\david</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IPreGameService" binding="tns:NetTcpBinding_IPreGameService">
       <soap12:address location="net.tcp://localhost:8081/MemoryService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8081/MemoryService</wsa10:Address>

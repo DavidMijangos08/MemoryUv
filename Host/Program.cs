@@ -31,7 +31,21 @@ namespace Host
         [OperationContract(IsOneWay = true)]
         void RecieveInvitation(string usergameApplicant);
 
+        [OperationContract(IsOneWay = true)]
+        void RecieveAnswer();
+    }
 
+    [ServiceContract]
+    public interface IPreGameClient
+    {
+        [OperationContract(IsOneWay = true)]
+        void UpdateUsersRoom(Dictionary<IPreGameClient, string>.ValueCollection usersPreGame);
+
+        [OperationContract(IsOneWay = true)]
+        void RecieveAccessGame();
+
+        [OperationContract(IsOneWay = true)]
+        void RecieveExitNotification(string userDisconnected);
     }
 
     [ServiceContract(CallbackContract = typeof(IChatClient))]
@@ -54,13 +68,29 @@ namespace Host
     public interface IRoomService
     {
         [OperationContract(IsOneWay = true)]
-        void ConnectRoom(string userGameConnect, string userGameApplicant);
+        void ConnectWaitingRoom(string userGameConnect);
 
         [OperationContract(IsOneWay = true)]
         void DisconnectRoom(string usergame);
 
         [OperationContract(IsOneWay = true)]
         void SendInvitation(string usergameApplicant, string usergameReceiver);
+
+        [OperationContract(IsOneWay = true)]
+        void SendAcceptance(string usergameApplicant, string usergameReceiver);
+    }
+
+    [ServiceContract(CallbackContract = typeof(IPreGameClient))]
+    public interface IPreGameService
+    {
+        [OperationContract(IsOneWay = true)]
+        void ConnectPlayer(string usergameConnected, string usergameAdmin);
+
+        [OperationContract(IsOneWay = true)]
+        void DisconnectPlayer(string usergameToDisconnect, string usergameToNotify);
+
+        [OperationContract(IsOneWay = true)]
+        void SendAccessGame(string usergam1, string usergame2);
     }
 
     [ServiceContract]
@@ -154,10 +184,11 @@ namespace Host
     }
 
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single, InstanceContextMode = InstanceContextMode.Single)]
-    public class MemoryServer : IChatService, IRoomService, IUserService, IFriendService, IFriendRequestService
+    public class MemoryServer : IChatService, IRoomService, IPreGameService, IUserService, IFriendService, IFriendRequestService
     {
         Dictionary<IChatClient, string> _users = new Dictionary<IChatClient, string>();
         Dictionary<IUserClient, string> usersRoom = new Dictionary<IUserClient, string>();
+        Dictionary<IPreGameClient, string> usersPreGame = new Dictionary<IPreGameClient, string>();
         public void Join(string username)
         {
             var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
@@ -220,11 +251,11 @@ namespace Host
             }
         }
 
-        public void ConnectRoom(string userGameConnect, string userGameApplicant)
+        public void ConnectWaitingRoom(string userGameConnect)
         {
             var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
             usersRoom[connection] = userGameConnect;
-            Console.WriteLine("El usuario " + userGameConnect + "se conecto a la sala de" + userGameApplicant);
+            Console.WriteLine("El usuario " + userGameConnect + "esta en espera de alguna invitacion");
         }
 
         public void DisconnectRoom(string usergame)
@@ -251,6 +282,87 @@ namespace Host
                     if(usergameReceiverAux == usergameReceiver)
                     {
                         userReceiver.RecieveInvitation(usergameApplicant);
+                    }
+                }
+            }
+        }
+
+        public void SendAcceptance(string usergameApplicant, string usergameReceiver)
+        {
+            var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
+            string usergame;
+            string usergameApplicantAux;
+            if (!usersRoom.TryGetValue(connection, out usergame))
+            {
+                return;
+            }
+
+            foreach (var userApplicant in usersRoom.Keys)
+            {
+                if (usersRoom.TryGetValue(userApplicant, out usergameApplicantAux))
+                {
+                    if (usergameApplicantAux == usergameApplicant)
+                    {
+                        Console.WriteLine("El usuario " + usergameReceiver + " acepto la invitacion de " + usergameApplicant);
+                        userApplicant.RecieveAnswer();
+                    }
+                }
+            }
+        }
+
+        public void ConnectPlayer(string usergameConnected, string usergameAdmin)
+        {
+            var connection = OperationContext.Current.GetCallbackChannel<IPreGameClient>();
+            usersPreGame[connection] = usergameConnected;
+            Console.WriteLine("El jugador " + usergameConnected + " se conecto a la sala de " + usergameAdmin);
+            foreach (var userConnection in usersPreGame.Keys)
+            {
+                userConnection.UpdateUsersRoom(usersPreGame.Values);
+            }
+        }
+
+        public void DisconnectPlayer(string usergameToDisconnect, string usergameToNotify)
+        {
+            var connection = OperationContext.Current.GetCallbackChannel<IPreGameClient>();
+            
+            Console.WriteLine("El jugador " + usergameToDisconnect + " se desconectó de la sala de juego entre " + usergameToDisconnect + " y " + usergameToNotify);
+            string userDisconnected;
+            string userNotify;
+            if (!usersPreGame.TryGetValue(connection, out userDisconnected))
+            {
+                return;
+            }
+
+            foreach(var userToNotify in usersPreGame.Keys)
+            {
+                if(usersPreGame.TryGetValue(userToNotify, out userNotify))
+                {
+                    if(userNotify == usergameToNotify)
+                    {
+                        userToNotify.RecieveExitNotification(usergameToDisconnect);
+                    }
+                }
+            }
+            usersPreGame.Remove(connection);
+        }
+
+        public void SendAccessGame(string usergam1, string usergame2)
+        {
+            var connection = OperationContext.Current.GetCallbackChannel<IPreGameClient>();
+            string usergame;
+            string userToAccess;
+            if (!usersPreGame.TryGetValue(connection, out usergame))
+            {
+                return;
+            }
+
+            foreach(var userAccess in usersPreGame.Keys)
+            {
+                if(usersPreGame.TryGetValue(userAccess, out userToAccess))
+                {
+                    if(userToAccess == usergame2)
+                    {
+                        userAccess.RecieveAccessGame();
                     }
                 }
             }

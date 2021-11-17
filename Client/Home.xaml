@@ -20,6 +20,13 @@
         <Button Content="Crear sala" HorizontalAlignment="Left" Margin="589,185,0,0" VerticalAlignment="Top" Width="74"  Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun" Click="RoomClick"/>
         <Button Content="Chat" HorizontalAlignment="Left" Margin="589,268,0,0" VerticalAlignment="Top" Width="74" FontFamily="SimSun" Click="ChatClick" Background="White" BorderBrush="#FFC5C2C2"/>
         <TextBlock x:Name="lbUsername" HorizontalAlignment="Left" Margin="389,92,0,0" VerticalAlignment="Top" Height="26" Width="98"/>
-
+        <Grid x:Name="gridInvitation" HorizontalAlignment="Left" Height="131" Margin="217,140,0,0" VerticalAlignment="Top" Width="256" Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" Visibility="Hidden">
+            <Grid.Effect>
+                <DropShadowEffect Color="#FF101354"/>
+            </Grid.Effect>
+        <Button Content="Aceptar" HorizontalAlignment="Left" Margin="23,101,0,0" Click="ClickAccept" VerticalAlignment="Top" Width="74"/>
+        <Button Content="Rechazar" HorizontalAlignment="Left" Margin="171,101,0,0" Click="ClicRejeact"  VerticalAlignment="Top" Width="75"/>
+        <TextBlock x:Name="lbInvitation" HorizontalAlignment="Left" Margin="23,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="38" Width="223"/>
+        </Grid>
     </Grid>
 </Window>

@@ -98,7 +98,8 @@
   <xs:element name="DisconnectPlayer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="usergame" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="usergameToDisconnect" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="usergameToNotify" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -119,9 +120,13 @@
   </xs:element>
   <xs:element name="RecieveAccessGame">
     <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecieveExitNotification">
+    <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="user1" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="user2" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userDisconnected" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

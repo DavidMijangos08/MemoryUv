@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.ChatService {
+namespace Client.PreGameService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ChatService.IChatService", CallbackContract=typeof(Client.ChatService.IChatServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PreGameService.IChatService", CallbackContract=typeof(Client.PreGameService.IChatServiceCallback))]
     public interface IChatService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/Join")]
@@ -51,12 +51,12 @@ namespace Client.ChatService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IChatServiceChannel : Client.ChatService.IChatService, System.ServiceModel.IClientChannel {
+    public interface IChatServiceChannel : Client.PreGameService.IChatService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ChatServiceClient : System.ServiceModel.DuplexClientBase<Client.ChatService.IChatService>, Client.ChatService.IChatService {
+    public partial class ChatServiceClient : System.ServiceModel.DuplexClientBase<Client.PreGameService.IChatService>, Client.PreGameService.IChatService {
         
         public ChatServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
@@ -112,7 +112,7 @@ namespace Client.ChatService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ChatService.IRoomService", CallbackContract=typeof(Client.ChatService.IRoomServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PreGameService.IRoomService", CallbackContract=typeof(Client.PreGameService.IRoomServiceCallback))]
     public interface IRoomService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/ConnectWaitingRoom")]
@@ -127,27 +127,36 @@ namespace Client.ChatService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/DisconnectRoom")]
         System.Threading.Tasks.Task DisconnectRoomAsync(string usergame);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/SendInvitation", ReplyAction="http://tempuri.org/IRoomService/SendInvitationResponse")]
-        bool SendInvitation(string usergameApplicant, string usergameReceiver);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/SendInvitation")]
+        void SendInvitation(string usergameApplicant, string usergameReceiver);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/SendInvitation", ReplyAction="http://tempuri.org/IRoomService/SendInvitationResponse")]
-        System.Threading.Tasks.Task<bool> SendInvitationAsync(string usergameApplicant, string usergameReceiver);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/SendInvitation")]
+        System.Threading.Tasks.Task SendInvitationAsync(string usergameApplicant, string usergameReceiver);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/SendAcceptance")]
+        void SendAcceptance(string usergameApplicant, string usergameReceiver);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/SendAcceptance")]
+        System.Threading.Tasks.Task SendAcceptanceAsync(string usergameApplicant, string usergameReceiver);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IRoomServiceCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomService/RecieveInvitation", ReplyAction="http://tempuri.org/IRoomService/RecieveInvitationResponse")]
-        bool RecieveInvitation(string usergameApplicant);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/RecieveInvitation")]
+        void RecieveInvitation(string usergameApplicant);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IRoomService/RecieveAnswer")]
+        void RecieveAnswer();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IRoomServiceChannel : Client.ChatService.IRoomService, System.ServiceModel.IClientChannel {
+    public interface IRoomServiceChannel : Client.PreGameService.IRoomService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class RoomServiceClient : System.ServiceModel.DuplexClientBase<Client.ChatService.IRoomService>, Client.ChatService.IRoomService {
+    public partial class RoomServiceClient : System.ServiceModel.DuplexClientBase<Client.PreGameService.IRoomService>, Client.PreGameService.IRoomService {
         
         public RoomServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
@@ -185,17 +194,25 @@ namespace Client.ChatService {
             return base.Channel.DisconnectRoomAsync(usergame);
         }
         
-        public bool SendInvitation(string usergameApplicant, string usergameReceiver) {
-            return base.Channel.SendInvitation(usergameApplicant, usergameReceiver);
+        public void SendInvitation(string usergameApplicant, string usergameReceiver) {
+            base.Channel.SendInvitation(usergameApplicant, usergameReceiver);
         }
         
-        public System.Threading.Tasks.Task<bool> SendInvitationAsync(string usergameApplicant, string usergameReceiver) {
+        public System.Threading.Tasks.Task SendInvitationAsync(string usergameApplicant, string usergameReceiver) {
             return base.Channel.SendInvitationAsync(usergameApplicant, usergameReceiver);
+        }
+        
+        public void SendAcceptance(string usergameApplicant, string usergameReceiver) {
+            base.Channel.SendAcceptance(usergameApplicant, usergameReceiver);
+        }
+        
+        public System.Threading.Tasks.Task SendAcceptanceAsync(string usergameApplicant, string usergameReceiver) {
+            return base.Channel.SendAcceptanceAsync(usergameApplicant, usergameReceiver);
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ChatService.IPreGameService", CallbackContract=typeof(Client.ChatService.IPreGameServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PreGameService.IPreGameService", CallbackContract=typeof(Client.PreGameService.IPreGameServiceCallback))]
     public interface IPreGameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/ConnectPlayer")]
@@ -205,10 +222,10 @@ namespace Client.ChatService {
         System.Threading.Tasks.Task ConnectPlayerAsync(string usergameConnected, string usergameAdmin);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/DisconnectPlayer")]
-        void DisconnectPlayer(string usergame);
+        void DisconnectPlayer(string usergameToDisconnect, string usergameToNotify);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/DisconnectPlayer")]
-        System.Threading.Tasks.Task DisconnectPlayerAsync(string usergame);
+        System.Threading.Tasks.Task DisconnectPlayerAsync(string usergameToDisconnect, string usergameToNotify);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/SendAccessGame")]
         void SendAccessGame(string usergam1, string usergame2);
@@ -224,16 +241,19 @@ namespace Client.ChatService {
         void UpdateUsersRoom(System.Collections.Generic.Dictionary<object, string>.ValueCollection usersPreGame);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/RecieveAccessGame")]
-        void RecieveAccessGame(string user1, string user2);
+        void RecieveAccessGame();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/RecieveExitNotification")]
+        void RecieveExitNotification(string userDisconnected);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IPreGameServiceChannel : Client.ChatService.IPreGameService, System.ServiceModel.IClientChannel {
+    public interface IPreGameServiceChannel : Client.PreGameService.IPreGameService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class PreGameServiceClient : System.ServiceModel.DuplexClientBase<Client.ChatService.IPreGameService>, Client.ChatService.IPreGameService {
+    public partial class PreGameServiceClient : System.ServiceModel.DuplexClientBase<Client.PreGameService.IPreGameService>, Client.PreGameService.IPreGameService {
         
         public PreGameServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
@@ -263,12 +283,12 @@ namespace Client.ChatService {
             return base.Channel.ConnectPlayerAsync(usergameConnected, usergameAdmin);
         }
         
-        public void DisconnectPlayer(string usergame) {
-            base.Channel.DisconnectPlayer(usergame);
+        public void DisconnectPlayer(string usergameToDisconnect, string usergameToNotify) {
+            base.Channel.DisconnectPlayer(usergameToDisconnect, usergameToNotify);
         }
         
-        public System.Threading.Tasks.Task DisconnectPlayerAsync(string usergame) {
-            return base.Channel.DisconnectPlayerAsync(usergame);
+        public System.Threading.Tasks.Task DisconnectPlayerAsync(string usergameToDisconnect, string usergameToNotify) {
+            return base.Channel.DisconnectPlayerAsync(usergameToDisconnect, usergameToNotify);
         }
         
         public void SendAccessGame(string usergam1, string usergame2) {
