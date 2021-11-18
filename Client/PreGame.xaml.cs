@@ -26,22 +26,33 @@ namespace Client
         UserGame userInvited = new UserGame();
         public PreGameService.PreGameServiceClient client;
         List<String> users = new List<String>();
-        public PreGame(UserGame userGameConnected, UserGame userGameInvited, UserGame userGameAdmin)
+        List<UserGame> receivedUsers = new List<UserGame>();
+        List<UserGame> usersGame = new List<UserGame>();
+        string section;
+        string difficulty;
+        public PreGame(List<UserGame> receivedUsers, string section, string difficulty)
         {
             InitializeComponent();
-            userConnected = userGameConnected;
-            userAdmin = userGameAdmin;
-            userInvited = userGameInvited;
+            this.receivedUsers = receivedUsers;
+            userConnected = receivedUsers[0];
+            userAdmin = receivedUsers[1];
+            userInvited = receivedUsers[2];
+            this.section = section;
+            this.difficulty = difficulty;
             InstanceContext context = new InstanceContext(this);
             client = new PreGameService.PreGameServiceClient(context);
             client.ConnectPlayer(userConnected.nametag, userAdmin.nametag);
-            if (userGameConnected.nametag.Equals(userGameAdmin.nametag))
+            if (userConnected.nametag.Equals(userAdmin.nametag))
             {
                 btnStartGame.IsEnabled = true;
+                usersGame.Add(userConnected);
+                usersGame.Add(userInvited);
             }
             else
             {
                 btnStartGame.IsEnabled = false;
+                usersGame.Add(userConnected);
+                usersGame.Add(userAdmin);
             }
         }
 
@@ -49,11 +60,11 @@ namespace Client
         {
             if (userConnected.nametag.Equals(userInvited.nametag))
             {
-                client.DisconnectPlayer(userConnected.nametag, userAdmin.nametag);
+                client.DisconnectPlayer("Abandonado", userConnected.nametag, userAdmin.nametag);
             }
             else
             {
-                client.DisconnectPlayer(userConnected.nametag, userInvited.nametag);
+                client.DisconnectPlayer("Abandonado", userConnected.nametag, userInvited.nametag);
             }
             this.Close();
             Home home = new Home(userConnected);
@@ -62,9 +73,11 @@ namespace Client
 
         private void ClicStartGame(object sender, RoutedEventArgs e)
         {
-            client.SendAccessGame(userAdmin.nametag, userConnected.nametag);
+            client.SendConfigurationGame(userInvited.nametag, section, difficulty);
+            client.SendAccessGame(userAdmin.nametag, userInvited.nametag);
+            client.DisconnectPlayer("Correcto", userConnected.nametag, userInvited.nametag);
             this.Close();
-            Game game = new Game(userConnected);
+            Game game = new Game(usersGame, section, difficulty);
             game.Show(); 
         }
 
@@ -87,9 +100,10 @@ namespace Client
 
         public void RecieveAccessGame()
         {
-            this.Close();
-            Game game = new Game(userConnected);
+            client.DisconnectPlayer("Correcto", userConnected.nametag, userAdmin.nametag);
+            Game game = new Game(usersGame, section, difficulty);
             game.Show();
+            this.Close();
         }
 
         public void RecieveExitNotification(string userDisconnected)
@@ -101,9 +115,16 @@ namespace Client
 
         private void ClickAccept(object sender, RoutedEventArgs e)
         {
+            client.DisconnectPlayer("Correcto", userConnected.nametag, userAdmin.nametag);
             this.Close();
             Home home = new Home(userConnected);
             home.Show();
+        }
+
+        public void ReceiveConfigurationGame(string section, string difficulty)
+        {
+            this.section = section;
+            this.difficulty = difficulty;
         }
     }
 }

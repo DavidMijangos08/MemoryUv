@@ -27,7 +27,6 @@ namespace Client
         MemoryServer service;
         public RoomService.RoomServiceClient client;
         string usergameApplicant;
-        string usergameInvited;
         public Home(UserGame _user)
         {
             InitializeComponent();
@@ -41,6 +40,7 @@ namespace Client
 
         private void ChatClick(object sender, RoutedEventArgs e)
         {
+            client.DisconnectRoom(usergame.nametag);
             Chat windowChat = new Chat(username);
             windowChat.Show();
         }
@@ -49,11 +49,13 @@ namespace Client
         {
             service = new MemoryServer();
             service.UpdateUserStatus(usergame.id, "Inactivo");
+            client.DisconnectRoom(usergame.nametag);
             this.Close();
         }
 
         private void SettingsClick(object sender, RoutedEventArgs e)
         {
+            client.DisconnectRoom(usergame.nametag);
             Settings settings = new Settings(usergame);
             settings.Show();
             this.Close();
@@ -61,6 +63,7 @@ namespace Client
 
         private void ArchievementClick(object sender, RoutedEventArgs e)
         {
+            client.DisconnectRoom(usergame.nametag);
             Logros logro = new Logros(usergame);
             logro.Show();
             this.Close();
@@ -68,6 +71,7 @@ namespace Client
 
         private void FriendsClick(object sender, RoutedEventArgs e)
         {
+            client.DisconnectRoom(usergame.nametag);
             Friends windowFriends = new Friends(usergame);
             windowFriends.Show();
             this.Close();
@@ -75,6 +79,7 @@ namespace Client
 
         private void RankingClick(object sender, RoutedEventArgs e)
         {
+            client.DisconnectRoom(usergame.nametag);
             Ranking ranking = new Ranking(usergame);
             ranking.Show();
             this.Close();
@@ -82,6 +87,7 @@ namespace Client
 
         private void RoomClick(object sender, RoutedEventArgs e)
         {
+            client.DisconnectRoom(usergame.nametag);
             Room room = new Room(usergame);
             room.Show();
             this.Close();
@@ -89,10 +95,7 @@ namespace Client
 
         private void PersonalizeClick(object sender, RoutedEventArgs e)
         {
-            Game game = new Game(usergame);
-            game.Show();
-            this.Close();
-
+            client.DisconnectRoom(usergame.nametag);
             Personalize personalize = new Personalize();
             personalize.Show();
             this.Close();
@@ -104,8 +107,13 @@ namespace Client
             client.SendAcceptance(this.usergameApplicant, usergame.nametag);
             service = new MemoryServer();
             List<UserGame> userAdmin = service.GetUsersByInitialesOfNametag(this.usergameApplicant);
-            PreGame pregame = new PreGame(usergame, usergame, userAdmin[0]);
+            List<UserGame> usersToSend = new List<UserGame>(4);
+            usersToSend.Add(usergame);
+            usersToSend.Add(usergame);
+            usersToSend.Add(userAdmin[0]);
+            PreGame pregame = new PreGame(usersToSend, "", "");
             pregame.Show();
+            client.DisconnectRoom(usergame.nametag);
             this.Close();
         }
 
@@ -124,10 +132,13 @@ namespace Client
 
         public void RecieveAnswer()
         {
-            service = new MemoryServer();
-            List<UserGame> userInvited = service.GetUsersByInitialesOfNametag(this.usergameInvited);
-            PreGame preGame = new PreGame(usergame, userInvited[0], usergame);
+            List<UserGame> usersToSend = new List<UserGame>(4);
+            usersToSend.Add(usergame);
+            usersToSend.Add(usergame);
+            usersToSend.Add(usergame);
+            PreGame preGame = new PreGame(usersToSend, "", "");
             preGame.Show();
+            client.DisconnectRoom(usergame.nametag);
             this.Close();
         }
     }

@@ -27,6 +27,8 @@ namespace Client
         public RoomService.RoomServiceClient client;
         string usergameApplicant;
         string usergameInvited;
+        string section;
+        string difficulty;
 
         public Room(UserGame _user)
         {
@@ -51,6 +53,7 @@ namespace Client
 
         private void ClicExit(object sender, RoutedEventArgs e)
         {
+            client.DisconnectRoom(usergame.nametag);
             Home windowHome = new Home(usergame);
             windowHome.Show();
             this.Close();
@@ -58,18 +61,33 @@ namespace Client
 
         private void ClicAdd(object sender, RoutedEventArgs e)
         {
-            object itemSelected = listFriends.SelectedItem;
-            usergameInvited = itemSelected.ToString();
-            client.SendInvitation(usergame.nametag, usergameInvited);
+            if(cbSection.SelectedItem != null && cbDifficulty.SelectedItem != null)
+            {
+                this.section = cbSection.SelectedItem.ToString();
+                this.difficulty = cbDifficulty.SelectedItem.ToString();
+                object itemSelected = listFriends.SelectedItem;
+                usergameInvited = itemSelected.ToString();
+                client.SendInvitation(usergame.nametag, usergameInvited);
+            }
+            else
+            {
+                MessageBox.Show("Debes configurar la partida");
+            }
+           
         }
 
         private void ClickAccept(object sender, RoutedEventArgs e)
         {
             gridInvitation.Visibility = Visibility.Collapsed;
             client.SendAcceptance(this.usergameApplicant, usergame.nametag);
+            client.DisconnectRoom(usergame.nametag);
             service = new MemoryServer();
             List<UserGame> userAdmin = service.GetUsersByInitialesOfNametag(this.usergameApplicant);
-            PreGame pregame = new PreGame(usergame, usergame, userAdmin[0]);
+            List<UserGame> usersToSend = new List<UserGame>(4);
+            usersToSend.Add(usergame);
+            usersToSend.Add(usergame);
+            usersToSend.Add(userAdmin[0]);
+            PreGame pregame = new PreGame(usersToSend, "", "");
             pregame.Show();
             this.Close();
         }
@@ -91,8 +109,13 @@ namespace Client
         {
             service = new MemoryServer();
             List<UserGame> userInvited = service.GetUsersByInitialesOfNametag(this.usergameInvited);
-            PreGame preGame = new PreGame(usergame, userInvited[0], usergame);
+            List<UserGame> usersToSend = new List<UserGame>(4);
+            usersToSend.Add(usergame);
+            usersToSend.Add(userInvited[0]);
+            usersToSend.Add(usergame);
+            PreGame preGame = new PreGame(usersToSend, section, difficulty);
             preGame.Show();
+            client.DisconnectRoom(usergame.nametag);
             this.Close();
         }
 

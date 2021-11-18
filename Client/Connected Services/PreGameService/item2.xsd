@@ -98,6 +98,7 @@
   <xs:element name="DisconnectPlayer">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="usergameToDisconnect" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="usergameToNotify" nillable="true" type="xs:string" />
       </xs:sequence>
@@ -108,6 +109,23 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="usergam1" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="usergame2" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendExitNotification">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="usergameToDisconnect" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="usergameToNotify" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendConfigurationGame">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userToSend" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="section" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="difficulty" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -127,6 +145,14 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="userDisconnected" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReceiveConfigurationGame">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="section" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="difficulty" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

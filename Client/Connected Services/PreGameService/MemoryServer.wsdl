@@ -140,6 +140,12 @@
   <wsdl:message name="IPreGameService_SendAccessGame_InputMessage">
     <wsdl:part name="parameters" element="tns:SendAccessGame" />
   </wsdl:message>
+  <wsdl:message name="IPreGameService_SendExitNotification_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendExitNotification" />
+  </wsdl:message>
+  <wsdl:message name="IPreGameService_SendConfigurationGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendConfigurationGame" />
+  </wsdl:message>
   <wsdl:message name="IPreGameService_UpdateUsersRoom_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:UpdateUsersRoom" />
   </wsdl:message>
@@ -148,6 +154,9 @@
   </wsdl:message>
   <wsdl:message name="IPreGameService_RecieveExitNotification_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:RecieveExitNotification" />
+  </wsdl:message>
+  <wsdl:message name="IPreGameService_ReceiveConfigurationGame_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveConfigurationGame" />
   </wsdl:message>
   <wsdl:portType name="IChatService">
     <wsdl:operation name="Join">
@@ -199,6 +208,12 @@
     <wsdl:operation name="SendAccessGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IPreGameService/SendAccessGame" message="tns:IPreGameService_SendAccessGame_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="SendExitNotification">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPreGameService/SendExitNotification" message="tns:IPreGameService_SendExitNotification_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendConfigurationGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPreGameService/SendConfigurationGame" message="tns:IPreGameService_SendConfigurationGame_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="UpdateUsersRoom">
       <wsdl:output wsaw:Action="http://tempuri.org/IPreGameService/UpdateUsersRoom" message="tns:IPreGameService_UpdateUsersRoom_OutputCallbackMessage" />
     </wsdl:operation>
@@ -207,6 +222,9 @@
     </wsdl:operation>
     <wsdl:operation name="RecieveExitNotification">
       <wsdl:output wsaw:Action="http://tempuri.org/IPreGameService/RecieveExitNotification" message="tns:IPreGameService_RecieveExitNotification_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveConfigurationGame">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPreGameService/ReceiveConfigurationGame" message="tns:IPreGameService_ReceiveConfigurationGame_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IChatService" type="tns:IChatService">
@@ -310,6 +328,18 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="SendExitNotification">
+      <soap12:operation soapAction="http://tempuri.org/IPreGameService/SendExitNotification" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="SendConfigurationGame">
+      <soap12:operation soapAction="http://tempuri.org/IPreGameService/SendConfigurationGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="UpdateUsersRoom">
       <soap12:operation soapAction="http://tempuri.org/IPreGameService/UpdateUsersRoom" style="document" />
       <wsdl:output>
@@ -324,6 +354,12 @@
     </wsdl:operation>
     <wsdl:operation name="RecieveExitNotification">
       <soap12:operation soapAction="http://tempuri.org/IPreGameService/RecieveExitNotification" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveConfigurationGame">
+      <soap12:operation soapAction="http://tempuri.org/IPreGameService/ReceiveConfigurationGame" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

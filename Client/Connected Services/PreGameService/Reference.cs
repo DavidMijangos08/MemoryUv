@@ -222,16 +222,28 @@ namespace Client.PreGameService {
         System.Threading.Tasks.Task ConnectPlayerAsync(string usergameConnected, string usergameAdmin);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/DisconnectPlayer")]
-        void DisconnectPlayer(string usergameToDisconnect, string usergameToNotify);
+        void DisconnectPlayer(string status, string usergameToDisconnect, string usergameToNotify);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/DisconnectPlayer")]
-        System.Threading.Tasks.Task DisconnectPlayerAsync(string usergameToDisconnect, string usergameToNotify);
+        System.Threading.Tasks.Task DisconnectPlayerAsync(string status, string usergameToDisconnect, string usergameToNotify);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/SendAccessGame")]
         void SendAccessGame(string usergam1, string usergame2);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/SendAccessGame")]
         System.Threading.Tasks.Task SendAccessGameAsync(string usergam1, string usergame2);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/SendExitNotification")]
+        void SendExitNotification(string usergameToDisconnect, string usergameToNotify);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/SendExitNotification")]
+        System.Threading.Tasks.Task SendExitNotificationAsync(string usergameToDisconnect, string usergameToNotify);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/SendConfigurationGame")]
+        void SendConfigurationGame(string userToSend, string section, string difficulty);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/SendConfigurationGame")]
+        System.Threading.Tasks.Task SendConfigurationGameAsync(string userToSend, string section, string difficulty);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -245,6 +257,9 @@ namespace Client.PreGameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/RecieveExitNotification")]
         void RecieveExitNotification(string userDisconnected);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreGameService/ReceiveConfigurationGame")]
+        void ReceiveConfigurationGame(string section, string difficulty);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -283,12 +298,12 @@ namespace Client.PreGameService {
             return base.Channel.ConnectPlayerAsync(usergameConnected, usergameAdmin);
         }
         
-        public void DisconnectPlayer(string usergameToDisconnect, string usergameToNotify) {
-            base.Channel.DisconnectPlayer(usergameToDisconnect, usergameToNotify);
+        public void DisconnectPlayer(string status, string usergameToDisconnect, string usergameToNotify) {
+            base.Channel.DisconnectPlayer(status, usergameToDisconnect, usergameToNotify);
         }
         
-        public System.Threading.Tasks.Task DisconnectPlayerAsync(string usergameToDisconnect, string usergameToNotify) {
-            return base.Channel.DisconnectPlayerAsync(usergameToDisconnect, usergameToNotify);
+        public System.Threading.Tasks.Task DisconnectPlayerAsync(string status, string usergameToDisconnect, string usergameToNotify) {
+            return base.Channel.DisconnectPlayerAsync(status, usergameToDisconnect, usergameToNotify);
         }
         
         public void SendAccessGame(string usergam1, string usergame2) {
@@ -297,6 +312,22 @@ namespace Client.PreGameService {
         
         public System.Threading.Tasks.Task SendAccessGameAsync(string usergam1, string usergame2) {
             return base.Channel.SendAccessGameAsync(usergam1, usergame2);
+        }
+        
+        public void SendExitNotification(string usergameToDisconnect, string usergameToNotify) {
+            base.Channel.SendExitNotification(usergameToDisconnect, usergameToNotify);
+        }
+        
+        public System.Threading.Tasks.Task SendExitNotificationAsync(string usergameToDisconnect, string usergameToNotify) {
+            return base.Channel.SendExitNotificationAsync(usergameToDisconnect, usergameToNotify);
+        }
+        
+        public void SendConfigurationGame(string userToSend, string section, string difficulty) {
+            base.Channel.SendConfigurationGame(userToSend, section, difficulty);
+        }
+        
+        public System.Threading.Tasks.Task SendConfigurationGameAsync(string userToSend, string section, string difficulty) {
+            return base.Channel.SendConfigurationGameAsync(userToSend, section, difficulty);
         }
     }
 }

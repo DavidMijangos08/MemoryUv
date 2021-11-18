@@ -46,6 +46,9 @@ namespace Host
 
         [OperationContract(IsOneWay = true)]
         void RecieveExitNotification(string userDisconnected);
+
+        [OperationContract(IsOneWay = true)]
+        void ReceiveConfigurationGame(string section, string difficulty);
     }
 
     [ServiceContract(CallbackContract = typeof(IChatClient))]
@@ -87,10 +90,16 @@ namespace Host
         void ConnectPlayer(string usergameConnected, string usergameAdmin);
 
         [OperationContract(IsOneWay = true)]
-        void DisconnectPlayer(string usergameToDisconnect, string usergameToNotify);
+        void DisconnectPlayer(string status, string usergameToDisconnect, string usergameToNotify);
 
         [OperationContract(IsOneWay = true)]
         void SendAccessGame(string usergam1, string usergame2);
+
+        [OperationContract(IsOneWay = true)]
+        void SendExitNotification(string usergameToDisconnect, string usergameToNotify);
+
+        [OperationContract(IsOneWay = true)]
+        void SendConfigurationGame(string userToSend, string section, string difficulty);
     }
 
     [ServiceContract]
@@ -262,7 +271,6 @@ namespace Host
         {
             var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
             usersRoom.Remove(connection);
-            Console.WriteLine("El usuario " + usergame + "se desconecto de una sala de juego");
         }
 
         public void SendInvitation(string usergameApplicant, string usergameReceiver)
@@ -321,29 +329,33 @@ namespace Host
             }
         }
 
-        public void DisconnectPlayer(string usergameToDisconnect, string usergameToNotify)
+        public void DisconnectPlayer(string status, string usergameToDisconnect, string usergameToNotify)
         {
             var connection = OperationContext.Current.GetCallbackChannel<IPreGameClient>();
-            
             Console.WriteLine("El jugador " + usergameToDisconnect + " se desconectó de la sala de juego entre " + usergameToDisconnect + " y " + usergameToNotify);
-            string userDisconnected;
-            string userNotify;
-            if (!usersPreGame.TryGetValue(connection, out userDisconnected))
+            if (status.Equals("Abandonado"))
             {
-                return;
+                SendExitNotification(usergameToDisconnect, usergameToNotify);
             }
+            usersPreGame.Remove(connection);
+        }
 
-            foreach(var userToNotify in usersPreGame.Keys)
+        public void SendExitNotification(string usergameToDisconnect, string usergameToNotify)
+        {
+            string userNotify;
+            var connection = OperationContext.Current.GetCallbackChannel<IPreGameClient>();
+
+            foreach (var userToNotify in usersPreGame.Keys)
             {
-                if(usersPreGame.TryGetValue(userToNotify, out userNotify))
+                if (usersPreGame.TryGetValue(userToNotify, out userNotify))
                 {
-                    if(userNotify == usergameToNotify)
+                    if (userNotify == usergameToNotify)
                     {
                         userToNotify.RecieveExitNotification(usergameToDisconnect);
                     }
                 }
             }
-            usersPreGame.Remove(connection);
+
         }
 
         public void SendAccessGame(string usergam1, string usergame2)
@@ -363,6 +375,23 @@ namespace Host
                     if(userToAccess == usergame2)
                     {
                         userAccess.RecieveAccessGame();
+                    }
+                }
+            }
+        }
+
+        public void SendConfigurationGame(string userToSend, string section, string difficulty)
+        {
+            string userNotify;
+            var connection = OperationContext.Current.GetCallbackChannel<IPreGameClient>();
+
+            foreach (var userToNotify in usersPreGame.Keys)
+            {
+                if (usersPreGame.TryGetValue(userToNotify, out userNotify))
+                {
+                    if (userNotify == userToSend)
+                    {
+                        userToNotify.ReceiveConfigurationGame(section, difficulty);
                     }
                 }
             }
