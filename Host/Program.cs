@@ -633,6 +633,8 @@ namespace Host
 
     class Program
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         static void Main(string[] args)
         {
             using (ServiceHost host = new ServiceHost(typeof(Host.MemoryServer)))

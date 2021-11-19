@@ -48,9 +48,7 @@ namespace Client
                     service.UpdateUserStatus(user.id, "Activo");
                     Home windowHome = new Home(user);
                     windowHome.Show();
-                    this.Hide();
-
-                    
+                    this.Hide();  
                 }
                 else
                 {

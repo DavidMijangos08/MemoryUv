@@ -14,6 +14,8 @@ namespace Logic
     /// </summary>
     public partial class Authentication
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         /// <summary>
         /// Constructor vacío de la clase Authentication
         /// </summary>
@@ -46,9 +48,10 @@ namespace Logic
                         user = null;
                     }
                 }
-            } catch (DbException)
+            } catch (DbException ex)
             {
-
+                log.Error("Error en login", ex);
+              //  throw new DbException();
             }
             return user;
         }
