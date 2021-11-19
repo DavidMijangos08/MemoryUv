@@ -28,7 +28,6 @@ namespace Client
         public Game(List<UserGame> users, string section, string difficulty)
         {
             InitializeComponent();
-            MessageBox.Show("La configuración de la partida es: Sección: " + section, " dificultad: " + difficulty);
         }
 
         private void changeTextBlock(int lb)
