@@ -10,7 +10,7 @@
         <StackPanel Background="BlanchedAlmond">
             <Grid Margin="10">
 
-                <Label Content="Login" FontSize="50" HorizontalAlignment="Center" Margin="271,10,312,-10" RenderTransformOrigin="0.255,-0.745"  />
+                <Label Content="Login" FontSize="50" HorizontalAlignment="Center" Margin="271,10,294,-10" RenderTransformOrigin="0.255,-0.745" Width="147"  />
                 <TextBox Name="Usuario" FontSize="15" Margin="287,150,163,-87" />
 
                 <Button Name="ButtonLogin" Content="Ingresar" HorizontalAlignment="Right" Click="ButtonLogin_Click" Margin="0,283,176,-224" RenderTransformOrigin="0.5,0.503" Width="78"  >

@@ -35,8 +35,8 @@ namespace Client
             InitializeComponent();
             this.receivedUsers = receivedUsers;
             userConnected = receivedUsers[0];
-            userAdmin = receivedUsers[1];
-            userInvited = receivedUsers[2];
+            userInvited = receivedUsers[1];
+            userAdmin = receivedUsers[2];
             this.section = section;
             this.difficulty = difficulty;
             InstanceContext context = new InstanceContext(this);
