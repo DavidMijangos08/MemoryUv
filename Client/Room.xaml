@@ -40,6 +40,10 @@
             <Button Content="Rechazar" HorizontalAlignment="Left" Margin="171,101,0,0" Click="ClicRejeact"  VerticalAlignment="Top" Width="75"/>
             <TextBlock x:Name="lbInvitation" HorizontalAlignment="Left" Margin="23,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="38" Width="223"/>
         </Grid>
-        <Button Content="Recargar" HorizontalAlignment="Left" Margin="629,75,0,0" VerticalAlignment="Top" Width="51" Height="21" Click="RecharchClick"/>
+        <Button Content="Recargar" HorizontalAlignment="Left" Margin="629,64,0,0" VerticalAlignment="Top" Width="51" Height="21" Click="RecharchClick">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
     </Grid>
 </Window>

@@ -10,7 +10,11 @@
         Title="Logros" Height="450" Width="800">
     <Grid Background="#DCDCDC">
         <Label Content="Archievement" HorizontalAlignment="Left" Margin="411,13,0,0" FontSize="36" VerticalAlignment="Top" FontFamily="Segoe Script" FontWeight="Bold"/>
-        <Button Content="Regresar" HorizontalAlignment="Left" Margin="407,385,0,0" VerticalAlignment="Top" Width="75" Click="ExitClick"/>
+        <Button Content="Regresar" HorizontalAlignment="Left" Margin="407,385,0,0" VerticalAlignment="Top" Width="75" Click="ExitClick">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
         <Label x:Name="lbAchievement1" Content="Obten tu primer victoria" HorizontalAlignment="Left" Margin="485,94,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Dubai Medium" IsEnabled="False"/>
         <Label x:Name="lbAchievement2" Content="Consigue 10 victorias!" HorizontalAlignment="Left" Margin="485,158,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Dubai Medium" IsEnabled="False"/>
         <Label x:Name="lbAchievement3" Content="En buena hora 250 victorias!!!" HorizontalAlignment="Left" Margin="485,215,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Dubai Medium" IsEnabled="False"/>

@@ -27,7 +27,11 @@
         <Grid Margin="10,184,938.6,10.4"  >
             <ListBox x:Name="messageDisplay" Margin="0,0,0,41" />
             <TextBox x:Name="txtChat" Margin="0,440,47,-1" />
-            <Button x:Name="btnSend" Content="Enviar" Margin="203,440,0,1" />
+            <Button x:Name="btnSend" Content="Enviar" Margin="203,440,0,1" >
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
         </Grid>
         <Label Content="Turno de:" Margin="24,47,977.6,587.4" FontSize="20" />
         <Label Content="Puntos:" Margin="936,346,74.6,285.4" FontSize="20" />
@@ -35,7 +39,11 @@
         <TextBlock x:Name="lbUsergameAplicant" HorizontalAlignment="Left" Margin="940,452,0,0" VerticalAlignment="Top" Height="40" Width="179" Background="#FFF09E9E" FontSize="48"/>
         <TextBlock x:Name="lbUsergamePoints" HorizontalAlignment="Left" Margin="1137,385,0,0" VerticalAlignment="Top" Height="40" Width="47" Background="#FFF09E9E" FontSize="48"/>
         <TextBlock x:Name="lbUsergameAplicantPoints" HorizontalAlignment="Left" Margin="1137,452,0,0" VerticalAlignment="Top" Height="40" Width="47" Background="#FFF09E9E" FontSize="48"/>
-        <Button Content="Retirarse" HorizontalAlignment="Left" Margin="1083,632,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Retirarse" HorizontalAlignment="Left" Margin="1083,632,0,0" VerticalAlignment="Top" Width="75">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
 
     </Grid>
 </Window>

@@ -13,12 +13,24 @@
                 <Label Content="Login" FontSize="50" HorizontalAlignment="Center" Margin="271,10,312,-10" RenderTransformOrigin="0.255,-0.745"  />
                 <TextBox Name="Usuario" FontSize="15" Margin="287,150,163,-87" />
 
-                <Button Name="ButtonLogin" Content="Ingresar" HorizontalAlignment="Right" Click="ButtonLogin_Click" Margin="0,283,176,-224" RenderTransformOrigin="0.5,0.503" Width="78"  />
+                <Button Name="ButtonLogin" Content="Ingresar" HorizontalAlignment="Right" Click="ButtonLogin_Click" Margin="0,283,176,-224" RenderTransformOrigin="0.5,0.503" Width="78"  >
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
                 <Label Content="Correo electrónico:" FontSize="20" HorizontalAlignment="Center" Margin="64,140,408,-95" RenderTransformOrigin="0.255,-0.745" Width="240"  />
                 <Label Content="Contraseña:" FontSize="20" HorizontalAlignment="Center" Margin="64,200,408,-155" RenderTransformOrigin="0.255,-0.745" Width="240"  />
-                <Button x:Name="ButtonNewAccount" Content="Crear cuenta" HorizontalAlignment="Right" Click="ButtonNewAccountClick"  Margin="0,283,23,-224" RenderTransformOrigin="0.353,-0.423" Width="78"  />
+                <Button x:Name="ButtonNewAccount" Content="Crear cuenta" HorizontalAlignment="Right" Click="ButtonNewAccountClick"  Margin="0,283,23,-224" RenderTransformOrigin="0.353,-0.423" Width="78"  >
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
                 <Label Content="-Idioma-" FontSize="20" HorizontalAlignment="Center" Margin="585,91,-111.4,-45.2" RenderTransformOrigin="0.255,-0.745" Width="240"  />
-                <Button x:Name="btnSupport" Content="Recuperar contraseña" HorizontalAlignment="Right" Click="SupportClick"  Margin="0,283,515,-224" RenderTransformOrigin="0.353,-0.423" Width="134"  />
+                <Button x:Name="btnSupport" Content="Recuperar contraseña" HorizontalAlignment="Right" Click="SupportClick"  Margin="0,283,515,-224" RenderTransformOrigin="0.353,-0.423" Width="134"  >
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
 
             </Grid>
 

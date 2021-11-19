@@ -12,7 +12,11 @@
         <ListBox x:Name="listUsersOnline" Margin="10,29,0,109" HorizontalAlignment="Left" Width="201"/>
         <ListBox x:Name="messageDisplay" Margin="216,29,9.6,109"/>
         <TextBox x:Name="txtChat" HorizontalAlignment="Left" Margin="46,355,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="516" Height="45"/>
-        <Button x:Name="btnSend" Content="Enviar" HorizontalAlignment="Left" Margin="646,328,0,0" VerticalAlignment="Top" Click="btnSend_Click" Width="103" Height="22"/>
+        <Button x:Name="btnSend" Content="Enviar" HorizontalAlignment="Left" Margin="646,328,0,0" VerticalAlignment="Top" Click="btnSend_Click" Width="103" Height="22">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
         <ComboBox x:Name="cbUsers" ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalAlignment="Left" Margin="646,378,0,0" VerticalAlignment="Top" Width="103" Height="22"/>
     </Grid>
 </Window>

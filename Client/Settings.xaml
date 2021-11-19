@@ -18,15 +18,23 @@
             <ComboBoxItem>Espaniol</ComboBoxItem>
             <ComboBoxItem>English</ComboBoxItem>
         </ComboBox>
-        <Button Content="Cerrar Sesion" HorizontalAlignment="Left" Margin="682,373,0,0" VerticalAlignment="Top" Width="75" Click="CerrarSesionClick"/>
-        <Button Content="Regresar" HorizontalAlignment="Left" Margin="395,373,0,0" VerticalAlignment="Top" Width="75" Click="RegresarClick"/>
+        <Button Content="Cerrar Sesion" HorizontalAlignment="Left" Margin="682,373,0,0" VerticalAlignment="Top" Width="75" Click="CerrarSesionClick">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button Content="Regresar" HorizontalAlignment="Left" Margin="395,373,0,0" VerticalAlignment="Top" Width="75" Click="RegresarClick">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
 
-        
+
         <CheckBox x:Name="chbVista" Content="Vista" HorizontalAlignment="Left" Margin="533,185,0,0" VerticalAlignment="Top" />
         <CheckBox Content="♫" HorizontalAlignment="Left" Margin="533,233,0,0" VerticalAlignment="Top" />
         <Image gif:AnimationBehavior.SourceUri="/Resources/Images/fondo1.gif" Margin="10,13,514.6,28" 
              gif:AnimationBehavior.RepeatBehavior="Forever"  />
-        
+
 
 
     </Grid>

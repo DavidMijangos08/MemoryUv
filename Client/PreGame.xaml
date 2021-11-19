@@ -25,7 +25,11 @@
             </Grid>
             <TextBlock x:Name="lbUsergame1" Margin="96,82,259,250" />
             <TextBlock x:Name="lbUsergame2" Margin="280,81,73,250" />
-            <Button Content="salir" HorizontalAlignment="Left" Margin="249,371,0,0" VerticalAlignment="Top" Width="75" Click="ExitClick"/>
+            <Button Content="salir" HorizontalAlignment="Left" Margin="249,371,0,0" VerticalAlignment="Top" Width="75" Click="ExitClick">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
         </Grid>
     </Grid>
 </Window>

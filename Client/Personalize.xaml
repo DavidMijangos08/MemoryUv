@@ -6,16 +6,44 @@
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
         Title="Personalize" Height="450" Width="800">
-    <Grid>
-        <Button Content="Regresar" HorizontalAlignment="Left" Margin="390,378,0,0" VerticalAlignment="Top" Width="75" Click="ExitClick"/>
+    <Grid x:Name="mainGrid">
+        <Button Content="Regresar" HorizontalAlignment="Left" Margin="390,378,0,0" VerticalAlignment="Top" Width="75" Click="ExitClick">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
         <Label Content="Personalize" HorizontalAlignment="Left" Margin="270,31,0,0" FontSize="36" VerticalAlignment="Top" FontFamily="Segoe Script" FontWeight="Bold"/>
         <Label Content="Selecciona tu fondo favorito" HorizontalAlignment="Left" Margin="97,98,0,0" VerticalAlignment="Top" Width="349"/>
-        <Image HorizontalAlignment="Left" Height="112" Margin="97,142,0,0" VerticalAlignment="Top" Width="170" Source="Resources/Background/backgroundGreen.png" Stretch="UniformToFill"/>
-        <Image HorizontalAlignment="Left" Height="112" Margin="173,281,0,0" VerticalAlignment="Top" Width="170" Source="Resources/Background/backgroundIce.png" Stretch="UniformToFill"/>
-        <Image HorizontalAlignment="Left" Height="112" Margin="340,142,0,0" VerticalAlignment="Top" Width="170" Source="Resources/Background/backgroundPink.jpg" Stretch="UniformToFill"/>
-        <Image HorizontalAlignment="Left" Height="112" Margin="581,142,0,0" VerticalAlignment="Top" Width="170" Source="Resources/Background/backgroundRed.jpg" Stretch="UniformToFill"/>
-        <Image HorizontalAlignment="Left" Height="112" Margin="510,281,0,0" VerticalAlignment="Top" Width="170" Source="Resources/Background/backgroundX.jpg" Stretch="UniformToFill"/>
-        <Button Content="Restablecer Fondo" HorizontalAlignment="Left" Margin="581,109,0,0" VerticalAlignment="Top" Width="129"/>
+        <Button HorizontalAlignment="Left" Height="112" Margin="97,142,0,0" VerticalAlignment="Top" Width="170" Click="GreenClick"  >
+            <Button.Background>
+                <ImageBrush ImageSource="Resources/Background/backgroundGreen.png"/>
+            </Button.Background>
+        </Button>
+        <Button HorizontalAlignment="Left" Height="112" Margin="173,281,0,0" VerticalAlignment="Top" Width="170" Click="IceClick" >
+            <Button.Background>
+                <ImageBrush ImageSource="Resources/Background/backgroundIce.png"/>
+            </Button.Background>
+        </Button>
+        <Button HorizontalAlignment="Left" Height="112" Margin="340,142,0,0" VerticalAlignment="Top" Width="170" Click="PinkClick" >
+            <Button.Background>
+                <ImageBrush ImageSource="Resources/Background/backgroundPink.jpg"/>
+            </Button.Background>
+        </Button>
+        <Button HorizontalAlignment="Left" Height="112" Margin="581,142,0,0" VerticalAlignment="Top" Width="170" Click="RedClick" >
+            <Button.Background>
+                <ImageBrush ImageSource="Resources/Background/backgroundRed.jpg"/>
+            </Button.Background>
+        </Button>
+        <Button HorizontalAlignment="Left" Height="112" Margin="510,281,0,0" VerticalAlignment="Top" Width="170" Click="XClick" >
+            <Button.Background>
+                <ImageBrush ImageSource="Resources/Background/backgroundX.jpg"/>
+            </Button.Background>
+        </Button>
+        <Button Content="Restablecer Fondo" HorizontalAlignment="Left" Margin="581,109,0,0" VerticalAlignment="Top" Width="129" Click="DefaultClick">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
 
     </Grid>
 </Window>

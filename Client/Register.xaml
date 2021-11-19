@@ -17,9 +17,21 @@
 
                 <TextBox Name="tbCorreo" FontSize="15" Margin="297,120,167,197" />
                 <PasswordBox Name="pbPassword" HorizontalAlignment="Left" Margin="297,181,0,0" VerticalAlignment="Top" Width="270" Height="26"/>
-                <Button Content="Salir" HorizontalAlignment="Left" Margin="318,217,0,0" VerticalAlignment="Top" Width="75" Click="ButtonSalir_Click" Background="WhiteSmoke"/>
-                <Button Content="Continuar" HorizontalAlignment="Left" Margin="492,217,0,0" VerticalAlignment="Top" Width="75" Click="ButtonContinuar_Click"/>
-                <Button Content="Aceptar" HorizontalAlignment="Left" Margin="659,270,0,0" VerticalAlignment="Top" Width="71" Click="ButtonAceptar_Click" Height="53"/>
+                <Button Content="Salir" HorizontalAlignment="Left" Margin="318,217,0,0" VerticalAlignment="Top" Width="75" Click="ButtonSalir_Click" Background="WhiteSmoke">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
+                <Button Content="Continuar" HorizontalAlignment="Left" Margin="492,217,0,0" VerticalAlignment="Top" Width="75" Click="ButtonContinuar_Click">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
+                <Button Content="Aceptar" HorizontalAlignment="Left" Margin="659,270,0,0" VerticalAlignment="Top" Width="63" Click="ButtonAceptar_Click" Height="53">
+                    <Button.Effect>
+                        <DropShadowEffect/>
+                    </Button.Effect>
+                </Button>
 
                 <Image HorizontalAlignment="Left" Height="316" Margin="10,10,0,-54" VerticalAlignment="Top" Width="185" />
 

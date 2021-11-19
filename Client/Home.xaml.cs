@@ -96,7 +96,7 @@ namespace Client
         private void PersonalizeClick(object sender, RoutedEventArgs e)
         {
             client.DisconnectRoom(usergame.nametag);
-            Personalize personalize = new Personalize();
+            Personalize personalize = new Personalize(usergame);
             personalize.Show();
             this.Close();
         }
