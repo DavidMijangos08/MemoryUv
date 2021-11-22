@@ -47,11 +47,13 @@ namespace Client
                 btnStartGame.IsEnabled = true;
                 usersGame.Add(userConnected);
                 usersGame.Add(userInvited);
+                usersGame.Add(userAdmin);
             }
             else
             {
                 btnStartGame.IsEnabled = false;
                 usersGame.Add(userConnected);
+                usersGame.Add(userAdmin);
                 usersGame.Add(userAdmin);
             }
         }

@@ -51,6 +51,16 @@ namespace Host
         void ReceiveConfigurationGame(string section, string difficulty);
     }
 
+    [ServiceContract]
+    public interface IGameClient
+    {
+        [OperationContract(IsOneWay = true)]
+        void ReceiveExitNotification(string userDisconnected);
+
+        [OperationContract(IsOneWay = true)]
+        void ReceiveGameTurn();
+    }
+
     [ServiceContract(CallbackContract = typeof(IChatClient))]
     public interface IChatService
     {
@@ -100,6 +110,22 @@ namespace Host
 
         [OperationContract(IsOneWay = true)]
         void SendConfigurationGame(string userToSend, string section, string difficulty);
+    }
+
+    [ServiceContract(CallbackContract = typeof(IGameClient))]
+    public interface IGameService
+    {
+        [OperationContract(IsOneWay = true)]
+        void ConnectToGame(string userConnected, string userOpponent);
+
+        [OperationContract(IsOneWay = true)]
+        void DisconnectTheGame(string status, string userDisconnect, string userOpponent);
+
+        [OperationContract(IsOneWay = true)]
+        void SendExitGameNotification(string userDisconnect, string userToNotify);
+
+        [OperationContract(IsOneWay = true)]
+        void SendGameTurn(string userReceiving);
     }
 
     [ServiceContract]
@@ -193,11 +219,12 @@ namespace Host
     }
 
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single, InstanceContextMode = InstanceContextMode.Single)]
-    public class MemoryServer : IChatService, IRoomService, IPreGameService, IUserService, IFriendService, IFriendRequestService
+    public class MemoryServer : IChatService, IRoomService, IPreGameService, IGameService, IUserService, IFriendService, IFriendRequestService
     {
         Dictionary<IChatClient, string> _users = new Dictionary<IChatClient, string>();
         Dictionary<IUserClient, string> usersRoom = new Dictionary<IUserClient, string>();
         Dictionary<IPreGameClient, string> usersPreGame = new Dictionary<IPreGameClient, string>();
+        Dictionary<IGameClient, string> usersGame = new Dictionary<IGameClient, string>();
         public void Join(string username)
         {
             var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
@@ -395,6 +422,56 @@ namespace Host
                     }
                 }
             }
+        }
+
+        public void ConnectToGame(string userConnected, string userOpponent)
+        {
+            var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
+            Console.WriteLine("El jugador " + userConnected + " se conectó a la partida vs " + userOpponent);
+            usersGame[connection] = userConnected;
+        }
+
+        public void DisconnectTheGame(string status, string userDisconnect, string userOpponent)
+        {
+            var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
+            Console.WriteLine("El jugador " + userDisconnect + " se desconectó del juego vs " + userOpponent);
+            if (status.Equals("Abandonado"))
+            {
+                SendExitGameNotification(userDisconnect, userOpponent);
+            }
+            usersGame.Remove(connection);
+        }
+
+        public void SendExitGameNotification(string userDisconnect, string userToNotify) {
+            var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
+            string userNotify;
+            foreach(var usergameToNotify in usersGame.Keys)
+            {
+                if(usersGame.TryGetValue(usergameToNotify, out userNotify))
+                {
+                    if (userNotify == userToNotify)
+                    {
+                        usergameToNotify.ReceiveExitNotification(userDisconnect);
+                    }
+                }
+            }
+        }
+
+        public void SendGameTurn(string userReceiving)
+        {
+            var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
+            string userNotify;
+            foreach(var usergameReceiving in usersGame.Keys)
+            {
+                if(usersGame.TryGetValue(usergameReceiving, out userNotify))
+                {
+                    if(userNotify == userReceiving)
+                    {
+                        usergameReceiving.ReceiveGameTurn();
+                    }
+                }
+            }
+
         }
 
         public UserGame GetLoggerUser(string email, string password)
