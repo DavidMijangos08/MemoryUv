@@ -3,6 +3,7 @@ using Host;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,22 +15,62 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Client
 {
     /// <summary>
     /// Lógica de interacción para Game.xaml
     /// </summary>
-    public partial class Game : Window
+    public partial class Game : Window, GameService.IGameServiceCallback
     {
         UserGame usergame = new UserGame();
         MemoryServer service;
-
+        public GameService.GameServiceClient client;
+        UserGame userConnected = new UserGame();
+        UserGame userOpponent = new UserGame();
+        DispatcherTimer dispatcherTimer;
+        int decrement;
 
         public Game(List<UserGame> users, string section, string difficulty)
         {
             InitializeComponent();
-            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(users[0].id))));
+            InstanceContext context = new InstanceContext(this);
+            client = new GameService.GameServiceClient(context);
+            userConnected = users[0];
+            userOpponent = users[1];
+            UserGame userAdmin = users[2];
+            client.ConnectToGame(userConnected.nametag, userOpponent.nametag);
+            if (userConnected.nametag.Equals(userAdmin.nametag))
+            {
+                InitializeTimer();
+            }
+            lbUserTurn.Text = userAdmin.nametag;
+        }
+        
+        private void InitializeTimer()
+        {
+            lbUserTurn.Text = userConnected.nametag;
+            decrement = 10;
+            dispatcherTimer = new DispatcherTimer();
+            lbTimer.Text = "10";
+            dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
+            dispatcherTimer.Tick += DispatcherTimerTicker;
+            dispatcherTimer.Start();    
+        }
+
+        
+
+        private void DispatcherTimerTicker(object sender, EventArgs e)
+        {
+            decrement--;
+            lbTimer.Text = decrement.ToString();
+            if (lbTimer.Text.Equals("0"))
+            {
+                dispatcherTimer.Stop();
+                client.SendGameTurn(userOpponent.nametag);
+                lbUserTurn.Text = userOpponent.nametag;
+            }
         }
 
         private void changeTextBlock(int lb)

@@ -92,6 +92,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\GameService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\PreGameService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -177,6 +182,19 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\ChatService\MemoryServer.wsdl" />
+    <None Include="Connected Services\GameService\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameService\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameService\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameService\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameService\MemoryServer.wsdl" />
     <None Include="Connected Services\PreGameService\item.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -410,11 +428,19 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Connected Services\GameService\item.disco" />
+    <None Include="Connected Services\GameService\configuration91.svcinfo" />
+    <None Include="Connected Services\GameService\configuration.svcinfo" />
+    <None Include="Connected Services\GameService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Resources\Sound\GameSoundtrack.mp3" />
     <Content Include="Resources\Sound\song.wav" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ChatService\" />
+    <WCFMetadataStorage Include="Connected Services\GameService\" />
     <WCFMetadataStorage Include="Connected Services\PreGameService\" />
     <WCFMetadataStorage Include="Connected Services\RoomService\" />
   </ItemGroup>
