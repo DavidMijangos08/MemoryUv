@@ -21,10 +21,10 @@ namespace Logic
             {
                 using (var context = new MemoryModel())
                 {
-                    var coincidences = from ConfigUser in context.ConfigUser where ConfigUser.idUser == idUser select ConfigUser;
+                    var coincidences = from ConfigUser in context.ConfigUsers where ConfigUser.idUser == idUser select ConfigUser;
                     if (coincidences.Count() > 0)
                     {
-                        confi = coincidences.first();
+                        confi = coincidences.First();
                         
                     }
                         
@@ -40,32 +40,32 @@ namespace Logic
         public string GetBackgroundUser(ConfigUser confi)
         {
 
-            if (confi.idBackgroud == 0)
+            if (confi.idBackground == 0)
             {
                 string background = "Resources/Background/backgroundDefault.png";
                 return background;
             }
-            else if (confi.idBackgroud == 1)
+            else if (confi.idBackground == 1)
             {
                 string background = "Resources/Background/backgroundGreen.png";
                 return background;
             }
-            else if (confi.idBackgroud == 2)
+            else if (confi.idBackground == 2)
             {
                 string background = "Resources/Background/backgroundIce.png";
                 return background;
             }
-            else if (confi.idBackgroud == 3)
+            else if (confi.idBackground == 3)
             {
                 string background = "Resources/Background/backgroundPink.jpg";
                 return background;
             }
-            else if(confi.idBackgroud == 4)
+            else if(confi.idBackground == 4)
             {
                 string background = "Resources/Background/backgroundRed.jpg";
                 return background;
             }
-            else if(confi.idBackgroud == 5)
+            else if(confi.idBackground == 5)
             {
                 string background = "Resources/Background/backgroundX.jpg";
                 return background;
@@ -79,16 +79,13 @@ namespace Logic
             {
                 using (var context = new MemoryModel())
                 {
-                    var coincidences = from ConfigUser in context.ConfigUser where ConfigUser.idUser == idUser select ConfigUser;
+                    var coincidences = from ConfigUser in context.ConfigUsers where ConfigUser.idUser == idUser select ConfigUser;
                     if (coincidences.Count() > 0)
                     {
                         ConfigUser configUser = coincidences.First();
-                        configUser.idBackgroud = idNewBackground;
-
-                        
+                        configUser.idBackground = idNewBackground;
                     }
                     context.SaveChanges();
-                    
                 }
             }
             catch (DbException)

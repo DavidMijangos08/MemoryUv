@@ -73,18 +73,32 @@ namespace Client
             }
         }
 
-        private void changeTextBlock(int lb)
+        public void ReceiveExitNotification(string userDisconnected)
         {
-            if (lb == 0)
-            {
-                //lbUserTurn.Text = userSelected.nametag;
-            }
-            if (lb == 1)
-            {
-                lbUserTurn.Text = usergame.nametag;
-            }
+            string message = "El jugador " + userDisconnected + " se desconectó. Tu ganas esta partida!!!";
+            gridNotification.Visibility = Visibility.Visible;
+            lbNotification.Text = message;
         }
 
-        
+        public void ReceiveGameTurn()
+        {
+            InitializeTimer();
+        }
+
+        private void BackingOutClick(object sender, RoutedEventArgs e)
+        {
+            client.DisconnectTheGame("Abandonado", userConnected.nametag, userOpponent.nametag);
+            this.Close();
+            Home home = new Home(userConnected);
+            home.Show();
+        }
+
+        private void ClickAcceptNotification(object sender, RoutedEventArgs e)
+        {
+            client.DisconnectTheGame("Finalizado", userConnected.nametag, userOpponent.nametag);
+            this.Close();
+            Home home = new Home(userConnected);
+            home.Show();
+        }
     }
 }
