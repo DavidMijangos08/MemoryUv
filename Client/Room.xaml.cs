@@ -13,6 +13,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Client
@@ -38,6 +39,7 @@ namespace Client
             InstanceContext context = new InstanceContext(this);
             client = new RoomService.RoomServiceClient(context);
             client.ConnectWaitingRoom(usergame.nametag);
+            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(usergame.id))));
         }
 
         private void initializeListFriends()

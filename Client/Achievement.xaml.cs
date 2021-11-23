@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Client
@@ -29,8 +30,8 @@ namespace Client
             userGame = _user;
             InitializeComponent();
             InitializeArchievement();
-            
-            
+            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
+
         }
 
         private void InitializeArchievement()

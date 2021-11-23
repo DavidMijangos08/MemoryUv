@@ -11,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Client
@@ -25,12 +26,14 @@ namespace Client
         public bool isDataDirty = false;
         public Chat(string _username)
         {
+
             InitializeComponent();
             userName = _username;
             InstanceContext context = new InstanceContext(this);
             client = new ChatService.ChatServiceClient(context);
             client.Join(userName);
             lbId.Text = "Bienvenido "+ userName;
+            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
         }
 
         public void RecieveMessage(string user, string message)

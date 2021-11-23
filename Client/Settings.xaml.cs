@@ -24,6 +24,7 @@ namespace Client
     {
         
         UserGame userGame = new UserGame();
+        MemoryModel service;
         public Settings(UserGame _user)
         {
             InitializeComponent();

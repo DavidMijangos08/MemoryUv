@@ -12,6 +12,8 @@ using System.Data.SqlClient;
 using System.Windows;
 using static Logic.UserLogic;
 using static Logic.FriendLogic;
+using System.Windows.Media;
+using System.Windows.Navigation;
 
 namespace Host
 {
@@ -190,6 +192,19 @@ namespace Host
         bool AddOneLoseGame(int idUser);
 
 
+    }
+
+    [ServiceContract]
+    public interface IConfigService
+    {
+        [OperationContract]
+        string GetConfigUser();
+
+        [OperationContract]
+        ConfigUser GetConfigUserById(int idUser);
+
+        [OperationContract]
+        void SetBackgroundUser(int idUser, int idNewBackground);
     }
 
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single, InstanceContextMode = InstanceContextMode.Single)]
@@ -628,6 +643,26 @@ namespace Host
             bool value = statisticUserLogic.GetStatisticUser(idUser, numAchievement);
 
             return value;
+        }
+
+        public String GetBackgroundUser(int idUser)
+        {
+            ConfigUserLogic configUserLogic = new ConfigUserLogic();
+            
+            return configUserLogic.GetBackgroundUser(GetConfigUserById(idUser));
+        }
+
+        public ConfigUser GetConfigUserById(int idUser)
+        {
+            ConfigUserLogic configUserLogic = new ConfigUserLogic();
+
+            return configUserLogic.GetConfigUserById(idUser);
+        }
+
+        public void SetBackgroundUser(int idUser, int idNewBackground)
+        {
+            ConfigUserLogic configUserLogic = new ConfigUserLogic();
+            configUserLogic.SetBackgroundUser(idUser, idNewBackground);
         }
     }
 
