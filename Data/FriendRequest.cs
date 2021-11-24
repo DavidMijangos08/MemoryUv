@@ -19,7 +19,5 @@ namespace Data
         public string requestStatus { get; set; }
 
         public virtual UserGame UserGame { get; set; }
-
-        public virtual UserGame UserGame1 { get; set; }
     }
 }

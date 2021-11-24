@@ -31,7 +31,7 @@ namespace Client
             InitializeComponent();
             InitializeListRank();
             userGame = _user;
-            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
+         //   this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
         }
 
         private void InitializeListRank()

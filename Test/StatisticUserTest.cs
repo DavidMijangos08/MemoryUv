@@ -7,9 +7,17 @@ using System.Linq;
 
 namespace Test
 {
+    /// <summary>
+    /// Clase que permite manejar las pruebas para la lógica de las estadisticas de un usuario
+    /// </summary>
+
     [TestClass]
     public class StatisticUserTest
     {
+
+        /// <summary>
+        /// Método que realiza prueba al método para obtener los mejores jugadores del juego
+        /// </summary>
 
         [TestMethod]
         public void TestGetBetterUsers()
@@ -24,6 +32,10 @@ namespace Test
             Assert.IsTrue(isOrdered);
         }
 
+        /// <summary>
+        /// Método que realiza prueba al método para agregar una nueva estadistica en ceros al usuario recien creado
+        /// </summary>
+
         [TestMethod]
         public void TestAddStatisticUser()
         {
@@ -36,6 +48,10 @@ namespace Test
             }
             Assert.IsTrue(added);
         }
+
+        /// <summary>
+        /// Método que realiza prueba al método para incrementar una partida ganada al jugador
+        /// </summary>
 
         [TestMethod]
         public void TestIncreaseGameWon()
@@ -50,6 +66,10 @@ namespace Test
             Assert.IsTrue(added);
         }
 
+        /// <summary>
+        /// Método que realiza prueba al método para incrementar una partida perdida al jugador
+        /// </summary>
+
         [TestMethod]
         public void TestIncreaseLosingGame()
         {
@@ -62,6 +82,10 @@ namespace Test
             }
             Assert.IsTrue(added);
         }
+
+        /// <summary>
+        /// Método que realiza prueba al método para obtener el score de un jugador mediante su id
+        /// </summary>
 
         [TestMethod]
         public void TestGetScoreById()

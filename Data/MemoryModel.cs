@@ -14,14 +14,18 @@ namespace Data
 
         public virtual DbSet<Friend> Friends { get; set; }
         public virtual DbSet<FriendRequest> FriendRequests { get; set; }
+        public virtual DbSet<StatisticUser> StatisticsUser { get; set; }
         public virtual DbSet<UserGame> UsersGame { get; set; }
         public virtual DbSet<ConfigUser> ConfigUsers { get; set; }
-        public virtual DbSet<StatisticUser> StatisticsUser { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<FriendRequest>()
                 .Property(e => e.requestStatus)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<StatisticUser>()
+                .Property(e => e.nameTag)
                 .IsUnicode(false);
 
             modelBuilder.Entity<UserGame>()
@@ -53,18 +57,14 @@ namespace Data
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<UserGame>()
-                .HasOptional(e => e.ConfigUser)
-                .WithRequired(e => e.UserGame);
-
-            modelBuilder.Entity<UserGame>()
                 .HasMany(e => e.StatisticUser)
                 .WithRequired(e => e.UserGame)
                 .HasForeignKey(e => e.idUser)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<StatisticUser>()
-                .Property(e => e.nameTag)
-                .IsUnicode(false);
+            modelBuilder.Entity<UserGame>()
+                .HasOptional(e => e.ConfigUser)
+                .WithRequired(e => e.UserGame);
         }
     }
 }
