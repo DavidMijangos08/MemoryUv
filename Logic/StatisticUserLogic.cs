@@ -135,9 +135,9 @@ namespace Logic
                     if (coincidences.Count() > 0)
                     {
                         StatisticUser statisticUser = coincidences.First();
-                        statisticUser.totalWins = statisticUser.totalWins + 1;
-                        statisticUser.totalGames = statisticUser.totalGames + 1;
-                        statisticUser.totalScore = statisticUser.totalScore + 1;
+                        statisticUser.totalWins++;
+                        statisticUser.totalGames++;
+                        statisticUser.totalScore += score;
                     }
                     int numberChanges = context.SaveChanges();
                     if (numberChanges > 0)
@@ -164,9 +164,9 @@ namespace Logic
                     if(coincidences.Count() > 0)
                     {
                         StatisticUser statisticUser = coincidences.First();
-                        statisticUser.totalDefeat = statisticUser.totalDefeat + 1;
-                        statisticUser.totalGames = statisticUser.totalGames + 1;
-                        statisticUser.totalScore = statisticUser.totalScore + 1;
+                        statisticUser.totalDefeat++;
+                        statisticUser.totalGames++;
+                        statisticUser.totalScore += score;
                     }
                     int numberChanges = context.SaveChanges();
                     if (numberChanges > 0)

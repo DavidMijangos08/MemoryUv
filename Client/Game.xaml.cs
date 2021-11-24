@@ -92,7 +92,7 @@ namespace Client
         {
             client.DisconnectTheGame("Finalizado", userConnected.nametag, userOpponent.nametag);
             service = new MemoryServer();
-            int totalScore = service.GetScoreByIdUser(userConnected.id);
+            int totalScore = service.GetScoreByIdUser(userConnected.id);  // EN VEZ DE ESTO DEBE MANDAR EL SCORE QUE TIENE EL JUGADOR DE LA PARTIDA
             bool addedGameWon = service.AddOneWinGame(userConnected.id, totalScore);
             if (addedGameWon)
             {
@@ -106,7 +106,7 @@ namespace Client
         {
             client.DisconnectTheGame("Abandonado", userConnected.nametag, userOpponent.nametag);
             service = new MemoryServer();
-            int totalScore = service.GetScoreByIdUser(userConnected.id);
+            int totalScore = service.GetScoreByIdUser(userConnected.id); //EN VEZ DE ESTO DEBE MANDAR EL SCORE QUE TIENE EL JUGADOR DE LA PARTIDA
             bool addedGameLosing = service.AddOneLoseGame(userConnected.id, totalScore);
             if (addedGameLosing) {
                 this.Close();

@@ -16,7 +16,5 @@ namespace Data
         public int id { get; set; }
 
         public virtual UserGame UserGame { get; set; }
-
-        public virtual UserGame UserGame1 { get; set; }
     }
 }
