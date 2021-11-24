@@ -89,6 +89,7 @@ namespace Client
                     if (saved)
                     {
                         MessageBox.Show("Se agrego correctamente al usuario");
+                        CreateStatisticsUser(nametag);
                     }
                 }
                 else
@@ -105,6 +106,17 @@ namespace Client
             {
                 MessageBox.Show("Existe un campo vacio!");
             }
+        }
+
+        /// <summary>
+        /// Método que permite crear las estadisticas vacías del nuevo jugador
+        /// </summary>
+        /// <param name="nametag"> Corresponde al nametag del jugador a crear sus estadisticas </param>
+
+        private void CreateStatisticsUser(string nametag)
+        {
+            List<UserGame> user = service.GetUsersByInitialesOfNametag(nametag);
+            bool addedStatistics = service.AddedStatisticUser(user[0].id, nametag);
         }
 
         /// <summary>

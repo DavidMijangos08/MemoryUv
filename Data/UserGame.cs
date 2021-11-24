@@ -40,9 +40,9 @@ namespace Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FriendRequest> FriendRequest { get; set; }
 
+        public virtual ConfigUser ConfigUser { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StatisticUser> StatisticUser { get; set; }
-
-        public virtual ConfigUser ConfigUser { get; set; }
     }
 }

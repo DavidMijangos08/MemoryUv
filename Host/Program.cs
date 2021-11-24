@@ -212,12 +212,16 @@ namespace Host
         bool GetStatisticUser(int idUser, int numAchievement);
 
         [OperationContract]
-        bool AddOneWinGame(int idUser);
+        bool AddOneWinGame(int idUser, int score);
 
         [OperationContract]
-        bool AddOneLoseGame(int idUser);
+        bool AddOneLoseGame(int idUser, int score);
 
+        [OperationContract]
+        bool AddedStatisticUser(int idUser, string nametag);
 
+        [OperationContract]
+        int GetScoreByIdUser(int id);
     }
 
     [ServiceContract]
@@ -234,7 +238,7 @@ namespace Host
     }
 
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single, InstanceContextMode = InstanceContextMode.Single)]
-    public class MemoryServer : IChatService, IRoomService, IPreGameService, IGameService, IUserService, IFriendService, IFriendRequestService
+    public class MemoryServer : IChatService, IRoomService, IPreGameService, IGameService, IUserService, IFriendService, IFriendRequestService, IStatisticService
     {
         Dictionary<IChatClient, string> _users = new Dictionary<IChatClient, string>();
         Dictionary<IUserClient, string> usersRoom = new Dictionary<IUserClient, string>();
@@ -706,22 +710,6 @@ namespace Host
             return exists;
         }
 
-        public List<StatisticUser> GetBetterUser()
-        {
-            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
-            List<StatisticUser> users = statisticUserLogic.GetBetterUsers();
-            return users;
-        }
-
-        public bool GetStatisticUser(int idUser, int numAchievement)
-        {
-            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
-            
-            bool value = statisticUserLogic.GetStatisticUser(idUser, numAchievement);
-
-            return value;
-        }
-
         public String GetBackgroundUser(int idUser)
         {
             ConfigUserLogic configUserLogic = new ConfigUserLogic();
@@ -740,6 +728,63 @@ namespace Host
         {
             ConfigUserLogic configUserLogic = new ConfigUserLogic();
             configUserLogic.SetBackgroundUser(idUser, idNewBackground);
+        }
+
+        public List<StatisticUser> GetBetterUser()
+        {
+            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
+            List<StatisticUser> users = statisticUserLogic.GetBetterUsers();
+            return users;
+        }
+
+        public bool GetStatisticUser(int idUser, int numAchievement)
+        {
+            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
+            bool value = statisticUserLogic.GetStatisticUser(idUser, numAchievement);
+            return value;
+        }
+
+        public bool AddOneWinGame(int idUser, int score)
+        {
+            bool added = false;
+            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
+            StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseGameWon(idUser, score);
+            if(status == StatisticUserLogic.StatisticStatus.Success)
+            {
+                added = true;
+            }
+            return added;
+        }
+
+        public bool AddOneLoseGame(int idUser, int score)
+        {
+            bool added = false;
+            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
+            StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseLosingGame(idUser, score);
+            if (status == StatisticUserLogic.StatisticStatus.Success)
+            {
+                added = true;
+            }
+            return added;
+        }
+
+        public bool AddedStatisticUser(int idUser, string nametag)
+        {
+            bool added = false;
+            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
+            StatisticUserLogic.StatisticStatus status = statisticUserLogic.AddStatisticUser(idUser, nametag);
+            if (status == StatisticUserLogic.StatisticStatus.Success)
+            {
+                added = true;
+            }
+            return added;
+        }
+
+        public int GetScoreByIdUser(int idUser)
+        {
+            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
+            int score = statisticUserLogic.GetScoreByIdUser(idUser);
+            return score;
         }
     }
 

@@ -76,9 +76,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigUser.cs" />
+    <Compile Include="Friend.cs" />
+    <Compile Include="FriendRequest.cs" />
+    <Compile Include="MemoryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatisticUser.cs" />
+    <Compile Include="UserGame.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\User.datasource" />
   </ItemGroup>

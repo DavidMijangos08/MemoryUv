@@ -24,5 +24,52 @@ namespace Test
             Assert.IsTrue(isOrdered);
         }
 
+        [TestMethod]
+        public void TestAddStatisticUser()
+        {
+            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
+            StatisticUserLogic.StatisticStatus status = statisticUserLogic.AddStatisticUser(3, "Jose=");
+            bool added = false;
+            if(status == StatisticUserLogic.StatisticStatus.Success)
+            {
+                added = true;
+            }
+            Assert.IsTrue(added);
+        }
+
+        [TestMethod]
+        public void TestIncreaseGameWon()
+        {
+            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
+            StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseGameWon(1, 25);
+            bool added = false;
+            if (status == StatisticUserLogic.StatisticStatus.Success)
+            {
+                added = true;
+            }
+            Assert.IsTrue(added);
+        }
+
+        [TestMethod]
+        public void TestIncreaseLosingGame()
+        {
+            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
+            StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseLosingGame(1, 25);
+            bool added = false;
+            if (status == StatisticUserLogic.StatisticStatus.Success)
+            {
+                added = true;
+            }
+            Assert.IsTrue(added);
+        }
+
+        [TestMethod]
+        public void TestGetScoreById()
+        {
+            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
+            int score = statisticUserLogic.GetScoreByIdUser(5);
+            Assert.AreEqual(score, 200);
+        }
+
     }
 }

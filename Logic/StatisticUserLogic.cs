@@ -124,8 +124,120 @@ namespace Logic
             return exists;
         }
 
+        public StatisticStatus IncreaseGameWon(int idUser, int score)
+        {
+            StatisticStatus status = StatisticStatus.Failed;
+            try
+            {
+                using (var context = new MemoryModel())
+                {
+                    var coincidences = from StatisticUser in context.StatisticsUser where StatisticUser.idUser == idUser select StatisticUser;
+                    if (coincidences.Count() > 0)
+                    {
+                        StatisticUser statisticUser = coincidences.First();
+                        statisticUser.totalWins = statisticUser.totalWins + 1;
+                        statisticUser.totalGames = statisticUser.totalGames + 1;
+                        statisticUser.totalScore = statisticUser.totalScore + 1;
+                    }
+                    int numberChanges = context.SaveChanges();
+                    if (numberChanges > 0)
+                    {
+                        status = StatisticStatus.Success;
+                    }
+                }
+            }
+            catch (DbException)
+            {
 
+            }
+            return status;
+        }
 
+        public StatisticStatus IncreaseLosingGame(int idUser, int score)
+        {
+            StatisticStatus status = StatisticStatus.Failed;
+            try
+            {
+                using (var context = new MemoryModel())
+                {
+                    var coincidences = from StatisticUser in context.StatisticsUser where StatisticUser.idUser == idUser select StatisticUser;
+                    if(coincidences.Count() > 0)
+                    {
+                        StatisticUser statisticUser = coincidences.First();
+                        statisticUser.totalDefeat = statisticUser.totalDefeat + 1;
+                        statisticUser.totalGames = statisticUser.totalGames + 1;
+                        statisticUser.totalScore = statisticUser.totalScore + 1;
+                    }
+                    int numberChanges = context.SaveChanges();
+                    if (numberChanges > 0)
+                    {
+                        status = StatisticStatus.Success;
+                    }
+                }
+            }
+            catch (DbException)
+            {
 
+            }
+            return status;
+        }
+
+        public StatisticStatus AddStatisticUser(int idUser, string nametag)
+        {
+            StatisticStatus status = StatisticStatus.Failed;
+            try
+            {
+                using(var context = new MemoryModel())
+                {
+                    StatisticUser statisticUser = new StatisticUser()
+                    {
+                        idUser = idUser,
+                        totalGames = 0,
+                        totalWins = 0,
+                        totalDefeat = 0,
+                        totalScore = 0,
+                        nameTag = nametag
+                    };
+                    context.StatisticsUser.Add(statisticUser);
+                    int numberChanges = context.SaveChanges();
+                    if (numberChanges > 0)
+                    {
+                        status = StatisticStatus.Success;
+                    }
+                }
+            }
+            catch (DbException)
+            {
+
+            }
+            return status;
+        }
+
+        public int GetScoreByIdUser(int idUser)
+        {
+            int score = 0;
+            try
+            {
+                using (var context = new MemoryModel())
+                {
+                    var coincidences = from StatisticUser in context.StatisticsUser where StatisticUser.idUser == idUser select StatisticUser;
+                    if(coincidences.Count() > 0)
+                    {
+                        score = coincidences.First().totalScore;
+                    }
+                }
+            }
+            catch (DbException)
+            {
+
+            }
+            return score;
+        }
+
+        public enum StatisticStatus
+        {
+            Success = 0,
+            Failed
+        }
     }
 }

@@ -33,7 +33,7 @@ namespace Client
             client = new ChatService.ChatServiceClient(context);
             client.Join(userName);
             lbId.Text = "Bienvenido "+ userName;
-            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
+         //   this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
         }
 
         public void RecieveMessage(string user, string message)

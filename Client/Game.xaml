@@ -55,5 +55,17 @@
             <Button Content="Aceptar" HorizontalAlignment="Left" Margin="130,120,0,0" Click="ClickAcceptNotification" VerticalAlignment="Top" Width="74" RenderTransformOrigin="1.838,1.375"/>
             <TextBlock x:Name="lbNotification" HorizontalAlignment="Left" Margin="23,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="38" Width="223" Grid.ColumnSpan="2"/>
         </Grid>
+        <Grid x:Name="gridConfirmation" HorizontalAlignment="Left" Height="118" Margin="462,275,0,0" VerticalAlignment="Top" Width="346" Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="159*"/>
+                <ColumnDefinition Width="98*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Effect>
+                <DropShadowEffect Color="#FF101354"/>
+            </Grid.Effect>
+            <Button Content="SI" HorizontalAlignment="Left" Margin="51,79,0,0" Click="ClickYes" VerticalAlignment="Top" Width="74" RenderTransformOrigin="1.838,1.375"/>
+            <TextBlock HorizontalAlignment="Left" Margin="51,10,0,0" TextWrapping="Wrap" Text="¿Estás seguro que deseas salir de la partida?" VerticalAlignment="Top" Height="38" Width="292" Grid.ColumnSpan="2"/>
+            <Button Content="NO" HorizontalAlignment="Left" Margin="0,79,0,0" Click="ClickNO" VerticalAlignment="Top" Width="74" RenderTransformOrigin="1.838,1.375" Grid.Column="1"/>
+        </Grid>
     </Grid>
 </Window>

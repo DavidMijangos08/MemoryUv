@@ -59,8 +59,6 @@ namespace Client
             dispatcherTimer.Start();    
         }
 
-        
-
         private void DispatcherTimerTicker(object sender, EventArgs e)
         {
             decrement--;
@@ -87,18 +85,39 @@ namespace Client
 
         private void BackingOutClick(object sender, RoutedEventArgs e)
         {
-            client.DisconnectTheGame("Abandonado", userConnected.nametag, userOpponent.nametag);
-            this.Close();
-            Home home = new Home(userConnected);
-            home.Show();
+            gridConfirmation.Visibility = Visibility.Visible;
         }
 
         private void ClickAcceptNotification(object sender, RoutedEventArgs e)
         {
             client.DisconnectTheGame("Finalizado", userConnected.nametag, userOpponent.nametag);
-            this.Close();
-            Home home = new Home(userConnected);
-            home.Show();
+            service = new MemoryServer();
+            int totalScore = service.GetScoreByIdUser(userConnected.id);
+            bool addedGameWon = service.AddOneWinGame(userConnected.id, totalScore);
+            if (addedGameWon)
+            {
+                this.Close();
+                Home home = new Home(userConnected);
+                home.Show();
+            }
+        }
+
+        private void ClickYes(object sender, RoutedEventArgs e)
+        {
+            client.DisconnectTheGame("Abandonado", userConnected.nametag, userOpponent.nametag);
+            service = new MemoryServer();
+            int totalScore = service.GetScoreByIdUser(userConnected.id);
+            bool addedGameLosing = service.AddOneLoseGame(userConnected.id, totalScore);
+            if (addedGameLosing) {
+                this.Close();
+                Home home = new Home(userConnected);
+                home.Show();
+            }
+        }
+
+        private void ClickNO(object sender, RoutedEventArgs e)
+        {
+            gridConfirmation.Visibility = Visibility.Hidden;
         }
     }
 }
