@@ -42,7 +42,7 @@ namespace Client
 
             for (int i = 0; i < itemStatic.Count(); i++)
             {
-                itemListView.Add(new StatisticUser() { id = i + 1, nameTag = itemStatic[i].nameTag, totalWins = itemStatic[i].totalWins });
+                itemListView.Add(new StatisticUser() { idUser = i + 1, nameTag = itemStatic[i].nameTag, totalWins = itemStatic[i].totalWins });
             }
 
             listRank.ItemsSource = itemListView;
