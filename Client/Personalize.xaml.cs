@@ -29,7 +29,7 @@ namespace Client
         {
             userGame = _user;
             InitializeComponent();
-            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
+            //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
         }
 
         private void ExitClick(object sender, RoutedEventArgs e)
@@ -43,7 +43,7 @@ namespace Client
         {
             
             this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Resources/Background/backgroundDefault.png")));
-            service.SetBackgroundUser(userGame.id, 0);
+            //service.SetBackgroundUser(userGame.id, 0);
 
             //this.Background = Brushes.Gray;
         }

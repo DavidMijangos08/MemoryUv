@@ -31,7 +31,8 @@ namespace Client
             InitializeComponent();
             InitializeListRank();
             userGame = _user;
-         //   this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
+            //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
+            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Resources / Background / backgroundX.jpg")));
         }
 
         private void InitializeListRank()
@@ -42,7 +43,7 @@ namespace Client
 
             for (int i = 0; i < itemStatic.Count(); i++)
             {
-                itemListView.Add(new StatisticUser() { idUser = i + 1, nameTag = itemStatic[i].nameTag, totalWins = itemStatic[i].totalWins });
+                itemListView.Add(new StatisticUser() { id = i + 1, nameTag = itemStatic[i].nameTag, totalWins = itemStatic[i].totalWins });
             }
 
             listRank.ItemsSource = itemListView;

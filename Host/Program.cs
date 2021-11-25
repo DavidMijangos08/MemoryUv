@@ -235,6 +235,9 @@ namespace Host
 
         [OperationContract]
         void SetBackgroundUser(int idUser, int idNewBackground);
+
+        [OperationContract]
+        string GetBackgroundUser(ConfigUser user);
     }
 
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single, InstanceContextMode = InstanceContextMode.Single)]
