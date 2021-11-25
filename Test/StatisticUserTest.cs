@@ -57,7 +57,7 @@ namespace Test
         public void TestIncreaseGameWon()
         {
             StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
-            StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseGameWon(1, 25);
+            StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseGameWon(1);
             bool added = false;
             if (status == StatisticUserLogic.StatisticStatus.Success)
             {
@@ -74,7 +74,7 @@ namespace Test
         public void TestIncreaseLosingGame()
         {
             StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
-            StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseLosingGame(1, 25);
+            StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseLosingGame(1);
             bool added = false;
             if (status == StatisticUserLogic.StatisticStatus.Success)
             {
@@ -82,18 +82,5 @@ namespace Test
             }
             Assert.IsTrue(added);
         }
-
-        /// <summary>
-        /// Método que realiza prueba al método para obtener el score de un jugador mediante su id
-        /// </summary>
-
-        [TestMethod]
-        public void TestGetScoreById()
-        {
-            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
-            int score = statisticUserLogic.GetScoreByIdUser(5);
-            Assert.AreEqual(score, 200);
-        }
-
     }
 }
