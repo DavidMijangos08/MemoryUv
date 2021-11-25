@@ -212,16 +212,13 @@ namespace Host
         bool GetStatisticUser(int idUser, int numAchievement);
 
         [OperationContract]
-        bool AddOneWinGame(int idUser, int score);
+        bool AddOneWinGame(int idUser);
 
         [OperationContract]
-        bool AddOneLoseGame(int idUser, int score);
+        bool AddOneLoseGame(int idUser);
 
         [OperationContract]
         bool AddedStatisticUser(int idUser, string nametag);
-
-        [OperationContract]
-        int GetScoreByIdUser(int id);
     }
 
     [ServiceContract]
@@ -744,11 +741,11 @@ namespace Host
             return value;
         }
 
-        public bool AddOneWinGame(int idUser, int score)
+        public bool AddOneWinGame(int idUser)
         {
             bool added = false;
             StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
-            StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseGameWon(idUser, score);
+            StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseGameWon(idUser);
             if(status == StatisticUserLogic.StatisticStatus.Success)
             {
                 added = true;
@@ -756,11 +753,11 @@ namespace Host
             return added;
         }
 
-        public bool AddOneLoseGame(int idUser, int score)
+        public bool AddOneLoseGame(int idUser)
         {
             bool added = false;
             StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
-            StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseLosingGame(idUser, score);
+            StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseLosingGame(idUser);
             if (status == StatisticUserLogic.StatisticStatus.Success)
             {
                 added = true;
@@ -778,13 +775,6 @@ namespace Host
                 added = true;
             }
             return added;
-        }
-
-        public int GetScoreByIdUser(int idUser)
-        {
-            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
-            int score = statisticUserLogic.GetScoreByIdUser(idUser);
-            return score;
         }
     }
 

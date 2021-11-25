@@ -17,8 +17,6 @@ namespace Data
 
         public int totalDefeat { get; set; }
 
-        public int totalScore { get; set; }
-
         [Required]
         [StringLength(20)]
         public string nameTag { get; set; }

@@ -124,7 +124,7 @@ namespace Logic
             return exists;
         }
 
-        public StatisticStatus IncreaseGameWon(int idUser, int score)
+        public StatisticStatus IncreaseGameWon(int idUser)
         {
             StatisticStatus status = StatisticStatus.Failed;
             try
@@ -137,7 +137,6 @@ namespace Logic
                         StatisticUser statisticUser = coincidences.First();
                         statisticUser.totalWins++;
                         statisticUser.totalGames++;
-                        statisticUser.totalScore += score;
                     }
                     int numberChanges = context.SaveChanges();
                     if (numberChanges > 0)
@@ -153,7 +152,7 @@ namespace Logic
             return status;
         }
 
-        public StatisticStatus IncreaseLosingGame(int idUser, int score)
+        public StatisticStatus IncreaseLosingGame(int idUser)
         {
             StatisticStatus status = StatisticStatus.Failed;
             try
@@ -166,7 +165,6 @@ namespace Logic
                         StatisticUser statisticUser = coincidences.First();
                         statisticUser.totalDefeat++;
                         statisticUser.totalGames++;
-                        statisticUser.totalScore += score;
                     }
                     int numberChanges = context.SaveChanges();
                     if (numberChanges > 0)
@@ -195,7 +193,6 @@ namespace Logic
                         totalGames = 0,
                         totalWins = 0,
                         totalDefeat = 0,
-                        totalScore = 0,
                         nameTag = nametag
                     };
                     context.StatisticsUser.Add(statisticUser);
@@ -211,27 +208,6 @@ namespace Logic
 
             }
             return status;
-        }
-
-        public int GetScoreByIdUser(int idUser)
-        {
-            int score = 0;
-            try
-            {
-                using (var context = new MemoryModel())
-                {
-                    var coincidences = from StatisticUser in context.StatisticsUser where StatisticUser.idUser == idUser select StatisticUser;
-                    if(coincidences.Count() > 0)
-                    {
-                        score = coincidences.First().totalScore;
-                    }
-                }
-            }
-            catch (DbException)
-            {
-
-            }
-            return score;
         }
 
         public enum StatisticStatus
