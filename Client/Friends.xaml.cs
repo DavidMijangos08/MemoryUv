@@ -30,7 +30,8 @@ namespace Client
             userGame = _user;
             InitializeComponent();
             InitializeFriendsList();
-            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
+            service = new MemoryServer();
+            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
         }
 
         private void InitializeFriendsList()

@@ -6,10 +6,7 @@
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
         Title="MemoryUv" Height="417" Width="704">
-    <Grid Margin="0,0,2,-1" RenderTransformOrigin="0.549,0.545">
-        <Grid.Background>
-            <ImageBrush ImageSource="Resources/Background/backgroundDefault.png"/>
-        </Grid.Background>
+    <Grid x:Name="mainGrid" Margin="0,0,2,-1" RenderTransformOrigin="0.549,0.545">
         <Label Content="Memory UV" HorizontalAlignment="Left" Margin="243,10,0,0" VerticalAlignment="Top" Width="244" FontSize="36" FontFamily="Segoe Script" FontWeight="Bold"/>
         <Button Content="Configuración" HorizontalAlignment="Left" Margin="217,346,0,0" VerticalAlignment="Top" Width="110" Height="28" RenderTransformOrigin="0.241,0.446" Click="SettingsClick">
             <Button.Effect>

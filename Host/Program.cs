@@ -713,8 +713,8 @@ namespace Host
         public String GetBackgroundUser(int idUser)
         {
             ConfigUserLogic configUserLogic = new ConfigUserLogic();
-            
-            return configUserLogic.GetBackgroundUser(GetConfigUserById(idUser));
+            string direccionFondo = configUserLogic.GetBackgroundUser(GetConfigUserById(idUser));
+            return direccionFondo;
         }
 
         public ConfigUser GetConfigUserById(int idUser)
