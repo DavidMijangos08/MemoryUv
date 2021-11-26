@@ -66,8 +66,10 @@ namespace Client
         {
             if(cbSection.SelectedItem != null && cbDifficulty.SelectedItem != null)
             {
-                this.section = cbSection.SelectedItem.ToString();
-                this.difficulty = cbDifficulty.SelectedItem.ToString();
+                //Object sectionSelected = cbSection.SelectedItem;
+                // Object difficultySelected = cbSection.SelectedItem;
+                section = cbSection.Text;
+                difficulty = cbDifficulty.Text;
                 object itemSelected = listFriends.SelectedItem;
                 usergameInvited = itemSelected.ToString();
                 client.SendInvitation(usergame.nametag, usergameInvited);

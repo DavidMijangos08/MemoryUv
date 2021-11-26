@@ -57,7 +57,7 @@ namespace Client
             }
         }
 
-        private void btnSend_Click(object sender, RoutedEventArgs e)
+        private void BtnSendClick(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrEmpty(txtChat.Text))
             {
