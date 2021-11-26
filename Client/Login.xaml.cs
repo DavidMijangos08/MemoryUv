@@ -41,9 +41,9 @@ namespace Client
                 if (user != null)
                 {
 
-                    Procesos procesos = new Procesos();
+                    /*Procesos procesos = new Procesos();
                     procesos.Show();
-                    procesos.Hide();
+                    procesos.Hide(); */
 
                     service.UpdateUserStatus(user.id, "Activo");
                     Home windowHome = new Home(user);

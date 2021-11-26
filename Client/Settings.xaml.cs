@@ -70,11 +70,11 @@ namespace Client
         {
             if (chbVista.IsEnabled)
             {
-                filtro.IsEnabled = true;
+                //filtro.IsEnabled = true;
             }
             else
             {
-                filtro.IsEnabled = false;
+                //filtro.IsEnabled = false;
             }
             
         }

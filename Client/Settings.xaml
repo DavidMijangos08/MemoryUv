@@ -8,7 +8,7 @@
         xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
         Title="Settings" Height="450" Width="800">
     <Grid x:Name="mainGrid">
-        <Rectangle x:Name="filtro" Fill="#FFFFB490" HorizontalAlignment="Left" Height="420" Stroke="Black" VerticalAlignment="Top" Width="794" Margin="0,0,-0.4,0" IsEnabled="False" Opacity="0.3" Visibility="Hidden"/>
+        
         <Label Content="Configuracion" FontSize="40" HorizontalAlignment="Left" Margin="435,30,0,0" VerticalAlignment="Top" FontFamily="Segoe Script" FontWeight="Bold"/>
 
         <Label Content="Idioma" HorizontalAlignment="Left" Margin="435,127,0,0" VerticalAlignment="Top"/>
@@ -35,7 +35,7 @@
         <Image gif:AnimationBehavior.SourceUri="/Resources/Images/fondo1.gif" Margin="10,13,514.6,28" 
              gif:AnimationBehavior.RepeatBehavior="Forever"  />
 
-
+        <Rectangle x:Name="daltonismo" Opacity="0.15" Fill="#FF2BD300" IsEnabled="False" Cursor="Pen" />
 
     </Grid>
 </Window>
