@@ -23,13 +23,15 @@ namespace Client
     public partial class Personalize : Window
     {
         UserGame userGame = new UserGame();
-        MemoryServer service;
+        MemoryServer service = new MemoryServer();
         
         public Personalize(UserGame _user)
         {
-            userGame = _user;
             InitializeComponent();
+            userGame = _user;
+            
             this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
+            //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Resources/Background/backgroundX.jpg")));
         }
 
         private void ExitClick(object sender, RoutedEventArgs e)

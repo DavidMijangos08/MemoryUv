@@ -13,7 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data;
 using Data;
+using Host;
 using System.Threading;
+using System.Windows.Navigation;
 
 namespace Client
 {
@@ -24,13 +26,14 @@ namespace Client
     {
         
         UserGame userGame = new UserGame();
-        MemoryModel service;
+        MemoryServer service;
         public Settings(UserGame _user)
         {
             InitializeComponent();
             userGame = _user;
 
-
+            service = new MemoryServer();
+            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
 
         }
 
@@ -67,11 +70,11 @@ namespace Client
         {
             if (chbVista.IsEnabled)
             {
-                filtro.IsEnabled = true;
+                //filtro.IsEnabled = true;
             }
             else
             {
-                filtro.IsEnabled = false;
+                //filtro.IsEnabled = false;
             }
             
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Host;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -24,6 +25,7 @@ namespace Client
         public string userName;
         public ChatService.ChatServiceClient client;
         public bool isDataDirty = false;
+        MemoryServer service;
         public Chat(string _username)
         {
 
@@ -33,7 +35,8 @@ namespace Client
             client = new ChatService.ChatServiceClient(context);
             client.Join(userName);
             lbId.Text = "Bienvenido "+ userName;
-         //   this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
+            service = new MemoryServer();
+            //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
         }
 
         public void RecieveMessage(string user, string message)

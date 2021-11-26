@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
         Title="MemoryUv" Height="394" Width="628">
-    <Grid Background="#DCDCDC" Margin="0,0,2,1">
+    <Grid x:Name="mainGrid" Margin="0,0,2,1">
         <Label Content="Amigos" HorizontalAlignment="Left" Margin="227,10,0,0" VerticalAlignment="Top" Width="244" FontSize="36" FontFamily="Segoe Script" FontWeight="Bold"/>
         <ListBox x:Name="listFriends" HorizontalAlignment="Left" Height="220" Margin="28,114,0,0" VerticalAlignment="Top" Width="198"/>
         <ListBox x:Name="listSearchUsers"  HorizontalAlignment="Left" Height="154" Margin="398,144,0,0" VerticalAlignment="Top" Width="166"/>

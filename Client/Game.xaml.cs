@@ -55,6 +55,8 @@ namespace Client
             LoadCardsDictionary();
             cardNumbers.Clear();
             LoadCardsToGame();
+            service = new MemoryServer();
+            //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(users[0].id))));
         }
 
         private void InitializeTimer()

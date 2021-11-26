@@ -37,7 +37,10 @@ namespace Client
             InstanceContext context = new InstanceContext(this);
             client = new RoomService.RoomServiceClient(context);
             client.ConnectWaitingRoom(usergame.nametag);
-           // this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(usergame.id))));
+            
+
+            service = new MemoryServer();
+            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
         }
 
         private void ChatClick(object sender, RoutedEventArgs e)
