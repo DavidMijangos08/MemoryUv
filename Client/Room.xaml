@@ -12,7 +12,7 @@
         <Label Content="Seleccionar dificultad:" HorizontalAlignment="Left" Margin="28,113,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cbSection" HorizontalAlignment="Left" Margin="164,75,0,0" VerticalAlignment="Top" Width="193" >
             <ComboBoxItem>AFEL</ComboBoxItem>
-            <ComboBoxItem>Licenciaturas</ComboBoxItem>
+            <ComboBoxItem>Carreras</ComboBoxItem>
         </ComboBox>
         <ComboBox x:Name="cbDifficulty" HorizontalAlignment="Left" Margin="164,116,0,0" VerticalAlignment="Top" Width="193" >
             <ComboBoxItem>Facil (4x4)</ComboBoxItem>

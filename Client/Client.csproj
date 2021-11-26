@@ -107,6 +107,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Domain\Card.cs" />
     <Compile Include="FriendRequests.xaml.cs">
       <DependentUpon>FriendRequests.xaml</DependentUpon>
     </Compile>
@@ -330,73 +331,44 @@
     <Resource Include="Resources\Images\logro2.gif" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\AFEL\AlergiasAlimentarias1.jpg" />
-    <Resource Include="Resources\AFEL\Atletismo1.jpg" />
-    <Resource Include="Resources\AFEL\Autoestima1.png" />
-    <Resource Include="Resources\AFEL\Baloncesto1.jpg" />
-    <Resource Include="Resources\AFEL\Balonmano1.jpg" />
-    <Resource Include="Resources\AFEL\Beisbol1.jpg" />
-    <Resource Include="Resources\AFEL\BiologiaCancer1.jpg" />
-    <Resource Include="Resources\AFEL\ConociendoVirusPapilomaHumano1.png" />
-    <Resource Include="Resources\AFEL\DietaControlPeso1.jpg" />
-    <Resource Include="Resources\AFEL\DrogasMitosRealidad1.jpg" />
-    <Resource Include="Resources\AFEL\EducacionSexual1.jpg" />
-    <Resource Include="Resources\AFEL\FloresBach1.jpg" />
-    <Resource Include="Resources\AFEL\FutbolAmericano1.jpg" />
-    <Resource Include="Resources\AFEL\FutbolRapido1.jpg" />
-    <Resource Include="Resources\AFEL\GimnasiaAerobica1.jpg" />
-    <Resource Include="Resources\AFEL\Halterofilia1.jpg" />
-    <Resource Include="Resources\AFEL\Herbolaria1.jpg" />
-    <Resource Include="Resources\AFEL\InfeccionesTransmicionSexual1.png" />
-    <Resource Include="Resources\AFEL\IntroduccionPsicoanalisis1.jpg" />
-    <Resource Include="Resources\AFEL\Judo1.jpg" />
-    <Resource Include="Resources\AFEL\KarateDo1.jpg" />
-    <Resource Include="Resources\AFEL\LactanciaMaterna1.jpg" />
-    <Resource Include="Resources\AFEL\ManejoConflictoNoviazgo1.png" />
-    <Resource Include="Resources\AFEL\Natacion1.jpg" />
-    <Resource Include="Resources\AFEL\PrevencionHipertensionArterial1.jpg" />
-    <Resource Include="Resources\AFEL\ReanimacionNeonatal1.png" />
-    <Resource Include="Resources\AFEL\SaludBucal1.jpg" />
-    <Resource Include="Resources\AFEL\Softbol1.jpg" />
-    <Resource Include="Resources\AFEL\Taekwondo1.jpg" />
-    <Resource Include="Resources\AFEL\Tenis1.jpg" />
-    <Resource Include="Resources\AFEL\Tochito1.jpg" />
-    <Resource Include="Resources\AFEL\Voleibol1.jpg" />
+    <Resource Include="Resources\AFEL\1.png" />
+    <Resource Include="Resources\AFEL\2.png" />
+    <Resource Include="Resources\AFEL\3.png" />
+    <Resource Include="Resources\AFEL\4.png" />
+    <Resource Include="Resources\AFEL\5.png" />
+    <Resource Include="Resources\AFEL\6.png" />
+    <Resource Include="Resources\AFEL\7.png" />
+    <Resource Include="Resources\AFEL\8.png" />
+    <Resource Include="Resources\AFEL\9.png" />
+    <Content Include="Resources\AFEL\10.png" />
+    <Content Include="Resources\AFEL\11.png" />
+    <Resource Include="Resources\AFEL\12.png" />
+    <Resource Include="Resources\AFEL\13.png" />
+    <Resource Include="Resources\AFEL\14.png" />
+    <Resource Include="Resources\AFEL\15.png" />
+    <Resource Include="Resources\AFEL\16.png" />
+    <Resource Include="Resources\AFEL\17.png" />
+    <Resource Include="Resources\AFEL\18.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Carreras\Administracion1.jpg" />
-    <Resource Include="Resources\Carreras\AgroecologiaSoberaniaAlimentaria1.jpg" />
-    <Resource Include="Resources\Carreras\Arqueologia1.jpg" />
-    <Resource Include="Resources\Carreras\Arquitectura1.jpg" />
-    <Resource Include="Resources\Carreras\ArtesVisuales1.jpg" />
-    <Resource Include="Resources\Carreras\Biologia1.jpg" />
-    <Resource Include="Resources\Carreras\CirujanoDentista1.jpg" />
-    <Resource Include="Resources\Carreras\Contaduria1.jpg" />
-    <Resource Include="Resources\Carreras\Danzacontemporanea1.jpg" />
-    <Resource Include="Resources\Carreras\derecho1.jpg" />
-    <Resource Include="Resources\Carreras\Enfermeria1.png" />
-    <Resource Include="Resources\Carreras\Fisica1.png" />
-    <Resource Include="Resources\Carreras\Geografia1.jpg" />
-    <Resource Include="Resources\Carreras\IngAgronomo1.jpg" />
-    <Resource Include="Resources\Carreras\IngAlimentos1.jpg" />
-    <Resource Include="Resources\Carreras\IngAmbiental1.jpg" />
-    <Resource Include="Resources\Carreras\IngBiomedica1.jpg" />
-    <Resource Include="Resources\Carreras\IngCivil1.jpg" />
-    <Resource Include="Resources\Carreras\IngElectrica1.jpg" />
-    <Resource Include="Resources\Carreras\IngFarmaceuticoBiologo1.jpg" />
-    <Resource Include="Resources\Carreras\IngMecanica1.jpg" />
-    <Resource Include="Resources\Carreras\IngQuimica1.png" />
-    <Resource Include="Resources\Carreras\IngSoftware1.jpeg" />
-    <Resource Include="Resources\Carreras\Matematicas1.jpg" />
-    <Resource Include="Resources\Carreras\MedicaCirujano1.jpg" />
-    <Resource Include="Resources\Carreras\Musica1.jpg" />
-    <Resource Include="Resources\Carreras\Nutricion1.jpg" />
-    <Resource Include="Resources\Carreras\Pedagogia1.jpeg" />
-    <Resource Include="Resources\Carreras\Psicologia1.png" />
-    <Resource Include="Resources\Carreras\RedesServicioComputo1.png" />
-    <Resource Include="Resources\Carreras\Sociologia1.jpg" />
-    <Resource Include="Resources\Carreras\Teatro1.png" />
-    <Resource Include="Resources\Carreras\TecnologiasComputacionales1.jpg" />
+    <Resource Include="Resources\Carreras\1.png" />
+    <Resource Include="Resources\Carreras\2.png" />
+    <Resource Include="Resources\Carreras\3.png" />
+    <Resource Include="Resources\Carreras\4.png" />
+    <Resource Include="Resources\Carreras\5.png" />
+    <Resource Include="Resources\Carreras\6.png" />
+    <Resource Include="Resources\Carreras\7.png" />
+    <Resource Include="Resources\Carreras\8.png" />
+    <Resource Include="Resources\Carreras\9.png" />
+    <Resource Include="Resources\Carreras\10.jpg" />
+    <Resource Include="Resources\Carreras\11.png" />
+    <Resource Include="Resources\Carreras\13.png" />
+    <Resource Include="Resources\Carreras\14.png" />
+    <Resource Include="Resources\Carreras\15.png" />
+    <Resource Include="Resources\Carreras\16.png" />
+    <Resource Include="Resources\Carreras\12.png" />
+    <Resource Include="Resources\Carreras\18.png" />
+    <Resource Include="Resources\Carreras\17.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\user0.png" />

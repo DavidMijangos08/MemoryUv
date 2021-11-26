@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
         Title="Game" Height="700" Width="1200">
-    <Grid>
+    <Grid Margin="0,0,0,-56">
         <Grid.Background>
             <ImageBrush ImageSource="Resources/Background/backgroundDefault.png"/>
         </Grid.Background>
@@ -14,20 +14,10 @@
         <Label Content="Tiempo:" Margin="940,130,5.6,470.4" FontSize="20" />
         <TextBlock x:Name="lbUserTurn" HorizontalAlignment="Left" Margin="24,88,0,0" VerticalAlignment="Top" Height="40" Width="218" Background="#FFF09E9E" FontSize="36"/>
         <TextBlock x:Name="lbTimer" HorizontalAlignment="Left" Margin="940,184,0,0" VerticalAlignment="Top" Height="40" Width="218" Background="#FFF09E9E" FontSize="40"/>
-        <WrapPanel x:Name="wrapDificil" Width="650" Height="650" ItemWidth="81" ItemHeight="81" Background="AntiqueWhite" >
-            <Image Margin="5" Source="Resources/AFEL/Baloncesto1.jpg" />
-            <Image Margin="5" Source="Resources/AFEL/Baloncesto1.jpg" />
-            <Image Margin="5" Source="Resources/AFEL/Baloncesto1.jpg" />
-            <Image Margin="5" Source="Resources/AFEL/Baloncesto1.jpg" />
-            <Image Margin="5" Source="Resources/AFEL/Baloncesto1.jpg" />
-            <Image Margin="5" Source="Resources/AFEL/Baloncesto1.jpg" />
-            <Image Margin="5" Source="Resources/AFEL/Baloncesto1.jpg" />
-            <Image Margin="5" Source="Resources/AFEL/Baloncesto1.jpg" />
-        </WrapPanel>
-        <Grid Margin="10,184,938.6,10.4"  >
-            <ListBox x:Name="messageDisplay" Margin="0,0,0,41" />
-            <TextBox x:Name="txtChat" Margin="0,440,47,-1" />
-            <Button x:Name="btnSend" Content="Enviar" Margin="203,440,0,1" >
+        <Grid Margin="10,184,939,0"  >
+            <ListBox x:Name="messageDisplay" Margin="0,0,0.4,155.6" />
+            <TextBox x:Name="txtChat" Margin="2,406,45,115" />
+            <Button x:Name="btnSend" Content="Enviar" Margin="203,406,0,115" >
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
@@ -39,7 +29,7 @@
         <TextBlock x:Name="lbUsergameAplicant" HorizontalAlignment="Left" Margin="940,452,0,0" VerticalAlignment="Top" Height="40" Width="179" Background="#FFF09E9E" FontSize="48"/>
         <TextBlock x:Name="lbUsergamePoints" HorizontalAlignment="Left" Margin="1137,385,0,0" VerticalAlignment="Top" Height="40" Width="47" Background="#FFF09E9E" FontSize="48"/>
         <TextBlock x:Name="lbUsergameAplicantPoints" HorizontalAlignment="Left" Margin="1137,452,0,0" VerticalAlignment="Top" Height="40" Width="47" Background="#FFF09E9E" FontSize="48"/>
-        <Button Content="Retirarse" HorizontalAlignment="Left" Margin="1083,632,0,0" VerticalAlignment="Top" Width="75" Click="BackingOutClick">
+        <Button Content="Retirarse" HorizontalAlignment="Left" Margin="1059,678,0,0" VerticalAlignment="Top" Width="99" Click="BackingOutClick" Height="30">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
@@ -55,6 +45,44 @@
             <Button Content="Aceptar" HorizontalAlignment="Left" Margin="130,120,0,0" Click="ClickAcceptNotification" VerticalAlignment="Top" Width="74" RenderTransformOrigin="1.838,1.375"/>
             <TextBlock x:Name="lbNotification" HorizontalAlignment="Left" Margin="23,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="38" Width="223" Grid.ColumnSpan="2"/>
         </Grid>
+        <Canvas x:Name="canvaGame" Background ="AntiqueWhite" HorizontalAlignment="Left" Height="649" Margin="270,29,0,0" VerticalAlignment="Top" Width="648">
+            <Button x:Name="btn1" Content="" Canvas.Left="10" Canvas.Top="10" Width="100" Height="100" Click="Btn1Click"/>
+            <Button x:Name="btn2" Content="" Canvas.Left="115" Canvas.Top="10" Width="100" Height="100" Click="Btn2Click"/>
+            <Button x:Name="btn3" Content="" Canvas.Left="220" Canvas.Top="10" Width="100" Height="100" Click="Btn3Click"/>
+            <Button x:Name="btn4" Content="" Canvas.Left="325" Canvas.Top="10" Width="100" Height="100" Click="Btn4Click"/>
+            <Button x:Name="btn5" Content="" Canvas.Left="430" Canvas.Top="10" Width="100" Height="100" Click="Btn5Click"/>
+            <Button x:Name="btn6" Content="" Canvas.Left="535" Canvas.Top="10" Width="100" Height="100" Click="Btn6Click"/>
+            <Button x:Name="btn7" Content="" Canvas.Left="10" Canvas.Top="115" Width="100" Height="100" Click="Btn7Click"/>
+            <Button x:Name="btn13" Content="" Canvas.Left="10" Canvas.Top="220" Width="100" Height="100" Click="Btn13Click"/>
+            <Button x:Name="btn19" Content="" Canvas.Left="10" Canvas.Top="325" Width="100" Height="100" Click="Btn19Click"/>
+            <Button x:Name="btn25" Content="" Canvas.Left="10" Canvas.Top="430" Width="100" Height="100" Click="Btn25Click"/>
+            <Button x:Name="btn31" Content="" Canvas.Left="10" Canvas.Top="535" Width="100" Height="100" Click="Btn31Click"/>
+            <Button x:Name="btn8" Content="" Canvas.Left="115" Canvas.Top="115" Width="100" Height="100" Click="Btn8Click"/>
+            <Button x:Name="btn9" Content="" Canvas.Left="220" Canvas.Top="115" Width="100" Height="100" Click="Btn9Click"/>
+            <Button x:Name="btn10" Content="" Canvas.Left="325" Canvas.Top="115" Width="100" Height="100" Click="Btn10Click"/>
+            <Button x:Name="btn11" Content="" Canvas.Left="430" Canvas.Top="115" Width="100" Height="100" Click="Btn11Click"/>
+            <Button x:Name="btn12" Content="" Canvas.Left="535" Canvas.Top="115" Width="100" Height="100" Click="Btn12Click"/>
+            <Button x:Name="btn14" Content="" Canvas.Left="115" Canvas.Top="220" Width="100" Height="100" Click="Btn14Click"/>
+            <Button x:Name="btn15" Content="" Canvas.Left="220" Canvas.Top="220" Width="100" Height="100" Click="Btn15Click"/>
+            <Button x:Name="btn16" Content="" Canvas.Left="325" Canvas.Top="220" Width="100" Height="100" Click="Btn16Click"/>
+            <Button x:Name="btn17" Content="" Canvas.Left="430" Canvas.Top="220" Width="100" Height="100" Click="Btn17Click"/>
+            <Button x:Name="btn18" Content="" Canvas.Left="535" Canvas.Top="220" Width="100" Height="100" Click="Btn18Click"/>
+            <Button x:Name="btn20" Content="" Canvas.Left="115" Canvas.Top="325" Width="100" Height="100" Click="Btn20Click"/>
+            <Button x:Name="btn21" Content="" Canvas.Left="220" Canvas.Top="325" Width="100" Height="100" Click="Btn21Click"/>
+            <Button x:Name="btn22" Content="" Canvas.Left="325" Canvas.Top="325" Width="100" Height="100" Click="Btn22Click"/>
+            <Button x:Name="btn23" Content="" Canvas.Left="430" Canvas.Top="325" Width="100" Height="100" Click="Btn23Click"/>
+            <Button x:Name="btn24" Content="" Canvas.Left="535" Canvas.Top="325" Width="100" Height="100" Click="Btn24Click"/>
+            <Button x:Name="btn26" Content="" Canvas.Left="115" Canvas.Top="430" Width="100" Height="100" Click="Btn26Click"/>
+            <Button x:Name="btn27" Content="" Canvas.Left="220" Canvas.Top="430" Width="100" Height="100" Click="Btn27Click"/>
+            <Button x:Name="btn28" Content="" Canvas.Left="325" Canvas.Top="430" Width="100" Height="100" Click="Btn28Click"/>
+            <Button x:Name="btn29" Content="" Canvas.Left="430" Canvas.Top="430" Width="100" Height="100" Click="Btn29Click"/>
+            <Button x:Name="btn30" Content="" Canvas.Left="535" Canvas.Top="430" Width="100" Height="100" Click="Btn30Click"/>
+            <Button x:Name="btn32" Content="" Canvas.Left="115" Canvas.Top="535" Width="100" Height="100" Click="Btn32Click"/>
+            <Button x:Name="btn33" Content="" Canvas.Left="220" Canvas.Top="535" Width="100" Height="100" Click="Btn33Click"/>
+            <Button x:Name="btn34" Content="" Canvas.Left="325" Canvas.Top="535" Width="100" Height="100" Click="Btn34Click"/>
+            <Button x:Name="btn35" Content="" Canvas.Left="430" Canvas.Top="535" Width="100" Height="100" Click="Btn35Click"/>
+            <Button x:Name="btn36" Content="" Canvas.Left="535" Canvas.Top="535" Width="100" Height="100" Click="Btn36Click"/>
+        </Canvas>
         <Grid x:Name="gridConfirmation" HorizontalAlignment="Left" Height="118" Margin="462,275,0,0" VerticalAlignment="Top" Width="346" Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="159*"/>

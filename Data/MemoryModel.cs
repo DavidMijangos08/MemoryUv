@@ -13,7 +13,7 @@ namespace Data
         }
 
         public virtual DbSet<Friend> Friends { get; set; }
-        public virtual DbSet<FriendRequest> FriendsRequest { get; set; }
+        public virtual DbSet<FriendRequest> FriendRequests { get; set; }
         public virtual DbSet<StatisticUser> StatisticsUser { get; set; }
         public virtual DbSet<UserGame> UsersGame { get; set; }
         public virtual DbSet<ConfigUser> ConfigUsers { get; set; }
