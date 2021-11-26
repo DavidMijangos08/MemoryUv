@@ -40,7 +40,7 @@ namespace Client
             client = new RoomService.RoomServiceClient(context);
             client.ConnectWaitingRoom(usergame.nametag);
             service = new MemoryServer();
-            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
+           // this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
         }
 
         private void initializeListFriends()
@@ -66,8 +66,6 @@ namespace Client
         {
             if(cbSection.SelectedItem != null && cbDifficulty.SelectedItem != null)
             {
-                //Object sectionSelected = cbSection.SelectedItem;
-                // Object difficultySelected = cbSection.SelectedItem;
                 section = cbSection.Text;
                 difficulty = cbDifficulty.Text;
                 object itemSelected = listFriends.SelectedItem;

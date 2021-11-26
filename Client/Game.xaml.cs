@@ -33,7 +33,7 @@ namespace Client
         private int[] messyCards = { 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15,
                                      16, 16, 17, 17, 18, 18};
         private int remainingPairs = 18;
-
+        string statusTurn;
         public Game(List<UserGame> users, string section, string difficulty)
         {
             InitializeComponent();
@@ -49,9 +49,10 @@ namespace Client
             {
                 InitializeTimer();
                 canvaGame.IsHitTestVisible = true;
+                flippedCards = 0;
+                statusTurn = "En ejecución";
             }
             lbUserTurn.Text = userAdmin.nametag;
-            flippedCards = 0;
             LoadCardsDictionary();
             cardNumbers.Clear();
             LoadCardsToGame();
@@ -74,7 +75,7 @@ namespace Client
         {
             decrement--;
             lbTimer.Text = decrement.ToString();
-            if (lbTimer.Text.Equals("0"))
+            if (lbTimer.Text.Equals("0") || statusTurn.Equals("Completado"))
             {
                 dispatcherTimer.Stop();
                 lbTimer.Text = "";
@@ -84,13 +85,11 @@ namespace Client
 
         private void CleanBoard()
         {
-
-            // ACA CHECAR SI ES IGUAL A 2 PONIENDO PRIMERO FLIPPEDCARDS = 0
             if(flippedCards == 1)
             {
                 cards[cardNumbers[0]].status = StatusCard.NotFlipped;
                 LoadCardsToGame();
-                flippedCards = 0;
+                cardNumbers.Clear();
                 SendTurn();
             }
             else
@@ -115,6 +114,8 @@ namespace Client
 
         public void ReceiveGameTurn()
         {
+            flippedCards = 0;
+            statusTurn = "En ejecución";
             canvaGame.IsHitTestVisible = true;
             InitializeTimer();
         }
@@ -235,7 +236,6 @@ namespace Client
         {
             if(flippedCards == 2)
             {
-                dispatcherTimer.Stop();
                 if (cards[cardNumbers[0]].numberCard == cards[cardNumbers[1]].numberCard)
                 {
                     remainingPairs--;
@@ -247,14 +247,11 @@ namespace Client
                     cards[cardNumbers[1]].status = StatusCard.NotFlipped;
                     MessageBox.Show("No son iguales");
                 }
-
-                //ACA CHECAR MANDANDO A LLAMAR A METODO PARA LIMPIAR PARA NO DUPLICAR
-                lbTimer.Text = "";
                 flippedCards = 0;
+                LoadCardsToGame();
                 cardNumbers.Clear();
                 CheckEndGame();
-                LoadCardsToGame();
-                SendTurn();
+                statusTurn = "Completado";
             }
         }
 

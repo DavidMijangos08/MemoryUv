@@ -15,9 +15,13 @@
         <TextBlock x:Name="lbUserTurn" HorizontalAlignment="Left" Margin="24,88,0,0" VerticalAlignment="Top" Height="40" Width="218" Background="#FFF09E9E" FontSize="36"/>
         <TextBlock x:Name="lbTimer" HorizontalAlignment="Left" Margin="940,184,0,0" VerticalAlignment="Top" Height="40" Width="218" Background="#FFF09E9E" FontSize="40"/>
         <Grid Margin="10,184,939,0"  >
-            <ListBox x:Name="messageDisplay" Margin="0,0,0.4,155.6" />
-            <TextBox x:Name="txtChat" Margin="2,406,45,115" />
-            <Button x:Name="btnSend" Content="Enviar" Margin="203,406,0,115" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="164*"/>
+                <ColumnDefinition Width="79*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox x:Name="messageDisplay" Margin="2,-32,-2,188" Grid.ColumnSpan="2" />
+            <TextBox x:Name="txtChat" Margin="4,358,43,163" Grid.ColumnSpan="2" />
+            <Button x:Name="btnSend" Content="Enviar" Margin="41,358,-2,163" Grid.Column="1" >
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
@@ -29,7 +33,7 @@
         <TextBlock x:Name="lbUsergameAplicant" HorizontalAlignment="Left" Margin="940,452,0,0" VerticalAlignment="Top" Height="40" Width="179" Background="#FFF09E9E" FontSize="48"/>
         <TextBlock x:Name="lbUsergamePoints" HorizontalAlignment="Left" Margin="1137,385,0,0" VerticalAlignment="Top" Height="40" Width="47" Background="#FFF09E9E" FontSize="48"/>
         <TextBlock x:Name="lbUsergameAplicantPoints" HorizontalAlignment="Left" Margin="1137,452,0,0" VerticalAlignment="Top" Height="40" Width="47" Background="#FFF09E9E" FontSize="48"/>
-        <Button Content="Retirarse" HorizontalAlignment="Left" Margin="1059,678,0,0" VerticalAlignment="Top" Width="99" Click="BackingOutClick" Height="30">
+        <Button Content="Retirarse" HorizontalAlignment="Left" Margin="983,562,0,0" VerticalAlignment="Top" Width="99" Click="BackingOutClick" Height="30">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
@@ -45,7 +49,7 @@
             <Button Content="Aceptar" HorizontalAlignment="Left" Margin="130,120,0,0" Click="ClickAcceptNotification" VerticalAlignment="Top" Width="74" RenderTransformOrigin="1.838,1.375"/>
             <TextBlock x:Name="lbNotification" HorizontalAlignment="Left" Margin="23,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="38" Width="223" Grid.ColumnSpan="2"/>
         </Grid>
-        <Canvas x:Name="canvaGame" Background ="AntiqueWhite" HorizontalAlignment="Left" Height="649" Margin="270,29,0,0" VerticalAlignment="Top" Width="648">
+        <Canvas x:Name="canvaGame" Background ="AntiqueWhite" HorizontalAlignment="Left" Height="649" Margin="258,10,0,0" VerticalAlignment="Top" Width="648">
             <Button x:Name="btn1" Content="" Canvas.Left="10" Canvas.Top="10" Width="100" Height="100" Click="Btn1Click"/>
             <Button x:Name="btn2" Content="" Canvas.Left="115" Canvas.Top="10" Width="100" Height="100" Click="Btn2Click"/>
             <Button x:Name="btn3" Content="" Canvas.Left="220" Canvas.Top="10" Width="100" Height="100" Click="Btn3Click"/>
