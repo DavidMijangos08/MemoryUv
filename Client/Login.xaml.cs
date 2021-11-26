@@ -45,6 +45,11 @@ namespace Client
                     procesos.Show();
                     procesos.Hide(); */
 
+                    if (!service.ExistsConfigUser(user.id))
+                    {
+                        service.NewConfigUser(user.id);
+                        MessageBox.Show("Se creo confi");
+                    } 
                     service.UpdateUserStatus(user.id, "Activo");
                     Home windowHome = new Home(user);
                     windowHome.Show();

@@ -93,5 +93,47 @@ namespace Logic
 
             }
         }
+        public bool ExistsConfigUser(int idUser)
+        {
+            ConfigUser confi = new ConfigUser();
+            try
+            {
+                using (var context = new MemoryModel())
+                {
+                    var coincidences = from ConfigUser in context.ConfigUsers where ConfigUser.idUser == idUser select ConfigUser;
+                    if (coincidences.Count() > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (DbException)
+            {
+                return false;
+            }
+            return false;
+        }
+        public void NewConfigUser(int idUser)
+        {
+            try
+            {
+                using (var context = new MemoryModel())
+                {
+                    ConfigUser configuracion = new ConfigUser()
+                    {
+                        idUser = idUser,
+                        idBackground = 0,
+                        idLanguage = 0
+                    };
+                    context.ConfigUsers.Add(configuracion);
+                    context.SaveChanges();
+                    
+                }
+            }
+            catch (DbException)
+            {
+
+            }
+        }
     }
 }

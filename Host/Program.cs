@@ -235,6 +235,12 @@ namespace Host
 
         [OperationContract]
         string GetBackgroundUser(ConfigUser user);
+
+        [OperationContract]
+        void NewConfigUser(int idUser);
+
+        [OperationContract]
+        bool ExistsConfigUser(int idUser);
     }
 
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single, InstanceContextMode = InstanceContextMode.Single)]
@@ -728,6 +734,18 @@ namespace Host
         {
             ConfigUserLogic configUserLogic = new ConfigUserLogic();
             configUserLogic.SetBackgroundUser(idUser, idNewBackground);
+        }
+        public bool ExistsConfigUser(int idUser)
+        {
+            ConfigUserLogic configUserLogic = new ConfigUserLogic();
+            
+
+            return configUserLogic.ExistsConfigUser(idUser);
+        }
+        public void NewConfigUser(int idUser)
+        {
+            ConfigUserLogic configUserLogic = new ConfigUserLogic();
+            configUserLogic.NewConfigUser(idUser);
         }
 
         public List<StatisticUser> GetBetterUser()
