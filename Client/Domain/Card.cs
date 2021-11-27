@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace Data.Domain
+namespace Client.Domain
 {
     public class Card
     {

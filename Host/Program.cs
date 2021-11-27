@@ -14,7 +14,6 @@ using static Logic.UserLogic;
 using static Logic.FriendLogic;
 using System.Windows.Media;
 using System.Windows.Navigation;
-using Data.Domain;
 
 namespace Host
 {
@@ -64,10 +63,13 @@ namespace Host
         void ReceiveGameTurn();
 
         [OperationContract(IsOneWay = true)]
-        void ReceiveGameBoard(Dictionary<string, Card> cars);
+        void ReceiveGameBoard(int[] messyCards);
 
         [OperationContract(IsOneWay = true)]
         void ReceiveMove(string user, string btn);
+
+        [OperationContract(IsOneWay = true)]
+        void ReceiveCleanBoard();
     }
 
     [ServiceContract(CallbackContract = typeof(IChatClient))]
@@ -137,10 +139,13 @@ namespace Host
         void SendGameTurn(string userReceiving);
 
         [OperationContract(IsOneWay = true)]
-        void SendGameBoard(Dictionary<string, Card> cards, string userReceiving);
+        void SendGameBoard(int[] messyCards, string userReceiving);
 
         [OperationContract(IsOneWay = true)]
         void SendMove(string userSend, string btn, string userReceiving);
+
+        [OperationContract(IsOneWay = true)]
+        void SendCleanBoard(string userReceiving);
     }
 
     [ServiceContract]
@@ -511,7 +516,7 @@ namespace Host
             }
         }
 
-        public void SendGameBoard(Dictionary<string, Card> cards, string userReceiving)
+        public void SendGameBoard(int[] messyCards, string userReceiving)
         {
             var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
             string userNotify;
@@ -521,7 +526,7 @@ namespace Host
                 {
                     if (userNotify == userReceiving)
                     {
-                        usergameReceiving.ReceiveGameBoard(cards);
+                        usergameReceiving.ReceiveGameBoard(messyCards);
                     }
                 }
             }
@@ -538,6 +543,22 @@ namespace Host
                     if (userNotify == userReceiving)
                     {
                         usergameReceiving.ReceiveMove(user, btn);
+                    }
+                }
+            }
+        }
+
+        public void SendCleanBoard(string userReceiving)
+        {
+            var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
+            string userNotify;
+            foreach (var usergameReceiving in usersGame.Keys)
+            {
+                if (usersGame.TryGetValue(usergameReceiving, out userNotify))
+                {
+                    if (userNotify == userReceiving)
+                    {
+                        usergameReceiving.ReceiveCleanBoard();
                     }
                 }
             }

@@ -29,26 +29,15 @@
         </Grid>
         <Label Content="Turno de:" Margin="24,47,977.6,587.4" FontSize="15" />
         <Label Content="Puntos:" Margin="936,346,74.6,285.4" FontSize="15" />
-        <TextBlock x:Name="lbUsergame" HorizontalAlignment="Left" Margin="940,385,0,0" VerticalAlignment="Top" Height="40" Width="179" Background="#FFF09E9E" FontSize="48"/>
-        <TextBlock x:Name="lbUsergameAplicant" HorizontalAlignment="Left" Margin="940,452,0,0" VerticalAlignment="Top" Height="40" Width="179" Background="#FFF09E9E" FontSize="48"/>
-        <TextBlock x:Name="lbUsergamePoints" HorizontalAlignment="Left" Margin="1137,385,0,0" VerticalAlignment="Top" Height="40" Width="47" Background="#FFF09E9E" FontSize="48"/>
-        <TextBlock x:Name="lbUsergameAplicantPoints" HorizontalAlignment="Left" Margin="1137,452,0,0" VerticalAlignment="Top" Height="40" Width="47" Background="#FFF09E9E" FontSize="48"/>
+        <TextBlock x:Name="lbUserAdmin" HorizontalAlignment="Left" Margin="940,385,0,0" VerticalAlignment="Top" Height="40" Width="179" Background="#FFF09E9E" FontSize="40"/>
+        <TextBlock x:Name="lbUserOpponent" HorizontalAlignment="Left" Margin="940,452,0,0" VerticalAlignment="Top" Height="40" Width="179" Background="#FFF09E9E" FontSize="40"/>
+        <TextBlock x:Name="lbUserAdminPoints" HorizontalAlignment="Left" Margin="1137,385,0,0" VerticalAlignment="Top" Height="40" Width="47" Background="#FFF09E9E" FontSize="40"/>
+        <TextBlock x:Name="lbUserOpponentPoints" HorizontalAlignment="Left" Margin="1137,452,0,0" VerticalAlignment="Top" Height="40" Width="47" Background="#FFF09E9E" FontSize="40"/>
         <Button Content="Retirarse" HorizontalAlignment="Left" Margin="983,562,0,0" VerticalAlignment="Top" Width="99" Click="BackingOutClick" Height="30">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Grid x:Name="gridNotification" HorizontalAlignment="Left" Height="150" Margin="462,275,0,0" VerticalAlignment="Top" Width="346" Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" Visibility="Hidden">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="159*"/>
-                <ColumnDefinition Width="98*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.Effect>
-                <DropShadowEffect Color="#FF101354"/>
-            </Grid.Effect>
-            <Button Content="Aceptar" HorizontalAlignment="Left" Margin="130,120,0,0" Click="ClickAcceptNotification" VerticalAlignment="Top" Width="74" RenderTransformOrigin="1.838,1.375"/>
-            <TextBlock x:Name="lbNotification" HorizontalAlignment="Left" Margin="23,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="38" Width="223" Grid.ColumnSpan="2"/>
-        </Grid>
         <Canvas x:Name="canvaGame" Background ="AntiqueWhite" HorizontalAlignment="Left" Height="649" Margin="258,10,0,0" VerticalAlignment="Top" Width="648">
             <Button x:Name="btn1" Content="" Canvas.Left="10" Canvas.Top="10" Width="100" Height="100" Click="Btn1Click"/>
             <Button x:Name="btn2" Content="" Canvas.Left="115" Canvas.Top="10" Width="100" Height="100" Click="Btn2Click"/>
@@ -87,6 +76,17 @@
             <Button x:Name="btn35" Content="" Canvas.Left="430" Canvas.Top="535" Width="100" Height="100" Click="Btn35Click"/>
             <Button x:Name="btn36" Content="" Canvas.Left="535" Canvas.Top="535" Width="100" Height="100" Click="Btn36Click"/>
         </Canvas>
+        <Grid x:Name="gridNotification" HorizontalAlignment="Left" Height="150" Margin="462,275,0,0" VerticalAlignment="Top" Width="346" Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="159*"/>
+                <ColumnDefinition Width="98*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Effect>
+                <DropShadowEffect Color="#FF101354"/>
+            </Grid.Effect>
+            <Button Content="Aceptar" HorizontalAlignment="Left" Margin="130,120,0,0" Click="ClickAcceptNotification" VerticalAlignment="Top" Width="74" RenderTransformOrigin="1.838,1.375"/>
+            <TextBlock x:Name="lbNotification" HorizontalAlignment="Left" Margin="23,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="38" Width="223" Grid.ColumnSpan="2"/>
+        </Grid>
         <Grid x:Name="gridConfirmation" HorizontalAlignment="Left" Height="118" Margin="462,275,0,0" VerticalAlignment="Top" Width="346" Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="159*"/>
@@ -99,5 +99,18 @@
             <TextBlock HorizontalAlignment="Left" Margin="51,10,0,0" TextWrapping="Wrap" Text="¿Estás seguro que deseas salir de la partida?" VerticalAlignment="Top" Height="38" Width="292" Grid.ColumnSpan="2"/>
             <Button Content="NO" HorizontalAlignment="Left" Margin="0,79,0,0" Click="ClickNO" VerticalAlignment="Top" Width="74" RenderTransformOrigin="1.838,1.375" Grid.Column="1"/>
         </Grid>
+        <Grid x:Name="gridFinishGame" HorizontalAlignment="Left" Height="118" Margin="462,275,0,0" VerticalAlignment="Top" Width="346" Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="159*"/>
+                <ColumnDefinition Width="98*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Effect>
+                <DropShadowEffect Color="#FF101354"/>
+            </Grid.Effect>
+            <TextBlock x:Name="lbWinner" HorizontalAlignment="Left" Margin="10,30,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="24"/>
+            <Button Content="Aceptar" HorizontalAlignment="Left" Margin="129,88,0,0" VerticalAlignment="Top" Click="ClicAcceptFinish" Width="75"/>
+        </Grid>
+        <Label Content="Pares restantes:" HorizontalAlignment="Left" FontSize="15" Margin="940,255,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="lbPairs" HorizontalAlignment="Left" Margin="940,290,0,0" VerticalAlignment="Top" Height="40" Width="179" Background="#FFF09E9E" FontSize="40"/>
     </Grid>
 </Window>
