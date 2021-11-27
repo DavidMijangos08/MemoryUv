@@ -14,6 +14,7 @@ using static Logic.UserLogic;
 using static Logic.FriendLogic;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using Data.Domain;
 
 namespace Host
 {
@@ -61,6 +62,12 @@ namespace Host
 
         [OperationContract(IsOneWay = true)]
         void ReceiveGameTurn();
+
+        [OperationContract(IsOneWay = true)]
+        void ReceiveGameBoard(Dictionary<string, Card> cars);
+
+        [OperationContract(IsOneWay = true)]
+        void ReceiveMove(string user, string btn);
     }
 
     [ServiceContract(CallbackContract = typeof(IChatClient))]
@@ -128,6 +135,12 @@ namespace Host
 
         [OperationContract(IsOneWay = true)]
         void SendGameTurn(string userReceiving);
+
+        [OperationContract(IsOneWay = true)]
+        void SendGameBoard(Dictionary<string, Card> cards, string userReceiving);
+
+        [OperationContract(IsOneWay = true)]
+        void SendMove(string userSend, string btn, string userReceiving);
     }
 
     [ServiceContract]
@@ -496,7 +509,38 @@ namespace Host
                     }
                 }
             }
+        }
 
+        public void SendGameBoard(Dictionary<string, Card> cards, string userReceiving)
+        {
+            var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
+            string userNotify;
+            foreach (var usergameReceiving in usersGame.Keys)
+            {
+                if (usersGame.TryGetValue(usergameReceiving, out userNotify))
+                {
+                    if (userNotify == userReceiving)
+                    {
+                        usergameReceiving.ReceiveGameBoard(cards);
+                    }
+                }
+            }
+        }
+
+        public void SendMove(string user, string btn, string userReceiving)
+        {
+            var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
+            string userNotify;
+            foreach (var usergameReceiving in usersGame.Keys)
+            {
+                if (usersGame.TryGetValue(usergameReceiving, out userNotify))
+                {
+                    if (userNotify == userReceiving)
+                    {
+                        usergameReceiving.ReceiveMove(user, btn);
+                    }
+                }
+            }
         }
 
         public UserGame GetLoggerUser(string email, string password)
