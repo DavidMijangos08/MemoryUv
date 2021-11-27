@@ -1,5 +1,5 @@
-﻿using Client.Domain;
-using Data;
+﻿using Data;
+using Data.Domain;
 using Host;
 using System;
 using System.Collections.Generic;
