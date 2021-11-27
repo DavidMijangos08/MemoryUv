@@ -376,6 +376,12 @@ namespace Client.GameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/SendCleanBoard")]
         System.Threading.Tasks.Task SendCleanBoardAsync(string userReceiving);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/SendMessageInGame")]
+        void SendMessageInGame(string userSend, string userReceiving, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/SendMessageInGame")]
+        System.Threading.Tasks.Task SendMessageInGameAsync(string userSend, string userReceiving, string message);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -395,6 +401,9 @@ namespace Client.GameService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/ReceiveCleanBoard")]
         void ReceiveCleanBoard();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IGameService/RecieveMessageInGame")]
+        void RecieveMessageInGame(string user, string message);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -479,6 +488,14 @@ namespace Client.GameService {
         
         public System.Threading.Tasks.Task SendCleanBoardAsync(string userReceiving) {
             return base.Channel.SendCleanBoardAsync(userReceiving);
+        }
+        
+        public void SendMessageInGame(string userSend, string userReceiving, string message) {
+            base.Channel.SendMessageInGame(userSend, userReceiving, message);
+        }
+        
+        public System.Threading.Tasks.Task SendMessageInGameAsync(string userSend, string userReceiving, string message) {
+            return base.Channel.SendMessageInGameAsync(userSend, userReceiving, message);
         }
     }
 }

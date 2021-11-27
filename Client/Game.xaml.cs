@@ -595,5 +595,24 @@ namespace Client
             Home home = new Home(userConnected);
             home.Show();
         }
+
+        public void RecieveMessageInGame(string user, string message)
+        {
+            string newMessage = $"{user} : {message}";
+            messageDisplay.Items.Add(newMessage);
+        }
+
+        private void ClicSend(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtChat.Text))
+            {
+                client.SendMessageInGame(userConnected.nametag, userOpponent.nametag, txtChat.Text);
+                string user = userConnected.nametag;
+                string message = txtChat.Text;
+                string newMessage = $"{user} : {message}";
+                messageDisplay.Items.Add(newMessage);
+                txtChat.Text = "";
+            }
+        }
     }
 }

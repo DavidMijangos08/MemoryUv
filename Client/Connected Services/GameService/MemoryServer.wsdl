@@ -208,6 +208,9 @@
   <wsdl:message name="IGameService_SendCleanBoard_InputMessage">
     <wsdl:part name="parameters" element="tns:SendCleanBoard" />
   </wsdl:message>
+  <wsdl:message name="IGameService_SendMessageInGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessageInGame" />
+  </wsdl:message>
   <wsdl:message name="IGameService_ReceiveExitNotification_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReceiveExitNotification" />
   </wsdl:message>
@@ -222,6 +225,9 @@
   </wsdl:message>
   <wsdl:message name="IGameService_ReceiveCleanBoard_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReceiveCleanBoard" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_RecieveMessageInGame_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RecieveMessageInGame" />
   </wsdl:message>
   <wsdl:portType name="IChatService">
     <wsdl:operation name="Join">
@@ -314,6 +320,9 @@
     <wsdl:operation name="SendCleanBoard">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/SendCleanBoard" message="tns:IGameService_SendCleanBoard_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="SendMessageInGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/SendMessageInGame" message="tns:IGameService_SendMessageInGame_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ReceiveExitNotification">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/ReceiveExitNotification" message="tns:IGameService_ReceiveExitNotification_OutputCallbackMessage" />
     </wsdl:operation>
@@ -328,6 +337,9 @@
     </wsdl:operation>
     <wsdl:operation name="ReceiveCleanBoard">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/ReceiveCleanBoard" message="tns:IGameService_ReceiveCleanBoard_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecieveMessageInGame">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/RecieveMessageInGame" message="tns:IGameService_RecieveMessageInGame_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IChatService" type="tns:IChatService">
@@ -513,6 +525,12 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="SendMessageInGame">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/SendMessageInGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="ReceiveExitNotification">
       <soap12:operation soapAction="http://tempuri.org/IGameService/ReceiveExitNotification" style="document" />
       <wsdl:output>
@@ -539,6 +557,12 @@
     </wsdl:operation>
     <wsdl:operation name="ReceiveCleanBoard">
       <soap12:operation soapAction="http://tempuri.org/IGameService/ReceiveCleanBoard" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecieveMessageInGame">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/RecieveMessageInGame" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

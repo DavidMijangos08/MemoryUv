@@ -70,6 +70,9 @@ namespace Host
 
         [OperationContract(IsOneWay = true)]
         void ReceiveCleanBoard();
+
+        [OperationContract(IsOneWay = true)]
+        void RecieveMessageInGame(string user, string message);
     }
 
     [ServiceContract(CallbackContract = typeof(IChatClient))]
@@ -146,6 +149,9 @@ namespace Host
 
         [OperationContract(IsOneWay = true)]
         void SendCleanBoard(string userReceiving);
+
+        [OperationContract(IsOneWay = true)]
+        void SendMessageInGame(string userSend, string userReceiving, string message);
     }
 
     [ServiceContract]
@@ -296,6 +302,7 @@ namespace Host
                 other.RecieveMessage(user, message);
             }
         }
+
         public void Leave(string username)
         {
             var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
@@ -559,6 +566,22 @@ namespace Host
                     if (userNotify == userReceiving)
                     {
                         usergameReceiving.ReceiveCleanBoard();
+                    }
+                }
+            }
+        }
+
+        public void SendMessageInGame(string userSend, string userReceiving, string message)
+        {
+            var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
+            string userNotify;
+            foreach (var usergameReceiving in usersGame.Keys)
+            {
+                if (usersGame.TryGetValue(usergameReceiving, out userNotify))
+                {
+                    if (userNotify == userReceiving)
+                    {
+                        usergameReceiving.RecieveMessageInGame(userSend, message);
                     }
                 }
             }

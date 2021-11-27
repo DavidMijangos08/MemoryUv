@@ -14,14 +14,18 @@
         <Label Content="Tiempo:" Margin="940,130,5.6,470.4" FontSize="20" />
         <TextBlock x:Name="lbUserTurn" HorizontalAlignment="Left" Margin="24,88,0,0" VerticalAlignment="Top" Height="40" Width="218" Background="#FFF09E9E" FontSize="36"/>
         <TextBlock x:Name="lbTimer" HorizontalAlignment="Left" Margin="940,184,0,0" VerticalAlignment="Top" Height="40" Width="218" Background="#FFF09E9E" FontSize="40"/>
-        <Grid Margin="10,184,939,0"  >
+        <Grid Margin="10,184,950,10"  >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="482*"/>
+                <RowDefinition Height="49*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="164*"/>
                 <ColumnDefinition Width="79*"/>
             </Grid.ColumnDefinitions>
-            <ListBox x:Name="messageDisplay" Margin="2,-32,-2,188" Grid.ColumnSpan="2" />
-            <TextBox x:Name="txtChat" Margin="4,358,43,163" Grid.ColumnSpan="2" />
-            <Button x:Name="btnSend" Content="Enviar" Margin="41,358,-2,163" Grid.Column="1" >
+            <ListBox x:Name="messageDisplay" Margin="0,-40,0,202" Grid.ColumnSpan="2" />
+            <TextBox x:Name="txtChat" Margin="10,295,10,129" Grid.ColumnSpan="2" />
+            <Button x:Name="btnSend" Click="ClicSend" Content="Enviar" Margin="10,358,10,80" Grid.Column="1" >
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
@@ -33,7 +37,7 @@
         <TextBlock x:Name="lbUserOpponent" HorizontalAlignment="Left" Margin="940,452,0,0" VerticalAlignment="Top" Height="40" Width="179" Background="#FFF09E9E" FontSize="40"/>
         <TextBlock x:Name="lbUserAdminPoints" HorizontalAlignment="Left" Margin="1137,385,0,0" VerticalAlignment="Top" Height="40" Width="47" Background="#FFF09E9E" FontSize="40"/>
         <TextBlock x:Name="lbUserOpponentPoints" HorizontalAlignment="Left" Margin="1137,452,0,0" VerticalAlignment="Top" Height="40" Width="47" Background="#FFF09E9E" FontSize="40"/>
-        <Button Content="Retirarse" HorizontalAlignment="Left" Margin="983,562,0,0" VerticalAlignment="Top" Width="99" Click="BackingOutClick" Height="30">
+        <Button Content="Retirarse" HorizontalAlignment="Left" Margin="992,520,0,0" VerticalAlignment="Top" Width="99" Click="BackingOutClick" Height="30">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
@@ -99,7 +103,7 @@
             <TextBlock HorizontalAlignment="Left" Margin="51,10,0,0" TextWrapping="Wrap" Text="¿Estás seguro que deseas salir de la partida?" VerticalAlignment="Top" Height="38" Width="292" Grid.ColumnSpan="2"/>
             <Button Content="NO" HorizontalAlignment="Left" Margin="0,79,0,0" Click="ClickNO" VerticalAlignment="Top" Width="74" RenderTransformOrigin="1.838,1.375" Grid.Column="1"/>
         </Grid>
-        <Grid x:Name="gridFinishGame" HorizontalAlignment="Left" Height="118" Margin="462,275,0,0" VerticalAlignment="Top" Width="346" Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}">
+        <Grid x:Name="gridFinishGame" HorizontalAlignment="Left" Height="118" Margin="462,275,0,0" VerticalAlignment="Top" Width="346" Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="159*"/>
                 <ColumnDefinition Width="98*"/>
