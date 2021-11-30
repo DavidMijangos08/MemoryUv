@@ -6,6 +6,10 @@ namespace Data
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+    /// <summary>
+    /// Clase correspondiente a la tabla de usuario de la BD
+    /// </summary>
+
     [Table("UserGame")]
     public partial class UserGame
     {

@@ -36,10 +36,9 @@ namespace Client
             usergame = _user;
             InstanceContext context = new InstanceContext(this);
             client = new RoomService.RoomServiceClient(context);
-            client.ConnectWaitingRoom(usergame.nametag);
-            
-
+            client.ConnectWaitingRoom(usergame.nametag);    
             service = new MemoryServer();
+            service.UpdateUserStatus(usergame.id, "Activo");
             //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
         }
 

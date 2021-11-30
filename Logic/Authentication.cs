@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -48,10 +49,10 @@ namespace Logic
                         user = null;
                     }
                 }
-            } catch (DbException ex)
+            } catch (DbUpdateException ex)
             {
                 log.Error("Error en login", ex);
-              //  throw new DbException();
+                throw new DbUpdateException();
             }
             return user;
         }

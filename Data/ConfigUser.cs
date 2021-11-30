@@ -6,6 +6,11 @@ namespace Data
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+
+    /// <summary>
+    /// Clase correspondiente a la tabla configuración del usuario de la BD
+    /// </summary>
+   
     [Table("ConfigUser")]
     public partial class ConfigUser
     {

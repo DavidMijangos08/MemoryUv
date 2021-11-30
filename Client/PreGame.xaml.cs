@@ -1,4 +1,5 @@
 ﻿using Data;
+using Host;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace Client
         List<UserGame> usersGame = new List<UserGame>();
         string section;
         string difficulty;
+        MemoryServer service;
         public PreGame(List<UserGame> receivedUsers, string section, string difficulty)
         {
             InitializeComponent();
@@ -48,6 +50,9 @@ namespace Client
                 usersGame.Add(userConnected);
                 usersGame.Add(userInvited);
                 usersGame.Add(userAdmin);
+                service = new MemoryServer();
+                service.UpdateUserStatus(userInvited.id, "En partida");
+                service.UpdateUserStatus(userAdmin.id, "En partida");
             }
             else
             {

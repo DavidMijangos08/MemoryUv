@@ -333,7 +333,7 @@ namespace Client
                     else
                     {
                         service.AddOneWinGame(userOpponent.id);
-                        service.AddOneWinGame(userConnected.id);
+                        service.AddOneLoseGame(userConnected.id);
                     }
                 }
             }

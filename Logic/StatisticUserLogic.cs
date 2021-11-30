@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,8 +10,20 @@ using System.Windows;
 
 namespace Logic
 {
+
+    /// <summary>
+    /// Clase que permite manejar la lógica de la estadística de un usuario
+    /// </summary>
+
     public class StatisticUserLogic
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        /// <summary>
+        /// Método que permite obtener los mejores jugadores del juego
+        /// </summary>
+        /// <returns> Retorna una lista ordenada de mayor a menor numero de partidas ganadas</returns>
+
         public List<StatisticUser> GetBetterUsers()
         {
             List<StatisticUser> users = new List<StatisticUser>();
@@ -22,9 +35,10 @@ namespace Logic
                     users = coincidences;
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en get better users", ex);
+                throw new DbUpdateException();
             }
             return users;
         }
@@ -117,12 +131,19 @@ namespace Logic
 
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en get statistic user", ex);
+                throw new DbUpdateException();
             }
             return exists;
         }
+
+        /// <summary>
+        /// Método que permite agregar una nueva partida ganada al jugador
+        /// </summary>
+        /// <param name="idUser"> Corresponde al id del jugador al que se desea agregar una nueva partida ganada</param>
+        /// <returns> Retorna el estado de procesamiento del método </returns>
 
         public StatisticStatus IncreaseGameWon(int idUser)
         {
@@ -145,12 +166,19 @@ namespace Logic
                     }
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en IncreaseGameWon", ex);
+                throw new DbUpdateException();
             }
             return status;
         }
+
+        /// <summary>
+        /// Método que permite agregar una nueva partida perdida a un jugador
+        /// </summary>
+        /// <param name="idUser"> Corresponde al id del jugador al que se le desea agregar una nueva partida perdida </param>
+        /// <returns> Retorna el estado de procesamiento del método </returns>
 
         public StatisticStatus IncreaseLosingGame(int idUser)
         {
@@ -173,12 +201,20 @@ namespace Logic
                     }
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en increaseLosingGame", ex);
+                throw new DbUpdateException();
             }
             return status;
         }
+
+        /// <summary>
+        /// Método que permite agregar las estadísticas del usuario vacías
+        /// </summary>
+        /// <param name="idUser"> Corresponde al id del usuario al que se desea agregar sus estadísticas </param>
+        /// <param name="nametag">Corresponde al nametag del usuario al que se desea agregar sus estadísticas</param>
+        /// <returns> Retorna el estado de procesamiento del método </returns>
 
         public StatisticStatus AddStatisticUser(int idUser, string nametag)
         {
@@ -203,12 +239,17 @@ namespace Logic
                     }
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en add statistic user", ex);
+                throw new DbUpdateException();
             }
             return status;
         }
+
+        /// <summary>
+        /// Enumerador que contiene dos estados (ÉXITO, FALLADO) para el retorno de diversos métodos de la lógica de estadísticas
+        /// </summary>
 
         public enum StatisticStatus
         {

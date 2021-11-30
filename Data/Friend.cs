@@ -6,6 +6,10 @@ namespace Data
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+    /// <summary>
+    /// Clase correspondiente a la tabla amigo de la BD
+    /// </summary>
+
     [Table("Friend")]
     public partial class Friend
     {

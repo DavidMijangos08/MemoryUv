@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace Logic
     /// </summary>
     public class UserLogic
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// Método que permite crear un nuevo usuario en el sistema
@@ -46,9 +48,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en add user", ex);
+                throw new DbUpdateException();
             }
             return status;
         }
@@ -73,18 +76,30 @@ namespace Logic
                     if(coincidences.Count() > 0)
                     {
                         UserGame userGame = coincidences.First();
-                        userGame.password = newPasswordHashed;
+                        if (userGame.password.Equals(newPasswordHashed))
+                        {
+                            status = Status.Sucess;
+                        }
+                        else
+                        {
+                            userGame.password = newPasswordHashed;
+                        }
                     }
-                    int numberChanges = context.SaveChanges();
-                    if(numberChanges > 0)
+
+                    if(status == Status.Failed)
                     {
-                        status = Status.Sucess;
+                        int numberChanges = context.SaveChanges();
+                        if (numberChanges > 0)
+                        {
+                            status = Status.Sucess;
+                        }
                     }
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en update password", ex);
+                throw new DbUpdateException();
             }
             return status;
         }
@@ -116,9 +131,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en update status", ex);
+                throw new DbUpdateException();
             }
             return status;
         }
@@ -147,9 +163,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en get user by id", ex);
+                throw new DbUpdateException();
             }
             return userGame;
         }
@@ -174,9 +191,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en get user by email", ex);
+                throw new DbUpdateException();
             }
             return userGame;
         }
@@ -198,9 +216,10 @@ namespace Logic
                     users = coincidences;
                 } 
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en get users by initiales", ex);
+                throw new DbUpdateException();
             }
             return users;
         }
@@ -227,9 +246,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbException )
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en verify mail", ex);
+                throw new DbUpdateException();
             }
             
             return status;
@@ -256,9 +276,10 @@ namespace Logic
                         status = VerificationStatus.Sucess;
                     }
                 }
-            } catch (DbException)
+            } catch (DbUpdateException ex)
             {
-
+                log.Error("Error en verify nametag", ex);
+                throw new DbUpdateException();
             }
             
             return status;

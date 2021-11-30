@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,8 @@ namespace Logic
 
     public class FriendLogic
     {
-        
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         /// <summary>
         /// Método que permite agregar una nueva amistad al juego
         /// </summary>
@@ -43,9 +45,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en add friend", ex);
+                throw new DbUpdateException();
             }
             return status;
         }
@@ -77,9 +80,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en delete friend", ex);
+                throw new DbUpdateException();
             }
 
             return status;
@@ -115,9 +119,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en get friends list", ex);
+                throw new DbUpdateException();
             }
             return users;
         }
@@ -156,9 +161,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en get connected friends", ex);
+                throw new DbUpdateException();
             }
             return users;
         }
@@ -184,9 +190,10 @@ namespace Logic
                         exists = true;
                     }
                 }
-            } catch (DbException)
+            } catch (DbUpdateException ex)
             {
-
+                log.Error("Error en exists friendship", ex);
+                throw new DbUpdateException();
             }
             return exists;
         }

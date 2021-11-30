@@ -5,6 +5,10 @@ using System.Linq;
 
 namespace Data
 {
+    /// <summary>
+    /// Clase correspondiente al contexto de la BD del sistema
+    /// </summary>
+
     public partial class MemoryModel : DbContext
     {
         public MemoryModel()

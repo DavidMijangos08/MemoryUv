@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace Logic
     
     public class FriendRequestLogic
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// Método que registra una nueva solicitud de amistad en el juego
@@ -44,9 +46,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en add friend request", ex);
+                throw new DbUpdateException();
             }
             return status;
         }
@@ -78,9 +81,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en accept friend request", ex);
+                throw new DbUpdateException();
             }
             return status;
         }
@@ -112,9 +116,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en reject friend request", ex);
+                throw new DbUpdateException();
             }
             return status;
         }
@@ -142,9 +147,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en get users requesting", ex);
+                throw new DbUpdateException();
             }
             return users;
         }
@@ -172,9 +178,10 @@ namespace Logic
 
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en exists pending request", ex);
+                throw new DbUpdateException();
             }
             return exists;
         }

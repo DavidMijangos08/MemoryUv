@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ namespace Logic
 {
     public class ConfigUserLogic
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public ConfigUser GetConfigUserById(int idUser)
         {
             ConfigUser confi = new ConfigUser();
@@ -30,9 +33,10 @@ namespace Logic
                         
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en get config user by id", ex);
+                throw new DbUpdateException();
             }
             return confi;
         }
@@ -89,14 +93,16 @@ namespace Logic
                     context.SaveChanges();
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en set background user", ex);
+                throw new DbUpdateException();
             }
         }
         public bool ExistsConfigUser(int idUser)
         {
             ConfigUser confi = new ConfigUser();
+            bool exists = false;
             try
             {
                 using (var context = new MemoryModel())
@@ -104,15 +110,16 @@ namespace Logic
                     var coincidences = from ConfigUser in context.ConfigUsers where ConfigUser.idUser == idUser select ConfigUser;
                     if (coincidences.Count() > 0)
                     {
-                        return true;
+                        exists = true;
                     }
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-                return false;
+                log.Error("Error en exists config user", ex);
+                throw new DbUpdateException();
             }
-            return false;
+            return exists;
         }
         public void NewConfigUser(int idUser)
         {
@@ -131,9 +138,10 @@ namespace Logic
                     
                 }
             }
-            catch (DbException)
+            catch (DbUpdateException ex)
             {
-
+                log.Error("Error en new config user", ex);
+                throw new DbUpdateException();
             }
         }
     }

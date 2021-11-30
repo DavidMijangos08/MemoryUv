@@ -17,6 +17,11 @@ using System.Windows.Navigation;
 
 namespace Host
 {
+
+    /// <summary>
+    /// Interfaz correspondiente al cliente del chat global
+    /// </summary>
+
     [ServiceContract]
     public interface IChatClient
     {

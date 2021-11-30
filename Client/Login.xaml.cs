@@ -3,6 +3,7 @@ using Host;
 using Logic;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,7 +51,6 @@ namespace Client
                         service.NewConfigUser(user.id);
                         MessageBox.Show("Se creo confi");
                     } 
-                    service.UpdateUserStatus(user.id, "Activo");
                     Home windowHome = new Home(user);
                     windowHome.Show();
                     this.Hide();  
