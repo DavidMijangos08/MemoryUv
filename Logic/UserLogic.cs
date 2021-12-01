@@ -49,10 +49,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 log.Error(ex.Message, ex);
-                throw new DataException();
+                throw new SystemException();
             }
             return status;
         }
@@ -97,10 +97,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 log.Error(ex.Message, ex);
-                throw new DataException();
+                throw new SystemException();
             }
             return status;
         }
@@ -132,10 +132,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 log.Error(ex.Message, ex);
-                throw new DataException();
+                throw new SystemException();
             }
             return status;
         }
@@ -164,10 +164,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 log.Error(ex.Message, ex);
-                throw new DataException();
+                throw new SystemException();
             }
             return userGame;
         }
@@ -192,10 +192,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 log.Error(ex.Message, ex);
-                throw new DataException();
+                throw new SystemException();
             }
             return userGame;
         }
@@ -217,10 +217,10 @@ namespace Logic
                     users = coincidences;
                 } 
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 log.Error(ex.Message, ex);
-                throw new DataException();
+                throw new SystemException();
             }
             return users;
         }
@@ -247,10 +247,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 log.Error(ex.Message, ex);
-                throw new DataException();
+                throw new SystemException();
             }
             return status;
         }
@@ -277,10 +277,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 log.Error(ex.Message, ex);
-                throw new DataException();
+                throw new SystemException();
             }
             return status;
         }

@@ -49,7 +49,7 @@ namespace Client
             {
                 ShowExceptionAlert();
             }
-            catch (DataException)
+            catch (SystemException)
             {
                 ShowExceptionAlert();
             }
@@ -67,9 +67,9 @@ namespace Client
                     listFriends.Items.Add(nametag);
                 }
             }
-            catch (DataException)
+            catch (SystemException)
             {
-
+                ShowExceptionAlert();
             }
         }
 
@@ -133,7 +133,7 @@ namespace Client
             {
                 ShowExceptionAlert();
             }
-            catch (DataException)
+            catch (SystemException)
             {
                 ShowExceptionAlert();
             }
@@ -171,7 +171,7 @@ namespace Client
             {
                 ShowExceptionAlert();
             }
-            catch (DataException)
+            catch (SystemException)
             {
                 ShowExceptionAlert();
             }

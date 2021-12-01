@@ -65,7 +65,7 @@ namespace Client
                     service.UpdateUserStatus(userInvited.id, "En partida");
                     service.UpdateUserStatus(userAdmin.id, "En partida");
                 }
-                catch (DataException)
+                catch (SystemException)
                 {
                     ShowExceptionAlert();
                 }

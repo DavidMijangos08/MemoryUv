@@ -37,7 +37,7 @@ namespace Client
                 this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
                 //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Resources/Background/backgroundX.jpg")));
             }
-            catch (DataException)
+            catch (SystemException)
             {
                 ShowExceptionAlert();
             }
@@ -58,7 +58,7 @@ namespace Client
 
                 listRank.ItemsSource = itemListView;
             }
-            catch (DataException)
+            catch (SystemException)
             {
                 ShowExceptionAlert();
             }

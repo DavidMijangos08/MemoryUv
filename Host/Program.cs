@@ -766,7 +766,7 @@ namespace Host
                 UserGame user = authentication.Login(email, password);
                 return user;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -785,7 +785,7 @@ namespace Host
                 }
                 return saved;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -804,7 +804,7 @@ namespace Host
                 }
                 return exists;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -823,7 +823,7 @@ namespace Host
                 }
                 return exists;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -854,7 +854,7 @@ namespace Host
                 client.Send(mmsg);
                 return code;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -874,7 +874,7 @@ namespace Host
                 }
                 return updated;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -893,7 +893,7 @@ namespace Host
                 }
                 return updated;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -907,7 +907,7 @@ namespace Host
                 UserGame userGame = userLogic.GetUserGameById(idUser);
                 return userGame;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -921,7 +921,7 @@ namespace Host
                 UserGame userGame = userLogic.GetUserGameByEmail(email);
                 return userGame;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -935,7 +935,7 @@ namespace Host
                 List<UserGame> users = userLogic.GetUsersByInitialesOfNametag(nametag);
                 return users;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -954,7 +954,7 @@ namespace Host
                 }
                 return saved;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -973,7 +973,7 @@ namespace Host
                 }
                 return deleted;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -987,7 +987,7 @@ namespace Host
                 List<UserGame> users = friendLogic.GetFriendsList(idUser);
                 return users;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -1001,7 +1001,7 @@ namespace Host
                 List<UserGame> usersConnected = friendLogic.GetConnectedFriends(idUser);
                 return usersConnected;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -1015,7 +1015,7 @@ namespace Host
                 bool exists = friendLogic.ExistsFriendship(idUser, idFriend);
                 return exists;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -1034,7 +1034,7 @@ namespace Host
                 }
                 return saved;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -1053,7 +1053,7 @@ namespace Host
                 }
                 return accepted;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -1072,7 +1072,7 @@ namespace Host
                 }
                 return rejected;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -1086,7 +1086,7 @@ namespace Host
                 List<UserGame> usersRequesting = friendRequestLogic.GetUsersRequesting(idUser);
                 return usersRequesting;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -1100,7 +1100,7 @@ namespace Host
                 bool exists = friendRequestLogic.ExistsPendingRequest(idApplicant, idReceiver);
                 return exists;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -1114,7 +1114,7 @@ namespace Host
                 string direccionFondo = configUserLogic.GetBackgroundUser(GetConfigUserById(idUser));
                 return direccionFondo;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -1127,7 +1127,7 @@ namespace Host
                 ConfigUserLogic configUserLogic = new ConfigUserLogic();
                 return configUserLogic.GetConfigUserById(idUser);
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -1140,7 +1140,7 @@ namespace Host
                 ConfigUserLogic configUserLogic = new ConfigUserLogic();
                 configUserLogic.SetBackgroundUser(idUser, idNewBackground);
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -1152,7 +1152,7 @@ namespace Host
                 ConfigUserLogic configUserLogic = new ConfigUserLogic();
                 return configUserLogic.ExistsConfigUser(idUser);
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -1164,7 +1164,7 @@ namespace Host
                 ConfigUserLogic configUserLogic = new ConfigUserLogic();
                 configUserLogic.NewConfigUser(idUser);
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -1178,7 +1178,7 @@ namespace Host
                 List<StatisticUser> users = statisticUserLogic.GetBetterUsers();
                 return users;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -1192,7 +1192,7 @@ namespace Host
                 bool value = statisticUserLogic.GetStatisticUser(idUser, numAchievement);
                 return value;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -1211,7 +1211,7 @@ namespace Host
                 }
                 return added;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -1230,7 +1230,7 @@ namespace Host
                 }
                 return added;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }
@@ -1249,7 +1249,7 @@ namespace Host
                 }
                 return added;
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 throw ex;
             }

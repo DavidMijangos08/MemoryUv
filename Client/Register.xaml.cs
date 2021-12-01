@@ -95,7 +95,7 @@ namespace Client
                             CreateStatisticsUser(nametag);
                         }
                     }
-                    catch (DataException)
+                    catch (SystemException)
                     {
                         ShowExceptionAlert();
                     }
@@ -126,7 +126,7 @@ namespace Client
                 List<UserGame> user = service.GetUsersByInitialesOfNametag(nametag);
                 bool addedStatistics = service.AddedStatisticUser(user[0].id, nametag);
             }
-            catch (DataException)
+            catch (SystemException)
             {
                 ShowExceptionAlert();
             }
@@ -203,7 +203,7 @@ namespace Client
                     MessageBox.Show("El nametag ya esta registrado en el juego");
                 }
             }
-            catch (DataException)
+            catch (SystemException)
             {
                 ShowExceptionAlert();
             }
@@ -222,7 +222,7 @@ namespace Client
                     MessageBox.Show("El correo electronico ya esta registrado en el juego");
                 }
             }
-            catch (DataException)
+            catch (SystemException)
             {
                 ShowExceptionAlert();
             }

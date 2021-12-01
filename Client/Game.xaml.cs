@@ -58,7 +58,7 @@ namespace Client
             {
                 ShowExceptionAlert();
             }
-            catch (DataException)
+            catch (SystemException)
             {
                 ShowExceptionAlert();
             }
@@ -188,7 +188,7 @@ namespace Client
             {
                 ShowExceptionAlert();
             }
-            catch (DataException)
+            catch (SystemException)
             {
                 ShowExceptionAlert();
             }
@@ -212,7 +212,7 @@ namespace Client
             {
                 ShowExceptionAlert();
             }
-            catch (DataException)
+            catch (SystemException)
             {
                 ShowExceptionAlert();
             }
@@ -392,7 +392,7 @@ namespace Client
                             service.AddOneLoseGame(userConnected.id);
                         }
                     }
-                    catch (DataException)
+                    catch (SystemException)
                     {
                         ShowExceptionAlert();
                     }

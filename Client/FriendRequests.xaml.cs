@@ -32,17 +32,17 @@ namespace Client
             usergame = _user;
             try
             {
-                initializeListRequests();
+                InitializeListRequests();
                 service = new MemoryServer();
                 this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
             }
-            catch (DataException)
+            catch (SystemException)
             {
                 ShowExceptionAlert();
             }          
         }
 
-        private void initializeListRequests()
+        private void InitializeListRequests()
         {
             try
             {
@@ -54,7 +54,7 @@ namespace Client
                     listRequests.Items.Add(nametag);
                 }
             }
-            catch (DataException)
+            catch (SystemException)
             {
                 ShowExceptionAlert();
             }
@@ -78,11 +78,11 @@ namespace Client
                         {
                             MessageBox.Show("Tienes un nuevo amigo");
                             listRequests.Items.Clear();
-                            initializeListRequests();
+                            InitializeListRequests();
                         }
                     }
                 }
-                catch (DataException)
+                catch (SystemException)
                 {
                     ShowExceptionAlert();
                 }
@@ -109,10 +109,10 @@ namespace Client
                     {
                         MessageBox.Show("Solicitud rechazada con exito");
                         listRequests.Items.Clear();
-                        initializeListRequests();
+                        InitializeListRequests();
                     }
                 }
-                catch (DataException)
+                catch (SystemException)
                 {
                     ShowExceptionAlert();
                 }

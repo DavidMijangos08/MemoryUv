@@ -36,7 +36,7 @@ namespace Client
                 service = new MemoryServer();
                 this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
             }
-            catch (DataException)
+            catch (SystemException)
             {
                 ShowExceptionAlert();
             }
@@ -54,7 +54,7 @@ namespace Client
                     listFriends.Items.Add(nametag);
                 }
             }
-            catch (DataException)
+            catch (SystemException)
             {
                 ShowExceptionAlert();
             }       
@@ -86,7 +86,7 @@ namespace Client
                         }
                     }
                 }
-                catch (DataException)
+                catch (SystemException)
                 {
                     ShowExceptionAlert();
                 }
@@ -126,7 +126,7 @@ namespace Client
                     MessageBox.Show("El jugador ya es tu amigo");
                 }
             }
-            catch (DataException)
+            catch (SystemException)
             {
                 ShowExceptionAlert();
             }
@@ -144,7 +144,7 @@ namespace Client
                     List<UserGame> coincidences = service.GetUsersByInitialesOfNametag(tbxNametag.Text);
                     FillListSearchUsers(coincidences);
                 }
-                catch (DataException)
+                catch (SystemException)
                 {
                     ShowExceptionAlert();
                 }
@@ -177,7 +177,7 @@ namespace Client
                         InitializeFriendsList();
                     }
                 }
-                catch (DataException)
+                catch (SystemException)
                 {
                     ShowExceptionAlert();
                 }

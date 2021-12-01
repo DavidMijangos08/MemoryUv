@@ -36,7 +36,7 @@ namespace Client
                 service = new MemoryServer();
                 this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
             }
-            catch (DataException)
+            catch (SystemException)
             {
                 ShowExceptionAlert();
             }      

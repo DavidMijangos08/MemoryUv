@@ -62,7 +62,7 @@ namespace Client
                         MessageBox.Show("Correo o contraseña incorrecta, revisa bien!");
                     }
                 }
-                catch (DataException)
+                catch (SystemException)
                 {
                     ShowExceptionAlert();
                 }        

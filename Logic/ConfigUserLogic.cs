@@ -34,10 +34,10 @@ namespace Logic
                         
                 }
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 log.Error(ex.Message, ex);
-                throw new DataException();
+                throw new SystemException();
             }
             return confi;
         }
@@ -94,10 +94,10 @@ namespace Logic
                     context.SaveChanges();
                 }
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 log.Error(ex.Message, ex);
-                throw new DataException();
+                throw new SystemException();
             }
         }
         public bool ExistsConfigUser(int idUser)
@@ -115,10 +115,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 log.Error(ex.Message, ex);
-                throw new DataException();
+                throw new SystemException();
             }
             return exists;
         }
@@ -139,10 +139,10 @@ namespace Logic
                     
                 }
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 log.Error(ex.Message, ex);
-                throw new DataException();
+                throw new SystemException();
             }
         }
     }

@@ -31,9 +31,15 @@ namespace Client
             userGame = _user;
             InitializeComponent();
             InitializeArchievement();
-            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
-            //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Resources/Background/backgroundX.jpg")));
-
+            try
+            {
+                this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
+                //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Resources/Background/backgroundX.jpg")));
+            }
+            catch (SystemException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void InitializeArchievement()
@@ -67,7 +73,7 @@ namespace Client
                     imgAchievement5.Opacity = 100;
                 }
             }
-            catch (DataException)
+            catch (SystemException)
             {
                 ShowExceptionAlert();
             }

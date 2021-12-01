@@ -50,10 +50,10 @@ namespace Logic
                         user = null;
                     }
                 }
-            } catch (DataException ex)
+            } catch (SystemException ex)
             {
                 log.Error(ex.Message, ex);
-                throw new DataException();
+                throw new SystemException();
             }
             return user;
         }

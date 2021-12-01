@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,10 +48,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 log.Error(ex.Message, ex);
-                throw new DataException();
+                throw new SystemException();
             }
             return status;
         }
@@ -82,10 +83,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 log.Error(ex.Message, ex);
-                throw new DataException();
+                throw new SystemException();
             }
             return status;
         }
@@ -117,10 +118,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 log.Error(ex.Message, ex);
-                throw new DataException();
+                throw new SystemException();
             }
             return status;
         }
@@ -148,10 +149,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 log.Error(ex.Message, ex);
-                throw new DataException();
+                throw new SystemException();
             }
             return users;
         }
@@ -179,10 +180,10 @@ namespace Logic
 
                 }
             }
-            catch (DataException ex)
+            catch (SystemException ex)
             {
                 log.Error(ex.Message, ex);
-                throw new DataException();
+                throw new SystemException();
             }
             return exists;
         }

@@ -77,7 +77,7 @@ namespace Client
                     MessageBox.Show("Se actualizo correctamente la contraseña");
                 }
             }
-            catch (DataException)
+            catch (SystemException)
             {
                 ShowExceptionAlert();
             }               
@@ -132,7 +132,7 @@ namespace Client
                         MessageBox.Show("No existe un usuario asociado al correo");
                     }
                 }
-                catch (DataException)
+                catch (SystemException)
                 {
                     ShowExceptionAlert();
                 }
