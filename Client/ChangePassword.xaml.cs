@@ -2,6 +2,7 @@
 using Host;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -67,12 +68,19 @@ namespace Client
 
         private void SendToModify(string password)
         {
-            service = new MemoryServer();
-            bool updated = service.UpdatePassword(user.id, password);
-            if (updated)
+            try
             {
-                MessageBox.Show("Se actualizo correctamente la contraseña");
-            }       
+                service = new MemoryServer();
+                bool updated = service.UpdatePassword(user.id, password);
+                if (updated)
+                {
+                    MessageBox.Show("Se actualizo correctamente la contraseña");
+                }
+            }
+            catch (DataException)
+            {
+                ShowExceptionAlert();
+            }               
         }
 
         private bool ExistsEmptyFields(string code, string password, string passwordRepit)
@@ -110,16 +118,23 @@ namespace Client
             
             if(exists != true)
             {
-                service = new MemoryServer();
-                UserGame user = service.GetUserByEmail(tbxEmail.Text);
-                if(user != null)
+                try
                 {
-                    this.user = user;
+                    service = new MemoryServer();
+                    UserGame user = service.GetUserByEmail(tbxEmail.Text);
+                    if (user != null)
+                    {
+                        this.user = user;
+                    }
+                    else
+                    {
+                        exists = true;
+                        MessageBox.Show("No existe un usuario asociado al correo");
+                    }
                 }
-                else
+                catch (DataException)
                 {
-                    exists = true;
-                    MessageBox.Show("No existe un usuario asociado al correo");
+                    ShowExceptionAlert();
                 }
             }
             return exists;
@@ -157,6 +172,12 @@ namespace Client
                     + "La contraseña debe tener por lo menos una letra minúscula");
             }
             return exists;
+        }
+
+        private void ShowExceptionAlert()
+        {
+            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            this.Close();
         }
     }
 }

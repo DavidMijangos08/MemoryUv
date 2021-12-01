@@ -1,6 +1,7 @@
 ﻿using Data;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -35,10 +36,10 @@ namespace Logic
                     users = coincidences;
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en get better users", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return users;
         }
@@ -131,10 +132,10 @@ namespace Logic
 
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en get statistic user", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return exists;
         }
@@ -166,10 +167,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en IncreaseGameWon", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return status;
         }
@@ -201,10 +202,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en increaseLosingGame", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return status;
         }
@@ -239,10 +240,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en add statistic user", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return status;
         }

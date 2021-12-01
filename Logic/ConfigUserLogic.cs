@@ -1,6 +1,7 @@
 ﻿using Data;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -33,10 +34,10 @@ namespace Logic
                         
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en get config user by id", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return confi;
         }
@@ -93,10 +94,10 @@ namespace Logic
                     context.SaveChanges();
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en set background user", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
         }
         public bool ExistsConfigUser(int idUser)
@@ -114,10 +115,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en exists config user", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return exists;
         }
@@ -138,10 +139,10 @@ namespace Logic
                     
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en new config user", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
         }
     }

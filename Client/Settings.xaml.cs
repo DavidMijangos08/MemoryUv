@@ -31,10 +31,15 @@ namespace Client
         {
             InitializeComponent();
             userGame = _user;
-
-            service = new MemoryServer();
-            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
-
+            try
+            {
+                service = new MemoryServer();
+                this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
+            }
+            catch (DataException)
+            {
+                ShowExceptionAlert();
+            }      
         }
 
 
@@ -62,9 +67,7 @@ namespace Client
             Home windowHome = new Home(userGame);
             windowHome.Show();
             this.Close();
-        }
-
-        
+        }       
 
         private void FiltroVista(object sender, RoutedEventArgs e)
         {
@@ -79,7 +82,11 @@ namespace Client
             
         }
 
-        
+        private void ShowExceptionAlert()
+        {
+            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            this.Close();
+        }
     }
 
     

@@ -3,8 +3,10 @@ using Data;
 using Host;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.ServiceModel;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -18,7 +20,6 @@ namespace Client
     /// </summary>
     public partial class Game : Window, GameService.IGameServiceCallback
     {
-        UserGame usergame = new UserGame();
         MemoryServer service;
         public GameService.GameServiceClient client;
         UserGame userConnected = new UserGame();
@@ -38,19 +39,33 @@ namespace Client
         string statusTurn;
         int pointsAdmin = 0;
         int pointsOpponent = 0;
+
         public Game(List<UserGame> users, string section, string difficulty)
         {
             InitializeComponent();
-            InstanceContext context = new InstanceContext(this);
-            client = new GameService.GameServiceClient(context);
-            userConnected = users[0];
-            userOpponent = users[1];
-            userAdmin = users[2];
+            try
+            {
+                service = new MemoryServer();
+                //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(users[0].id))));
+                InstanceContext context = new InstanceContext(this);
+                client = new GameService.GameServiceClient(context);
+                userConnected = users[0];
+                userOpponent = users[1];
+                userAdmin = users[2];
+                client.ConnectToGame(userConnected.nametag, userOpponent.nametag);
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
+            catch (DataException)
+            {
+                ShowExceptionAlert();
+            }
             this.section = section;
             lbUserAdminPoints.Text = pointsAdmin.ToString();
             lbUserOpponentPoints.Text = pointsOpponent.ToString();
             canvaGame.IsHitTestVisible = false;
-            client.ConnectToGame(userConnected.nametag, userOpponent.nametag);
             LoadCardsDictionary();
             if (userConnected.nametag.Equals(userAdmin.nametag))
             {
@@ -69,9 +84,7 @@ namespace Client
                 lbUserOpponent.Text = userConnected.nametag;
             }
             cardNumbers.Clear();
-            lbUserTurn.Text = userAdmin.nametag;
-            service = new MemoryServer();
-            //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(users[0].id))));
+            lbUserTurn.Text = userAdmin.nametag;     
         }
 
         private void InitializeTimer()
@@ -101,11 +114,18 @@ namespace Client
         {
             if(flippedCards == 1)
             {
-                cards[cardNumbers[0]].status = StatusCard.NotFlipped;
-                LoadCardsToGame();
-                cardNumbers.Clear();
-                client.SendCleanBoard(userOpponent.nametag);
-                SendTurn();
+                try
+                {
+                    cards[cardNumbers[0]].status = StatusCard.NotFlipped;
+                    LoadCardsToGame();
+                    cardNumbers.Clear();
+                    client.SendCleanBoard(userOpponent.nametag);
+                    SendTurn();
+                }
+                catch (CommunicationException)
+                {
+                    ShowExceptionAlert();
+                }
             }
             else
             {
@@ -116,10 +136,17 @@ namespace Client
 
         private void SendTurn()
         {
-            client.SendGameTurn(userOpponent.nametag);
-            lbUserTurn.Text = userOpponent.nametag;
-            canvaGame.IsHitTestVisible = false;
-            flippedCards = 0;
+            try
+            {
+                client.SendGameTurn(userOpponent.nametag);
+                lbUserTurn.Text = userOpponent.nametag;
+                canvaGame.IsHitTestVisible = false;
+                flippedCards = 0;
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         public void ReceiveExitNotification(string userDisconnected)
@@ -145,26 +172,49 @@ namespace Client
 
         private void ClickAcceptNotification(object sender, RoutedEventArgs e)
         {
-            client.DisconnectTheGame("Finalizado", userConnected.nametag, userOpponent.nametag);
-            service = new MemoryServer();
-            bool addedGameWon = service.AddOneWinGame(userConnected.id);
-            if (addedGameWon)
+            try
             {
-                this.Close();
-                Home home = new Home(userConnected);
-                home.Show();
+                client.DisconnectTheGame("Finalizado", userConnected.nametag, userOpponent.nametag);
+                service = new MemoryServer();
+                bool addedGameWon = service.AddOneWinGame(userConnected.id);
+                if (addedGameWon)
+                {
+                    this.Close();
+                    Home home = new Home(userConnected);
+                    home.Show();
+                }
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
+            catch (DataException)
+            {
+                ShowExceptionAlert();
             }
         }
 
         private void ClickYes(object sender, RoutedEventArgs e)
         {
-            client.DisconnectTheGame("Abandonado", userConnected.nametag, userOpponent.nametag);
-            service = new MemoryServer();
-            bool addedGameLosing = service.AddOneLoseGame(userConnected.id);
-            if (addedGameLosing) {
-                this.Close();
-                Home home = new Home(userConnected);
-                home.Show();
+            try
+            {
+                client.DisconnectTheGame("Abandonado", userConnected.nametag, userOpponent.nametag);
+                service = new MemoryServer();
+                bool addedGameLosing = service.AddOneLoseGame(userConnected.id);
+                if (addedGameLosing)
+                {
+                    this.Close();
+                    Home home = new Home(userConnected);
+                    home.Show();
+                }
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
+            catch (DataException)
+            {
+                ShowExceptionAlert();
             }
         }
 
@@ -227,7 +277,15 @@ namespace Client
                 cards[key].numberCard = messyCards[i];
                 i++;
             }
-            client.SendGameBoard(messyCards, userOpponent.nametag);
+
+            try
+            {
+                client.SendGameBoard(messyCards, userOpponent.nametag);
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void FillGuestBoard(int[] messyCards)
@@ -269,7 +327,7 @@ namespace Client
         private void CompareCards()
         {
             if(flippedCards == 2)
-            {
+            { 
                 if (cards[cardNumbers[0]].numberCard == cards[cardNumbers[1]].numberCard)
                 {
                     remainingPairs--;
@@ -298,10 +356,6 @@ namespace Client
                 CheckEndGame();
                 statusTurn = "Completado";
             }
-            else
-            {
-                return;
-            }           
         }
 
         private void CheckEndGame()
@@ -324,16 +378,23 @@ namespace Client
 
                 if (userConnected.nametag.Equals(userAdmin.nametag))
                 {
-                    service = new MemoryServer();
-                    if (winner.Equals(userConnected.nametag))
+                    try
                     {
-                        service.AddOneWinGame(userConnected.id);
-                        service.AddOneLoseGame(userOpponent.id);
+                        service = new MemoryServer();
+                        if (winner.Equals(userConnected.nametag))
+                        {
+                            service.AddOneWinGame(userConnected.id);
+                            service.AddOneLoseGame(userOpponent.id);
+                        }
+                        else
+                        {
+                            service.AddOneWinGame(userOpponent.id);
+                            service.AddOneLoseGame(userConnected.id);
+                        }
                     }
-                    else
+                    catch (DataException)
                     {
-                        service.AddOneWinGame(userOpponent.id);
-                        service.AddOneLoseGame(userConnected.id);
+                        ShowExceptionAlert();
                     }
                 }
             }
@@ -356,218 +417,470 @@ namespace Client
 
         private void Btn1Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn1", userOpponent.nametag);
-            NewClic("btn1");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn1", userOpponent.nametag);
+                NewClic("btn1");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn2Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn2", userOpponent.nametag);
-            NewClic("btn2");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn2", userOpponent.nametag);
+                NewClic("btn2");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn3Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn3", userOpponent.nametag);
-            NewClic("btn3");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn3", userOpponent.nametag);
+                NewClic("btn3");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn4Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn4", userOpponent.nametag);
-            NewClic("btn4");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn4", userOpponent.nametag);
+                NewClic("btn4");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn5Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn5", userOpponent.nametag);
-            NewClic("btn5");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn5", userOpponent.nametag);
+                NewClic("btn5");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn6Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn6", userOpponent.nametag);
-            NewClic("btn6");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn6", userOpponent.nametag);
+                NewClic("btn6");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn7Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn7", userOpponent.nametag);
-            NewClic("btn7");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn7", userOpponent.nametag);
+                NewClic("btn7");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn13Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn13", userOpponent.nametag);
-            NewClic("btn13");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn13", userOpponent.nametag);
+                NewClic("btn13");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn19Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn19", userOpponent.nametag);
-            NewClic("btn19");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn19", userOpponent.nametag);
+                NewClic("btn19");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn25Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn25", userOpponent.nametag);
-            NewClic("btn25");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn25", userOpponent.nametag);
+                NewClic("btn25");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn31Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn31", userOpponent.nametag);
-            NewClic("btn31");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn31", userOpponent.nametag);
+                NewClic("btn31");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn8Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn8", userOpponent.nametag);
-            NewClic("btn8");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn8", userOpponent.nametag);
+                NewClic("btn8");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn9Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn9", userOpponent.nametag);
-            NewClic("btn9");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn9", userOpponent.nametag);
+                NewClic("btn9");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn10Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn10", userOpponent.nametag);
-            NewClic("btn10");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn10", userOpponent.nametag);
+                NewClic("btn10");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn11Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn11", userOpponent.nametag);
-            NewClic("btn11");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn11", userOpponent.nametag);
+                NewClic("btn11");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn12Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn12", userOpponent.nametag);
-            NewClic("btn12");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn12", userOpponent.nametag);
+                NewClic("btn12");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn14Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn14", userOpponent.nametag);
-            NewClic("btn14");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn14", userOpponent.nametag);
+                NewClic("btn14");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn15Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn15", userOpponent.nametag);
-            NewClic("btn15");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn15", userOpponent.nametag);
+                NewClic("btn15");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn16Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn16", userOpponent.nametag);
-            NewClic("btn16");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn16", userOpponent.nametag);
+                NewClic("btn16");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn17Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn17", userOpponent.nametag);
-            NewClic("btn17");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn17", userOpponent.nametag);
+                NewClic("btn17");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn18Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn18", userOpponent.nametag);
-            NewClic("btn18");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn18", userOpponent.nametag);
+                NewClic("btn18");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn20Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn20", userOpponent.nametag);
-            NewClic("btn20");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn20", userOpponent.nametag);
+                NewClic("btn20");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn21Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn21", userOpponent.nametag);
-            NewClic("btn21");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn21", userOpponent.nametag);
+                NewClic("btn21");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn22Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn22", userOpponent.nametag);
-            NewClic("btn22");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn22", userOpponent.nametag);
+                NewClic("btn22");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn23Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn23", userOpponent.nametag);
-            NewClic("btn23");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn23", userOpponent.nametag);
+                NewClic("btn23");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn24Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn24", userOpponent.nametag);
-            NewClic("btn24");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn24", userOpponent.nametag);
+                NewClic("btn24");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn26Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn26", userOpponent.nametag);
-            NewClic("btn26");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn26", userOpponent.nametag);
+                NewClic("btn26");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn27Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn27", userOpponent.nametag);
-            NewClic("btn27");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn27", userOpponent.nametag);
+                NewClic("btn27");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn28Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn28", userOpponent.nametag);
-            NewClic("btn28");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn28", userOpponent.nametag);
+                NewClic("btn28");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn29Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn29", userOpponent.nametag);
-            NewClic("btn29");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn29", userOpponent.nametag);
+                NewClic("btn29");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn30Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn30", userOpponent.nametag);
-            NewClic("btn30");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn30", userOpponent.nametag);
+                NewClic("btn30");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn32Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn32", userOpponent.nametag);
-            NewClic("btn32");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn32", userOpponent.nametag);
+                NewClic("btn32");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn33Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn33", userOpponent.nametag);
-            NewClic("btn33");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn33", userOpponent.nametag);
+                NewClic("btn33");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn34Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn34", userOpponent.nametag);
-            NewClic("btn34");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn34", userOpponent.nametag);
+                NewClic("btn34");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn35Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn35", userOpponent.nametag);
-            NewClic("btn35");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn35", userOpponent.nametag);
+                NewClic("btn35");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void Btn36Click(object sender, RoutedEventArgs e)
         {
-            client.SendMove(userConnected.nametag, "btn36", userOpponent.nametag);
-            NewClic("btn36");
+            try
+            {
+                client.SendMove(userConnected.nametag, "btn36", userOpponent.nametag);
+                NewClic("btn36");
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         public void ReceiveGameBoard(int[] messyCards)
@@ -583,7 +896,6 @@ namespace Client
 
         public void ReceiveCleanBoard()
         {
-
             cards[cardNumbers[0]].status = StatusCard.NotFlipped;
             LoadCardsToGame();
             cardNumbers.Clear();
@@ -606,13 +918,26 @@ namespace Client
         {
             if (!string.IsNullOrEmpty(txtChat.Text))
             {
-                client.SendMessageInGame(userConnected.nametag, userOpponent.nametag, txtChat.Text);
-                string user = userConnected.nametag;
-                string message = txtChat.Text;
-                string newMessage = $"{user} : {message}";
-                messageDisplay.Items.Add(newMessage);
-                txtChat.Text = "";
+                try
+                {
+                    client.SendMessageInGame(userConnected.nametag, userOpponent.nametag, txtChat.Text);
+                    string user = userConnected.nametag;
+                    string message = txtChat.Text;
+                    string newMessage = $"{user} : {message}";
+                    messageDisplay.Items.Add(newMessage);
+                    txtChat.Text = "";
+                }
+                catch (CommunicationException)
+                {
+                    ShowExceptionAlert();
+                }
             }
+        }
+
+        private void ShowExceptionAlert()
+        {
+            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            this.Close();
         }
     }
 }

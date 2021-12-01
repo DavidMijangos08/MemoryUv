@@ -2,6 +2,7 @@
 using Host;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -36,30 +37,55 @@ namespace Client
             usergame = _user;
             InitializeComponent();
             initializeListFriends();
-            InstanceContext context = new InstanceContext(this);
-            client = new RoomService.RoomServiceClient(context);
-            client.ConnectWaitingRoom(usergame.nametag);
-            service = new MemoryServer();
-           // this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
+            try
+            {
+                InstanceContext context = new InstanceContext(this);
+                client = new RoomService.RoomServiceClient(context);
+                client.ConnectWaitingRoom(usergame.nametag);
+                service = new MemoryServer();
+                // this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
+            catch (DataException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void initializeListFriends()
         {
-            service = new MemoryServer();
-            List<UserGame> friendsConnected = service.GetConnectedFriends(usergame.id);
-            for (int i = 0; i < friendsConnected.Count(); i++)
+            try
             {
-                string nametag = friendsConnected[i].nametag;
-                listFriends.Items.Add(nametag);
+                service = new MemoryServer();
+                List<UserGame> friendsConnected = service.GetConnectedFriends(usergame.id);
+                for (int i = 0; i < friendsConnected.Count(); i++)
+                {
+                    string nametag = friendsConnected[i].nametag;
+                    listFriends.Items.Add(nametag);
+                }
+            }
+            catch (DataException)
+            {
+
             }
         }
 
         private void ClicExit(object sender, RoutedEventArgs e)
         {
-            client.DisconnectRoom(usergame.nametag);
-            Home windowHome = new Home(usergame);
-            windowHome.Show();
-            this.Close();
+            try
+            {
+                client.DisconnectRoom(usergame.nametag);
+                Home windowHome = new Home(usergame);
+                windowHome.Show();
+                this.Close();
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void ClicAdd(object sender, RoutedEventArgs e)
@@ -70,7 +96,14 @@ namespace Client
                 difficulty = cbDifficulty.Text;
                 object itemSelected = listFriends.SelectedItem;
                 usergameInvited = itemSelected.ToString();
-                client.SendInvitation(usergame.nametag, usergameInvited);
+                try
+                {
+                    client.SendInvitation(usergame.nametag, usergameInvited);
+                }
+                catch (CommunicationException)
+                {
+                    ShowExceptionAlert();
+                }
             }
             else
             {
@@ -81,18 +114,29 @@ namespace Client
 
         private void ClickAccept(object sender, RoutedEventArgs e)
         {
-            gridInvitation.Visibility = Visibility.Collapsed;
-            client.SendAcceptance(this.usergameApplicant, usergame.nametag);
-            client.DisconnectRoom(usergame.nametag);
-            service = new MemoryServer();
-            List<UserGame> userAdmin = service.GetUsersByInitialesOfNametag(this.usergameApplicant);
-            List<UserGame> usersToSend = new List<UserGame>(4);
-            usersToSend.Add(usergame);
-            usersToSend.Add(usergame);
-            usersToSend.Add(userAdmin[0]);
-            PreGame pregame = new PreGame(usersToSend, "", "");
-            pregame.Show();
-            this.Close();
+            try
+            {
+                gridInvitation.Visibility = Visibility.Collapsed;
+                client.SendAcceptance(this.usergameApplicant, usergame.nametag);
+                client.DisconnectRoom(usergame.nametag);
+                service = new MemoryServer();
+                List<UserGame> userAdmin = service.GetUsersByInitialesOfNametag(this.usergameApplicant);
+                List<UserGame> usersToSend = new List<UserGame>(4);
+                usersToSend.Add(usergame);
+                usersToSend.Add(usergame);
+                usersToSend.Add(userAdmin[0]);
+                PreGame pregame = new PreGame(usersToSend, "", "");
+                pregame.Show();
+                this.Close();
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
+            catch (DataException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void ClicRejeact(object sender, RoutedEventArgs e)
@@ -110,22 +154,39 @@ namespace Client
 
         public void RecieveAnswer()
         {
-            service = new MemoryServer();
-            List<UserGame> userInvited = service.GetUsersByInitialesOfNametag(this.usergameInvited);
-            List<UserGame> usersToSend = new List<UserGame>(4);
-            usersToSend.Add(usergame);
-            usersToSend.Add(userInvited[0]);
-            usersToSend.Add(usergame);
-            PreGame preGame = new PreGame(usersToSend, section, difficulty);
-            preGame.Show();
-            client.DisconnectRoom(usergame.nametag);
-            this.Close();
+            try
+            {
+                service = new MemoryServer();
+                List<UserGame> userInvited = service.GetUsersByInitialesOfNametag(this.usergameInvited);
+                List<UserGame> usersToSend = new List<UserGame>(4);
+                usersToSend.Add(usergame);
+                usersToSend.Add(userInvited[0]);
+                usersToSend.Add(usergame);
+                PreGame preGame = new PreGame(usersToSend, section, difficulty);
+                preGame.Show();
+                client.DisconnectRoom(usergame.nametag);
+                this.Close();
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
+            catch (DataException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void RecharchClick(object sender, RoutedEventArgs e)
         {
             listFriends.Items.Clear();
             initializeListFriends();
+        }
+
+        private void ShowExceptionAlert()
+        {
+            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            this.Close();
         }
     }
 }

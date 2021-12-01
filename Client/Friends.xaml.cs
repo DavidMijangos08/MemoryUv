@@ -2,6 +2,7 @@
 using Host;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -29,21 +30,34 @@ namespace Client
         {
             userGame = _user;
             InitializeComponent();
-            InitializeFriendsList();
-            service = new MemoryServer();
-            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
+            try
+            {
+                InitializeFriendsList();
+                service = new MemoryServer();
+                this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
+            }
+            catch (DataException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void InitializeFriendsList()
         {
-            service = new MemoryServer();
-            List<UserGame> friends = service.GetFriendsList(userGame.id);
-            for(int i = 0; i < friends.Count(); i++)
+            try
             {
-                string nametag = friends[i].nametag;
-                listFriends.Items.Add(nametag);
+                service = new MemoryServer();
+                List<UserGame> friends = service.GetFriendsList(userGame.id);
+                for (int i = 0; i < friends.Count(); i++)
+                {
+                    string nametag = friends[i].nametag;
+                    listFriends.Items.Add(nametag);
+                }
             }
-           
+            catch (DataException)
+            {
+                ShowExceptionAlert();
+            }       
         }
 
         private void ClicExit(object sender, RoutedEventArgs e)
@@ -58,16 +72,23 @@ namespace Client
             object itemSelected = listSearchUsers.SelectedItem;
             if (itemSelected != null)
             {
-                string nametagAddressee = itemSelected.ToString();
-                service = new MemoryServer();
-                List<UserGame> addressee = service.GetUsersByInitialesOfNametag(nametagAddressee);
-                if (!existsRequestImpediment(addressee[0]))
+                try
                 {
-                    bool added = service.AddFriendRequest(userGame.id, addressee[0].id);
-                    if (added)
+                    string nametagAddressee = itemSelected.ToString();
+                    service = new MemoryServer();
+                    List<UserGame> addressee = service.GetUsersByInitialesOfNametag(nametagAddressee);
+                    if (!ExistsRequestImpediment(addressee[0]))
                     {
-                        MessageBox.Show("Solicitud enviada con exito");
+                        bool added = service.AddFriendRequest(userGame.id, addressee[0].id);
+                        if (added)
+                        {
+                            MessageBox.Show("Solicitud enviada con exito");
+                        }
                     }
+                }
+                catch (DataException)
+                {
+                    ShowExceptionAlert();
                 }
             }
             else
@@ -77,7 +98,7 @@ namespace Client
             listSearchUsers.Items.Clear();
         }
 
-        private bool existsRequestImpediment(UserGame addressee)
+        private bool ExistsRequestImpediment(UserGame addressee)
         {
             bool exists = false;
             service = new MemoryServer();
@@ -86,20 +107,28 @@ namespace Client
                 exists = true;
                 MessageBox.Show("No puedes enviar una solicitud a ti mismo");
             }
-            bool existsFriendship = service.ExistsFriendship(userGame.id, addressee.id);
-            if (!existsFriendship)
+
+            try
             {
-                bool exitsRequest = service.ExistsPendingRequest(userGame.id, addressee.id);
-                if (exitsRequest)
+                bool existsFriendship = service.ExistsFriendship(userGame.id, addressee.id);
+                if (!existsFriendship)
+                {
+                    bool exitsRequest = service.ExistsPendingRequest(userGame.id, addressee.id);
+                    if (exitsRequest)
+                    {
+                        exists = true;
+                        MessageBox.Show("Ya hay una solicitud pendiente");
+                    }
+                }
+                else
                 {
                     exists = true;
-                    MessageBox.Show("Ya hay una solicitud pendiente");
+                    MessageBox.Show("El jugador ya es tu amigo");
                 }
             }
-            else
+            catch (DataException)
             {
-                exists = true;
-                MessageBox.Show("El jugador ya es tu amigo");
+                ShowExceptionAlert();
             }
             return exists;
         }
@@ -108,10 +137,17 @@ namespace Client
         {
             if (!ExistsInvalidField())
             {
-                MessageBox.Show("Buscando...");
-                service = new MemoryServer();
-                List<UserGame> coincidences = service.GetUsersByInitialesOfNametag(tbxNametag.Text);
-                FillListSearchUsers(coincidences);
+                try
+                {
+                    MessageBox.Show("Buscando...");
+                    service = new MemoryServer();
+                    List<UserGame> coincidences = service.GetUsersByInitialesOfNametag(tbxNametag.Text);
+                    FillListSearchUsers(coincidences);
+                }
+                catch (DataException)
+                {
+                    ShowExceptionAlert();
+                }
             }
         }
 
@@ -129,14 +165,21 @@ namespace Client
             object itemSelected = listFriends.SelectedItem;
             if(itemSelected != null)
             {
-                service = new MemoryServer();
-                string nametagFriend = itemSelected.ToString();
-                List<UserGame> friend = service.GetUsersByInitialesOfNametag(nametagFriend);
-                bool deleted = service.DeleteFriend(userGame.id, friend[0].id);
-                if (deleted)
+                try
                 {
-                    listFriends.Items.Clear();
-                    InitializeFriendsList();
+                    service = new MemoryServer();
+                    string nametagFriend = itemSelected.ToString();
+                    List<UserGame> friend = service.GetUsersByInitialesOfNametag(nametagFriend);
+                    bool deleted = service.DeleteFriend(userGame.id, friend[0].id);
+                    if (deleted)
+                    {
+                        listFriends.Items.Clear();
+                        InitializeFriendsList();
+                    }
+                }
+                catch (DataException)
+                {
+                    ShowExceptionAlert();
                 }
             }
             else
@@ -188,6 +231,12 @@ namespace Client
                                 "El nametag solo puede tener letras y numeros \n" +
                                 "El nametag no puede llevar espacios");
             }
+        }
+
+        private void ShowExceptionAlert()
+        {
+            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            this.Close();
         }
 
         public enum TypeError

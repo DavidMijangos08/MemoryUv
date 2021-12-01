@@ -16,6 +16,7 @@ using Logic;
 using Host;
 using System.Text.RegularExpressions;
 using System.Net.Mail;
+using System.Data;
 
 namespace Client
 {
@@ -85,22 +86,27 @@ namespace Client
             {
                 if(code == codex)
                 {
-                    bool saved = service.RegisterUser(email, password, nametag);
-                    if (saved)
+                    try
                     {
-                        MessageBox.Show("Se agrego correctamente al usuario");
-                        CreateStatisticsUser(nametag);
+                        bool saved = service.RegisterUser(email, password, nametag);
+                        if (saved)
+                        {
+                            MessageBox.Show("Se agrego correctamente al usuario");
+                            CreateStatisticsUser(nametag);
+                        }
+                    }
+                    catch (DataException)
+                    {
+                        ShowExceptionAlert();
                     }
                 }
                 else
                 {
                     MessageBox.Show("Codigo incorrecto");
-                }
-                
+                }               
                 Login login = new Login();
                 login.Show();
-                this.Hide();         
-                
+                this.Hide();                       
             }
             else
             {
@@ -115,8 +121,15 @@ namespace Client
 
         private void CreateStatisticsUser(string nametag)
         {
-            List<UserGame> user = service.GetUsersByInitialesOfNametag(nametag);
-            bool addedStatistics = service.AddedStatisticUser(user[0].id, nametag);
+            try
+            {
+                List<UserGame> user = service.GetUsersByInitialesOfNametag(nametag);
+                bool addedStatistics = service.AddedStatisticUser(user[0].id, nametag);
+            }
+            catch (DataException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         /// <summary>
@@ -175,16 +188,24 @@ namespace Client
             bool exists = false;
             Regex regex = new Regex("^[A-Za-z0-9]\\S+$");
             service = new MemoryServer();
-            if(!regex.IsMatch(nametag) || nametag.Length > 10 || nametag.Length < 4 )
+            try
             {
-                exists = true;
-                MessageBox.Show("El nametag solo puede tener entre 4 y 10 caracteres \n" +
-                                " El nametag solo puede tener letras y numeros \n" +
-                                "El nametag no puede llevar espacios");
-            }else if (service.ExistsNametag(nametag))
+                if (!regex.IsMatch(nametag) || nametag.Length > 10 || nametag.Length < 4)
+                {
+                    exists = true;
+                    MessageBox.Show("El nametag solo puede tener entre 4 y 10 caracteres \n" +
+                                    " El nametag solo puede tener letras y numeros \n" +
+                                    "El nametag no puede llevar espacios");
+                }
+                else if (service.ExistsNametag(nametag))
+                {
+                    exists = true;
+                    MessageBox.Show("El nametag ya esta registrado en el juego");
+                }
+            }
+            catch (DataException)
             {
-                exists = true;
-                MessageBox.Show("El nametag ya esta registrado en el juego");
+                ShowExceptionAlert();
             }
             return exists;
         }
@@ -192,13 +213,26 @@ namespace Client
         private Boolean ExistsEqualEmail(string email)
         {
             bool exists = false;
-            service = new MemoryServer();
-            if (service.ExistsEmail(email))
+            try
+            {              
+                service = new MemoryServer();
+                if (service.ExistsEmail(email))
+                {
+                    exists = true;
+                    MessageBox.Show("El correo electronico ya esta registrado en el juego");
+                }
+            }
+            catch (DataException)
             {
-                exists = true;
-                MessageBox.Show("El correo electronico ya esta registrado en el juego");
+                ShowExceptionAlert();
             }
             return exists;
-        }     
+        }
+
+        private void ShowExceptionAlert()
+        {
+            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            this.Close();
+        }
     }
 }

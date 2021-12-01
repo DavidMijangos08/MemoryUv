@@ -17,7 +17,6 @@ using System.Windows.Navigation;
 
 namespace Host
 {
-
     /// <summary>
     /// Interfaz correspondiente al cliente del chat global
     /// </summary>
@@ -275,627 +274,990 @@ namespace Host
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single, InstanceContextMode = InstanceContextMode.Single)]
     public class MemoryServer : IChatService, IRoomService, IPreGameService, IGameService, IUserService, IFriendService, IFriendRequestService, IStatisticService
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         Dictionary<IChatClient, string> _users = new Dictionary<IChatClient, string>();
         Dictionary<IUserClient, string> usersRoom = new Dictionary<IUserClient, string>();
         Dictionary<IPreGameClient, string> usersPreGame = new Dictionary<IPreGameClient, string>();
         Dictionary<IGameClient, string> usersGame = new Dictionary<IGameClient, string>();
         public void Join(string username)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
-            _users[connection] = username;
-            Console.WriteLine("El usuario " + username + " se conecto...");
-            foreach (var userConnection in _users.Keys)
+            try
             {
-                userConnection.UsersUpdate(_users.Values);
+                var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
+                _users[connection] = username;
+                Console.WriteLine("El usuario " + username + " se conecto...");
+                foreach (var userConnection in _users.Keys)
+                {
+                    userConnection.UsersUpdate(_users.Values);
+                }
+            }
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
             }
         }
 
         public void SendMessage(string message)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
-            string user;
-            if(!_users.TryGetValue(connection, out user))
+            try
             {
-                return;
-            }
-            foreach (var other in _users.Keys)
-            {
-                if(other == connection)
+                var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
+                string user;
+                if (!_users.TryGetValue(connection, out user))
                 {
+                    return;
+                }
+                foreach (var other in _users.Keys)
+                {
+                    if (other == connection)
+                    {
+                        other.RecieveMessage(user, message);
+                    }
                     other.RecieveMessage(user, message);
                 }
-                other.RecieveMessage(user, message);
+            }
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
             }
         }
 
         public void Leave(string username)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
-            Console.WriteLine("El usuario " + _users[connection] + " se desconecto!");
-            _users.Remove(connection);
-            foreach (var userConnection in _users.Keys)
+            try
             {
-                userConnection.UsersUpdate(_users.Values);
+                var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
+                Console.WriteLine("El usuario " + _users[connection] + " se desconecto!");
+                _users.Remove(connection);
+                foreach (var userConnection in _users.Keys)
+                {
+                    userConnection.UsersUpdate(_users.Values);
+                }
+            }
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
             }
         }
 
         public void PrivateSendMessage(string message, string username)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
-            string user;
-            string userPrivate;
-            if (!_users.TryGetValue(connection, out user))
+            try
             {
-                return;
-            }
-
-            foreach (var uPrivate in _users.Keys)
-            {
-                if (_users.TryGetValue(uPrivate, out userPrivate))
+                var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
+                string user;
+                string userPrivate;
+                if (!_users.TryGetValue(connection, out user))
                 {
-                    if (userPrivate == username)
-                    {
-                        uPrivate.RecieveMessage(user, message);
-                    }
-                    
+                    return;
                 }
+
+                foreach (var uPrivate in _users.Keys)
+                {
+                    if (_users.TryGetValue(uPrivate, out userPrivate))
+                    {
+                        if (userPrivate == username)
+                        {
+                            uPrivate.RecieveMessage(user, message);
+                        }
+
+                    }
+                }
+            }
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
             }
         }
 
         public void ConnectWaitingRoom(string userGameConnect)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
-            usersRoom[connection] = userGameConnect;
-            Console.WriteLine("El usuario " + userGameConnect + "esta en espera de alguna invitacion");
+            try
+            {
+                var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
+                usersRoom[connection] = userGameConnect;
+                Console.WriteLine("El usuario " + userGameConnect + "esta en espera de alguna invitacion");
+            }catch(CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
+            }
         }
 
         public void DisconnectRoom(string usergame)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
-            usersRoom.Remove(connection);
+            try
+            {
+                var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
+                usersRoom.Remove(connection);
+            }
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
+            }
         }
 
         public void SendInvitation(string usergameApplicant, string usergameReceiver)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
-            string usergame;
-            string usergameReceiverAux;
-            if (!usersRoom.TryGetValue(connection, out usergame))
+            try
             {
-                return;
-            }
-
-            foreach(var userReceiver in usersRoom.Keys)
-            {
-                if(usersRoom.TryGetValue(userReceiver, out usergameReceiverAux))
+                var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
+                string usergame;
+                string usergameReceiverAux;
+                if (!usersRoom.TryGetValue(connection, out usergame))
                 {
-                    if(usergameReceiverAux == usergameReceiver)
+                    return;
+                }
+
+                foreach (var userReceiver in usersRoom.Keys)
+                {
+                    if (usersRoom.TryGetValue(userReceiver, out usergameReceiverAux))
                     {
-                        userReceiver.RecieveInvitation(usergameApplicant);
+                        if (usergameReceiverAux == usergameReceiver)
+                        {
+                            userReceiver.RecieveInvitation(usergameApplicant);
+                        }
                     }
                 }
+            }
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
             }
         }
 
         public void SendAcceptance(string usergameApplicant, string usergameReceiver)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
-            string usergame;
-            string usergameApplicantAux;
-            if (!usersRoom.TryGetValue(connection, out usergame))
+            try
             {
-                return;
-            }
-
-            foreach (var userApplicant in usersRoom.Keys)
-            {
-                if (usersRoom.TryGetValue(userApplicant, out usergameApplicantAux))
+                var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
+                string usergame;
+                string usergameApplicantAux;
+                if (!usersRoom.TryGetValue(connection, out usergame))
                 {
-                    if (usergameApplicantAux == usergameApplicant)
+                    return;
+                }
+
+                foreach (var userApplicant in usersRoom.Keys)
+                {
+                    if (usersRoom.TryGetValue(userApplicant, out usergameApplicantAux))
                     {
-                        Console.WriteLine("El usuario " + usergameReceiver + " acepto la invitacion de " + usergameApplicant);
-                        userApplicant.RecieveAnswer();
+                        if (usergameApplicantAux == usergameApplicant)
+                        {
+                            Console.WriteLine("El usuario " + usergameReceiver + " acepto la invitacion de " + usergameApplicant);
+                            userApplicant.RecieveAnswer();
+                        }
                     }
                 }
+            }
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
             }
         }
 
         public void ConnectPlayer(string usergameConnected, string usergameAdmin)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IPreGameClient>();
-            usersPreGame[connection] = usergameConnected;
-            Console.WriteLine("El jugador " + usergameConnected + " se conecto a la sala de " + usergameAdmin);
-            foreach (var userConnection in usersPreGame.Keys)
+            try
             {
-                userConnection.UpdateUsersRoom(usersPreGame.Values);
+                var connection = OperationContext.Current.GetCallbackChannel<IPreGameClient>();
+                usersPreGame[connection] = usergameConnected;
+                Console.WriteLine("El jugador " + usergameConnected + " se conecto a la sala de " + usergameAdmin);
+                foreach (var userConnection in usersPreGame.Keys)
+                {
+                    userConnection.UpdateUsersRoom(usersPreGame.Values);
+                }
+            }
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
             }
         }
 
         public void DisconnectPlayer(string status, string usergameToDisconnect, string usergameToNotify)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IPreGameClient>();
-            Console.WriteLine("El jugador " + usergameToDisconnect + " se desconectó de la sala de juego entre " + usergameToDisconnect + " y " + usergameToNotify);
-            if (status.Equals("Abandonado"))
+            try
             {
-                SendExitNotification(usergameToDisconnect, usergameToNotify);
+                var connection = OperationContext.Current.GetCallbackChannel<IPreGameClient>();
+                Console.WriteLine("El jugador " + usergameToDisconnect + " se desconectó de la sala de juego entre " + usergameToDisconnect + " y " + usergameToNotify);
+                if (status.Equals("Abandonado"))
+                {
+                    SendExitNotification(usergameToDisconnect, usergameToNotify);
+                }
+                usersPreGame.Remove(connection);
             }
-            usersPreGame.Remove(connection);
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
+            }
         }
 
         public void SendExitNotification(string usergameToDisconnect, string usergameToNotify)
         {
-            string userNotify;
-            var connection = OperationContext.Current.GetCallbackChannel<IPreGameClient>();
-
-            foreach (var userToNotify in usersPreGame.Keys)
+            try
             {
-                if (usersPreGame.TryGetValue(userToNotify, out userNotify))
+                string userNotify;
+                var connection = OperationContext.Current.GetCallbackChannel<IPreGameClient>();
+
+                foreach (var userToNotify in usersPreGame.Keys)
                 {
-                    if (userNotify == usergameToNotify)
+                    if (usersPreGame.TryGetValue(userToNotify, out userNotify))
                     {
-                        userToNotify.RecieveExitNotification(usergameToDisconnect);
+                        if (userNotify == usergameToNotify)
+                        {
+                            userToNotify.RecieveExitNotification(usergameToDisconnect);
+                        }
                     }
                 }
             }
-
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
+            }
         }
 
         public void SendAccessGame(string usergam1, string usergame2)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IPreGameClient>();
-            string usergame;
-            string userToAccess;
-            if (!usersPreGame.TryGetValue(connection, out usergame))
+            try
             {
-                return;
-            }
-
-            foreach(var userAccess in usersPreGame.Keys)
-            {
-                if(usersPreGame.TryGetValue(userAccess, out userToAccess))
+                var connection = OperationContext.Current.GetCallbackChannel<IPreGameClient>();
+                string usergame;
+                string userToAccess;
+                if (!usersPreGame.TryGetValue(connection, out usergame))
                 {
-                    if(userToAccess == usergame2)
+                    return;
+                }
+
+                foreach (var userAccess in usersPreGame.Keys)
+                {
+                    if (usersPreGame.TryGetValue(userAccess, out userToAccess))
                     {
-                        userAccess.RecieveAccessGame();
+                        if (userToAccess == usergame2)
+                        {
+                            userAccess.RecieveAccessGame();
+                        }
                     }
                 }
+            }
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
             }
         }
 
         public void SendConfigurationGame(string userToSend, string section, string difficulty)
         {
-            string userNotify;
-            var connection = OperationContext.Current.GetCallbackChannel<IPreGameClient>();
-
-            foreach (var userToNotify in usersPreGame.Keys)
+            try
             {
-                if (usersPreGame.TryGetValue(userToNotify, out userNotify))
+                string userNotify;
+                var connection = OperationContext.Current.GetCallbackChannel<IPreGameClient>();
+
+                foreach (var userToNotify in usersPreGame.Keys)
                 {
-                    if (userNotify == userToSend)
+                    if (usersPreGame.TryGetValue(userToNotify, out userNotify))
                     {
-                        userToNotify.ReceiveConfigurationGame(section, difficulty);
+                        if (userNotify == userToSend)
+                        {
+                            userToNotify.ReceiveConfigurationGame(section, difficulty);
+                        }
                     }
                 }
+            }
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
             }
         }
 
         public void ConnectToGame(string userConnected, string userOpponent)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
-            Console.WriteLine("El jugador " + userConnected + " se conectó a la partida vs " + userOpponent);
-            usersGame[connection] = userConnected;
+            try
+            {
+                var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
+                Console.WriteLine("El jugador " + userConnected + " se conectó a la partida vs " + userOpponent);
+                usersGame[connection] = userConnected;
+            }
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
+            }
         }
 
         public void DisconnectTheGame(string status, string userDisconnect, string userOpponent)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
-            Console.WriteLine("El jugador " + userDisconnect + " se desconectó del juego vs " + userOpponent);
-            if (status.Equals("Abandonado"))
+            try
             {
-                SendExitGameNotification(userDisconnect, userOpponent);
+                var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
+                Console.WriteLine("El jugador " + userDisconnect + " se desconectó del juego vs " + userOpponent);
+                if (status.Equals("Abandonado"))
+                {
+                    SendExitGameNotification(userDisconnect, userOpponent);
+                }
+                usersGame.Remove(connection);
             }
-            usersGame.Remove(connection);
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
+            }
         }
 
         public void SendExitGameNotification(string userDisconnect, string userToNotify) {
-            var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
-            string userNotify;
-            foreach(var usergameToNotify in usersGame.Keys)
+            try
             {
-                if(usersGame.TryGetValue(usergameToNotify, out userNotify))
+                var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
+                string userNotify;
+                foreach (var usergameToNotify in usersGame.Keys)
                 {
-                    if (userNotify == userToNotify)
+                    if (usersGame.TryGetValue(usergameToNotify, out userNotify))
                     {
-                        usergameToNotify.ReceiveExitNotification(userDisconnect);
+                        if (userNotify == userToNotify)
+                        {
+                            usergameToNotify.ReceiveExitNotification(userDisconnect);
+                        }
                     }
                 }
+            }
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
             }
         }
 
         public void SendGameTurn(string userReceiving)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
-            string userNotify;
-            foreach(var usergameReceiving in usersGame.Keys)
+            try
             {
-                if(usersGame.TryGetValue(usergameReceiving, out userNotify))
+                var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
+                string userNotify;
+                foreach (var usergameReceiving in usersGame.Keys)
                 {
-                    if(userNotify == userReceiving)
+                    if (usersGame.TryGetValue(usergameReceiving, out userNotify))
                     {
-                        usergameReceiving.ReceiveGameTurn();
+                        if (userNotify == userReceiving)
+                        {
+                            usergameReceiving.ReceiveGameTurn();
+                        }
                     }
                 }
+            }
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
             }
         }
 
         public void SendGameBoard(int[] messyCards, string userReceiving)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
-            string userNotify;
-            foreach (var usergameReceiving in usersGame.Keys)
+            try
             {
-                if (usersGame.TryGetValue(usergameReceiving, out userNotify))
+                var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
+                string userNotify;
+                foreach (var usergameReceiving in usersGame.Keys)
                 {
-                    if (userNotify == userReceiving)
+                    if (usersGame.TryGetValue(usergameReceiving, out userNotify))
                     {
-                        usergameReceiving.ReceiveGameBoard(messyCards);
+                        if (userNotify == userReceiving)
+                        {
+                            usergameReceiving.ReceiveGameBoard(messyCards);
+                        }
                     }
                 }
+            }
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
             }
         }
 
         public void SendMove(string user, string btn, string userReceiving)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
-            string userNotify;
-            foreach (var usergameReceiving in usersGame.Keys)
+            try
             {
-                if (usersGame.TryGetValue(usergameReceiving, out userNotify))
+                var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
+                string userNotify;
+                foreach (var usergameReceiving in usersGame.Keys)
                 {
-                    if (userNotify == userReceiving)
+                    if (usersGame.TryGetValue(usergameReceiving, out userNotify))
                     {
-                        usergameReceiving.ReceiveMove(user, btn);
+                        if (userNotify == userReceiving)
+                        {
+                            usergameReceiving.ReceiveMove(user, btn);
+                        }
                     }
                 }
+            }
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
             }
         }
 
         public void SendCleanBoard(string userReceiving)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
-            string userNotify;
-            foreach (var usergameReceiving in usersGame.Keys)
+            try
             {
-                if (usersGame.TryGetValue(usergameReceiving, out userNotify))
+                var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
+                string userNotify;
+                foreach (var usergameReceiving in usersGame.Keys)
                 {
-                    if (userNotify == userReceiving)
+                    if (usersGame.TryGetValue(usergameReceiving, out userNotify))
                     {
-                        usergameReceiving.ReceiveCleanBoard();
+                        if (userNotify == userReceiving)
+                        {
+                            usergameReceiving.ReceiveCleanBoard();
+                        }
                     }
                 }
+            }
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
             }
         }
 
         public void SendMessageInGame(string userSend, string userReceiving, string message)
         {
-            var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
-            string userNotify;
-            foreach (var usergameReceiving in usersGame.Keys)
+            try
             {
-                if (usersGame.TryGetValue(usergameReceiving, out userNotify))
+                var connection = OperationContext.Current.GetCallbackChannel<IGameClient>();
+                string userNotify;
+                foreach (var usergameReceiving in usersGame.Keys)
                 {
-                    if (userNotify == userReceiving)
+                    if (usersGame.TryGetValue(usergameReceiving, out userNotify))
                     {
-                        usergameReceiving.RecieveMessageInGame(userSend, message);
+                        if (userNotify == userReceiving)
+                        {
+                            usergameReceiving.RecieveMessageInGame(userSend, message);
+                        }
                     }
                 }
+            }
+            catch (CommunicationException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new CommunicationException();
             }
         }
 
         public UserGame GetLoggerUser(string email, string password)
         {
-            Authentication authentication = new Authentication();
-            UserGame user = authentication.Login(email, password);
-            return user;
+            try
+            {
+                Authentication authentication = new Authentication();
+                UserGame user = authentication.Login(email, password);
+                return user;
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public Boolean RegisterUser(string email, string password, string nametag)
         {
-            bool saved = false;
-            UserLogic userLogic = new UserLogic();
-            UserLogic.Status status = userLogic.AddUser(email, password, nametag);
-            if (status == UserLogic.Status.Sucess)
+            try
             {
-                saved = true;
+                bool saved = false;
+                UserLogic userLogic = new UserLogic();
+                UserLogic.Status status = userLogic.AddUser(email, password, nametag);
+                if (status == UserLogic.Status.Sucess)
+                {
+                    saved = true;
+                }
+                return saved;
             }
-            return saved;
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public bool ExistsEmail(string email)
         {
-            bool exists = false;
-            UserLogic userLogic = new UserLogic();
-            VerificationStatus status = userLogic.VerifyMailExistence(email);
-            if (status == VerificationStatus.Sucess)
+            try
             {
-                exists = true;
+                bool exists = false;
+                UserLogic userLogic = new UserLogic();
+                VerificationStatus status = userLogic.VerifyMailExistence(email);
+                if (status == VerificationStatus.Sucess)
+                {
+                    exists = true;
+                }
+                return exists;
             }
-            return exists;
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public bool ExistsNametag(string nametag)
         {
-            bool exists = false;
-            UserLogic userLogic = new UserLogic();
-            VerificationStatus status = userLogic.VerifyNametagExistence(nametag);
-            if (status == VerificationStatus.Sucess)
+            try
             {
-                exists = true;
+                bool exists = false;
+                UserLogic userLogic = new UserLogic();
+                VerificationStatus status = userLogic.VerifyNametagExistence(nametag);
+                if (status == VerificationStatus.Sucess)
+                {
+                    exists = true;
+                }
+                return exists;
             }
-            return exists;
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public String SendEmail(string email)
         {
-            Authentication authentication = new Authentication();
-            String code = authentication.RandomString();
-            System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
-            mmsg.To.Add(email);
-            mmsg.Subject = "CODE UV";
-            mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
-            mmsg.Body = code;
-            mmsg.BodyEncoding = System.Text.Encoding.UTF8;
-            mmsg.IsBodyHtml = true;
-
-            mmsg.From = new System.Net.Mail.MailAddress("memoryuv@gmail.com");
-            System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
-            client.Credentials = new System.Net.NetworkCredential("memoryuv@gmail.com", "0qwerty0");
-
-            client.Port = 587;
-            client.EnableSsl = true;
-
-            client.Host = "smtp.gmail.com";
-
             try
             {
+                Authentication authentication = new Authentication();
+                String code = authentication.RandomString();
+                System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
+                mmsg.To.Add(email);
+                mmsg.Subject = "CODE UV";
+                mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
+                mmsg.Body = code;
+                mmsg.BodyEncoding = System.Text.Encoding.UTF8;
+                mmsg.IsBodyHtml = true;
+
+                mmsg.From = new System.Net.Mail.MailAddress("memoryuv@gmail.com");
+                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
+                client.Credentials = new System.Net.NetworkCredential("memoryuv@gmail.com", "0qwerty0");
+
+                client.Port = 587;
+                client.EnableSsl = true;
+
+                client.Host = "smtp.gmail.com";
                 client.Send(mmsg);
-                
+                return code;
             }
-            catch(Exception)
+            catch (DataException ex)
             {
-                MessageBox.Show("Error al enviar");
+                throw ex;
             }
 
-            return code;
         }
 
         public bool UpdatePassword(int idUser, string newPassword)
         {
-            bool updated = false;
-            UserLogic userLogic = new UserLogic();
-            UserLogic.Status status = userLogic.UpdatePasswordUser(idUser, newPassword);
-            if(status == UserLogic.Status.Sucess)
+            try
             {
-                updated = true;
+                bool updated = false;
+                UserLogic userLogic = new UserLogic();
+                UserLogic.Status status = userLogic.UpdatePasswordUser(idUser, newPassword);
+                if (status == UserLogic.Status.Sucess)
+                {
+                    updated = true;
+                }
+                return updated;
             }
-            return updated;
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public bool UpdateUserStatus(int idUser, string userStatus)
         {
-            bool updated = false;
-            UserLogic userLogic = new UserLogic();
-            UserLogic.Status status = userLogic.updateUserStatus(idUser, userStatus);
-            if (status == UserLogic.Status.Sucess)
+            try
             {
-                updated = true;
+                bool updated = false;
+                UserLogic userLogic = new UserLogic();
+                UserLogic.Status status = userLogic.updateUserStatus(idUser, userStatus);
+                if (status == UserLogic.Status.Sucess)
+                {
+                    updated = true;
+                }
+                return updated;
             }
-            return updated;
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public UserGame GetUserById(int idUser)
         {
-            UserLogic userLogic = new UserLogic();
-            UserGame userGame = userLogic.GetUserGameById(idUser);
-            return userGame;
+            try
+            {
+                UserLogic userLogic = new UserLogic();
+                UserGame userGame = userLogic.GetUserGameById(idUser);
+                return userGame;
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public UserGame GetUserByEmail(string email)
         {
-            UserLogic userLogic = new UserLogic();
-            UserGame userGame = userLogic.GetUserGameByEmail(email);
-            return userGame;
+            try
+            {
+                UserLogic userLogic = new UserLogic();
+                UserGame userGame = userLogic.GetUserGameByEmail(email);
+                return userGame;
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public List<UserGame> GetUsersByInitialesOfNametag(string nametag)
         {
-            UserLogic userLogic = new UserLogic();
-            List<UserGame> users = userLogic.GetUsersByInitialesOfNametag(nametag);
-            return users;
+            try
+            {
+                UserLogic userLogic = new UserLogic();
+                List<UserGame> users = userLogic.GetUsersByInitialesOfNametag(nametag);
+                return users;
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public bool AddFriend(int idUser, int idFriend)
         {
-            FriendLogic friendLogic = new FriendLogic();
-            bool saved = false;
-            FriendLogic.Status status = friendLogic.AddFriend(idUser, idFriend);
-            if(status == FriendLogic.Status.Success)
+            try
             {
-                saved = true;
+                FriendLogic friendLogic = new FriendLogic();
+                bool saved = false;
+                FriendLogic.Status status = friendLogic.AddFriend(idUser, idFriend);
+                if (status == FriendLogic.Status.Success)
+                {
+                    saved = true;
+                }
+                return saved;
             }
-            return saved;
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public bool DeleteFriend(int idUser, int idFriend)
         {
-            FriendLogic friendLogic = new FriendLogic();
-            bool deleted = false;
-            FriendLogic.Status status = friendLogic.DeleteFriend(idUser, idFriend);
-            if (status == FriendLogic.Status.Success)
+            try
             {
-                deleted = true;
+                FriendLogic friendLogic = new FriendLogic();
+                bool deleted = false;
+                FriendLogic.Status status = friendLogic.DeleteFriend(idUser, idFriend);
+                if (status == FriendLogic.Status.Success)
+                {
+                    deleted = true;
+                }
+                return deleted;
             }
-            return deleted;
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public List<UserGame> GetFriendsList(int idUser)
         {
-            FriendLogic friendLogic = new FriendLogic();
-            List<UserGame> users = friendLogic.GetFriendsList(idUser);
-            return users;
+            try
+            {
+                FriendLogic friendLogic = new FriendLogic();
+                List<UserGame> users = friendLogic.GetFriendsList(idUser);
+                return users;
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public List<UserGame> GetConnectedFriends(int idUser)
         {
-            FriendLogic friendLogic = new FriendLogic();
-            List<UserGame> usersConnected = friendLogic.GetConnectedFriends(idUser);
-            return usersConnected;
+            try
+            {
+                FriendLogic friendLogic = new FriendLogic();
+                List<UserGame> usersConnected = friendLogic.GetConnectedFriends(idUser);
+                return usersConnected;
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public bool ExistsFriendship(int idUser, int idFriend)
         {
-            FriendLogic friendLogic = new FriendLogic();
-            bool exists = friendLogic.ExistsFriendship(idUser, idFriend);
-            return exists;
+            try
+            {
+                FriendLogic friendLogic = new FriendLogic();
+                bool exists = friendLogic.ExistsFriendship(idUser, idFriend);
+                return exists;
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public bool AddFriendRequest(int idApplicant, int idReceiver)
         {
-            FriendRequestLogic friendRequestLogic = new FriendRequestLogic();
-            bool saved = false;
-            FriendRequestLogic.Status status = friendRequestLogic.AddFriendRequest(idApplicant, idReceiver);
-            if(status == FriendRequestLogic.Status.Sucess)
+            try
             {
-                saved = true;
+                FriendRequestLogic friendRequestLogic = new FriendRequestLogic();
+                bool saved = false;
+                FriendRequestLogic.Status status = friendRequestLogic.AddFriendRequest(idApplicant, idReceiver);
+                if (status == FriendRequestLogic.Status.Sucess)
+                {
+                    saved = true;
+                }
+                return saved;
             }
-            return saved;
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public bool AcceptFriendRequest(int idApplicant, int idReceiver)
         {
-            FriendRequestLogic friendRequestLogic = new FriendRequestLogic();
-            bool accepted = false;
-            FriendRequestLogic.Status status = friendRequestLogic.AcceptFriendRequest(idApplicant, idReceiver);
-            if (status == FriendRequestLogic.Status.Sucess)
+            try
             {
-                accepted = true;
+                FriendRequestLogic friendRequestLogic = new FriendRequestLogic();
+                bool accepted = false;
+                FriendRequestLogic.Status status = friendRequestLogic.AcceptFriendRequest(idApplicant, idReceiver);
+                if (status == FriendRequestLogic.Status.Sucess)
+                {
+                    accepted = true;
+                }
+                return accepted;
             }
-            return accepted;
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public bool RejectFriendRequest(int idApplicant, int idReceiver)
         {
-            FriendRequestLogic friendRequestLogic = new FriendRequestLogic();
-            bool rejected = false;
-            FriendRequestLogic.Status status = friendRequestLogic.RejectFriendRequest(idApplicant, idReceiver);
-            if (status == FriendRequestLogic.Status.Sucess)
+            try
             {
-                rejected = true;
+                FriendRequestLogic friendRequestLogic = new FriendRequestLogic();
+                bool rejected = false;
+                FriendRequestLogic.Status status = friendRequestLogic.RejectFriendRequest(idApplicant, idReceiver);
+                if (status == FriendRequestLogic.Status.Sucess)
+                {
+                    rejected = true;
+                }
+                return rejected;
             }
-            return rejected;
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public List<UserGame> GetUsersRequesting(int idUser)
         {
-            FriendRequestLogic friendRequestLogic = new FriendRequestLogic();
-            List<UserGame> usersRequesting = friendRequestLogic.GetUsersRequesting(idUser);
-            return usersRequesting;
+            try
+            {
+                FriendRequestLogic friendRequestLogic = new FriendRequestLogic();
+                List<UserGame> usersRequesting = friendRequestLogic.GetUsersRequesting(idUser);
+                return usersRequesting;
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public bool ExistsPendingRequest(int idApplicant, int idReceiver)
         {
-            FriendRequestLogic friendRequestLogic = new FriendRequestLogic();
-            bool exists = friendRequestLogic.ExistsPendingRequest(idApplicant, idReceiver);
-            return exists;
+            try
+            {
+                FriendRequestLogic friendRequestLogic = new FriendRequestLogic();
+                bool exists = friendRequestLogic.ExistsPendingRequest(idApplicant, idReceiver);
+                return exists;
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public String GetBackgroundUser(int idUser)
         {
-            ConfigUserLogic configUserLogic = new ConfigUserLogic();
-            string direccionFondo = configUserLogic.GetBackgroundUser(GetConfigUserById(idUser));
-            return direccionFondo;
+            try
+            {
+                ConfigUserLogic configUserLogic = new ConfigUserLogic();
+                string direccionFondo = configUserLogic.GetBackgroundUser(GetConfigUserById(idUser));
+                return direccionFondo;
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public ConfigUser GetConfigUserById(int idUser)
         {
-            ConfigUserLogic configUserLogic = new ConfigUserLogic();
-
-            return configUserLogic.GetConfigUserById(idUser);
+            try
+            {
+                ConfigUserLogic configUserLogic = new ConfigUserLogic();
+                return configUserLogic.GetConfigUserById(idUser);
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public void SetBackgroundUser(int idUser, int idNewBackground)
         {
-            ConfigUserLogic configUserLogic = new ConfigUserLogic();
-            configUserLogic.SetBackgroundUser(idUser, idNewBackground);
+            try
+            {
+                ConfigUserLogic configUserLogic = new ConfigUserLogic();
+                configUserLogic.SetBackgroundUser(idUser, idNewBackground);
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
         public bool ExistsConfigUser(int idUser)
         {
-            ConfigUserLogic configUserLogic = new ConfigUserLogic();
-            
-
-            return configUserLogic.ExistsConfigUser(idUser);
+            try
+            {
+                ConfigUserLogic configUserLogic = new ConfigUserLogic();
+                return configUserLogic.ExistsConfigUser(idUser);
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
         public void NewConfigUser(int idUser)
         {
-            ConfigUserLogic configUserLogic = new ConfigUserLogic();
-            configUserLogic.NewConfigUser(idUser);
+            try
+            {
+                ConfigUserLogic configUserLogic = new ConfigUserLogic();
+                configUserLogic.NewConfigUser(idUser);
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public List<StatisticUser> GetBetterUser()
         {
-            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
-            List<StatisticUser> users = statisticUserLogic.GetBetterUsers();
-            return users;
+            try
+            {
+                StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
+                List<StatisticUser> users = statisticUserLogic.GetBetterUsers();
+                return users;
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public bool GetStatisticUser(int idUser, int numAchievement)
         {
-            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
-            bool value = statisticUserLogic.GetStatisticUser(idUser, numAchievement);
-            return value;
+            try
+            {
+                StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
+                bool value = statisticUserLogic.GetStatisticUser(idUser, numAchievement);
+                return value;
+            }
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public bool AddOneWinGame(int idUser)
         {
-            bool added = false;
-            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
-            StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseGameWon(idUser);
-            if(status == StatisticUserLogic.StatisticStatus.Success)
+            try
             {
-                added = true;
+                bool added = false;
+                StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
+                StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseGameWon(idUser);
+                if (status == StatisticUserLogic.StatisticStatus.Success)
+                {
+                    added = true;
+                }
+                return added;
             }
-            return added;
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public bool AddOneLoseGame(int idUser)
         {
-            bool added = false;
-            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
-            StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseLosingGame(idUser);
-            if (status == StatisticUserLogic.StatisticStatus.Success)
+            try
             {
-                added = true;
+                bool added = false;
+                StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
+                StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseLosingGame(idUser);
+                if (status == StatisticUserLogic.StatisticStatus.Success)
+                {
+                    added = true;
+                }
+                return added;
             }
-            return added;
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
 
         public bool AddedStatisticUser(int idUser, string nametag)
         {
-            bool added = false;
-            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
-            StatisticUserLogic.StatisticStatus status = statisticUserLogic.AddStatisticUser(idUser, nametag);
-            if (status == StatisticUserLogic.StatisticStatus.Success)
+            try
             {
-                added = true;
+                bool added = false;
+                StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
+                StatisticUserLogic.StatisticStatus status = statisticUserLogic.AddStatisticUser(idUser, nametag);
+                if (status == StatisticUserLogic.StatisticStatus.Success)
+                {
+                    added = true;
+                }
+                return added;
             }
-            return added;
+            catch (DataException ex)
+            {
+                throw ex;
+            }
         }
     }
 
     class Program
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         static void Main(string[] args)
         {
             using (ServiceHost host = new ServiceHost(typeof(Host.MemoryServer)))

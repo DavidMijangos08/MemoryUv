@@ -1,6 +1,7 @@
 ﻿using Data;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -46,10 +47,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en add friend request", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return status;
         }
@@ -81,10 +82,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en accept friend request", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return status;
         }
@@ -116,10 +117,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en reject friend request", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return status;
         }
@@ -147,10 +148,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en get users requesting", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return users;
         }
@@ -178,10 +179,10 @@ namespace Logic
 
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en exists pending request", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return exists;
         }

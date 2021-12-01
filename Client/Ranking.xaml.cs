@@ -2,6 +2,7 @@
 using Host;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,30 +30,50 @@ namespace Client
         public Ranking(UserGame _user)
         {
             InitializeComponent();
-            InitializeListRank();
-            userGame = _user;
-            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
-            //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Resources/Background/backgroundX.jpg")));
+            try
+            {
+                InitializeListRank();
+                userGame = _user;
+                this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
+                //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Resources/Background/backgroundX.jpg")));
+            }
+            catch (DataException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void InitializeListRank()
         {
-            service = new MemoryServer();
-            List<StatisticUser> itemListView = new List<StatisticUser>();
-            List<StatisticUser> itemStatic = service.GetBetterUser();
-
-            for (int i = 0; i < itemStatic.Count(); i++)
+            try
             {
-                itemListView.Add(new StatisticUser() { id = i + 1, nameTag = itemStatic[i].nameTag, totalWins = itemStatic[i].totalWins });
-            }
+                service = new MemoryServer();
+                List<StatisticUser> itemListView = new List<StatisticUser>();
+                List<StatisticUser> itemStatic = service.GetBetterUser();
 
-            listRank.ItemsSource = itemListView;
+                for (int i = 0; i < itemStatic.Count(); i++)
+                {
+                    itemListView.Add(new StatisticUser() { id = i + 1, nameTag = itemStatic[i].nameTag, totalWins = itemStatic[i].totalWins });
+                }
+
+                listRank.ItemsSource = itemListView;
+            }
+            catch (DataException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         private void RegresarClick(object sender, RoutedEventArgs e)
         {
             Home windowHome = new Home(userGame);
             windowHome.Show();
+            this.Close();
+        }
+
+        private void ShowExceptionAlert()
+        {
+            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
             this.Close();
         }
     }

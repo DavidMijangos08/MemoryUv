@@ -2,6 +2,7 @@
 using Host;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -41,18 +42,33 @@ namespace Client
             userAdmin = receivedUsers[2];
             this.section = section;
             this.difficulty = difficulty;
-            InstanceContext context = new InstanceContext(this);
-            client = new PreGameService.PreGameServiceClient(context);
-            client.ConnectPlayer(userConnected.nametag, userAdmin.nametag);
+            try
+            {
+                InstanceContext context = new InstanceContext(this);
+                client = new PreGameService.PreGameServiceClient(context);
+                client.ConnectPlayer(userConnected.nametag, userAdmin.nametag);
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
+
             if (userConnected.nametag.Equals(userAdmin.nametag))
             {
                 btnStartGame.IsEnabled = true;
                 usersGame.Add(userConnected);
                 usersGame.Add(userInvited);
                 usersGame.Add(userAdmin);
-                service = new MemoryServer();
-                service.UpdateUserStatus(userInvited.id, "En partida");
-                service.UpdateUserStatus(userAdmin.id, "En partida");
+                try
+                {
+                    service = new MemoryServer();
+                    service.UpdateUserStatus(userInvited.id, "En partida");
+                    service.UpdateUserStatus(userAdmin.id, "En partida");
+                }
+                catch (DataException)
+                {
+                    ShowExceptionAlert();
+                }
             }
             else
             {
@@ -65,27 +81,41 @@ namespace Client
 
         private void ExitClick(object sender, RoutedEventArgs e)
         {
-            if (userConnected.nametag.Equals(userInvited.nametag))
+            try
             {
-                client.DisconnectPlayer("Abandonado", userConnected.nametag, userAdmin.nametag);
+                if (userConnected.nametag.Equals(userInvited.nametag))
+                {
+                    client.DisconnectPlayer("Abandonado", userConnected.nametag, userAdmin.nametag);
+                }
+                else
+                {
+                    client.DisconnectPlayer("Abandonado", userConnected.nametag, userInvited.nametag);
+                }
+                this.Close();
+                Home home = new Home(userConnected);
+                home.Show();
             }
-            else
+            catch (CommunicationException)
             {
-                client.DisconnectPlayer("Abandonado", userConnected.nametag, userInvited.nametag);
+                ShowExceptionAlert();
             }
-            this.Close();
-            Home home = new Home(userConnected);
-            home.Show();
         }
 
         private void ClicStartGame(object sender, RoutedEventArgs e)
         {
-            client.SendConfigurationGame(userInvited.nametag, section, difficulty);
-            client.SendAccessGame(userAdmin.nametag, userInvited.nametag);
-            client.DisconnectPlayer("Correcto", userConnected.nametag, userInvited.nametag);
-            this.Close();
-            Game game = new Game(usersGame, section, difficulty);
-            game.Show(); 
+            try
+            {
+                client.SendConfigurationGame(userInvited.nametag, section, difficulty);
+                client.SendAccessGame(userAdmin.nametag, userInvited.nametag);
+                client.DisconnectPlayer("Correcto", userConnected.nametag, userInvited.nametag);
+                this.Close();
+                Game game = new Game(usersGame, section, difficulty);
+                game.Show();
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         public void UpdateUsersRoom(Dictionary<object, string>.ValueCollection usersPreGame)
@@ -107,10 +137,17 @@ namespace Client
 
         public void RecieveAccessGame()
         {
-            client.DisconnectPlayer("Correcto", userConnected.nametag, userAdmin.nametag);
-            Game game = new Game(usersGame, section, difficulty);
-            game.Show();
-            this.Close();
+            try
+            {
+                client.DisconnectPlayer("Correcto", userConnected.nametag, userAdmin.nametag);
+                Game game = new Game(usersGame, section, difficulty);
+                game.Show();
+                this.Close();
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         public void RecieveExitNotification(string userDisconnected)
@@ -122,16 +159,29 @@ namespace Client
 
         private void ClickAccept(object sender, RoutedEventArgs e)
         {
-            client.DisconnectPlayer("Correcto", userConnected.nametag, userAdmin.nametag);
-            this.Close();
-            Home home = new Home(userConnected);
-            home.Show();
+            try
+            {
+                client.DisconnectPlayer("Correcto", userConnected.nametag, userAdmin.nametag);
+                this.Close();
+                Home home = new Home(userConnected);
+                home.Show();
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         public void ReceiveConfigurationGame(string section, string difficulty)
         {
             this.section = section;
             this.difficulty = difficulty;
+        }
+
+        private void ShowExceptionAlert()
+        {
+            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            this.Close();
         }
     }
 }

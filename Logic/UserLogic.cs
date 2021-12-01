@@ -1,6 +1,7 @@
 ﻿using Data;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -48,10 +49,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en add user", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return status;
         }
@@ -96,10 +97,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en update password", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return status;
         }
@@ -131,10 +132,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en update status", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return status;
         }
@@ -163,10 +164,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en get user by id", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return userGame;
         }
@@ -191,10 +192,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en get user by email", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return userGame;
         }
@@ -216,10 +217,10 @@ namespace Logic
                     users = coincidences;
                 } 
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en get users by initiales", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return users;
         }
@@ -246,12 +247,11 @@ namespace Logic
                     }
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en verify mail", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
-            
             return status;
         }
 
@@ -276,12 +276,12 @@ namespace Logic
                         status = VerificationStatus.Sucess;
                     }
                 }
-            } catch (DbUpdateException ex)
-            {
-                log.Error("Error en verify nametag", ex);
-                throw new DbUpdateException();
             }
-            
+            catch (DataException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new DataException();
+            }
             return status;
         }
 

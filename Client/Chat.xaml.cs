@@ -31,12 +31,19 @@ namespace Client
 
             InitializeComponent();
             userName = _username;
-            InstanceContext context = new InstanceContext(this);
-            client = new ChatService.ChatServiceClient(context);
-            client.Join(userName);
-            lbId.Text = "Bienvenido "+ userName;
-            service = new MemoryServer();
-            //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
+            try
+            {
+                InstanceContext context = new InstanceContext(this);
+                client = new ChatService.ChatServiceClient(context);
+                client.Join(userName);
+                lbId.Text = "Bienvenido " + userName;
+                service = new MemoryServer();
+                //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
+            }
+            catch (CommunicationException)
+            {
+                ShowExceptionAlert();
+            }
         }
 
         public void RecieveMessage(string user, string message)
@@ -67,20 +74,28 @@ namespace Client
                 }
                 else
                 {
-                    Object itemSelected = cbUsers.SelectedItem;
-                    string receiver = itemSelected.ToString();
-                    if (receiver == "Todos")
+                    try
                     {
-                        client.SendMessage(txtChat.Text);
-                        txtChat.Text = "";
-                    }else if(receiver == userName)
-                    {
-                        MessageBox.Show("No puedes enviarte un mensaje a ti mismo");
+                        Object itemSelected = cbUsers.SelectedItem;
+                        string receiver = itemSelected.ToString();
+                        if (receiver == "Todos")
+                        {
+                            client.SendMessage(txtChat.Text);
+                            txtChat.Text = "";
+                        }
+                        else if (receiver == userName)
+                        {
+                            MessageBox.Show("No puedes enviarte un mensaje a ti mismo");
+                        }
+                        else
+                        {
+                            client.PrivateSendMessage(txtChat.Text, receiver);
+                            txtChat.Text = "";
+                        }
                     }
-                    else
+                    catch (CommunicationException)
                     {
-                        client.PrivateSendMessage(txtChat.Text, receiver);
-                        txtChat.Text = "";
+                        ShowExceptionAlert();
                     }
                 }
             }
@@ -91,8 +106,21 @@ namespace Client
             isDataDirty = true;
             if (this.isDataDirty)
             {
-                client.Leave(userName);
+                try
+                {
+                    client.Leave(userName);
+                }
+                catch (CommunicationException)
+                {
+                    ShowExceptionAlert();
+                }
             }
+        }
+
+        private void ShowExceptionAlert()
+        {
+            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            this.Close();
         }
     }
 }

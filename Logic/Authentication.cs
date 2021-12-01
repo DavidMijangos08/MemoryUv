@@ -1,6 +1,7 @@
 ﻿using Data;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -49,10 +50,10 @@ namespace Logic
                         user = null;
                     }
                 }
-            } catch (DbUpdateException ex)
+            } catch (DataException ex)
             {
-                log.Error("Error en login", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return user;
         }

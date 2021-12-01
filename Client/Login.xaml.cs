@@ -3,6 +3,7 @@ using Host;
 using Logic;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
@@ -26,8 +27,7 @@ namespace Client
         public MemoryServer service;
         public Login()
         {
-            InitializeComponent();
-            
+            InitializeComponent();   
         }
 
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
@@ -37,28 +37,35 @@ namespace Client
 
             if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
             {
-                service = new MemoryServer();
-                UserGame user = service.GetLoggerUser(email, password);
-                if (user != null)
+                try
                 {
-
-                    /*Procesos procesos = new Procesos();
-                    procesos.Show();
-                    procesos.Hide(); */
-
-                    if (!service.ExistsConfigUser(user.id))
+                    service = new MemoryServer();
+                    UserGame user = service.GetLoggerUser(email, password);
+                    if (user != null)
                     {
-                        service.NewConfigUser(user.id);
-                        MessageBox.Show("Se creo confi");
-                    } 
-                    Home windowHome = new Home(user);
-                    windowHome.Show();
-                    this.Hide();  
+
+                        /*Procesos procesos = new Procesos();
+                        procesos.Show();
+                        procesos.Hide(); */
+
+                        if (!service.ExistsConfigUser(user.id))
+                        {
+                            service.NewConfigUser(user.id);
+                            MessageBox.Show("Se creo confi");
+                        }
+                        Home windowHome = new Home(user);
+                        windowHome.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Correo o contraseña incorrecta, revisa bien!");
+                    }
                 }
-                else
+                catch (DataException)
                 {
-                    MessageBox.Show("Correo o contraseña incorrecta, revisa bien!");
-                }             
+                    ShowExceptionAlert();
+                }        
             }
             else
             {
@@ -77,6 +84,12 @@ namespace Client
         {
             ChangePassword windowChangePassword = new ChangePassword();
             windowChangePassword.Show();
+            this.Close();
+        }
+
+        private void ShowExceptionAlert()
+        {
+            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
             this.Close();
         }
     }

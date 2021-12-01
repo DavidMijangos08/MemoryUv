@@ -1,6 +1,7 @@
 ﻿using Data;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -45,10 +46,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en add friend", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return status;
         }
@@ -80,12 +81,11 @@ namespace Logic
                     }
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en delete friend", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
-
             return status;
         }
 
@@ -119,10 +119,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en get friends list", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return users;
         }
@@ -161,10 +161,10 @@ namespace Logic
                     }
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DataException ex)
             {
-                log.Error("Error en get connected friends", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return users;
         }
@@ -190,10 +190,11 @@ namespace Logic
                         exists = true;
                     }
                 }
-            } catch (DbUpdateException ex)
+            }
+            catch (DataException ex)
             {
-                log.Error("Error en exists friendship", ex);
-                throw new DbUpdateException();
+                log.Error(ex.Message, ex);
+                throw new DataException();
             }
             return exists;
         }

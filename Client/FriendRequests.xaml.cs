@@ -2,7 +2,9 @@
 using Host;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,19 +30,33 @@ namespace Client
         {
             InitializeComponent();
             usergame = _user;
-            initializeListRequests();
-            service = new MemoryServer();
-            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
+            try
+            {
+                initializeListRequests();
+                service = new MemoryServer();
+                this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
+            }
+            catch (DataException)
+            {
+                ShowExceptionAlert();
+            }          
         }
 
         private void initializeListRequests()
         {
-            service = new MemoryServer();
-            List<UserGame> usersRequesting = service.GetUsersRequesting(usergame.id);
-            for(int i = 0; i < usersRequesting.Count(); i++)
+            try
             {
-                string nametag = usersRequesting[i].nametag;
-                listRequests.Items.Add(nametag);
+                service = new MemoryServer();
+                List<UserGame> usersRequesting = service.GetUsersRequesting(usergame.id);
+                for (int i = 0; i < usersRequesting.Count(); i++)
+                {
+                    string nametag = usersRequesting[i].nametag;
+                    listRequests.Items.Add(nametag);
+                }
+            }
+            catch (DataException)
+            {
+                ShowExceptionAlert();
             }
         }
 
@@ -49,19 +65,26 @@ namespace Client
             object itemSelected = listRequests.SelectedItem;
             if(itemSelected != null)
             {
-                service = new MemoryServer();
-                string nametagApplicant = itemSelected.ToString();
-                List<UserGame> userApplicant = service.GetUsersByInitialesOfNametag(nametagApplicant);
-                bool accepted = service.AcceptFriendRequest(userApplicant[0].id, usergame.id);
-                if (accepted)
+                try
                 {
-                    bool added = service.AddFriend(userApplicant[0].id, usergame.id);
-                    if (added)
+                    service = new MemoryServer();
+                    string nametagApplicant = itemSelected.ToString();
+                    List<UserGame> userApplicant = service.GetUsersByInitialesOfNametag(nametagApplicant);
+                    bool accepted = service.AcceptFriendRequest(userApplicant[0].id, usergame.id);
+                    if (accepted)
                     {
-                        MessageBox.Show("Tienes un nuevo amigo");
-                        listRequests.Items.Clear();
-                        initializeListRequests();
+                        bool added = service.AddFriend(userApplicant[0].id, usergame.id);
+                        if (added)
+                        {
+                            MessageBox.Show("Tienes un nuevo amigo");
+                            listRequests.Items.Clear();
+                            initializeListRequests();
+                        }
                     }
+                }
+                catch (DataException)
+                {
+                    ShowExceptionAlert();
                 }
             }
             else
@@ -76,15 +99,22 @@ namespace Client
             object itemSelected = listRequests.SelectedItem;
             if (itemSelected != null)
             {
-                service = new MemoryServer();
-                string nametagApplicant = itemSelected.ToString();
-                List<UserGame> userApplicant = service.GetUsersByInitialesOfNametag(nametagApplicant);
-                bool rejected = service.RejectFriendRequest(userApplicant[0].id, usergame.id);
-                if (rejected)
+                try
                 {
-                    MessageBox.Show("Solicitud rechazada con exito");
-                    listRequests.Items.Clear();
-                    initializeListRequests();
+                    service = new MemoryServer();
+                    string nametagApplicant = itemSelected.ToString();
+                    List<UserGame> userApplicant = service.GetUsersByInitialesOfNametag(nametagApplicant);
+                    bool rejected = service.RejectFriendRequest(userApplicant[0].id, usergame.id);
+                    if (rejected)
+                    {
+                        MessageBox.Show("Solicitud rechazada con exito");
+                        listRequests.Items.Clear();
+                        initializeListRequests();
+                    }
+                }
+                catch (DataException)
+                {
+                    ShowExceptionAlert();
                 }
             }
             else
@@ -97,6 +127,12 @@ namespace Client
         {
             Friends windowFriends = new Friends(usergame);
             windowFriends.Show();
+            this.Close();
+        }
+
+        private void ShowExceptionAlert()
+        {
+            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
             this.Close();
         }
     }

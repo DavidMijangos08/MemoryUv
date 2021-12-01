@@ -2,6 +2,7 @@
 using Host;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,30 +39,37 @@ namespace Client
         private void InitializeArchievement()
         {
             service = new MemoryServer();
-            if (service.GetStatisticUser(userGame.id, 1) == true)
+            try
             {
-                lbAchievement1.IsEnabled = true;
-                imgAchievement1.Opacity = 100;
+                if (service.GetStatisticUser(userGame.id, 1) == true)
+                {
+                    lbAchievement1.IsEnabled = true;
+                    imgAchievement1.Opacity = 100;
+                }
+                if (service.GetStatisticUser(userGame.id, 2))
+                {
+                    lbAchievement2.IsEnabled = true;
+                    imgAchievement2.Opacity = 100;
+                }
+                if (service.GetStatisticUser(userGame.id, 3))
+                {
+                    lbAchievement3.IsEnabled = true;
+                    imgAchievement3.Opacity = 100;
+                }
+                if (service.GetStatisticUser(userGame.id, 4))
+                {
+                    lbAchievement4.IsEnabled = true;
+                    imgAchievement4.Opacity = 100;
+                }
+                if (service.GetStatisticUser(userGame.id, 5))
+                {
+                    lbAchievement5.IsEnabled = true;
+                    imgAchievement5.Opacity = 100;
+                }
             }
-            if (service.GetStatisticUser(userGame.id, 2))
+            catch (DataException)
             {
-                lbAchievement2.IsEnabled = true;
-                imgAchievement2.Opacity = 100;
-            }
-            if (service.GetStatisticUser(userGame.id, 3))
-            {
-                lbAchievement3.IsEnabled = true;
-                imgAchievement3.Opacity = 100;
-            }
-            if (service.GetStatisticUser(userGame.id, 4))
-            {
-                lbAchievement4.IsEnabled = true;
-                imgAchievement4.Opacity = 100;
-            }
-            if (service.GetStatisticUser(userGame.id, 5))
-            {
-                lbAchievement5.IsEnabled = true;
-                imgAchievement5.Opacity = 100;
+                ShowExceptionAlert();
             }
         }
 
@@ -76,6 +84,12 @@ namespace Client
         {
             Home windowHome = new Home(userGame);
             windowHome.Show();
+            this.Close();
+        }
+
+        private void ShowExceptionAlert()
+        {
+            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
             this.Close();
         }
     }
