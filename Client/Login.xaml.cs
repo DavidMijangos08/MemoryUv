@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,7 +36,7 @@ namespace Client
             string email = Usuario.Text;
             string password = pbPassword.Password.ToString();
 
-            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
+            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password) && !ExistsInvalidPassword(password))
             {
                 try
                 {
@@ -71,6 +72,18 @@ namespace Client
             {
                 MessageBox.Show("Existe campo vacio");
             }
+        }
+
+        private bool ExistsInvalidPassword(string password)
+        {
+            bool exists = false;
+            Regex regex = new Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)\\S{8,15}$");
+            if (!regex.IsMatch(password))
+            {
+                exists = true;
+                MessageBox.Show("Caracteres inválidos en la contraseña");
+            }
+            return exists;
         }
 
         private void ButtonNewAccountClick(object sender, RoutedEventArgs e)

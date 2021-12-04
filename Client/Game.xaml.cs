@@ -939,5 +939,10 @@ namespace Client
             MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
             this.Close();
         }
+
+        private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            gridConfirmation.Visibility = Visibility.Visible;
+        }
     }
 }

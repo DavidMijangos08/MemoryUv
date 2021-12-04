@@ -31,6 +31,10 @@ namespace Host
         void UsersUpdate(Dictionary<IChatClient, string>.ValueCollection users);
     }
 
+    /// <summary>
+    /// Interfaz correspondiente al cliente del usuario
+    /// </summary>
+
     [ServiceContract]
     public interface IUserClient
     {
@@ -40,6 +44,10 @@ namespace Host
         [OperationContract(IsOneWay = true)]
         void RecieveAnswer();
     }
+
+    /// <summary>
+    /// Interfaz correspondiente al cliente del prejuego
+    /// </summary>
 
     [ServiceContract]
     public interface IPreGameClient
@@ -56,6 +64,10 @@ namespace Host
         [OperationContract(IsOneWay = true)]
         void ReceiveConfigurationGame(string section, string difficulty);
     }
+
+    /// <summary>
+    /// Interfaz correspondiente al cliente del juego
+    /// </summary>
 
     [ServiceContract]
     public interface IGameClient
@@ -79,6 +91,10 @@ namespace Host
         void RecieveMessageInGame(string user, string message);
     }
 
+    /// <summary>
+    /// Interfaz correspondiente al servicio del chat global
+    /// </summary>
+
     [ServiceContract(CallbackContract = typeof(IChatClient))]
     public interface IChatService
     {
@@ -95,6 +111,10 @@ namespace Host
         void PrivateSendMessage(string message, string username);
     }
 
+    /// <summary>
+    /// Interfaz correspondiente al servicio de la sala
+    /// </summary>
+
     [ServiceContract(CallbackContract = typeof(IUserClient))]
     public interface IRoomService
     {
@@ -110,6 +130,10 @@ namespace Host
         [OperationContract(IsOneWay = true)]
         void SendAcceptance(string usergameApplicant, string usergameReceiver);
     }
+
+    /// <summary>
+    /// Interfaz correspondiente al servicio del prejuego
+    /// </summary>
 
     [ServiceContract(CallbackContract = typeof(IPreGameClient))]
     public interface IPreGameService
@@ -129,6 +153,10 @@ namespace Host
         [OperationContract(IsOneWay = true)]
         void SendConfigurationGame(string userToSend, string section, string difficulty);
     }
+
+    /// <summary>
+    /// Interfaz correspondiente al servicio del juego
+    /// </summary>
 
     [ServiceContract(CallbackContract = typeof(IGameClient))]
     public interface IGameService
@@ -157,6 +185,10 @@ namespace Host
         [OperationContract(IsOneWay = true)]
         void SendMessageInGame(string userSend, string userReceiving, string message);
     }
+
+    /// <summary>
+    /// Interfaz correspondiente al servicio del usuario
+    /// </summary>
 
     [ServiceContract]
     public interface IUserService
@@ -192,6 +224,10 @@ namespace Host
         bool UpdateUserStatus(int idUser, string userStatus);
     }
 
+    /// <summary>
+    /// Interfaz correspondiente al servicio de amigo
+    /// </summary>
+
     [ServiceContract]
     public interface IFriendService
     {
@@ -210,6 +246,10 @@ namespace Host
         [OperationContract]
         bool ExistsFriendship(int idUser, int idFriend);
     }
+
+    /// <summary>
+    /// Interfaz correspondiente al servicio de solicitud de amistad
+    /// </summary>
 
     [ServiceContract]
     public interface IFriendRequestService
@@ -230,6 +270,10 @@ namespace Host
         bool ExistsPendingRequest(int idApplicant, int idReceiver);
     }
 
+    /// <summary>
+    /// Interfaz correspondiente al servicio de la estadística de usuario
+    /// </summary>
+
     [ServiceContract]
     public interface IStatisticService
     {
@@ -248,6 +292,10 @@ namespace Host
         [OperationContract]
         bool AddedStatisticUser(int idUser, string nametag);
     }
+
+    /// <summary>
+    /// Interfaz correspondiente al servicio de la configuración
+    /// </summary>
 
     [ServiceContract]
     public interface IConfigService
@@ -271,6 +319,10 @@ namespace Host
         bool ExistsConfigUser(int idUser);
     }
 
+    /// <summary>
+    /// Clase correspondiente al servidor del juego MemoryUv, la cual implementa los diferentes servicios
+    /// </summary>
+
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single, InstanceContextMode = InstanceContextMode.Single)]
     public class MemoryServer : IChatService, IRoomService, IPreGameService, IGameService, IUserService, IFriendService, IFriendRequestService, IStatisticService
     {
@@ -279,6 +331,12 @@ namespace Host
         Dictionary<IUserClient, string> usersRoom = new Dictionary<IUserClient, string>();
         Dictionary<IPreGameClient, string> usersPreGame = new Dictionary<IPreGameClient, string>();
         Dictionary<IGameClient, string> usersGame = new Dictionary<IGameClient, string>();
+
+        /// <summary>
+        /// Método del servicio del chat que permite conectar un nuevo usuario al chat global
+        /// </summary>
+        /// <param name="username"> Corresponde al nombre del usuario que se conectará al chat </param>
+
         public void Join(string username)
         {
             try
@@ -297,6 +355,11 @@ namespace Host
                 throw new CommunicationException();
             }
         }
+
+        /// <summary>
+        /// Método del servicio del chat que permite enviar un mensaje al chat global
+        /// </summary>
+        /// <param name="message"> Corresponde al mensaje que se desea enviar </param>
 
         public void SendMessage(string message)
         {
@@ -324,6 +387,11 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método del servicio del chat que permite desconectar a un jugador del chat global
+        /// </summary>
+        /// <param name="username"> Corresponde al nombre del usuario que se desconectará del chat </param>
+
         public void Leave(string username)
         {
             try
@@ -342,6 +410,12 @@ namespace Host
                 throw new CommunicationException();
             }
         }
+
+        /// <summary>
+        /// Método del servicio del chat que permite enviar un mensaje privado en el chat global
+        /// </summary>
+        /// <param name="message"> Corresponde al mensaje que se desea enviar de manera privada </param>
+        /// <param name="username"> Corresponde al nombre del usuario que recibirá el mensaje privado </param>
 
         public void PrivateSendMessage(string message, string username)
         {
@@ -374,6 +448,11 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método del servicio de room que permite conectar a un usuario a la espera de una invitación para el juego
+        /// </summary>
+        /// <param name="userGameConnect"> Corresponde al usuario que está en la espera de alguna invitación </param>
+
         public void ConnectWaitingRoom(string userGameConnect)
         {
             try
@@ -388,6 +467,11 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que desconecta a un usuario de la espera de alguna invitación para jugar
+        /// </summary>
+        /// <param name="usergame"> Corresponde al nombre del usuario que se desconectará de la espera </param>
+
         public void DisconnectRoom(string usergame)
         {
             try
@@ -401,6 +485,12 @@ namespace Host
                 throw new CommunicationException();
             }
         }
+
+        /// <summary>
+        /// Método que envía una invitación a un usuario para unirse a una sala de juego
+        /// </summary>
+        /// <param name="usergameApplicant"> Nombre del usuario que envía la invitación de juego </param>
+        /// <param name="usergameReceiver">  Nombre del usuario que recibe la invitación de juego </param>
 
         public void SendInvitation(string usergameApplicant, string usergameReceiver)
         {
@@ -431,6 +521,12 @@ namespace Host
                 throw new CommunicationException();
             }
         }
+
+        /// <summary>
+        /// Método que envía la aceptación de una invitación a un juego
+        /// </summary>
+        /// <param name="usergameApplicant"> Nombre del usuario que envió la invitación </param>
+        /// <param name="usergameReceiver"> Nombre del usuario que recibió y aceptó la invitación de juego </param>
 
         public void SendAcceptance(string usergameApplicant, string usergameReceiver)
         {
@@ -463,6 +559,12 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que permite conectar un jugador al prejuego de una partida
+        /// </summary>
+        /// <param name="usergameConnected"> Corresponde al nombre del usuario que se conectará al prejuego </param>
+        /// <param name="usergameAdmin">  Corresponde al nombre del usuario administrador de la partida </param>
+
         public void ConnectPlayer(string usergameConnected, string usergameAdmin)
         {
             try
@@ -482,6 +584,13 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que permite desconectar a un jugador de un prejuego
+        /// </summary>
+        /// <param name="status"> Corresponde al estado de la salida del prejuego. Permitiendo verificar si abandonó el prejuego </param>
+        /// <param name="usergameToDisconnect">  Corresponde al nombre del usuario a desconectarse </param>
+        /// <param name="usergameToNotify">  Corresponde al nombre del usuario que recibirá una notificación de que su oponente se retiró </param>
+
         public void DisconnectPlayer(string status, string usergameToDisconnect, string usergameToNotify)
         {
             try
@@ -500,6 +609,12 @@ namespace Host
                 throw new CommunicationException();
             }
         }
+
+        /// <summary>
+        /// Método que envía una notificación de salida de un prejuego
+        /// </summary>
+        /// <param name="usergameToDisconnect"> Corresponde al nombre del usuario que se desconectó </param>
+        /// <param name="usergameToNotify">  Corresponde al nombre del usuario a notificar </param>
 
         public void SendExitNotification(string usergameToDisconnect, string usergameToNotify)
         {
@@ -525,6 +640,12 @@ namespace Host
                 throw new CommunicationException();
             }
         }
+
+        /// <summary>
+        /// Método que permite que el administrador envíe el acceso al juego al usuario invitado
+        /// </summary>
+        /// <param name="usergam1"> Corresponde al nombre del adminsitrador del juego </param>
+        /// <param name="usergame2"> Corresponde al nombre del usuario invitado </param>
 
         public void SendAccessGame(string usergam1, string usergame2)
         {
@@ -556,6 +677,13 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que envía la configuración de la partida al jugador invitado
+        /// </summary>
+        /// <param name="userToSend"> Corresponde al nombre del usuario invitado que se envía la configuración </param>
+        /// <param name="section"> Corresponde a la sección del juego </param>
+        /// <param name="difficulty"> Corresponde a la dificultad del juego </param>
+
         public void SendConfigurationGame(string userToSend, string section, string difficulty)
         {
             try
@@ -581,6 +709,12 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que permite conectar un jugador a una partida 
+        /// </summary>
+        /// <param name="userConnected"> Corresponde al nombre del usuario que se conectará </param>
+        /// <param name="userOpponent">  Corresponde al nombre del usuario oponente del usuario que se conectará </param>
+
         public void ConnectToGame(string userConnected, string userOpponent)
         {
             try
@@ -595,6 +729,13 @@ namespace Host
                 throw new CommunicationException();
             }
         }
+
+        /// <summary>
+        /// Método que permite desconectar a un jugador de una partida
+        /// </summary>
+        /// <param name="status"> Corresponde al estatus de la salida, verificando si se abandonó la partida </param>
+        /// <param name="userDisconnect"> Correspodne al nombre del usuario que se desconectará de la partida </param>
+        /// <param name="userOpponent"> Corresponde al nombre del usuario oponente del que se desconectará de la partida </param>
 
         public void DisconnectTheGame(string status, string userDisconnect, string userOpponent)
         {
@@ -614,6 +755,12 @@ namespace Host
                 throw new CommunicationException();
             }
         }
+
+        /// <summary>
+        /// Método que envía notificación de salida de un jugador, al jugador oponente
+        /// </summary>
+        /// <param name="userDisconnect"> Corresponde al nombre del usuario que se desconectó </param>
+        /// <param name="userToNotify">  Corresponde al nombre del usuario que recibirá la notificación </param>
 
         public void SendExitGameNotification(string userDisconnect, string userToNotify) {
             try
@@ -637,6 +784,11 @@ namespace Host
                 throw new CommunicationException();
             }
         }
+
+        /// <summary>
+        /// Método que envía el turno del juego a otro jugador
+        /// </summary>
+        /// <param name="userReceiving">  Corresponde al nombre del usuario que recibirá el turno en la partida </param>
 
         public void SendGameTurn(string userReceiving)
         {
@@ -662,6 +814,12 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que envía el tablero de la partida al jugador invitado por parte del administrador
+        /// </summary>
+        /// <param name="messyCards"> Corresponde a las cartas revueltas para la partida </param>
+        /// <param name="userReceiving">  Corresponde al nombre del usuario que recibirá el tablero de la partida </param>
+
         public void SendGameBoard(int[] messyCards, string userReceiving)
         {
             try
@@ -685,6 +843,13 @@ namespace Host
                 throw new CommunicationException();
             }
         }
+
+        /// <summary>
+        /// Método que permite enviar el movimiento de un jugador al jugador oponente
+        /// </summary>
+        /// <param name="user"> Corresponde al usuario que hizo el movimiento </param>
+        /// <param name="btn"> Corresponde al botón en el que el usuario hizo clic /param>
+        /// <param name="userReceiving"> Corresponde al usuario que recibirá el movimiento </param>
 
         public void SendMove(string user, string btn, string userReceiving)
         {
@@ -710,6 +875,11 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que permite enviar una limpieza de los movimientos que hizo el jugador en el tablero 
+        /// </summary>
+        /// <param name="userReceiving"> Corresponde al nombre del usuario que recibe la limpieza de su tablero </param>
+
         public void SendCleanBoard(string userReceiving)
         {
             try
@@ -733,6 +903,13 @@ namespace Host
                 throw new CommunicationException();
             }
         }
+
+        /// <summary>
+        /// Método que permite el envío de mensajes en chat dentro del juego
+        /// </summary>
+        /// <param name="userSend"> Corresponde al usuario que envía el mensaje en el juego </param>
+        /// <param name="userReceiving"> Corresponde al usuario que recibe el mensaje </param>
+        /// <param name="message"> Corresponde al mensaje que se envía </param>
 
         public void SendMessageInGame(string userSend, string userReceiving, string message)
         {
@@ -758,6 +935,13 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para obtener un usuario
+        /// </summary>
+        /// <param name="email"> Corresponde al correo del usuario que se desea obtener </param>
+        /// <param name="password"> Corresponde a la contraseña del usuario que se desea obtener </param>
+        /// <returns> Retorna un UserGame correspondiente a el email y password de entrada </returns>
+
         public UserGame GetLoggerUser(string email, string password)
         {
             try
@@ -771,6 +955,14 @@ namespace Host
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para registrar un nuevo usuario al juego
+        /// </summary>
+        /// <param name="email"> Corresponde al correo del jugador que se desea registrar </param>
+        /// <param name="password"> Corresponde a la contraseña del jugador que se desea registrar </param>
+        /// <param name="nametag"> Corresponde al nametag del usuario que se desea registrar </param>
+        /// <returns> Retorna un booleano con la respuesta del registro, true si fue existoso, de lo contrario, false </returns>
 
         public Boolean RegisterUser(string email, string password, string nametag)
         {
@@ -791,6 +983,12 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para verificar la existencia de un correo electrónico
+        /// </summary>
+        /// <param name="email"> Corresponde al correo que se verificará </param>
+        /// <returns> Booleano con el resultado de la operación, true si existe, de lo contrario, false </returns>
+
         public bool ExistsEmail(string email)
         {
             try
@@ -810,6 +1008,12 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para verificar la existencia de un nametag 
+        /// </summary>
+        /// <param name="nametag"> Corresponde al nametag que se verificará </param>
+        /// <returns></returns>
+
         public bool ExistsNametag(string nametag)
         {
             try
@@ -828,6 +1032,12 @@ namespace Host
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Método que envía un correo electronico con un código de verificación
+        /// </summary>
+        /// <param name="email"> Corresponde al correo electrónico al que se enviará el correo </param>
+        /// <returns> Cadena con el código que se envió al correo </returns>
 
         public String SendEmail(string email)
         {
@@ -858,8 +1068,14 @@ namespace Host
             {
                 throw ex;
             }
-
         }
+
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para modificar la contraseña de un usuario
+        /// </summary>
+        /// <param name="idUser"> Corresponde al id del usuario que desea modificar su contraseña </param>
+        /// <param name="newPassword"> Corresponde a la nueva contraseña del usuario </param>
+        /// <returns> Booleano con el resultado de la operación, true si se modificó, de lo contrario, false </returns>
 
         public bool UpdatePassword(int idUser, string newPassword)
         {
@@ -880,6 +1096,13 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para modificar el estado de un usuario
+        /// </summary>
+        /// <param name="idUser"> Corresponde a la id del usuario que desea modificar su estado </param>
+        /// <param name="userStatus"> Corresponde al estado al que pasará el usuario </param>
+        /// <returns> Booleano con el resultado de la operación, true si se modificó, de lo contrario, false </returns>
+
         public bool UpdateUserStatus(int idUser, string userStatus)
         {
             try
@@ -899,6 +1122,12 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para obtener un usuario mediante su id
+        /// </summary>
+        /// <param name="idUser"> Corresponde a la id del usuario que se desea obtener </param>
+        /// <returns> Variable de tipo UserGame con el usuario que coincide con la id </returns>
+
         public UserGame GetUserById(int idUser)
         {
             try
@@ -912,6 +1141,12 @@ namespace Host
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para obtener un usuario de acuerdo a su correo
+        /// </summary>
+        /// <param name="email"> Corresponde al correo del usuario que se desea obtener </param>
+        /// <returns> Variable de tipo UserGame con el usuario que coincide con el correo</returns>
 
         public UserGame GetUserByEmail(string email)
         {
@@ -927,6 +1162,12 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para obtener el o los usuarios que coincidan con ciertas iniciales de su nametag
+        /// </summary>
+        /// <param name="nametag"> Corresponde a las iniciales del nametag que se desea buscar </param>
+        /// <returns> Lista con el o los usuarios que coincidan con las iniciales </returns>
+
         public List<UserGame> GetUsersByInitialesOfNametag(string nametag)
         {
             try
@@ -940,6 +1181,13 @@ namespace Host
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para agregar un nuevo amigo a un jugador
+        /// </summary>
+        /// <param name="idUser"> Corresponde a la id del usuario que agregará un nuevo amigo </param>
+        /// <param name="idFriend"> Corresponde a la id del usuario que se agregará como amigo </param>
+        /// <returns> Booleano con el resultado de la operación, true si se agregó, de lo contrario, false </returns>
 
         public bool AddFriend(int idUser, int idFriend)
         {
@@ -960,6 +1208,13 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para eliminar un amigo de un jugador
+        /// </summary>
+        /// <param name="idUser"> Corresponde al id del usuario que desea eliminar un amigo </param>
+        /// <param name="idFriend"> Corresponde al id del usuario que se eliminará </param>
+        /// <returns> Booleano con el resultado de la operación, true si es verdadero, de lo contrario, false </returns>
+
         public bool DeleteFriend(int idUser, int idFriend)
         {
             try
@@ -979,6 +1234,12 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para obtener la lista de amigos de un jugador
+        /// </summary>
+        /// <param name="idUser"> Corresponde al id del usuario que desea obtener su lista de amigos </param>
+        /// <returns> Lista con los usuarios amigos del jugador </returns>
+
         public List<UserGame> GetFriendsList(int idUser)
         {
             try
@@ -992,6 +1253,12 @@ namespace Host
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para obtener la lista de amigos conectados de un jugador
+        /// </summary>
+        /// <param name="idUser"> Corresponde al id del usuario que desea obtener su lista de amigos conectados </param>
+        /// <returns> Lista con los usuarios conectados que son amigos del jugador </returns>
 
         public List<UserGame> GetConnectedFriends(int idUser)
         {
@@ -1007,6 +1274,13 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para verificar la existencia de una amistad entre dos jugadores
+        /// </summary>
+        /// <param name="idUser"> Corresponde a la id del primer jugador a verificar </param>
+        /// <param name="idFriend"> Corresponde a la id del segundo jugador a verificar </param>
+        /// <returns> Booleano con el resultado de la operación, true si existe, de lo contrario, false </returns>
+
         public bool ExistsFriendship(int idUser, int idFriend)
         {
             try
@@ -1020,6 +1294,13 @@ namespace Host
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para agregar una nueva solicitud de amistad
+        /// </summary>
+        /// <param name="idApplicant"> Corresponde a la id del jugador que desea enviar una solicitud de amistad </param>
+        /// <param name="idReceiver"> Corresponde a la id del jugador que recibirá la solicitud de amistad </param>
+        /// <returns> Booleano con el resultado de la operación, true si se agregó, de lo contrario, false </returns>
 
         public bool AddFriendRequest(int idApplicant, int idReceiver)
         {
@@ -1040,6 +1321,13 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para aceptar una solicitud de amistad
+        /// </summary>
+        /// <param name="idApplicant"> Corresponde a la id del jugador que envía la solicitud </param>
+        /// <param name="idReceiver"> Corresponde al id del jugador que recibió la solicitud y que la aceptará </param>
+        /// <returns> Booleano con el resultado de la operación, true si aceptó correctamente, de lo contrario, false </returns>
+
         public bool AcceptFriendRequest(int idApplicant, int idReceiver)
         {
             try
@@ -1058,6 +1346,13 @@ namespace Host
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para rechazar una solicitud de amistad
+        /// </summary>
+        /// <param name="idApplicant"> Corresponde al id del usuario que envío la solicitud de amistad </param>
+        /// <param name="idReceiver"> Corresponde al id del usuario que recibió la solicitud y la rechazará </param>
+        /// <returns> Booleano con el resultado de la operación, true si rechazó correctamente, de lo contrario, false</returns>
 
         public bool RejectFriendRequest(int idApplicant, int idReceiver)
         {
@@ -1078,6 +1373,12 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para obtener los usuarios que enviaron una solicitud de amistad a un jugador
+        /// </summary>
+        /// <param name="idUser"> Corresponde al id del usuario que desea obtener los usuarios que le enviaron solicitud </param>
+        /// <returns> Lista con los usuarios que le enviaron una solicitud de amistad al jugador </returns>
+
         public List<UserGame> GetUsersRequesting(int idUser)
         {
             try
@@ -1091,6 +1392,13 @@ namespace Host
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para verificar si existe una solicitud pendiente entre dos jugadores
+        /// </summary>
+        /// <param name="idApplicant"> Corresponde al id del usuario que desea enviar una solicitud de amistad </param>
+        /// <param name="idReceiver"> Corresponde al id del usuario que recibirá la solicitud de amistad </param>
+        /// <returns> Booleano con el resultado de la operación, true si ya existe una solicitud, de lo contrario, false </returns>
 
         public bool ExistsPendingRequest(int idApplicant, int idReceiver)
         {
@@ -1106,19 +1414,31 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para obtener el fondo del juego del usuario
+        /// </summary>
+        /// <param name="idUser"> Corresponde al id del usuario que desea obtener su fondo predeterminado </param>
+        /// <returns> Cadena con la dirección del fondo predeterminado </returns>
+
         public String GetBackgroundUser(int idUser)
         {
             try
             {
                 ConfigUserLogic configUserLogic = new ConfigUserLogic();
-                string direccionFondo = configUserLogic.GetBackgroundUser(GetConfigUserById(idUser));
-                return direccionFondo;
+                string addressBackground = configUserLogic.GetBackgroundUser(GetConfigUserById(idUser));
+                return addressBackground;
             }
             catch (SystemException ex)
             {
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para obtener la configuración de un jugador 
+        /// </summary>
+        /// <param name="idUser"> Corresponde a la id del jugador que desea obtener su configuración </param>
+        /// <returns> Variable de tipo configuser con la configuración del usuario </returns>
 
         public ConfigUser GetConfigUserById(int idUser)
         {
@@ -1133,6 +1453,12 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para modificar el fondo del juego de un jugador
+        /// </summary>
+        /// <param name="idUser"> Corresponde a la id del usuario que desea modificar su fondo predeterminado </param>
+        /// <param name="idNewBackground"> Corresponde a la id del nuevo fondo del juego </param>
+
         public void SetBackgroundUser(int idUser, int idNewBackground)
         {
             try
@@ -1145,6 +1471,13 @@ namespace Host
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para verificar si existe una configuración dle usuario
+        /// </summary>
+        /// <param name="idUser"> Corresponde a la id del jugador que desea verificar </param>
+        /// <returns> Booleano con el resultado de la operación, true si existe, de lo contrario, false </returns>
+
         public bool ExistsConfigUser(int idUser)
         {
             try
@@ -1157,6 +1490,12 @@ namespace Host
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para crear una configuración predeterminada a un usuario
+        /// </summary>
+        /// <param name="idUser"> Corresponde a la id del usuario que creará su configuración predeterminada </param>
+
         public void NewConfigUser(int idUser)
         {
             try
@@ -1169,6 +1508,11 @@ namespace Host
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para obtener los jugadores en orden de partidas ganadas
+        /// </summary>
+        /// <returns> Lista con los usuarios ordenados de mayor a menor partidas ganadas </returns>
 
         public List<StatisticUser> GetBetterUser()
         {
@@ -1184,6 +1528,13 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para obtener la estadística de un jugador
+        /// </summary>
+        /// <param name="idUser"> Corresponde al id del jugador que desea obtener su estadística </param>
+        /// <param name="numAchievement"> Corresponde al número de logros </param>
+        /// <returns> booleano con el resultado de la operación, true si existe, de lo contrario, false </returns>
+
         public bool GetStatisticUser(int idUser, int numAchievement)
         {
             try
@@ -1197,6 +1548,12 @@ namespace Host
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para agregar un nuevo juego ganado a un jugador
+        /// </summary>
+        /// <param name="idUser"> Corresponde a la id del jugador al que se le agregará el juego ganado </param>
+        /// <returns> Booleano con el resultado de la operación, true si agregó, de lo contrario, false </returns>
 
         public bool AddOneWinGame(int idUser)
         {
@@ -1217,6 +1574,12 @@ namespace Host
             }
         }
 
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para agregar un nuevo juego perdido a un jugador
+        /// </summary>
+        /// <param name="idUser"> Corresponde a la id del jugador al que se le agregará un nuevo juego perdido </param>
+        /// <returns> Booleano con el resultado de la operación, true si agregó, de lo contrario, false </returns>
+
         public bool AddOneLoseGame(int idUser)
         {
             try
@@ -1235,6 +1598,13 @@ namespace Host
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para agregar la estadística vacía de un nuevo jugador
+        /// </summary>
+        /// <param name="idUser"> Corresponde al id del usuario al que se le agregará su estadística </param>
+        /// <param name="nametag">Corresponde al nametag usuario al que se le agregará su estadística </param>
+        /// <returns> Booleano con el resultado de la operación, true si agregó, de lo contrario, false </returns>
 
         public bool AddedStatisticUser(int idUser, string nametag)
         {
@@ -1256,8 +1626,18 @@ namespace Host
         }
     }
 
+    /// <summary>
+    /// Corresponde a la clase principal del Host del MemoryUv
+    /// </summary>
+    /// 
     class Program
     {
+
+        /// <summary>
+        /// Método principal de la clase principal del HOST
+        /// </summary>
+        /// <param name="args"> Corresponde al parámetro predeterminado </param>
+       
         static void Main(string[] args)
         {
             using (ServiceHost host = new ServiceHost(typeof(Host.MemoryServer)))
