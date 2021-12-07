@@ -14,6 +14,7 @@ namespace Logic
     /// <summary>
     /// Clase que permite controlar la lógica del usuario en el sistema
     /// </summary>
+   
     public class UserLogic
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -112,7 +113,7 @@ namespace Logic
         /// <param name="userStatus"> Corresponde el estado al que pasará el jugador </param>
         /// <returns> Retorna el estado del procesamiento del método </returns>
 
-        public Status updateUserStatus(int idUser, string userStatus) 
+        public Status UpdateUserStatus(int idUser, string userStatus) 
         {
             Status status = Status.Failed;
             try

@@ -177,7 +177,6 @@ namespace Logic
                     {
                         exists = true;
                     }
-
                 }
             }
             catch (SystemException ex)

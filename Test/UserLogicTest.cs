@@ -58,7 +58,7 @@ namespace Test
         public void TestUpdateUserStatus()
         {
             UserLogic userLogic = new UserLogic();
-            Status status = userLogic.updateUserStatus(1, "Inactivo");
+            Status status = userLogic.UpdateUserStatus(1, "Inactivo");
             bool modified = false;
             if (status == Status.Sucess)
             {
