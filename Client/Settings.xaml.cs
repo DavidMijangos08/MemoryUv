@@ -87,6 +87,30 @@ namespace Client
             MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
             this.Close();
         }
+
+        private void Idiomas_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbLanguage.SelectedIndex == 0)
+            {
+                Properties.Settings.Default.languageCode = "en-US";
+                Properties.Settings.Default.Save();
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
+
+                Settings settings = new Settings(userGame);
+                settings.Show();
+                this.Close();
+            }
+            else
+            {
+                Properties.Settings.Default.languageCode = "es-MX";
+                Properties.Settings.Default.Save();
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es-MX");
+
+                Settings settings = new Settings(userGame);
+                settings.Show();
+                this.Close();
+            }
+        }
     }
 
     
