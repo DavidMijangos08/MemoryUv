@@ -19,7 +19,7 @@ namespace Logic
 
         public ConfigUser GetConfigUserById(int idUser)
         {
-            ConfigUser confi = new ConfigUser();
+            ConfigUser config = new ConfigUser();
 
             try
             {
@@ -28,10 +28,9 @@ namespace Logic
                     var coincidences = from ConfigUser in context.ConfigUsers where ConfigUser.idUser == idUser select ConfigUser;
                     if (coincidences.Count() > 0)
                     {
-                        confi = coincidences.First();
+                        config = coincidences.First();
                         
-                    }
-                        
+                    }                       
                 }
             }
             catch (SystemException ex)
@@ -39,7 +38,7 @@ namespace Logic
                 log.Error(ex.Message, ex);
                 throw new SystemException();
             }
-            return confi;
+            return config;
         }
 
         public string GetBackgroundUser(ConfigUser confi)
@@ -102,7 +101,7 @@ namespace Logic
         }
         public bool ExistsConfigUser(int idUser)
         {
-            ConfigUser confi = new ConfigUser();
+            ConfigUser config = new ConfigUser();
             bool exists = false;
             try
             {
@@ -128,15 +127,14 @@ namespace Logic
             {
                 using (var context = new MemoryModel())
                 {
-                    ConfigUser configuracion = new ConfigUser()
+                    ConfigUser config = new ConfigUser()
                     {
                         idUser = idUser,
                         idBackground = 0,
                         idLanguage = 0
                     };
-                    context.ConfigUsers.Add(configuracion);
-                    context.SaveChanges();
-                    
+                    context.ConfigUsers.Add(config);
+                    context.SaveChanges();                    
                 }
             }
             catch (SystemException ex)

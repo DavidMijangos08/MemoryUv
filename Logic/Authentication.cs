@@ -23,6 +23,7 @@ namespace Logic
         /// </summary>
         public Authentication()
         {
+
         }
 
         /// <summary>

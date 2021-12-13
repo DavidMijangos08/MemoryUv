@@ -40,6 +40,13 @@ namespace Client
         int pointsAdmin = 0;
         int pointsOpponent = 0;
 
+        /// <summary>
+        /// Constructor de la clase Game en donde se inicializan los diversos componentes
+        /// </summary>
+        /// <param name="users"> Corresponde a una lista con los usuarios que se conectan al juego </param>
+        /// <param name="section"> Corresponde a la sección del juego </param>
+        /// <param name="difficulty"> Corresponde a la dificultad del juego </param>
+
         public Game(List<UserGame> users, string section, string difficulty)
         {
             InitializeComponent();
@@ -87,6 +94,10 @@ namespace Client
             lbUserTurn.Text = userAdmin.nametag;     
         }
 
+        /// <summary>
+        /// Método que permite inicializar el temporizador de turnos del juego
+        /// </summary>
+
         private void InitializeTimer()
         {
             lbUserTurn.Text = userConnected.nametag;
@@ -97,6 +108,12 @@ namespace Client
             dispatcherTimer.Tick += DispatcherTimerTicker;
             dispatcherTimer.Start();
         }
+
+        /// <summary>
+        /// Método que permite generar el evento del temporizador y verificar si terminó el tiempo
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del temporizador </param>
 
         private void DispatcherTimerTicker(object sender, EventArgs e)
         {
@@ -109,6 +126,10 @@ namespace Client
                 CleanBoard();
             }
         }
+
+        /// <summary>
+        /// Método que permite limpiar el tablero con las cartas volteadas 
+        /// </summary>
 
         private void CleanBoard()
         {
@@ -134,6 +155,10 @@ namespace Client
             return;
         }
 
+        /// <summary>
+        /// Método que permite mandar el turno al jugador oponente
+        /// </summary>
+
         private void SendTurn()
         {
             try
@@ -149,12 +174,21 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que permite recibir si un jugador se desconectó del juego 
+        /// </summary>
+        /// <param name="userDisconnected"> Corresponde al usuario que se desconectó </param>
+
         public void ReceiveExitNotification(string userDisconnected)
         {
             string message = "El jugador " + userDisconnected + " se desconectó. Tu ganas esta partida!!!";
             gridNotification.Visibility = Visibility.Visible;
             lbNotification.Text = message;
         }
+
+        /// <summary>
+        /// Método que permite recibir el turno de juego
+        /// </summary>
 
         public void ReceiveGameTurn()
         {
@@ -165,10 +199,22 @@ namespace Client
             flippedCards = 0;
         }
 
+        /// <summary>
+        /// Método que permite habilitar la notificación de salida
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
+
         private void BackingOutClick(object sender, RoutedEventArgs e)
         {
             gridConfirmation.Visibility = Visibility.Visible;
         }
+
+        /// <summary>
+        /// Método que controla la aceptación de la notificación de salida
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
 
         private void ClickAcceptNotification(object sender, RoutedEventArgs e)
         {
@@ -194,6 +240,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que permite controlar la confirmación de salida
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
+
         private void ClickYes(object sender, RoutedEventArgs e)
         {
             try
@@ -218,10 +270,20 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que permite controlar la negación de la notificación de salida
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e">  Corresponde al evento del método </param>
+
         private void ClickNO(object sender, RoutedEventArgs e)
         {
             gridConfirmation.Visibility = Visibility.Hidden;
         }
+
+        /// <summary>
+        /// Método que genera las cartas del juego
+        /// </summary>
 
         private void LoadCardsDictionary()
         {
@@ -267,6 +329,10 @@ namespace Client
             } 
         }
 
+        /// <summary>
+        /// Mètodo que permite desordenar las cartas del juego
+        /// </summary>
+
         private void MessUpCards()
         {
             Random random = new Random();
@@ -288,6 +354,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que permite llenar el tablero de juego del invitado
+        /// </summary>
+        /// <param name="messyCards"> Corresponde a las cartas revueltas </param>
+
         private void FillGuestBoard(int[] messyCards)
         {
             this.messyCards = messyCards;
@@ -299,6 +370,10 @@ namespace Client
             }
             LoadCardsToGame();
         }
+
+        /// <summary>
+        /// Método que permite voltear las cartas del juego o regresar a su posición original
+        /// </summary>
 
         private void LoadCardsToGame()
         {
@@ -323,6 +398,10 @@ namespace Client
             }
             CompareCards();
         }
+
+        /// <summary>
+        /// Método que permite comparar las cartas volteadas
+        /// </summary>
 
         private void CompareCards()
         {
@@ -357,6 +436,10 @@ namespace Client
                 statusTurn = "Completado";
             }
         }
+
+        /// <summary>
+        /// Método que permite verificar si el juego llegó a su fin
+        /// </summary>
 
         private void CheckEndGame()
         {
@@ -400,6 +483,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que permite mandar a voltear una carta trás un clic en el tablero
+        /// </summary>
+        /// <param name="btn"></param>
+
         private void NewClic(string btn)
         {
             if(flippedCards < 2)
@@ -415,6 +503,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 1
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
+
         private void Btn1Click(object sender, RoutedEventArgs e)
         {
             try
@@ -427,6 +521,12 @@ namespace Client
                 ShowExceptionAlert();
             }
         }
+
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 2
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
 
         private void Btn2Click(object sender, RoutedEventArgs e)
         {
@@ -441,6 +541,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 3
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
+
         private void Btn3Click(object sender, RoutedEventArgs e)
         {
             try
@@ -453,6 +559,12 @@ namespace Client
                 ShowExceptionAlert();
             }
         }
+
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 4
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
 
         private void Btn4Click(object sender, RoutedEventArgs e)
         {
@@ -467,6 +579,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 5
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
+
         private void Btn5Click(object sender, RoutedEventArgs e)
         {
             try
@@ -479,6 +597,12 @@ namespace Client
                 ShowExceptionAlert();
             }
         }
+
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 6
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
 
         private void Btn6Click(object sender, RoutedEventArgs e)
         {
@@ -493,6 +617,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 7
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
+
         private void Btn7Click(object sender, RoutedEventArgs e)
         {
             try
@@ -505,6 +635,12 @@ namespace Client
                 ShowExceptionAlert();
             }
         }
+
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 13
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
 
         private void Btn13Click(object sender, RoutedEventArgs e)
         {
@@ -519,6 +655,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 19
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
+
         private void Btn19Click(object sender, RoutedEventArgs e)
         {
             try
@@ -531,6 +673,12 @@ namespace Client
                 ShowExceptionAlert();
             }
         }
+
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 25
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
 
         private void Btn25Click(object sender, RoutedEventArgs e)
         {
@@ -545,6 +693,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 31
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
+
         private void Btn31Click(object sender, RoutedEventArgs e)
         {
             try
@@ -557,6 +711,12 @@ namespace Client
                 ShowExceptionAlert();
             }
         }
+
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 8
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
 
         private void Btn8Click(object sender, RoutedEventArgs e)
         {
@@ -571,6 +731,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 9
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
+
         private void Btn9Click(object sender, RoutedEventArgs e)
         {
             try
@@ -583,6 +749,12 @@ namespace Client
                 ShowExceptionAlert();
             }
         }
+
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 10
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
 
         private void Btn10Click(object sender, RoutedEventArgs e)
         {
@@ -597,6 +769,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 11
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
+
         private void Btn11Click(object sender, RoutedEventArgs e)
         {
             try
@@ -609,6 +787,12 @@ namespace Client
                 ShowExceptionAlert();
             }
         }
+
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 12
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
 
         private void Btn12Click(object sender, RoutedEventArgs e)
         {
@@ -623,6 +807,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 14
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
+
         private void Btn14Click(object sender, RoutedEventArgs e)
         {
             try
@@ -635,6 +825,12 @@ namespace Client
                 ShowExceptionAlert();
             }
         }
+
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 15
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
 
         private void Btn15Click(object sender, RoutedEventArgs e)
         {
@@ -649,6 +845,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 16
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
+
         private void Btn16Click(object sender, RoutedEventArgs e)
         {
             try
@@ -661,6 +863,12 @@ namespace Client
                 ShowExceptionAlert();
             }
         }
+
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 17
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
 
         private void Btn17Click(object sender, RoutedEventArgs e)
         {
@@ -675,6 +883,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 18
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
+
         private void Btn18Click(object sender, RoutedEventArgs e)
         {
             try
@@ -687,6 +901,12 @@ namespace Client
                 ShowExceptionAlert();
             }
         }
+
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 20
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
 
         private void Btn20Click(object sender, RoutedEventArgs e)
         {
@@ -701,6 +921,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 21
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
+
         private void Btn21Click(object sender, RoutedEventArgs e)
         {
             try
@@ -713,6 +939,12 @@ namespace Client
                 ShowExceptionAlert();
             }
         }
+
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 22
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
 
         private void Btn22Click(object sender, RoutedEventArgs e)
         {
@@ -727,6 +959,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 23
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
+
         private void Btn23Click(object sender, RoutedEventArgs e)
         {
             try
@@ -739,6 +977,12 @@ namespace Client
                 ShowExceptionAlert();
             }
         }
+
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 24
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
 
         private void Btn24Click(object sender, RoutedEventArgs e)
         {
@@ -753,6 +997,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 26
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
+
         private void Btn26Click(object sender, RoutedEventArgs e)
         {
             try
@@ -765,6 +1015,12 @@ namespace Client
                 ShowExceptionAlert();
             }
         }
+
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 27
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
 
         private void Btn27Click(object sender, RoutedEventArgs e)
         {
@@ -779,6 +1035,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 28
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
+
         private void Btn28Click(object sender, RoutedEventArgs e)
         {
             try
@@ -791,6 +1053,12 @@ namespace Client
                 ShowExceptionAlert();
             }
         }
+
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 29
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
 
         private void Btn29Click(object sender, RoutedEventArgs e)
         {
@@ -805,6 +1073,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 30
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
+
         private void Btn30Click(object sender, RoutedEventArgs e)
         {
             try
@@ -817,6 +1091,12 @@ namespace Client
                 ShowExceptionAlert();
             }
         }
+
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 32
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
 
         private void Btn32Click(object sender, RoutedEventArgs e)
         {
@@ -831,6 +1111,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 33
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
+
         private void Btn33Click(object sender, RoutedEventArgs e)
         {
             try
@@ -843,6 +1129,12 @@ namespace Client
                 ShowExceptionAlert();
             }
         }
+
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 34
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
 
         private void Btn34Click(object sender, RoutedEventArgs e)
         {
@@ -857,6 +1149,12 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 35
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
+
         private void Btn35Click(object sender, RoutedEventArgs e)
         {
             try
@@ -869,6 +1167,12 @@ namespace Client
                 ShowExceptionAlert();
             }
         }
+
+        /// <summary>
+        /// Método que representa al evento del clic en el botón 36
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del botón </param>
 
         private void Btn36Click(object sender, RoutedEventArgs e)
         {
@@ -883,16 +1187,31 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que recibe las cartas revueltas del juego
+        /// </summary>
+        /// <param name="messyCards"> Corresponde a las cartas revultas </param>
+
         public void ReceiveGameBoard(int[] messyCards)
         {
             FillGuestBoard(messyCards);
         }
+
+        /// <summary>
+        /// Método que recibe el movimiento del jugador oponente
+        /// </summary>
+        /// <param name="user"> Corresponde al usuario que hizo el movimiento </param>
+        /// <param name="btn"> Corresponde al botón en el que dio clic </param>
 
         public void ReceiveMove(string user, string btn)
         {
             userInTurn = user;
             NewClic(btn);
         }
+
+        /// <summary>
+        /// Método que recibe la limpieza del tablero
+        /// </summary>
 
         public void ReceiveCleanBoard()
         {
@@ -901,6 +1220,12 @@ namespace Client
             cardNumbers.Clear();
         }
 
+        /// <summary>
+        /// Método que permite controlar la aceptación de la notificación de finalización
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
+
         private void ClicAcceptFinish(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -908,11 +1233,23 @@ namespace Client
             home.Show();
         }
 
+        /// <summary>
+        /// Método que permite recibir un mensaje del oponente en el juego
+        /// </summary>
+        /// <param name="user"> Corresponde al usuario que envía el mensaje </param>
+        /// <param name="message"> Corresponde al mensaje que enviaron </param>
+
         public void RecieveMessageInGame(string user, string message)
         {
             string newMessage = $"{user} : {message}";
             messageDisplay.Items.Add(newMessage);
         }
+
+        /// <summary>
+        /// Método que controla el envío de mensajes en el juego
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
 
         private void ClicSend(object sender, RoutedEventArgs e)
         {
@@ -934,11 +1271,21 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que muestra la alerta en caso de excepción
+        /// </summary>
+
         private void ShowExceptionAlert()
         {
             MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
             this.Close();
         }
+
+        /// <summary>
+        /// Método que controla la salida del juego desde la X de la ventana
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {

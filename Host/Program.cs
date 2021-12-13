@@ -327,7 +327,7 @@ namespace Host
     public class MemoryServer : IChatService, IRoomService, IPreGameService, IGameService, IUserService, IFriendService, IFriendRequestService, IStatisticService
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        Dictionary<IChatClient, string> _users = new Dictionary<IChatClient, string>();
+        Dictionary<IChatClient, string> users = new Dictionary<IChatClient, string>();
         Dictionary<IUserClient, string> usersRoom = new Dictionary<IUserClient, string>();
         Dictionary<IPreGameClient, string> usersPreGame = new Dictionary<IPreGameClient, string>();
         Dictionary<IGameClient, string> usersGame = new Dictionary<IGameClient, string>();
@@ -342,11 +342,11 @@ namespace Host
             try
             {
                 var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
-                _users[connection] = username;
+                users[connection] = username;
                 Console.WriteLine("El usuario " + username + " se conecto...");
-                foreach (var userConnection in _users.Keys)
+                foreach (var userConnection in users.Keys)
                 {
-                    userConnection.UsersUpdate(_users.Values);
+                    userConnection.UsersUpdate(users.Values);
                 }
             }
             catch (CommunicationException ex)
@@ -367,11 +367,11 @@ namespace Host
             {
                 var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
                 string user;
-                if (!_users.TryGetValue(connection, out user))
+                if (!users.TryGetValue(connection, out user))
                 {
                     return;
                 }
-                foreach (var other in _users.Keys)
+                foreach (var other in users.Keys)
                 {
                     if (other == connection)
                     {
@@ -397,11 +397,11 @@ namespace Host
             try
             {
                 var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
-                Console.WriteLine("El usuario " + _users[connection] + " se desconecto!");
-                _users.Remove(connection);
-                foreach (var userConnection in _users.Keys)
+                Console.WriteLine("El usuario " + users[connection] + " se desconecto!");
+                users.Remove(connection);
+                foreach (var userConnection in users.Keys)
                 {
-                    userConnection.UsersUpdate(_users.Values);
+                    userConnection.UsersUpdate(users.Values);
                 }
             }
             catch (CommunicationException ex)
@@ -424,14 +424,14 @@ namespace Host
                 var connection = OperationContext.Current.GetCallbackChannel<IChatClient>();
                 string user;
                 string userPrivate;
-                if (!_users.TryGetValue(connection, out user))
+                if (!users.TryGetValue(connection, out user))
                 {
                     return;
                 }
 
-                foreach (var uPrivate in _users.Keys)
+                foreach (var uPrivate in users.Keys)
                 {
-                    if (_users.TryGetValue(uPrivate, out userPrivate))
+                    if (users.TryGetValue(uPrivate, out userPrivate))
                     {
                         if (userPrivate == username)
                         {
@@ -1045,15 +1045,15 @@ namespace Host
             {
                 Authentication authentication = new Authentication();
                 String code = authentication.RandomString();
-                System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
-                mmsg.To.Add(email);
-                mmsg.Subject = "CODE UV";
-                mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
-                mmsg.Body = code;
-                mmsg.BodyEncoding = System.Text.Encoding.UTF8;
-                mmsg.IsBodyHtml = true;
+                System.Net.Mail.MailMessage mailMessage = new System.Net.Mail.MailMessage();
+                mailMessage.To.Add(email);
+                mailMessage.Subject = "CODE UV";
+                mailMessage.SubjectEncoding = System.Text.Encoding.UTF8;
+                mailMessage.Body = code;
+                mailMessage.BodyEncoding = System.Text.Encoding.UTF8;
+                mailMessage.IsBodyHtml = true;
 
-                mmsg.From = new System.Net.Mail.MailAddress("memoryuv@gmail.com");
+                mailMessage.From = new System.Net.Mail.MailAddress("memoryuv@gmail.com");
                 System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
                 client.Credentials = new System.Net.NetworkCredential("memoryuv@gmail.com", "0qwerty0");
 
@@ -1061,7 +1061,7 @@ namespace Host
                 client.EnableSsl = true;
 
                 client.Host = "smtp.gmail.com";
-                client.Send(mmsg);
+                client.Send(mailMessage);
                 return code;
             }
             catch (SystemException ex)
@@ -1109,7 +1109,7 @@ namespace Host
             {
                 bool updated = false;
                 UserLogic userLogic = new UserLogic();
-                UserLogic.Status status = userLogic.updateUserStatus(idUser, userStatus);
+                UserLogic.Status status = userLogic.UpdateUserStatus(idUser, userStatus);
                 if (status == UserLogic.Status.Sucess)
                 {
                     updated = true;

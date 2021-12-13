@@ -64,8 +64,7 @@ namespace Logic
                                 exists = true;
                                 
                                 return exists;
-                            }
-                            
+                            }                           
                         }
                     }
                     else if (numAchievement == 2)
@@ -80,7 +79,6 @@ namespace Logic
                                 exists = true;
                                 return exists;
                             }
-
                         }
                     }
                     else if (numAchievement == 3)
@@ -95,7 +93,6 @@ namespace Logic
                                 exists = true;
                                 return exists;
                             }
-
                         }
                     }
                     else if (numAchievement == 4)
@@ -107,9 +104,6 @@ namespace Logic
                             Friend statisticuser = concidences.First();
                             exists = true;
                             return exists;
-                               
-                            
-
                         }
                     }
                     else if (numAchievement == 5)
@@ -127,9 +121,6 @@ namespace Logic
 
                         }
                     }
-
-
-
                 }
             }
             catch (SystemException ex)
@@ -160,6 +151,7 @@ namespace Logic
                         statisticUser.totalWins++;
                         statisticUser.totalGames++;
                     }
+
                     int numberChanges = context.SaveChanges();
                     if (numberChanges > 0)
                     {
