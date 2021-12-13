@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
+        xmlns:p="clr-namespace:Client.Properties.Langs"
         mc:Ignorable="d"
         Closing="WindowClosing"
         Title="Chat" Height="450" Width="800">
@@ -12,7 +13,7 @@
         <ListBox x:Name="listUsersOnline" Margin="10,29,0,109" HorizontalAlignment="Left" Width="201"/>
         <ListBox x:Name="messageDisplay" Margin="216,29,9.6,109"/>
         <TextBox x:Name="txtChat" HorizontalAlignment="Left" Margin="46,355,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="516" Height="45"/>
-        <Button x:Name="btnSend" Content="Enviar" HorizontalAlignment="Left" Margin="646,328,0,0" VerticalAlignment="Top" Click="BtnSendClick" Width="103" Height="22">
+        <Button x:Name="btnSend" Content="{x:Static p:Lang.btnSend}" HorizontalAlignment="Left" Margin="646,328,0,0" VerticalAlignment="Top" Click="BtnSendClick" Width="103" Height="22">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>

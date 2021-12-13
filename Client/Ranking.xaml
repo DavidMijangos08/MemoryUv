@@ -5,12 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
-        xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"     
+        xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"  
+        xmlns:p="clr-namespace:Client.Properties.Langs"
+        
         Title="MemoryUV" Height="450" Width="800">
     <Grid x:Name="mainGrid" Margin="0,0,2,2">
-        <Label Content="Ranking" HorizontalAlignment="Left" Margin="472,10,0,0" VerticalAlignment="Top" Width="244" FontSize="36" FontFamily="Segoe Script" FontWeight="Bold"/>
-        <Image gif:AnimationBehavior.SourceUri="/Resources/Images/logro2.gif" Margin="10,13,443.6,10" gif:AnimationBehavior.RepeatBehavior="Forever" /> 
-        <Button Content="Regresar" HorizontalAlignment="Left" Margin="533,379,0,0" VerticalAlignment="Top" Width="75" Click="RegresarClick">
+        <Label Content="{x:Static p:Lang.btnRanking}" HorizontalAlignment="Left" Margin="472,10,0,0" VerticalAlignment="Top" Width="244" FontSize="36" FontFamily="Segoe Script" FontWeight="Bold"/>
+        <Image gif:AnimationBehavior.SourceUri="/Resources/Images/logro2.gif" Margin="10,13,443.6,10" gif:AnimationBehavior.RepeatBehavior="Forever" />
+        <Button Content="{x:Static p:Lang.btnBack}" HorizontalAlignment="Left" Margin="533,379,0,0" VerticalAlignment="Top" Width="75" Click="RegresarClick">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
@@ -18,9 +20,9 @@
         <ListView x:Name="listRank" HorizontalAlignment="Left" Height="286" Margin="371,82,0,0" VerticalAlignment="Top" Width="394">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="TOP" Width="40" DisplayMemberBinding="{Binding id}"/>
-                    <GridViewColumn Header="Jugador" Width="190" DisplayMemberBinding="{Binding nameTag}"/>
-                    <GridViewColumn Header="Victorias" Width="70" DisplayMemberBinding="{Binding totalWins}"/>
+                    <GridViewColumn Header="{x:Static p:Lang.lbTop}" Width="40" DisplayMemberBinding="{Binding id}"/>
+                    <GridViewColumn Header="{x:Static p:Lang.lbPlayer}" Width="190" DisplayMemberBinding="{Binding nameTag}"/>
+                    <GridViewColumn Header="{x:Static p:Lang.lbVictories}" Width="70" DisplayMemberBinding="{Binding totalWins}"/>
                 </GridView>
             </ListView.View>
         </ListView>

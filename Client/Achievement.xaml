@@ -6,20 +6,21 @@
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
         xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
+        xmlns:p="clr-namespace:Client.Properties.Langs"
         
         Title="Logros" Height="450" Width="800">
     <Grid x:Name="mainGrid">
-        <Label Content="Archievement" HorizontalAlignment="Left" Margin="411,13,0,0" FontSize="36" VerticalAlignment="Top" FontFamily="Segoe Script" FontWeight="Bold"/>
-        <Button Content="Regresar" HorizontalAlignment="Left" Margin="407,385,0,0" VerticalAlignment="Top" Width="75" Click="ExitClick">
+        <Label Content="{x:Static p:Lang.btnAchievement}" HorizontalAlignment="Left" Margin="411,13,0,0" FontSize="36" VerticalAlignment="Top" FontFamily="Segoe Script" FontWeight="Bold"/>
+        <Button Content="{x:Static p:Lang.btnBack}" HorizontalAlignment="Left" Margin="407,385,0,0" VerticalAlignment="Top" Width="75" Click="ExitClick">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Label x:Name="lbAchievement1" Content="Obten tu primer victoria" HorizontalAlignment="Left" Margin="485,94,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Dubai Medium" IsEnabled="False"/>
-        <Label x:Name="lbAchievement2" Content="Consigue 10 victorias!" HorizontalAlignment="Left" Margin="485,158,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Dubai Medium" IsEnabled="False"/>
-        <Label x:Name="lbAchievement3" Content="En buena hora 250 victorias!!!" HorizontalAlignment="Left" Margin="485,215,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Dubai Medium" IsEnabled="False"/>
-        <Label x:Name="lbAchievement4" Content="Realiza 2 amigos" HorizontalAlignment="Left" Margin="485,275,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Dubai Medium" IsEnabled="False"/>
-        <Label x:Name="lbAchievement5" Content="Primer derrota?" HorizontalAlignment="Left" Margin="485,336,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Dubai Medium" IsEnabled="False"/>
+        <Label x:Name="lbAchievement1" Content="{x:Static p:Lang.ach1}" HorizontalAlignment="Left" Margin="485,94,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Dubai Medium" IsEnabled="False"/>
+        <Label x:Name="lbAchievement2" Content="{x:Static p:Lang.ach2}" HorizontalAlignment="Left" Margin="485,158,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Dubai Medium" IsEnabled="False"/>
+        <Label x:Name="lbAchievement3" Content="{x:Static p:Lang.ach3}" HorizontalAlignment="Left" Margin="485,215,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Dubai Medium" IsEnabled="False"/>
+        <Label x:Name="lbAchievement4" Content="{x:Static p:Lang.ach4}" HorizontalAlignment="Left" Margin="485,275,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Dubai Medium" IsEnabled="False"/>
+        <Label x:Name="lbAchievement5" Content="{x:Static p:Lang.ach5}" HorizontalAlignment="Left" Margin="485,336,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Dubai Medium" IsEnabled="False"/>
         <Image gif:AnimationBehavior.SourceUri="/Resources/Images/logro0.gif" Margin="10,13,393.6,44" 
              gif:AnimationBehavior.RepeatBehavior="Forever"  />
         <Image x:Name="imgAchievement1" HorizontalAlignment="Left" Height="53" Margin="411,80,0,0" VerticalAlignment="Top" Width="52" Source="Resources/Images/achievement1.jpg" Opacity="0.5"/>

@@ -4,22 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
+        xmlns:p="clr-namespace:Client.Properties.Langs"
         mc:Ignorable="d"
         Title="Solicitudes de amistad" Height="450" Width="366">
     <Grid Background="#DCDCDC" Margin="0,0,2,0">
-        <Label Content="Solicitudes de amistad" HorizontalAlignment="Left" Margin="34,10,0,0" VerticalAlignment="Top" Width="312" FontSize="24 " FontFamily="Segoe Script" FontWeight="Bold"/>
+        <Label Content="{x:Static p:Lang.lbFriendRequest}" HorizontalAlignment="Left" Margin="34,10,0,0" VerticalAlignment="Top" Width="312" FontSize="24 " FontFamily="Segoe Script" FontWeight="Bold"/>
         <ListBox x:Name="listRequests" HorizontalAlignment="Left" Height="272" Margin="34,82,0,0" VerticalAlignment="Top" Width="197"/>
-        <Button Content="Aceptar"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="254,96,0,0" VerticalAlignment="Top" Width="62" Click="ClicAcceptFriend">
+        <Button Content="{x:Static p:Lang.btnAcept}"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="254,96,0,0" VerticalAlignment="Top" Width="62" Click="ClicAcceptFriend">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button Content="Rechazar"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="254,132,0,0" VerticalAlignment="Top" Width="62" Click="ClicRejectFriend">
+        <Button Content="{x:Static p:Lang.btnRefuse}"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="254,132,0,0" VerticalAlignment="Top" Width="62" Click="ClicRejectFriend">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button Content="Salir"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="270,391,0,0" VerticalAlignment="Top" Width="62" Click="ClicExit">
+        <Button Content="{x:Static p:Lang.btnExit}"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="270,391,0,0" VerticalAlignment="Top" Width="62" Click="ClicExit">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>

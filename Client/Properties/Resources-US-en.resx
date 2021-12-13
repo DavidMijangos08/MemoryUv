@@ -118,34 +118,34 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="btnAccept" xml:space="preserve">
-    <value>Aceptar</value>
+    <value>Acept</value>
   </data>
   <data name="btnAdd" xml:space="preserve">
-    <value>Agregar</value>
+    <value>Add</value>
   </data>
   <data name="btnArchievements" xml:space="preserve">
-    <value>Logros</value>
+    <value>Achievement</value>
   </data>
   <data name="btnBackingOut" xml:space="preserve">
-    <value>Retirarse</value>
+    <value>Back</value>
   </data>
   <data name="btnChat" xml:space="preserve">
     <value>Chat</value>
   </data>
   <data name="btnExit" xml:space="preserve">
-    <value>Salir</value>
+    <value>Exit</value>
   </data>
   <data name="btnFriends" xml:space="preserve">
-    <value>Amigos</value>
+    <value>Friends</value>
   </data>
   <data name="btnInclude" xml:space="preserve">
-    <value>Incluir</value>
+    <value>Include</value>
   </data>
   <data name="btnLogin" xml:space="preserve">
-    <value>Ingresar</value>
+    <value>Login</value>
   </data>
   <data name="btnNewAccount" xml:space="preserve">
-    <value>Crear cuenta</value>
+    <value>New Account</value>
   </data>
   <data name="btnPersonalize" xml:space="preserve">
     <value>Personalizar</value>
@@ -261,8 +261,5 @@
   </data>
   <data name="victories" xml:space="preserve">
     <value>Victorias</value>
-  </data>
-  <data name="test" xml:space="preserve">
-    <value>test</value>
   </data>
 </root>

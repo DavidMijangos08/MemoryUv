@@ -5,15 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
+        xmlns:p="clr-namespace:Client.Properties.Langs"
         Title="MemoryUv" Height="417" Width="704">
     <Grid x:Name="mainGrid" Margin="0,0,2,-1" RenderTransformOrigin="0.549,0.545">
         <Label Content="Memory UV" HorizontalAlignment="Left" Margin="243,10,0,0" VerticalAlignment="Top" Width="244" FontSize="36" FontFamily="Segoe Script" FontWeight="Bold"/>
-        <Button Content="Configuración" HorizontalAlignment="Left" Margin="217,346,0,0" VerticalAlignment="Top" Width="110" Height="28" RenderTransformOrigin="0.241,0.446" Click="SettingsClick">
+        <Button Content="{x:Static p:Lang.lbSettings}" HorizontalAlignment="Left" Margin="217,346,0,0" VerticalAlignment="Top" Width="110" Height="28" RenderTransformOrigin="0.241,0.446" Click="SettingsClick">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button Content="Salir" Click="ExitClick" HorizontalAlignment="Left" Margin="398,346,0,0" VerticalAlignment="Top" Width="108" Height="28" RenderTransformOrigin="0.899,0.393">
+        <Button Content="{x:Static p:Lang.btnExit}" Click="ExitClick" HorizontalAlignment="Left" Margin="398,346,0,0" VerticalAlignment="Top" Width="108" Height="28" RenderTransformOrigin="0.899,0.393">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
@@ -23,38 +24,38 @@
                 <BlurEffect/>
             </StackPanel.Effect>
         </StackPanel>
-        <Button Content="Amigos" HorizontalAlignment="Left" Margin="24,112,0,0" VerticalAlignment="Top" Width="74"  Click="FriendsClick" Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun">
+        <Button Content="{x:Static p:Lang.btnFriends}" HorizontalAlignment="Left" Margin="24,112,0,0" VerticalAlignment="Top" Width="74"  Click="FriendsClick" Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button Content="Logros" HorizontalAlignment="Left" Margin="24,185,0,0" VerticalAlignment="Top" Width="74"  Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun" Click="ArchievementClick">
+        <Button Content="{x:Static p:Lang.btnAchievement}" HorizontalAlignment="Left" Margin="24,185,0,0" VerticalAlignment="Top" Width="74"  Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun" Click="ArchievementClick">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button Content="Personalizar" HorizontalAlignment="Left" Margin="24,268,0,0" VerticalAlignment="Top" Width="74" Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun" Click="PersonalizeClick">
+        <Button Content="{x:Static p:Lang.btnPersonalize}" HorizontalAlignment="Left" Margin="24,268,0,0" VerticalAlignment="Top" Width="74" Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun" Click="PersonalizeClick">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Label Content="Bienvenido al juego " HorizontalAlignment="Left" Margin="266,82,0,0" VerticalAlignment="Top"/>
+        <Label Content="{x:Static p:Lang.textWelcome}" HorizontalAlignment="Left" Margin="266,82,0,0" VerticalAlignment="Top"/>
         <StackPanel Background="White"  HorizontalAlignment="Left" Height="242" Margin="570,82,0,0" VerticalAlignment="Top" Width="114">
             <StackPanel.Effect>
                 <BlurEffect/>
             </StackPanel.Effect>
         </StackPanel>
-        <Button Content="Ranking" HorizontalAlignment="Left" Margin="589,112,0,0" VerticalAlignment="Top" Width="74"  Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun" RenderTransformOrigin="0.399,0.667" Click="RankingClick">
+        <Button Content="{x:Static p:Lang.btnRanking}" HorizontalAlignment="Left" Margin="589,112,0,0" VerticalAlignment="Top" Width="74"  Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun" RenderTransformOrigin="0.399,0.667" Click="RankingClick">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button Content="Crear sala" HorizontalAlignment="Left" Margin="589,185,0,0" VerticalAlignment="Top" Width="74"  Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun" Click="RoomClick">
+        <Button Content="{x:Static p:Lang.btnNewRoom}" HorizontalAlignment="Left" Margin="589,185,0,0" VerticalAlignment="Top" Width="74"  Background="White" BorderBrush="#FFC5C2C2" FontFamily="SimSun" Click="RoomClick">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button Content="Chat" HorizontalAlignment="Left" Margin="589,268,0,0" VerticalAlignment="Top" Width="74" FontFamily="SimSun" Click="ChatClick" Background="White" BorderBrush="#FFC5C2C2">
+        <Button Content="{x:Static p:Lang.btnChat}" HorizontalAlignment="Left" Margin="589,268,0,0" VerticalAlignment="Top" Width="74" FontFamily="SimSun" Click="ChatClick" Background="White" BorderBrush="#FFC5C2C2">
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
@@ -64,8 +65,8 @@
             <Grid.Effect>
                 <DropShadowEffect Color="#FF101354"/>
             </Grid.Effect>
-            <Button Content="Aceptar" HorizontalAlignment="Left" Margin="23,101,0,0" Click="ClickAccept" VerticalAlignment="Top" Width="74"/>
-            <Button Content="Rechazar" HorizontalAlignment="Left" Margin="171,101,0,0" Click="ClicRejeact"  VerticalAlignment="Top" Width="75"/>
+            <Button Content="{x:Static p:Lang.btnAcept}" HorizontalAlignment="Left" Margin="23,101,0,0" Click="ClickAccept" VerticalAlignment="Top" Width="74"/>
+            <Button Content="{x:Static p:Lang.lbToRefuse}" HorizontalAlignment="Left" Margin="171,101,0,0" Click="ClicRejeact"  VerticalAlignment="Top" Width="75"/>
             <TextBlock x:Name="lbInvitation" HorizontalAlignment="Left" Margin="23,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="38" Width="223"/>
         </Grid>
     </Grid>

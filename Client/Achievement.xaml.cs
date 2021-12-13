@@ -79,13 +79,6 @@ namespace Client
             }
         }
 
-        private void Settings_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
-
         private void ExitClick(object sender, RoutedEventArgs e)
         {
             Home windowHome = new Home(userGame);

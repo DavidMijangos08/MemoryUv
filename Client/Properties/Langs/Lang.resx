@@ -117,152 +117,214 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="btnAccept" xml:space="preserve">
-    <value>Aceptar</value>
+  <data name="ach1" xml:space="preserve">
+    <value>Get your first win!</value>
+  </data>
+  <data name="ach2" xml:space="preserve">
+    <value>Get 10 wins!!</value>
+  </data>
+  <data name="ach3" xml:space="preserve">
+    <value>Congratulations, 250 victories!!!</value>
+  </data>
+  <data name="ach4" xml:space="preserve">
+    <value>make two friends</value>
+  </data>
+  <data name="ach5" xml:space="preserve">
+    <value>first loss?</value>
+  </data>
+  <data name="btnAcept" xml:space="preserve">
+    <value>Acept</value>
+  </data>
+  <data name="btnAchievement" xml:space="preserve">
+    <value>Achievement</value>
   </data>
   <data name="btnAdd" xml:space="preserve">
-    <value>Agregar</value>
+    <value>Add</value>
   </data>
-  <data name="btnArchievements" xml:space="preserve">
-    <value>Logros</value>
+  <data name="btnBack" xml:space="preserve">
+    <value>Back</value>
   </data>
-  <data name="btnBackingOut" xml:space="preserve">
-    <value>Retirarse</value>
+  <data name="btnCancel" xml:space="preserve">
+    <value>Cancel</value>
   </data>
   <data name="btnChat" xml:space="preserve">
     <value>Chat</value>
   </data>
+  <data name="btnContinue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="btnDeletFriend" xml:space="preserve">
+    <value>Delet Friend</value>
+  </data>
   <data name="btnExit" xml:space="preserve">
-    <value>Salir</value>
+    <value>Exit</value>
+  </data>
+  <data name="btnForgotPassword" xml:space="preserve">
+    <value>Forgot Password</value>
   </data>
   <data name="btnFriends" xml:space="preserve">
-    <value>Amigos</value>
-  </data>
-  <data name="btnInclude" xml:space="preserve">
-    <value>Incluir</value>
+    <value>Friends</value>
   </data>
   <data name="btnLogin" xml:space="preserve">
-    <value>Ingresar</value>
+    <value>Login</value>
+  </data>
+  <data name="btnLogOut" xml:space="preserve">
+    <value>Log out</value>
   </data>
   <data name="btnNewAccount" xml:space="preserve">
-    <value>Crear cuenta</value>
+    <value>New Account</value>
+  </data>
+  <data name="btnNewRoom" xml:space="preserve">
+    <value>New Room</value>
+  </data>
+  <data name="btnNext" xml:space="preserve">
+    <value>Next</value>
   </data>
   <data name="btnPersonalize" xml:space="preserve">
-    <value>Personalizar</value>
+    <value>Personalize</value>
   </data>
   <data name="btnRanking" xml:space="preserve">
     <value>Ranking</value>
   </data>
   <data name="btnRecharge" xml:space="preserve">
-    <value>Recargar</value>
+    <value>Recharge</value>
   </data>
-  <data name="btnReject" xml:space="preserve">
-    <value>Rechazar</value>
+  <data name="btnRefuse" xml:space="preserve">
+    <value>Refuse</value>
   </data>
-  <data name="btnRemoveFriend" xml:space="preserve">
-    <value>Eliminar amigo</value>
+  <data name="btnRequest" xml:space="preserve">
+    <value>Request</value>
   </data>
-  <data name="btnRequests" xml:space="preserve">
-    <value>Solicitudes</value>
-  </data>
-  <data name="btnReturn" xml:space="preserve">
-    <value>Regresar</value>
-  </data>
-  <data name="btnRoom" xml:space="preserve">
-    <value>Crear sala</value>
+  <data name="btnRestoreBackground" xml:space="preserve">
+    <value>Restore Background</value>
   </data>
   <data name="btnSearch" xml:space="preserve">
-    <value>Buscar</value>
+    <value>Search</value>
   </data>
   <data name="btnSend" xml:space="preserve">
-    <value>Enviar</value>
+    <value>Send</value>
   </data>
-  <data name="btnSetting" xml:space="preserve">
-    <value>Configuración</value>
+  <data name="btnSendCode" xml:space="preserve">
+    <value>Send Code</value>
   </data>
-  <data name="btnSingOff" xml:space="preserve">
-    <value>Cerrar sesión</value>
+  <data name="btnStartGame" xml:space="preserve">
+    <value>Start Game</value>
   </data>
-  <data name="btnSupport" xml:space="preserve">
-    <value>Recuperar contraseña</value>
+  <data name="btnSurrender" xml:space="preserve">
+    <value>Surrender</value>
   </data>
-  <data name="email" xml:space="preserve">
-    <value>Correo electrónico</value>
+  <data name="EN" xml:space="preserve">
+    <value>English</value>
   </data>
-  <data name="friends" xml:space="preserve">
-    <value>Amigos</value>
+  <data name="ES" xml:space="preserve">
+    <value>Spanish</value>
   </data>
-  <data name="lbArchivements" xml:space="preserve">
-    <value>Logros</value>
+  <data name="lbAFEL" xml:space="preserve">
+    <value>AFEL</value>
   </data>
-  <data name="lbDifficulty" xml:space="preserve">
-    <value>Seleccionar dificultad:</value>
+  <data name="lbAgainPassword" xml:space="preserve">
+    <value>Repeat Password</value>
   </data>
-  <data name="lbFriendRequests" xml:space="preserve">
-    <value>Solicitudes de amistad</value>
+  <data name="lbChooseDifficulty" xml:space="preserve">
+    <value>Choose a difficulty</value>
   </data>
-  <data name="lbIdiom" xml:space="preserve">
-    <value>Idioma</value>
+  <data name="lbChooseSection" xml:space="preserve">
+    <value>Choose a section</value>
   </data>
-  <data name="lbInvitFriend" xml:space="preserve">
-    <value>Invitar amigo</value>
+  <data name="lbEasy" xml:space="preserve">
+    <value>Easy (4x4)</value>
   </data>
-  <data name="lbPoints" xml:space="preserve">
-    <value>Puntos:</value>
+  <data name="lbEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="lbEmptyField" xml:space="preserve">
+    <value>Empty fields</value>
+  </data>
+  <data name="lbFriendRequest" xml:space="preserve">
+    <value>Friend Requests</value>
+  </data>
+  <data name="lbHard" xml:space="preserve">
+    <value>Hard (8x8)</value>
+  </data>
+  <data name="lbInviteFriend" xml:space="preserve">
+    <value>Invite your friend</value>
+  </data>
+  <data name="lbLanguage" xml:space="preserve">
+    <value>-Language-</value>
+  </data>
+  <data name="lbLogin" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="lbNewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="lbNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="lbNormal" xml:space="preserve">
+    <value>Normal (6x6)</value>
+  </data>
+  <data name="lbPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="lbPlayer" xml:space="preserve">
+    <value>Player</value>
+  </data>
+  <data name="lbPlayerTurn" xml:space="preserve">
+    <value>Player Turn:</value>
+  </data>
+  <data name="lbRemainingPairs" xml:space="preserve">
+    <value>Remaining Pairs:</value>
   </data>
   <data name="lbRoom" xml:space="preserve">
-    <value>Sala</value>
+    <value>Room</value>
   </data>
-  <data name="lbSearchFriends" xml:space="preserve">
-    <value>Buscar amigos</value>
+  <data name="lbScore" xml:space="preserve">
+    <value>Score:</value>
   </data>
-  <data name="lbSection" xml:space="preserve">
-    <value>Seleccionar sección: </value>
+  <data name="lbSearchFriend" xml:space="preserve">
+    <value>Search Friend</value>
   </data>
   <data name="lbSettings" xml:space="preserve">
-    <value>Configuración</value>
+    <value>Settings</value>
   </data>
   <data name="lbSound" xml:space="preserve">
-    <value>Sonido</value>
+    <value>Sound:</value>
+  </data>
+  <data name="lbStudy" xml:space="preserve">
+    <value>Study</value>
   </data>
   <data name="lbTime" xml:space="preserve">
-    <value>Tiempo:</value>
+    <value>Time:</value>
   </data>
-  <data name="lbTurn" xml:space="preserve">
-    <value>Turno de:</value>
+  <data name="lbTop" xml:space="preserve">
+    <value>TOP</value>
   </data>
-  <data name="lbView" xml:space="preserve">
-    <value>Vista</value>
+  <data name="lbToRefuse" xml:space="preserve">
+    <value>To Refuse</value>
   </data>
-  <data name="lbVisualFilter" xml:space="preserve">
-    <value>Filtro visual</value>
+  <data name="lbVictories" xml:space="preserve">
+    <value>Victories</value>
   </data>
-  <data name="lbWelcome" xml:space="preserve">
-    <value>Bienvenido al juego</value>
+  <data name="lbVisual" xml:space="preserve">
+    <value>Visual:</value>
   </data>
-  <data name="login" xml:space="preserve">
-    <value>Inicio de sesión</value>
+  <data name="lbYes" xml:space="preserve">
+    <value>Yes</value>
   </data>
-  <data name="memoryUv" xml:space="preserve">
-    <value>Memory UV</value>
+  <data name="textBackground" xml:space="preserve">
+    <value>Select your favorite background!</value>
   </data>
-  <data name="password" xml:space="preserve">
-    <value>Contraseña</value>
+  <data name="textCode" xml:space="preserve">
+    <value>Enter the code sent to your email</value>
   </data>
-  <data name="player" xml:space="preserve">
-    <value>Jugador</value>
+  <data name="textGameExit" xml:space="preserve">
+    <value>Are you sure you want to exit the game?</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="backgroundDefault" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Background\backgroundDefault.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="textNametag" xml:space="preserve">
+    <value>Which nametag would you like?</value>
   </data>
-  <data name="song" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Sound\song.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="victories" xml:space="preserve">
-    <value>Victorias</value>
-  </data>
-  <data name="test" xml:space="preserve">
-    <value>test</value>
+  <data name="textWelcome" xml:space="preserve">
+    <value>Welcome to the game:</value>
   </data>
 </root>

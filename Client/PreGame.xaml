@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
+        xmlns:p="clr-namespace:Client.Properties.Langs"
         mc:Ignorable="d"
         Title="PreGame" Height="450" Width="435.053">
     <Grid>
@@ -11,7 +12,7 @@
             <Image HorizontalAlignment="Left" Height="100" Margin="83,174,0,0" VerticalAlignment="Top" Width="100" Source="Resources/Images/user0.png"/>
             <Image HorizontalAlignment="Left" Height="100" Margin="266,174,0,0" VerticalAlignment="Top" Width="100" Source="Resources/Images/user0.png"/>
             <Image HorizontalAlignment="Left" Height="100" Margin="174,174,0,0" VerticalAlignment="Top" Width="100" Source="Resources/Images/vs0.png"/>
-            <Button x:Name="btnStartGame" Content="Iniciar juego"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="160,318,0,0" VerticalAlignment="Top" Width="118" Click="ClicStartGame">
+            <Button x:Name="btnStartGame" Content="{x:Static p:Lang.btnStartGame}"  FontFamily="SimSun" HorizontalAlignment="Left" Margin="160,318,0,0" VerticalAlignment="Top" Width="118" Click="ClicStartGame">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
@@ -20,12 +21,12 @@
                 <Grid.Effect>
                     <DropShadowEffect Color="#FF101354"/>
                 </Grid.Effect>
-                <Button Content="Aceptar" HorizontalAlignment="Left" Margin="94,101,0,0" Click="ClickAccept" VerticalAlignment="Top" Width="74"/>
+                <Button Content="{x:Static p:Lang.btnAcept}" HorizontalAlignment="Left" Margin="94,101,0,0" Click="ClickAccept" VerticalAlignment="Top" Width="74"/>
                 <TextBlock x:Name="lbNotification" HorizontalAlignment="Left" Margin="23,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="38" Width="223"/>
             </Grid>
             <TextBlock x:Name="lbUsergame1" Margin="96,82,259,250" />
             <TextBlock x:Name="lbUsergame2" Margin="280,81,73,250" />
-            <Button Content="salir" HorizontalAlignment="Left" Margin="249,371,0,0" VerticalAlignment="Top" Width="75" Click="ExitClick">
+            <Button Content="{x:Static p:Lang.btnExit}" HorizontalAlignment="Left" Margin="249,371,0,0" VerticalAlignment="Top" Width="75" Click="ExitClick">
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>

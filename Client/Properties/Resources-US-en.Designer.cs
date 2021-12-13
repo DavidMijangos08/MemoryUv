@@ -22,14 +22,14 @@ namespace Client.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    public class Resources_US_en {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal Resources_US_en() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Client.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Client.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Client.Properties.Resources-US-en", typeof(Resources_US_en).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -71,7 +71,7 @@ namespace Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Aceptar.
+        ///   Busca una cadena traducida similar a Acept.
         /// </summary>
         public static string btnAccept {
             get {
@@ -80,7 +80,7 @@ namespace Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Agregar.
+        ///   Busca una cadena traducida similar a Add.
         /// </summary>
         public static string btnAdd {
             get {
@@ -89,7 +89,7 @@ namespace Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Logros.
+        ///   Busca una cadena traducida similar a Achievement.
         /// </summary>
         public static string btnArchievements {
             get {
@@ -98,7 +98,7 @@ namespace Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Retirarse.
+        ///   Busca una cadena traducida similar a Back.
         /// </summary>
         public static string btnBackingOut {
             get {
@@ -116,7 +116,7 @@ namespace Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Salir.
+        ///   Busca una cadena traducida similar a Exit.
         /// </summary>
         public static string btnExit {
             get {
@@ -125,7 +125,7 @@ namespace Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Amigos.
+        ///   Busca una cadena traducida similar a Friends.
         /// </summary>
         public static string btnFriends {
             get {
@@ -134,7 +134,7 @@ namespace Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Incluir.
+        ///   Busca una cadena traducida similar a Include.
         /// </summary>
         public static string btnInclude {
             get {
@@ -143,7 +143,7 @@ namespace Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Ingresar.
+        ///   Busca una cadena traducida similar a Login.
         /// </summary>
         public static string btnLogin {
             get {
@@ -152,7 +152,7 @@ namespace Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Crear cuenta.
+        ///   Busca una cadena traducida similar a New Account.
         /// </summary>
         public static string btnNewAccount {
             get {
@@ -481,15 +481,6 @@ namespace Client.Properties {
         public static System.IO.UnmanagedMemoryStream song {
             get {
                 return ResourceManager.GetStream("song", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a test.
-        /// </summary>
-        public static string test {
-            get {
-                return ResourceManager.GetString("test", resourceCulture);
             }
         }
         

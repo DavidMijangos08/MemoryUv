@@ -5,36 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Client"
         mc:Ignorable="d"
+        xmlns:p = "clr-namespace:Client.Properties.Langs"
         Title="Login" Height="450" Width="800">
     <Grid Margin="30">
         <StackPanel Background="BlanchedAlmond">
             <Grid Margin="10">
 
-                <Label Content="Login" FontSize="50" HorizontalAlignment="Center" Margin="271,10,294,-10" RenderTransformOrigin="0.255,-0.745" Width="147"  />
-                <TextBox Name="Usuario" FontSize="15" Margin="287,150,163,-87" />
+                <Label Content="{x:Static p:Lang.lbLogin}" FontSize="50" HorizontalAlignment="Center" Margin="271,10,294,-10" RenderTransformOrigin="0.255,-0.745" Width="147"  />
+                <TextBox Name="Usuario" FontSize="15" Margin="266,150,183.6,-87.2" />
 
-                <Button Name="ButtonLogin" Content="Ingresar" HorizontalAlignment="Right" Click="ButtonLogin_Click" Margin="0,283,176,-224" RenderTransformOrigin="0.5,0.503" Width="78"  >
+                <Button Name="ButtonLogin" Content="{x:Static p:Lang.btnLogin}" HorizontalAlignment="Right" Click="ButtonLogin_Click" Margin="0,283,176,-224" RenderTransformOrigin="0.5,0.503" Width="78"  >
                     <Button.Effect>
                         <DropShadowEffect/>
                     </Button.Effect>
                 </Button>
-                <Label Content="Correo electrónico:" FontSize="20" HorizontalAlignment="Center" Margin="64,140,408,-95" RenderTransformOrigin="0.255,-0.745" Width="240"  />
-                <Label Content="Contraseña:" FontSize="20" HorizontalAlignment="Center" Margin="64,200,408,-155" RenderTransformOrigin="0.255,-0.745" Width="240"  />
-                <Button x:Name="ButtonNewAccount" Content="Crear cuenta" HorizontalAlignment="Right" Click="ButtonNewAccountClick"  Margin="0,283,23,-224" RenderTransformOrigin="0.353,-0.423" Width="78"  >
+                <Label Content="{x:Static p:Lang.lbEmail}" FontSize="20" HorizontalAlignment="Center" Margin="50,140,423.6,-95.2" RenderTransformOrigin="0.255,-0.745" Width="240"  />
+                <Label Content="{x:Static p:Lang.lbPassword}" FontSize="20" HorizontalAlignment="Center" Margin="50,200,423.6,-155.2" RenderTransformOrigin="0.255,-0.745" Width="240"  />
+                <Button x:Name="ButtonNewAccount" Content="{x:Static p:Lang.btnNewAccount}" HorizontalAlignment="Right" Click="ButtonNewAccountClick"  Margin="0,283,23,-224" RenderTransformOrigin="0.353,-0.423" Width="78"  >
                     <Button.Effect>
                         <DropShadowEffect/>
                     </Button.Effect>
                 </Button>
-                <Label Content="-Idioma-" FontSize="20" HorizontalAlignment="Center" Margin="585,91,-111.4,-45.2" RenderTransformOrigin="0.255,-0.745" Width="240"  />
-                <Button x:Name="btnSupport" Content="Recuperar contraseña" HorizontalAlignment="Right" Click="SupportClick"  Margin="0,283,515,-224" RenderTransformOrigin="0.353,-0.423" Width="134"  >
+                <Label Content="{x:Static p:Lang.lbLanguage}" FontSize="20" HorizontalAlignment="Center" Margin="585,111,22.6,-65.2" RenderTransformOrigin="0.255,-0.745" Width="106"  />
+                <Button x:Name="btnSupport" Content="{x:Static p:Lang.btnForgotPassword}" HorizontalAlignment="Right" Click="SupportClick"  Margin="0,283,515,-224" RenderTransformOrigin="0.353,-0.423" Width="134"  >
                     <Button.Effect>
                         <DropShadowEffect/>
                     </Button.Effect>
                 </Button>
-
+                <ComboBox Margin="561,150,22.6,-87.2" >
+                    <ComboBoxItem Content="{x:Static p:Lang.EN}" />
+                    <ComboBoxItem Content="{x:Static p:Lang.ES}" />
+                </ComboBox>
             </Grid>
 
         </StackPanel>
-        <PasswordBox Name="pbPassword" HorizontalAlignment="Left" Margin="298,221,0,0" VerticalAlignment="Top" Width="260" Height="19"/>
+        <PasswordBox Name="pbPassword" HorizontalAlignment="Left" Margin="277,221,0,0" VerticalAlignment="Top" Width="260" Height="19"/>
     </Grid>
 </Window>
