@@ -14,16 +14,12 @@
         <Label x:Name="lbSettings" Content="{x:Static p:Lang.lbSettings}" FontSize="40" HorizontalAlignment="Left" Margin="435,30,0,0" VerticalAlignment="Top" FontFamily="Segoe Script" FontWeight="Bold"/>
 
         <Label Content="{x:Static p:Lang.lbLanguage}" HorizontalAlignment="Left" Margin="435,127,0,0" VerticalAlignment="Top"/>
-<<<<<<< HEAD
         <Label Content="{x:Static p:Lang.lbSound}" HorizontalAlignment="Left" Margin="435,227,0,0" VerticalAlignment="Top"/>
         <Label Content="{x:Static p:Lang.lbVisual}" HorizontalAlignment="Left"  Margin="435,179,0,0"  VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbLanguage" HorizontalAlignment="Left" Margin="533,130,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="IdiomsSelectionChanged"     >
-=======
         <Label Content="{x:Static p:Lang.lbSound}" HorizontalAlignment="Left" Margin="435,227,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
         <Label Content="{x:Static p:Lang.lbVisual}" HorizontalAlignment="Left"  Margin="435,179,0,0"  VerticalAlignment="Top" Visibility="Hidden"/>
-        <ComboBox x:Name="cbLanguage" HorizontalAlignment="Left" Margin="533,130,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Idiomas_SelectionChanged"     >
->>>>>>> 060a23c3c39945e67b7b3574616dd2a7551bfcbb
-            <ComboBoxItem Content="{x:Static p:Lang.EN}"/>
+            <ComboBox x:Name="cbLanguage" HorizontalAlignment="Left" Margin="533,130,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="IdiomsSelectionChanged"     >
+                <ComboBoxItem Content="{x:Static p:Lang.EN}"/>
             <ComboBoxItem Content="{x:Static p:Lang.ES}"/>
         </ComboBox>
         <Button Content="{x:Static p:Lang.btnLogOut}" HorizontalAlignment="Left" Margin="682,373,0,0" VerticalAlignment="Top" Width="75" Click="CerrarSesionClick">
@@ -31,19 +27,15 @@
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Button Content="{x:Static p:Lang.btnBack}" HorizontalAlignment="Left" Margin="395,373,0,0" VerticalAlignment="Top" Width="75" Click="RegresarClick">
-            <Button.Effect>
-                <DropShadowEffect/>
-            </Button.Effect>
-        </Button>
-
-
-        <CheckBox x:Name="chbVista" Content="o.o" HorizontalAlignment="Left" Margin="533,185,0,0" VerticalAlignment="Top" Visibility="Hidden" />
+            <Button Content="{x:Static p:Lang.btnBack}" HorizontalAlignment="Left" Margin="395,373,0,0" VerticalAlignment="Top" Width="75" Click="RegresarClick">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+            </Button>
+            <CheckBox x:Name="chbVista" Content="o.o" HorizontalAlignment="Left" Margin="533,185,0,0" VerticalAlignment="Top" Visibility="Hidden" />
         <CheckBox Content="♫" HorizontalAlignment="Left" Margin="533,233,0,0" VerticalAlignment="Top" Visibility="Hidden" />
-        <Image gif:AnimationBehavior.SourceUri="/Resources/Images/fondo1.gif" Margin="10,13,514.6,28" 
+            <Image gif:AnimationBehavior.SourceUri="/Resources/Images/fondo1.gif" Margin="10,13,514.6,28" 
              gif:AnimationBehavior.RepeatBehavior="Forever"  />
-
-        <Rectangle x:Name="daltonismo" Opacity="0.15" Fill="#FF2BD300" Cursor="Pen" IsEnabled="False" Visibility="Hidden" />
-
+            <Rectangle x:Name="daltonismo" Opacity="0.15" Fill="#FF2BD300" Cursor="Pen" IsEnabled="False" Visibility="Hidden" />
     </Grid>
 </Window>
