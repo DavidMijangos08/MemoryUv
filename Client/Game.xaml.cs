@@ -55,8 +55,6 @@ namespace Client
             language = Properties.Settings.Default.languageCode;
             try
             {
-                service = new MemoryServer();
-                this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(users[0].id))));
                 InstanceContext context = new InstanceContext(this);
                 client = new GameService.GameServiceClient(context);
                 userConnected = users[0];
