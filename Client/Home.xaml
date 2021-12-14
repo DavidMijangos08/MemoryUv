@@ -61,7 +61,7 @@
             </Button.Effect>
         </Button>
         <TextBlock x:Name="lbUsername" HorizontalAlignment="Left" Margin="389,82,0,0" VerticalAlignment="Top" Height="26" Width="98" FontSize="14"/>
-        <Grid x:Name="gridInvitation" HorizontalAlignment="Left" Height="131" Margin="217,140,0,0" VerticalAlignment="Top" Width="256" Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" Visibility="Hidden">
+        <Grid x:Name="gridInvitation" HorizontalAlignment="Left" Height="131" Margin="217,140,0,0" VerticalAlignment="Top" Width="256" Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}">
             <Grid.Effect>
                 <DropShadowEffect Color="#FF101354"/>
             </Grid.Effect>

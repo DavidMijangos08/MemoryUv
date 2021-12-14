@@ -32,7 +32,7 @@
                         <DropShadowEffect/>
                     </Button.Effect>
                 </Button>
-                <ComboBox Margin="561,150,22.6,-87.2" >
+                <ComboBox x:Name="cbLanguage" Margin="561,150,22.6,-87.2" SelectionChanged="cbLanguage_SelectionChanged" >
                     <ComboBoxItem Content="{x:Static p:Lang.EN}" />
                     <ComboBoxItem Content="{x:Static p:Lang.ES}" />
                 </ComboBox>

@@ -45,14 +45,9 @@ namespace Client
                     if (user != null)
                     {
 
-                        /*Procesos procesos = new Procesos();
-                        procesos.Show();
-                        procesos.Hide(); */
-
                         if (!service.ExistsConfigUser(user.id))
                         {
                             service.NewConfigUser(user.id);
-                            MessageBox.Show("Se creo confi");
                         }
                         Home windowHome = new Home(user);
                         windowHome.Show();
@@ -104,6 +99,30 @@ namespace Client
         {
             MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
             this.Close();
+        }
+
+        private void cbLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbLanguage.SelectedIndex == 0)
+            {
+                Properties.Settings.Default.languageCode = "en-US";
+                Properties.Settings.Default.Save();
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
+
+                Login login = new Login();
+                login.Show();
+                this.Hide();
+            }
+            else
+            {
+                Properties.Settings.Default.languageCode = "es-MX";
+                Properties.Settings.Default.Save();
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es-MX");
+
+                Login login = new Login();
+                login.Show();
+                this.Hide();
+            }
         }
     }
 }

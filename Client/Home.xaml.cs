@@ -42,7 +42,7 @@ namespace Client
                 client.ConnectWaitingRoom(usergame.nametag);
                 service = new MemoryServer();
                 service.UpdateUserStatus(usergame.id, "Activo");
-                //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
+                this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
             }
             catch (CommunicationException)
             {
