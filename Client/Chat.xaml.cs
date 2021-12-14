@@ -25,20 +25,27 @@ namespace Client
         public string userName;
         public ChatService.ChatServiceClient client;
         public bool isDataDirty = false;
-        MemoryServer service;
+        string language = "es-MX";
+
         public Chat(string _username)
         {
 
             InitializeComponent();
+            language = Properties.Settings.Default.languageCode;
             userName = _username;
             try
             {
                 InstanceContext context = new InstanceContext(this);
                 client = new ChatService.ChatServiceClient(context);
                 client.Join(userName);
-                lbId.Text = "Bienvenido " + userName;
-                service = new MemoryServer();
-                //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
+                if (language.Equals("es-MX"))
+                {
+                    lbId.Text = "Bienvenido " + userName;
+                }
+                else
+                {
+                    lbId.Text = "Welcome " + userName;
+                }
             }
             catch (CommunicationException)
             {
@@ -56,7 +63,14 @@ namespace Client
         {
             listUsersOnline.Items.Clear();
             cbUsers.Items.Clear();
-            cbUsers.Items.Add("Todos");
+            if (language.Equals("es-MX"))
+            {
+                cbUsers.Items.Add("Todos");
+            }
+            else
+            {
+                cbUsers.Items.Add("All");
+            }
             foreach (string user in users)
             {
                 listUsersOnline.Items.Add(user);
@@ -70,7 +84,14 @@ namespace Client
             {
                 if (cbUsers.SelectedIndex == -1)
                 {
-                    MessageBox.Show("Seleccione un destinatario");
+                    if (language.Equals("es-MX"))
+                    {
+                        MessageBox.Show("Seleccione un destinatario");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Select a recipient");
+                    }
                 }
                 else
                 {
@@ -78,14 +99,21 @@ namespace Client
                     {
                         Object itemSelected = cbUsers.SelectedItem;
                         string receiver = itemSelected.ToString();
-                        if (receiver == "Todos")
+                        if (receiver == "Todos" || receiver == "All")
                         {
                             client.SendMessage(txtChat.Text);
                             txtChat.Text = "";
                         }
                         else if (receiver == userName)
                         {
-                            MessageBox.Show("No puedes enviarte un mensaje a ti mismo");
+                            if (language.Equals("es-MX"))
+                            {
+                                MessageBox.Show("No puedes enviarte un mensaje a ti mismo");
+                            }
+                            else
+                            {
+                                MessageBox.Show("You can't message yourself");
+                            }
                         }
                         else
                         {
@@ -119,7 +147,14 @@ namespace Client
 
         private void ShowExceptionAlert()
         {
-            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            if (language.Equals("es-MX"))
+            {
+                MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            }
+            else
+            {
+                MessageBox.Show("A system error occurred, please try again later.");
+            }
             this.Close();
         }
     }

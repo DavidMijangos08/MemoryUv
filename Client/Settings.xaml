@@ -16,7 +16,7 @@
         <Label Content="{x:Static p:Lang.lbLanguage}" HorizontalAlignment="Left" Margin="435,127,0,0" VerticalAlignment="Top"/>
         <Label Content="{x:Static p:Lang.lbSound}" HorizontalAlignment="Left" Margin="435,227,0,0" VerticalAlignment="Top"/>
         <Label Content="{x:Static p:Lang.lbVisual}" HorizontalAlignment="Left"  Margin="435,179,0,0"  VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbLanguage" HorizontalAlignment="Left" Margin="533,130,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Idiomas_SelectionChanged"     >
+        <ComboBox x:Name="cbLanguage" HorizontalAlignment="Left" Margin="533,130,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="IdiomsSelectionChanged"     >
             <ComboBoxItem Content="{x:Static p:Lang.EN}"/>
             <ComboBoxItem Content="{x:Static p:Lang.ES}"/>
         </ComboBox>

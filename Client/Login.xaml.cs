@@ -26,9 +26,11 @@ namespace Client
     public partial class Login : Window
     {
         public MemoryServer service;
+        string language = "es-MX";
         public Login()
         {
-            InitializeComponent();   
+            InitializeComponent();
+            language = Properties.Settings.Default.languageCode;
         }
 
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
@@ -55,7 +57,14 @@ namespace Client
                     }
                     else
                     {
-                        MessageBox.Show("Correo o contraseña incorrecta, revisa bien!");
+                        if (language.Equals("es-MX"))
+                        {
+                            MessageBox.Show("Correo o contraseña incorrecta, revisa bien!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Incorrect email or password, check well!");
+                        }
                     }
                 }
                 catch (SystemException)
@@ -65,7 +74,14 @@ namespace Client
             }
             else
             {
-                MessageBox.Show("Existe campo vacio");
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("Existe campo vacio o selección faltante");
+                }
+                else
+                {
+                    MessageBox.Show("There is an empty field or missing selection");
+                }
             }
         }
 
@@ -76,7 +92,14 @@ namespace Client
             if (!regex.IsMatch(password))
             {
                 exists = true;
-                MessageBox.Show("Caracteres inválidos en la contraseña");
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("Caracteres inválidos");
+                }
+                else
+                {
+                    MessageBox.Show("Invalid characters");
+                }              
             }
             return exists;
         }
@@ -97,11 +120,18 @@ namespace Client
 
         private void ShowExceptionAlert()
         {
-            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            if (language.Equals("es-MX"))
+            {
+                MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            }
+            else
+            {
+                MessageBox.Show("A system error occurred, please try again later.");
+            }
             this.Close();
         }
 
-        private void cbLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CbLanguageSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbLanguage.SelectedIndex == 0)
             {

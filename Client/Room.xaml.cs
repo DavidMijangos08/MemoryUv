@@ -31,19 +31,21 @@ namespace Client
         string usergameInvited;
         string section;
         string difficulty;
+        string language = "es-MX";
 
         public Room(UserGame _user)
         {
             usergame = _user;
             InitializeComponent();
-            initializeListFriends();
+            language = Properties.Settings.Default.languageCode;
+            InitializeListFriends();
             try
             {
                 InstanceContext context = new InstanceContext(this);
                 client = new RoomService.RoomServiceClient(context);
                 client.ConnectWaitingRoom(usergame.nametag);
                 service = new MemoryServer();
-                // this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
+                this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
             }
             catch (CommunicationException)
             {
@@ -55,7 +57,7 @@ namespace Client
             }
         }
 
-        private void initializeListFriends()
+        private void InitializeListFriends()
         {
             try
             {
@@ -107,7 +109,14 @@ namespace Client
             }
             else
             {
-                MessageBox.Show("Debes configurar la partida");
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("Debes configurar la partida");
+                }
+                else
+                {
+                    MessageBox.Show("You must configure the game");
+                }
             }
            
         }
@@ -147,7 +156,15 @@ namespace Client
         public void RecieveInvitation(string usergameApplicant)
         {
             this.usergameApplicant = usergameApplicant;
-            string messageInvitation = "El usuario " + usergameApplicant + " te está invitando a su sala";
+            string messageInvitation;
+            if (language.Equals("es-MX"))
+            {
+                messageInvitation = "El usuario " + usergameApplicant + " te está invitando a su sala";
+            }
+            else
+            {
+                messageInvitation = "The user " + usergameApplicant + " is inviting you to his room";
+            }
             gridInvitation.Visibility = Visibility.Visible;
             lbInvitation.Text = messageInvitation;
         }
@@ -180,12 +197,19 @@ namespace Client
         private void RecharchClick(object sender, RoutedEventArgs e)
         {
             listFriends.Items.Clear();
-            initializeListFriends();
+            InitializeListFriends();
         }
 
         private void ShowExceptionAlert()
         {
-            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            if (language.Equals("es-MX"))
+            {
+                MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            }
+            else
+            {
+                MessageBox.Show("A system error occurred, please try again later.");
+            }
             this.Close();
         }
     }

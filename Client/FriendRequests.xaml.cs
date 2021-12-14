@@ -26,9 +26,12 @@ namespace Client
     {
         UserGame usergame = new UserGame();
         MemoryServer service;
+        string language = "es-MX";
+
         public FriendRequests(UserGame _user)
         {
             InitializeComponent();
+            language = Properties.Settings.Default.languageCode;
             usergame = _user;
             try
             {
@@ -74,12 +77,16 @@ namespace Client
                     if (accepted)
                     {
                         bool added = service.AddFriend(userApplicant[0].id, usergame.id);
-                        if (added)
+                        if (language.Equals("es-MX"))
                         {
                             MessageBox.Show("Tienes un nuevo amigo");
-                            listRequests.Items.Clear();
-                            InitializeListRequests();
                         }
+                        else
+                        {
+                            MessageBox.Show("You have a new friend");
+                        }
+                        listRequests.Items.Clear();
+                        InitializeListRequests();
                     }
                 }
                 catch (SystemException)
@@ -89,7 +96,14 @@ namespace Client
             }
             else
             {
-                MessageBox.Show("Debes seleccionar una solicitud");
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("Debes seleccionar una solicitud");
+                }
+                else
+                {
+                    MessageBox.Show("You must select an application");
+                }
             }
 
         }
@@ -107,7 +121,14 @@ namespace Client
                     bool rejected = service.RejectFriendRequest(userApplicant[0].id, usergame.id);
                     if (rejected)
                     {
-                        MessageBox.Show("Solicitud rechazada con exito");
+                        if (language.Equals("es-MX"))
+                        {
+                            MessageBox.Show("Solicitud rechazada con exito");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Request rejected successfully");
+                        }
                         listRequests.Items.Clear();
                         InitializeListRequests();
                     }
@@ -119,7 +140,14 @@ namespace Client
             }
             else
             {
-                MessageBox.Show("Debes seleccionar una solicitud");
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("Debes seleccionar una solicitud");
+                }
+                else
+                {
+                    MessageBox.Show("You must select an application");
+                }
             }
         }
 
@@ -132,7 +160,14 @@ namespace Client
 
         private void ShowExceptionAlert()
         {
-            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            if (language.Equals("es-MX"))
+            {
+                MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            }
+            else
+            {
+                MessageBox.Show("A system error occurred, please try again later.");
+            }
             this.Close();
         }
     }

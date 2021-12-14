@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Threading;
 
 namespace Client
@@ -21,6 +22,7 @@ namespace Client
     public partial class Game : Window, GameService.IGameServiceCallback
     {
         MemoryServer service;
+        string language = "es-MX";
         public GameService.GameServiceClient client;
         UserGame userConnected = new UserGame();
         UserGame userOpponent = new UserGame();
@@ -50,10 +52,11 @@ namespace Client
         public Game(List<UserGame> users, string section, string difficulty)
         {
             InitializeComponent();
+            language = Properties.Settings.Default.languageCode;
             try
             {
                 service = new MemoryServer();
-                //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(users[0].id))));
+                this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(users[0].id))));
                 InstanceContext context = new InstanceContext(this);
                 client = new GameService.GameServiceClient(context);
                 userConnected = users[0];
@@ -181,7 +184,15 @@ namespace Client
 
         public void ReceiveExitNotification(string userDisconnected)
         {
-            string message = "El jugador " + userDisconnected + " se desconectó. Tu ganas esta partida!!!";
+            string message;
+            if (language.Equals("es-MX"))
+            {
+                message = "El jugador " + userDisconnected + " se desconectó. Tu ganas esta partida!!!";
+            }
+            else
+            {
+                message = "The player " + userDisconnected + " got disconnected. You win this game!!!";
+            }
             gridNotification.Visibility = Visibility.Visible;
             lbNotification.Text = message;
         }
@@ -421,13 +432,27 @@ namespace Client
                     }
                     lbUserAdminPoints.Text = pointsAdmin.ToString();
                     lbUserOpponentPoints.Text = pointsOpponent.ToString();
-                    MessageBox.Show("Las cartas son iguales");
+                    if (language.Equals("es-MX"))
+                    {
+                        MessageBox.Show("Las cartas son iguales");
+                    }
+                    else
+                    {
+                        MessageBox.Show("The cards are the same");
+                    }
                 }
                 else
                 {
                     cards[cardNumbers[0]].status = StatusCard.NotFlipped;
                     cards[cardNumbers[1]].status = StatusCard.NotFlipped;
-                    MessageBox.Show("Las cartas no son iguales");
+                    if (language.Equals("es-MX"))
+                    {
+                        MessageBox.Show("Las cartas no son iguales");
+                    }
+                    else
+                    {
+                        MessageBox.Show("The cards are not the same");
+                    }
                 }
                 flippedCards = 0;
                 LoadCardsToGame();
@@ -455,7 +480,17 @@ namespace Client
                     winner = lbUserOpponent.Text;
                 }
 
-                string message = "El juego ha terminado. El ganador es: " + winner;
+                string message;
+
+                if (language.Equals("es-MX"))
+                {
+                    message = "El juego ha terminado. El ganador es: " + winner;
+                }
+                else
+                {
+                    message = "The game is over. The winner is: " + winner;
+                }
+
                 gridFinishGame.Visibility = Visibility.Visible;
                 lbWinner.Text = message;
 
@@ -1277,7 +1312,14 @@ namespace Client
 
         private void ShowExceptionAlert()
         {
-            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            if (language.Equals("es-MX"))
+            {
+                MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            }
+            else
+            {
+                MessageBox.Show("A system error occurred, please try again later.");
+            }
             this.Close();
         }
 

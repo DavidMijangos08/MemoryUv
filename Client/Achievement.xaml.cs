@@ -25,11 +25,13 @@ namespace Client
     {
         UserGame userGame = new UserGame();
         MemoryServer service;
+        string language = "es-MX";
 
         public Logros(UserGame _user)
         {
             userGame = _user;
             InitializeComponent();
+            language = Properties.Settings.Default.languageCode;
             InitializeArchievement();
             try
             {
@@ -88,7 +90,14 @@ namespace Client
 
         private void ShowExceptionAlert()
         {
-            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            if (language.Equals("es-MX"))
+            {
+                MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            }
+            else
+            {
+                MessageBox.Show("A system error occurred, please try again later.");
+            }
             this.Close();
         }
     }

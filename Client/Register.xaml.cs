@@ -27,11 +27,12 @@ namespace Client
     {
         public MemoryServer service;
         string codex;
-        
+        string language = "es-MX";
 
         public Register()
         {
             InitializeComponent();
+            language = Properties.Settings.Default.languageCode;
         }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace Client
         /// <param name="sender"> Identificador del usuario que desea enviar la solicitud </param>
         /// <param name="e"> Identificador del usuario que recibe la solicitud </param>
         /// <returns> No retorna </returns>
-        private void ButtonSalir_Click(object sender, RoutedEventArgs e)
+        private void ButtonExitClick(object sender, RoutedEventArgs e)
         {
             Login login = new Login();
             login.Show();
@@ -61,7 +62,14 @@ namespace Client
                          
             if (!ExistsInvalidFields(email, password))
             {
-                MessageBox.Show("Codigo enviado...");
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("Codigo enviado...");
+                }
+                else
+                {
+                    MessageBox.Show("code sent...");
+                }
                 codex = service.SendEmail(email);
                 tbCodigo.IsEnabled = true;
                 tbNametag.IsEnabled = true;
@@ -74,7 +82,7 @@ namespace Client
         /// <param name="sender"> Identificador del usuario que desea enviar la solicitud </param>
         /// <param name="e"> Identificador del usuario que recibe la solicitud </param>
         /// <returns> No retorna </returns>
-        private void ButtonAceptar_Click(object sender, RoutedEventArgs e)
+        private void ButtonAcceptClick(object sender, RoutedEventArgs e)
         {
             service = new MemoryServer();
             string code = tbCodigo.Text;
@@ -91,7 +99,14 @@ namespace Client
                         bool saved = service.RegisterUser(email, password, nametag);
                         if (saved)
                         {
-                            MessageBox.Show("Se agrego correctamente al usuario");
+                            if (language.Equals("es-MX"))
+                            {
+                                MessageBox.Show("Se agrego correctamente al usuario");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Successfully added to user");
+                            }
                             CreateStatisticsUser(nametag);
                         }
                     }
@@ -102,7 +117,14 @@ namespace Client
                 }
                 else
                 {
-                    MessageBox.Show("Codigo incorrecto");
+                    if (language.Equals("es-MX"))
+                    {
+                        MessageBox.Show("Codigo incorrecto");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Incorrect code");
+                    }
                 }               
                 Login login = new Login();
                 login.Show();
@@ -110,7 +132,14 @@ namespace Client
             }
             else
             {
-                MessageBox.Show("Existe un campo vacio!");
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("Existe campo vacío");
+                }
+                else
+                {
+                    MessageBox.Show("Empty field exists");
+                }
             }
         }
 
@@ -144,8 +173,16 @@ namespace Client
             if(string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
                 exists = true;
-                MessageBox.Show("Existe un campo vacio!");
-            }else if (ExistsInvalidEmail(email) || ExistsInvalidPassword(password) || ExistsEqualEmail(email))
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("Existe campo vacío");
+                }
+                else
+                {
+                    MessageBox.Show("Empty field exists");
+                }
+            }
+            else if (ExistsInvalidEmail(email) || ExistsInvalidPassword(password) || ExistsEqualEmail(email))
             {
                 exists = true;
             }
@@ -162,7 +199,14 @@ namespace Client
             catch (FormatException)
             {
                 exists = true;
-                MessageBox.Show("Existen caracteres invalidos en el correo electronico");
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("Existen caracteres invalidos en el correo electronico");
+                }
+                else
+                {
+                    MessageBox.Show("There are invalid characters in the email");
+                }
             }
             return exists;
         }
@@ -174,11 +218,22 @@ namespace Client
             if (!regex.IsMatch(password))
             {
                 exists = true;
-                MessageBox.Show("Contraseña insegura \n"
-                    + "La contraseña debe tener entre 8 y 16 caracteres \n" 
-                    + "La contraseña debe tener por lo menos un digito \n"
-                    + "La contraseña debe tener por lo menos una letra mayúscula \n"
-                    + "La contraseña debe tener por lo menos una letra minúscula");
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("Contraseña insegura \n"
+                                        + "La contraseña debe tener entre 8 y 16 caracteres \n"
+                                        + "La contraseña debe tener por lo menos un digito \n"
+                                        + "La contraseña debe tener por lo menos una letra mayúscula \n"
+                                        + "La contraseña debe tener por lo menos una letra minúscula");
+                }
+                else
+                {
+                    MessageBox.Show("Weak password \n "
+                                         + "Password must be between 8 and 16 characters \n"
+                                         + "The password must have at least one digit \n"
+                                         + "Password must have at least one capital letter \n"
+                                         + "The password must have at least one lowercase letter");
+                }
             }
             return exists;
         }
@@ -193,14 +248,30 @@ namespace Client
                 if (!regex.IsMatch(nametag) || nametag.Length > 10 || nametag.Length < 4)
                 {
                     exists = true;
-                    MessageBox.Show("El nametag solo puede tener entre 4 y 10 caracteres \n" +
-                                    " El nametag solo puede tener letras y numeros \n" +
-                                    "El nametag no puede llevar espacios");
+                    if (language.Equals("es-MX"))
+                    {
+                        MessageBox.Show("El nametag solo puede tener entre 4 y 10 caracteres \n" +
+                                        " El nametag solo puede tener letras y numeros \n" +
+                                        "El nametag no puede llevar espacios");
+                    }
+                    else
+                    {
+                        MessageBox.Show("The nametag can only be between 4 and 10 characters long \n " +
+                                         "The nametag can only have letters and numbers \n" +
+                                         "The nametag cannot have spaces");
+                    }
                 }
                 else if (service.ExistsNametag(nametag))
                 {
                     exists = true;
-                    MessageBox.Show("El nametag ya esta registrado en el juego");
+                    if (language.Equals("es-MX"))
+                    {
+                        MessageBox.Show("El nametag ya esta registrado en el juego");
+                    }
+                    else
+                    {
+                        MessageBox.Show("The nametag is already registered in the game");
+                    }
                 }
             }
             catch (SystemException)
@@ -219,7 +290,14 @@ namespace Client
                 if (service.ExistsEmail(email))
                 {
                     exists = true;
-                    MessageBox.Show("El correo electronico ya esta registrado en el juego");
+                    if (language.Equals("es-MX"))
+                    {
+                        MessageBox.Show("El correo electronico ya esta registrado en el juego");
+                    }
+                    else
+                    {
+                        MessageBox.Show("The email is already registered in the game");
+                    }
                 }
             }
             catch (SystemException)
@@ -231,7 +309,14 @@ namespace Client
 
         private void ShowExceptionAlert()
         {
-            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            if (language.Equals("es-MX"))
+            {
+                MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            }
+            else
+            {
+                MessageBox.Show("A system error occurred, please try again later.");
+            }
             this.Close();
         }
     }
