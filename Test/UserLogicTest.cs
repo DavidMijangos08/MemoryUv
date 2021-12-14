@@ -24,7 +24,7 @@ namespace Test
         public void TestAddUser()
         {
             UserLogic userLogic = new UserLogic();
-            Status status = userLogic.AddUser("jose2@gmail.com", "JoseJose1", "Jose");
+            Status status = userLogic.AddUser("Bartolo@gmail.com", "Bartolo123", "Barth");
             bool saved = false;
             if (status == Status.Sucess)
             {
@@ -41,7 +41,7 @@ namespace Test
         public void TestUpdatePasswordUser()
         {
             UserLogic userLogic = new UserLogic();
-            Status status = userLogic.UpdatePasswordUser(1, "David1234");
+            Status status = userLogic.UpdatePasswordUser(7, "Robert1234");
             bool modified = false;
             if (status == Status.Sucess)
             {
@@ -58,7 +58,7 @@ namespace Test
         public void TestUpdateUserStatus()
         {
             UserLogic userLogic = new UserLogic();
-            Status status = userLogic.UpdateUserStatus(1, "Inactivo");
+            Status status = userLogic.UpdateUserStatus(7, "Inactivo");
             bool modified = false;
             if (status == Status.Sucess)
             {
