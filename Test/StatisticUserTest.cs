@@ -40,7 +40,7 @@ namespace Test
         public void TestAddStatisticUser()
         {
             StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
-            StatisticUserLogic.StatisticStatus status = statisticUserLogic.AddStatisticUser(3, "Jose=");
+            StatisticUserLogic.StatisticStatus status = statisticUserLogic.AddStatisticUser(8, "Albert");
             bool added = false;
             if(status == StatisticUserLogic.StatisticStatus.Success)
             {
@@ -57,7 +57,7 @@ namespace Test
         public void TestIncreaseGameWon()
         {
             StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
-            StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseGameWon(1);
+            StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseGameWon(5);
             bool added = false;
             if (status == StatisticUserLogic.StatisticStatus.Success)
             {
@@ -74,7 +74,7 @@ namespace Test
         public void TestIncreaseLosingGame()
         {
             StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
-            StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseLosingGame(1);
+            StatisticUserLogic.StatisticStatus status = statisticUserLogic.IncreaseLosingGame(5);
             bool added = false;
             if (status == StatisticUserLogic.StatisticStatus.Success)
             {

@@ -24,7 +24,7 @@ namespace Test
         public void TestAddFriend()
         {
             FriendLogic friendLogic = new FriendLogic();
-            Status status = friendLogic.AddFriend(6, 2);
+            Status status = friendLogic.AddFriend(2, 7);
             bool saved = false;
             if (status == Status.Success)
             {
@@ -41,7 +41,7 @@ namespace Test
         public void TestDeleteFriend()
         {
             FriendLogic friendLogic = new FriendLogic();
-            Status status = friendLogic.DeleteFriend(1, 5);
+            Status status = friendLogic.DeleteFriend(2, 7);
             bool deleted = false;
             if (status == Status.Success)
             {
@@ -59,7 +59,7 @@ namespace Test
         {
             FriendLogic friendLogic = new FriendLogic();
             List<UserGame> users = friendLogic.GetFriendsList(1);
-            Assert.AreEqual(0, users.Count);
+            Assert.AreEqual(1, users.Count);
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Test
         public void TestExistsFriendship()
         {
             FriendLogic friendLogic = new FriendLogic();
-            bool exists = friendLogic.ExistsFriendship(6, 1);
+            bool exists = friendLogic.ExistsFriendship(2, 1);
             Assert.IsTrue(exists);
         }
 
@@ -94,7 +94,7 @@ namespace Test
         public void SecondTestExistsFriendship()
         {
             FriendLogic friendLogic = new FriendLogic();
-            bool exists = friendLogic.ExistsFriendship(1, 6);
+            bool exists = friendLogic.ExistsFriendship(1, 2);
             Assert.IsTrue(exists);
         }
 

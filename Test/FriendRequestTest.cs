@@ -27,7 +27,7 @@ namespace Test
         public void TestAddFriendRequest()
         {
             FriendRequestLogic friendRequestLogic = new FriendRequestLogic();
-            Status status = friendRequestLogic.AddFriendRequest(1, 6);
+            Status status = friendRequestLogic.AddFriendRequest(8, 7);
             bool saved = false;
             if(status == Status.Sucess)
             {
@@ -44,7 +44,7 @@ namespace Test
         public void TestAcceptFriendRequest()
         {
             FriendRequestLogic friendRequestLogic = new FriendRequestLogic();
-            Status status = friendRequestLogic.AcceptFriendRequest(1, 2);
+            Status status = friendRequestLogic.AcceptFriendRequest(2, 7);
             bool accepted = false;
             if (status == Status.Sucess)
             {
@@ -61,7 +61,7 @@ namespace Test
         public void TestRejectFriendRequest()
         {
             FriendRequestLogic friendRequestLogic = new FriendRequestLogic();
-            Status status = friendRequestLogic.RejectFriendRequest(1, 5);
+            Status status = friendRequestLogic.RejectFriendRequest(1, 7);
             bool rejected = false;
             if (status == Status.Sucess)
             {
@@ -79,7 +79,7 @@ namespace Test
         {
             FriendRequestLogic friendRequestLogic = new FriendRequestLogic();
             List<UserGame> usersRequesting = friendRequestLogic.GetUsersRequesting(6);
-            Assert.AreEqual(usersRequesting.Count(), 1);
+            Assert.AreEqual(usersRequesting.Count(), 2);
         }
 
         /// <summary>
