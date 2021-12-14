@@ -10,12 +10,12 @@
         xmlns:p = "clr-namespace:Client.Properties.Langs"
         Title="Settings" Height="450" Width="800">
     <Grid x:Name="mainGrid">
-        
+
         <Label x:Name="lbSettings" Content="{x:Static p:Lang.lbSettings}" FontSize="40" HorizontalAlignment="Left" Margin="435,30,0,0" VerticalAlignment="Top" FontFamily="Segoe Script" FontWeight="Bold"/>
 
         <Label Content="{x:Static p:Lang.lbLanguage}" HorizontalAlignment="Left" Margin="435,127,0,0" VerticalAlignment="Top"/>
-        <Label Content="{x:Static p:Lang.lbSound}" HorizontalAlignment="Left" Margin="435,227,0,0" VerticalAlignment="Top"/>
-        <Label Content="{x:Static p:Lang.lbVisual}" HorizontalAlignment="Left"  Margin="435,179,0,0"  VerticalAlignment="Top"/>
+        <Label Content="{x:Static p:Lang.lbSound}" HorizontalAlignment="Left" Margin="435,227,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <Label Content="{x:Static p:Lang.lbVisual}" HorizontalAlignment="Left"  Margin="435,179,0,0"  VerticalAlignment="Top" Visibility="Hidden"/>
         <ComboBox x:Name="cbLanguage" HorizontalAlignment="Left" Margin="533,130,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="Idiomas_SelectionChanged"     >
             <ComboBoxItem Content="{x:Static p:Lang.EN}"/>
             <ComboBoxItem Content="{x:Static p:Lang.ES}"/>
@@ -32,8 +32,8 @@
         </Button>
 
 
-        <CheckBox x:Name="chbVista" Content="o.o" HorizontalAlignment="Left" Margin="533,185,0,0" VerticalAlignment="Top" />
-        <CheckBox Content="♫" HorizontalAlignment="Left" Margin="533,233,0,0" VerticalAlignment="Top" />
+        <CheckBox x:Name="chbVista" Content="o.o" HorizontalAlignment="Left" Margin="533,185,0,0" VerticalAlignment="Top" Visibility="Hidden" />
+        <CheckBox Content="♫" HorizontalAlignment="Left" Margin="533,233,0,0" VerticalAlignment="Top" Visibility="Hidden" />
         <Image gif:AnimationBehavior.SourceUri="/Resources/Images/fondo1.gif" Margin="10,13,514.6,28" 
              gif:AnimationBehavior.RepeatBehavior="Forever"  />
 
