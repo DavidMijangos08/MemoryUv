@@ -40,9 +40,11 @@ namespace Client
         /// <param name="receivedUsers" >Corresponde a la lista de usuarios de la sala</param>
         /// <param name="section"> Corresponde a la seleccion del juego</param>
         /// <param name="difficulty">Corresponde a la dificultad del juego</param>
+        string language = "es-MX";
         public PreGame(List<UserGame> receivedUsers, string section, string difficulty)
         {
             InitializeComponent();
+            language = Properties.Settings.Default.languageCode;
             this.receivedUsers = receivedUsers;
             userConnected = receivedUsers[0];
             userInvited = receivedUsers[1];
@@ -180,7 +182,15 @@ namespace Client
         /// <param name="userDisconnected"> Corresponde al usuario desconectado </param>
         public void RecieveExitNotification(string userDisconnected)
         {
-            string message = "La sala fue cancelada. El jugador " + userDisconnected + " se desconectó";
+            string message;
+            if (language.Equals("es-MX"))
+            {
+                message = "La sala fue cancelada. El jugador " + userDisconnected + " se desconectó";
+            }
+            else
+            {
+                message = "The room was canceled. The player " + userDisconnected + " was disconnected";
+            }
             gridNotification.Visibility = Visibility.Visible;
             lbNotification.Text = message;
         }
@@ -221,7 +231,14 @@ namespace Client
         /// </summary>
         private void ShowExceptionAlert()
         {
-            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            if (language.Equals("es-MX"))
+            {
+                MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            }
+            else
+            {
+                MessageBox.Show("A system error occurred, please try again later.");
+            }
             this.Close();
         }
     }

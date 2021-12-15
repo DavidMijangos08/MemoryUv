@@ -27,10 +27,14 @@ namespace Client
         
         UserGame userGame = new UserGame();
         MemoryServer service;
+        string language = "es-MX";
+
         public Settings(UserGame _user)
         {
             InitializeComponent();
             userGame = _user;
+            language = Properties.Settings.Default.languageCode;
+
             try
             {
                 service = new MemoryServer();
@@ -49,6 +53,7 @@ namespace Client
         /// <param name="sender"> Identificador del usuario que desea enviar la solicitud </param>
         /// <param name="e"> Identificador del usuario que recibe la solicitud </param>
         /// <returns> No retorna </returns>
+      
         private void CerrarSesionClick(object sender, RoutedEventArgs e)
         {
             Login login = new Login();
@@ -62,6 +67,7 @@ namespace Client
         /// <param name="sender"> Identificador del usuario que desea enviar la solicitud </param>
         /// <param name="e"> Identificador del usuario que recibe la solicitud </param>
         /// <returns> No retorna </returns>
+        
         private void RegresarClick(object sender, RoutedEventArgs e)
         {
             Home windowHome = new Home(userGame);
@@ -76,7 +82,14 @@ namespace Client
         /// </summary>
         private void ShowExceptionAlert()
         {
-            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            if (language.Equals("es-MX"))
+            {
+                MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            }
+            else
+            {
+                MessageBox.Show("A system error occurred, please try again later.");
+            }
             this.Close();
         }
 

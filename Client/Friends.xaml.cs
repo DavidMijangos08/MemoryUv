@@ -26,6 +26,8 @@ namespace Client
     {
         UserGame userGame = new UserGame();
         MemoryServer service;
+        string language = "es-MX";
+
 
         /// <summary>
         /// Constructor de la clase Friends en donde se inicializan los diversos componentes
@@ -34,6 +36,7 @@ namespace Client
         {
             userGame = _user;
             InitializeComponent();
+            language = Properties.Settings.Default.languageCode;
             try
             {
                 InitializeFriendsList();
@@ -99,7 +102,14 @@ namespace Client
                         bool added = service.AddFriendRequest(userGame.id, addressee[0].id);
                         if (added)
                         {
-                            MessageBox.Show("Solicitud enviada con exito");
+                            if (language.Equals("es-MX"))
+                            {
+                                MessageBox.Show("Solicitud enviada con exito");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Request sent successfully");
+                            }
                         }
                     }
                 }
@@ -110,7 +120,14 @@ namespace Client
             }
             else
             {
-                MessageBox.Show("Debes seleccionar a alguien");
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("Debes seleccionar a alguien");
+                }
+                else
+                {
+                    MessageBox.Show("You must select someone");
+                }
             }
             listSearchUsers.Items.Clear();
         }
@@ -126,7 +143,14 @@ namespace Client
             if (addressee.nametag.Equals(userGame.nametag))
             {
                 exists = true;
-                MessageBox.Show("No puedes enviar una solicitud a ti mismo");
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("No puedes enviar una solicitud a ti mismo");
+                }
+                else
+                {
+                    MessageBox.Show("You cannot submit a request to yourself");
+                }
             }
 
             try
@@ -138,13 +162,27 @@ namespace Client
                     if (exitsRequest)
                     {
                         exists = true;
-                        MessageBox.Show("Ya hay una solicitud pendiente");
+                        if (language.Equals("es-MX"))
+                        {
+                            MessageBox.Show("Ya hay una solicitud pendiente");
+                        }
+                        else
+                        {
+                            MessageBox.Show("There is already a pending request");
+                        }
                     }
                 }
                 else
                 {
                     exists = true;
-                    MessageBox.Show("El jugador ya es tu amigo");
+                    if (language.Equals("es-MX"))
+                    {
+                        MessageBox.Show("El jugador ya es tu amigo");
+                    }
+                    else
+                    {
+                        MessageBox.Show("The player is already your friend");
+                    }
                 }
             }
             catch (SystemException)
@@ -165,7 +203,14 @@ namespace Client
             {
                 try
                 {
-                    MessageBox.Show("Buscando...");
+                    if (language.Equals("es-MX"))
+                    {
+                        MessageBox.Show("Buscando...");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Searching...");
+                    }
                     service = new MemoryServer();
                     List<UserGame> coincidences = service.GetUsersByInitialesOfNametag(tbxNametag.Text);
                     FillListSearchUsers(coincidences);
@@ -219,7 +264,14 @@ namespace Client
             }
             else
             {
-                MessageBox.Show("Para eliminar debes seleccionar al amigo de la lista");
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("Para eliminar debes seleccionar al amigo de la lista");
+                }
+                else
+                {
+                    MessageBox.Show("To remove you must select the friend from the list");
+                }
             }
         }
 
@@ -267,16 +319,34 @@ namespace Client
         {
             if (typeError == TypeError.EMPTYFIELD)
             {
-                MessageBox.Show("El campo de texto está vacío");
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("El campo de texto está vacío");
+                }
+                else
+                {
+                    MessageBox.Show("The text field is empty");
+                }
             }
 
             if (typeError == TypeError.INVALIDNAMETAG)
             {
-                MessageBox.Show("Existen caracteres inválidos en el nametag a buscar \n" +
-                                "Recuerda que: \n" +
-                                "El nametag solo puede tener más de 10 caracteres \n" +
-                                "El nametag solo puede tener letras y numeros \n" +
-                                "El nametag no puede llevar espacios");
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("Existen caracteres inválidos en el nametag a buscar \n" +
+                                    "Recuerda que: \n" +
+                                    "El nametag solo puede tener más de 10 caracteres \n" +
+                                    "El nametag solo puede tener letras y numeros \n" +
+                                    "El nametag no puede llevar espacios");
+                }
+                else
+                {
+                    MessageBox.Show("There are invalid characters in the nametag to search for \n " +
+                                     "Remember that: \n" +
+                                     "The nametag can only have more than 10 characters \n" +
+                                     "The nametag can only have letters and numbers \n" +
+                                     "The nametag cannot have spaces");
+                }
             }
         }
 
@@ -285,7 +355,14 @@ namespace Client
         /// </summary>
         private void ShowExceptionAlert()
         {
-            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            if (language.Equals("es-MX"))
+            {
+                MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            }
+            else
+            {
+                MessageBox.Show("A system error occurred, please try again later.");
+            }
             this.Close();
         }
 

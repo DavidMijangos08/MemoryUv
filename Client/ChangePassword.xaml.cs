@@ -27,6 +27,8 @@ namespace Client
         public MemoryServer service;
         string codex;
         UserGame user;
+        string language = "es-MX";
+
 
         /// <summary>
         /// Constructor de la clase ChangePassword en donde se inicializan los diversos componentes
@@ -34,6 +36,7 @@ namespace Client
         public ChangePassword()
         {
             InitializeComponent();
+            language = Properties.Settings.Default.languageCode;
         }
 
         /// <summary>
@@ -65,7 +68,14 @@ namespace Client
                 }
                 else
                 {
-                    MessageBox.Show("Codigo incorrecto");
+                    if (language.Equals("es-MX"))
+                    {
+                        MessageBox.Show("Codigo incorrecto");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Incorrect code");
+                    }
                 }
             }
         }
@@ -81,7 +91,14 @@ namespace Client
             {
                 codex = service.SendEmail(tbxEmail.Text);
                 tbxCode.IsEnabled = true;
-                MessageBox.Show("Codigo enviado...");
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("Codigo enviado...");
+                }
+                else
+                {
+                    MessageBox.Show("code sent...");
+                }
             }
         }
 
@@ -98,7 +115,14 @@ namespace Client
                 bool updated = service.UpdatePassword(user.id, password);
                 if (updated)
                 {
-                    MessageBox.Show("Se actualizo correctamente la contraseña");
+                    if (language.Equals("es-MX"))
+                    {
+                        MessageBox.Show("Se actualizo correctamente la contraseña");
+                    }
+                    else
+                    {
+                        MessageBox.Show("The password was updated correctly");
+                    }
                 }
             }
             catch (SystemException)
@@ -117,7 +141,14 @@ namespace Client
             bool exists = false;
             if (string.IsNullOrEmpty(tbxCode.Text) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(passwordRepit))
             {
-                MessageBox.Show("Existe campo vacío");
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("Existe campo vacío");
+                }
+                else
+                {
+                    MessageBox.Show("Empty field exists");
+                }
                 exists = true;
             }
             return exists;
@@ -137,7 +168,14 @@ namespace Client
             catch (FormatException)
             {
                 exists = true;
-                MessageBox.Show("Existen caracteres invalidos en el correo electronico");
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("Existen caracteres invalidos en el correo electronico");
+                }
+                else
+                {
+                    MessageBox.Show("There are invalid characters in the email");
+                }
             }
 
             if (exists != true)
@@ -145,7 +183,14 @@ namespace Client
                 if (string.IsNullOrEmpty(email))
                 {
                     exists = true;
-                    MessageBox.Show("Existe campo vacío");
+                    if (language.Equals("es-MX"))
+                    {
+                        MessageBox.Show("Existe campo vacío");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Empty field exists");
+                    }
                 }
             }
             
@@ -162,7 +207,14 @@ namespace Client
                     else
                     {
                         exists = true;
-                        MessageBox.Show("No existe un usuario asociado al correo");
+                        if (language.Equals("es-MX"))
+                        {
+                            MessageBox.Show("No existe un usuario asociado al correo");
+                        }
+                        else
+                        {
+                            MessageBox.Show("There is no user associated with the email");
+                        }
                     }
                 }
                 catch (SystemException)
@@ -186,7 +238,14 @@ namespace Client
                 if (!password.Equals(passwordRepit))
                 {
                     exists = true;
-                    MessageBox.Show("Las contraseñas no son iguales");
+                    if (language.Equals("es-MX"))
+                    {
+                        MessageBox.Show("Las contraseñas no son iguales");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Passwords are not the same");
+                    }
                 }
             }
             else
@@ -206,12 +265,23 @@ namespace Client
             Regex regex = new Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)\\S{8,15}$");
             if (!regex.IsMatch(password))
             {
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("Contraseña insegura \n"
+                                        + "La contraseña debe tener entre 8 y 16 caracteres \n"
+                                        + "La contraseña debe tener por lo menos un digito \n"
+                                        + "La contraseña debe tener por lo menos una letra mayúscula \n"
+                                        + "La contraseña debe tener por lo menos una letra minúscula");
+                }
+                else
+                {
+                    MessageBox.Show("Weak password \n "
+                                         + "Password must be between 8 and 16 characters \n"
+                                         + "The password must have at least one digit \n"
+                                         + "Password must have at least one capital letter \n"
+                                         + "The password must have at least one lowercase letter");
+                }
                 exists = true;
-                MessageBox.Show("Contraseña insegura \n"
-                    + "La contraseña debe tener entre 8 y 16 caracteres \n"
-                    + "La contraseña debe tener por lo menos un digito \n"
-                    + "La contraseña debe tener por lo menos una letra mayúscula \n"
-                    + "La contraseña debe tener por lo menos una letra minúscula");
             }
             return exists;
         }
@@ -221,7 +291,14 @@ namespace Client
         /// </summary>
         private void ShowExceptionAlert()
         {
-            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            if (language.Equals("es-MX"))
+            {
+                MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            }
+            else
+            {
+                MessageBox.Show("A system error occurred, please try again later.");
+            }
             this.Close();
         }
     }

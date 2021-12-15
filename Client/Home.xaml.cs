@@ -29,6 +29,7 @@ namespace Client
         MemoryServer service;
         public RoomService.RoomServiceClient client;
         string usergameApplicant;
+        string language = "es-MX";
 
         /// <summary>
         /// Constructor de la clase Home en donde se inicializan los diversos componentes
@@ -39,6 +40,7 @@ namespace Client
             username = _user.nametag;
             lbUsername.Text = "" + username;
             usergame = _user;
+            language = Properties.Settings.Default.languageCode;
             try
             {
                 InstanceContext context = new InstanceContext(this);
@@ -270,7 +272,15 @@ namespace Client
         public void RecieveInvitation(string usergameApplicant)
         {
             this.usergameApplicant = usergameApplicant;
-            string messageInvitation = "El usuario " + usergameApplicant + " te está invitando a su sala";
+            string messageInvitation;
+            if (language.Equals("es-MX"))
+            {
+                messageInvitation = "El usuario " + usergameApplicant + " te está invitando a su sala";
+            }
+            else
+            {
+                messageInvitation = "The user " + usergameApplicant + " is inviting you to his room";
+            }
             gridInvitation.Visibility = Visibility.Visible;
             lbInvitation.Text = messageInvitation;
         }
@@ -302,7 +312,14 @@ namespace Client
         /// </summary>
         private void ShowExceptionAlert()
         {
-            MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            if (language.Equals("es-MX"))
+            {
+                MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
+            }
+            else
+            {
+                MessageBox.Show("A system error occurred, please try again later.");
+            }
             this.Close();
         }
     }
