@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -42,12 +43,12 @@ namespace Client
         /// </summary>
         /// <param name="sender"> Corresponde al objeto del método </param>
         /// <param name="e"> Corresponde al evento del método </param>
-        private void ButtonLogin_Click(object sender, RoutedEventArgs e)
+        private void ButtonLoginClick(object sender, RoutedEventArgs e)
         {
             string email = Usuario.Text;
             string password = pbPassword.Password.ToString();
 
-            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password) && !ExistsInvalidPassword(password))
+            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password) && !ExistsInvalidPassword(password) && !ExistsInvalidEmail(email))
             {
                 try
                 {
@@ -124,10 +125,41 @@ namespace Client
         }
 
         /// <summary>
+        /// Método que verifica si el email se encuentra registrado en la base de datos
+        /// </summary>
+        /// <param name="email"> Corresponde al campo de email </param>
+        private bool ExistsInvalidEmail(string email)
+        {
+            bool exists = false; ;
+            try
+            {
+                MailAddress address = new MailAddress(email);
+                if (address.Address == email)
+                {
+                    exists = false;
+                }
+            }
+            catch (FormatException)
+            {
+                exists = true;
+                if (language.Equals("es-MX"))
+                {
+                    MessageBox.Show("Existen caracteres invalidos en el correo electronico");
+                }
+                else
+                {
+                    MessageBox.Show("There are invalid characters in the email");
+                }
+            }
+            return exists;
+        }
+
+        /// <summary>
         /// Método que abre la ventana de crear nueva cuenta
         /// </summary>
         /// <param name="sender"> Corresponde al objeto del método </param>
         /// <param name="e"> Corresponde al evento del método </param>
+        
         private void ButtonNewAccountClick(object sender, RoutedEventArgs e)
         {
             Register windowRegister = new Register();
