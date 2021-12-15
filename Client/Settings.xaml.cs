@@ -98,7 +98,7 @@ namespace Client
         /// </summary>
         /// <param name="sender"> Corresponde al objeto del método </param>
         /// <param name="e"> Corresponde al evento del método </param>
-        private void Idiomas_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void IdiomsSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbLanguage.SelectedIndex == 0)
             {
