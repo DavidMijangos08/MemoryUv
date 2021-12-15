@@ -22,6 +22,7 @@ namespace Client
     public partial class Game : Window, GameService.IGameServiceCallback
     {
         MemoryServer service;
+        bool isDataDirty = false;
         string language;
         public GameService.GameServiceClient client;
         UserGame userConnected;
@@ -53,6 +54,7 @@ namespace Client
         {
             InitializeComponent();
             language = Properties.Settings.Default.languageCode;
+            this.section = section;
             try
             {
                 InstanceContext context = new InstanceContext(this);

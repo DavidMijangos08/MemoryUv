@@ -1,4 +1,18 @@
-2021-12-14 13:17:26,766 [10] ERROR Host.MemoryServer - El objeto de comunicación, System.ServiceModel.Channels.ServiceChannel, no se puede usar para la comunicación porque se anuló.
+2021-12-15 13:37:07,667 [12] ERROR Host.MemoryServer - El objeto de comunicación, System.ServiceModel.Channels.ServiceChannel, no se puede usar para la comunicación porque se anuló.
+System.ServiceModel.CommunicationObjectAbortedException: El objeto de comunicación, System.ServiceModel.Channels.ServiceChannel, no se puede usar para la comunicación porque se anuló.
+
+Server stack trace: 
+   en System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   en System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   en System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   en System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   en System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   en System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   en Host.IGameClient.ReceiveMove(String user, String btn)
+   en Host.MemoryServer.SendMove(String user, String btn, String userReceiving) en C:\Users\david\Documents\Quinto semestre\Tecnologias para la construcción de software\MemoryUv\Host\Program.cs:línea 859
+2021-12-15 13:37:13,834 [11] ERROR Host.MemoryServer - El objeto de comunicación, System.ServiceModel.Channels.ServiceChannel, no se puede usar para la comunicación porque se anuló.
 System.ServiceModel.CommunicationObjectAbortedException: El objeto de comunicación, System.ServiceModel.Channels.ServiceChannel, no se puede usar para la comunicación porque se anuló.
 
 Server stack trace: 
@@ -11,4 +25,18 @@ Exception rethrown at [0]:
    en System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
    en System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
    en Host.IGameClient.ReceiveGameTurn()
-   en Host.MemoryServer.SendGameTurn(String userReceiving) en C:\Users\david\Documents\Quinto semestre\Tecnologias para la construcción de software\MemoryUv\Host\Program.cs:línea 805
+   en Host.MemoryServer.SendGameTurn(String userReceiving) en C:\Users\david\Documents\Quinto semestre\Tecnologias para la construcción de software\MemoryUv\Host\Program.cs:línea 798
+2021-12-15 13:45:27,343 [7] ERROR Host.MemoryServer - El objeto de comunicación, System.ServiceModel.Channels.ServiceChannel, no se puede usar para la comunicación porque se anuló.
+System.ServiceModel.CommunicationObjectAbortedException: El objeto de comunicación, System.ServiceModel.Channels.ServiceChannel, no se puede usar para la comunicación porque se anuló.
+
+Server stack trace: 
+   en System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   en System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   en System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   en System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   en System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   en System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   en Host.IGameClient.ReceiveGameTurn()
+   en Host.MemoryServer.SendGameTurn(String userReceiving) en C:\Users\david\Documents\Quinto semestre\Tecnologias para la construcción de software\MemoryUv\Host\Program.cs:línea 798
