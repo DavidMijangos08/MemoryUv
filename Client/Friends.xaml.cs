@@ -24,9 +24,9 @@ namespace Client
     /// </summary>
     public partial class Friends : Window
     {
-        UserGame userGame = new UserGame();
+        UserGame userGame;
         MemoryServer service;
-        string language = "es-MX";
+        string language;
 
 
         /// <summary>

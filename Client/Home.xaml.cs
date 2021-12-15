@@ -24,12 +24,12 @@ namespace Client
     /// </summary>
     public partial class Home : Window, RoomService.IRoomServiceCallback
     {
-        public string username;
-        UserGame usergame = new UserGame();
+        string username;
+        UserGame usergame;
         MemoryServer service;
-        public RoomService.RoomServiceClient client;
+        RoomService.RoomServiceClient client;
         string usergameApplicant;
-        string language = "es-MX";
+        string language;
 
         /// <summary>
         /// Constructor de la clase Home en donde se inicializan los diversos componentes

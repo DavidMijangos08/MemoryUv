@@ -24,9 +24,9 @@ namespace Client
     /// </summary>
     public partial class FriendRequests : Window
     {
-        UserGame usergame = new UserGame();
+        UserGame usergame;
         MemoryServer service;
-        string language = "es-MX";
+        string language;
 
         /// <summary>
         /// Constructor de la clase FriendRequests en donde se inicializan los diversos componentes
@@ -87,7 +87,7 @@ namespace Client
                     bool accepted = service.AcceptFriendRequest(userApplicant[0].id, usergame.id);
                     if (accepted)
                     {
-                        bool added = service.AddFriend(userApplicant[0].id, usergame.id);
+                        service.AddFriend(userApplicant[0].id, usergame.id);
                         if (language.Equals("es-MX"))
                         {
                             MessageBox.Show("Tienes un nuevo amigo");

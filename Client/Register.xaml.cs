@@ -25,9 +25,9 @@ namespace Client
     /// </summary>
     public partial class Register : Window
     {
-        public MemoryServer service;
+        MemoryServer service;
         string codex;
-        string language = "es-MX";
+        string language;
 
         public Register()
         {
@@ -198,7 +198,11 @@ namespace Client
             bool exists = false;
             try
             {
-                MailAddress mailAdress = new MailAddress(email);
+                MailAddress address = new MailAddress(email);
+                if (address.Address == email)
+                {
+                    exists = false;
+                }
             }
             catch (FormatException)
             {

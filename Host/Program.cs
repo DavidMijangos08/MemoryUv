@@ -330,10 +330,10 @@ namespace Host
     public class MemoryServer : IChatService, IRoomService, IPreGameService, IGameService, IUserService, IFriendService, IFriendRequestService, IStatisticService
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        Dictionary<IChatClient, string> users = new Dictionary<IChatClient, string>();
-        Dictionary<IUserClient, string> usersRoom = new Dictionary<IUserClient, string>();
-        Dictionary<IPreGameClient, string> usersPreGame = new Dictionary<IPreGameClient, string>();
-        Dictionary<IGameClient, string> usersGame = new Dictionary<IGameClient, string>();
+        readonly Dictionary<IChatClient, string> users = new Dictionary<IChatClient, string>();
+        readonly Dictionary<IUserClient, string> usersRoom = new Dictionary<IUserClient, string>();
+        readonly Dictionary<IPreGameClient, string> usersPreGame = new Dictionary<IPreGameClient, string>();
+        readonly Dictionary<IGameClient, string> usersGame = new Dictionary<IGameClient, string>();
 
         /// <summary>
         /// Método del servicio del chat que permite conectar un nuevo usuario al chat global
@@ -500,12 +500,7 @@ namespace Host
             try
             {
                 var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
-                string usergame;
                 string usergameReceiverAux;
-                if (!usersRoom.TryGetValue(connection, out usergame))
-                {
-                    return;
-                }
 
                 foreach (var userReceiver in usersRoom.Keys)
                 {
@@ -536,12 +531,7 @@ namespace Host
             try
             {
                 var connection = OperationContext.Current.GetCallbackChannel<IUserClient>();
-                string usergame;
                 string usergameApplicantAux;
-                if (!usersRoom.TryGetValue(connection, out usergame))
-                {
-                    return;
-                }
 
                 foreach (var userApplicant in usersRoom.Keys)
                 {
@@ -953,9 +943,9 @@ namespace Host
                 UserGame user = authentication.Login(email, password);
                 return user;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -980,9 +970,9 @@ namespace Host
                 }
                 return saved;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1005,9 +995,9 @@ namespace Host
                 }
                 return exists;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1030,9 +1020,9 @@ namespace Host
                 }
                 return exists;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1067,9 +1057,9 @@ namespace Host
                 client.Send(mailMessage);
                 return code;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1093,9 +1083,9 @@ namespace Host
                 }
                 return updated;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1119,9 +1109,9 @@ namespace Host
                 }
                 return updated;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1139,9 +1129,9 @@ namespace Host
                 UserGame userGame = userLogic.GetUserGameById(idUser);
                 return userGame;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1159,9 +1149,9 @@ namespace Host
                 UserGame userGame = userLogic.GetUserGameByEmail(email);
                 return userGame;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1179,9 +1169,9 @@ namespace Host
                 List<UserGame> users = userLogic.GetUsersByInitialesOfNametag(nametag);
                 return users;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1205,9 +1195,9 @@ namespace Host
                 }
                 return saved;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1231,9 +1221,9 @@ namespace Host
                 }
                 return deleted;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1251,9 +1241,9 @@ namespace Host
                 List<UserGame> users = friendLogic.GetFriendsList(idUser);
                 return users;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1271,9 +1261,9 @@ namespace Host
                 List<UserGame> usersConnected = friendLogic.GetConnectedFriends(idUser);
                 return usersConnected;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1292,9 +1282,9 @@ namespace Host
                 bool exists = friendLogic.ExistsFriendship(idUser, idFriend);
                 return exists;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1318,9 +1308,9 @@ namespace Host
                 }
                 return saved;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1344,9 +1334,9 @@ namespace Host
                 }
                 return accepted;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1370,9 +1360,9 @@ namespace Host
                 }
                 return rejected;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1390,9 +1380,9 @@ namespace Host
                 List<UserGame> usersRequesting = friendRequestLogic.GetUsersRequesting(idUser);
                 return usersRequesting;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1411,9 +1401,9 @@ namespace Host
                 bool exists = friendRequestLogic.ExistsPendingRequest(idApplicant, idReceiver);
                 return exists;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1431,9 +1421,9 @@ namespace Host
                 string addressBackground = configUserLogic.GetBackgroundUser(GetConfigUserById(idUser));
                 return addressBackground;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1450,9 +1440,9 @@ namespace Host
                 ConfigUserLogic configUserLogic = new ConfigUserLogic();
                 return configUserLogic.GetConfigUserById(idUser);
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1469,9 +1459,9 @@ namespace Host
                 ConfigUserLogic configUserLogic = new ConfigUserLogic();
                 configUserLogic.SetBackgroundUser(idUser, idNewBackground);
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1488,9 +1478,9 @@ namespace Host
                 ConfigUserLogic configUserLogic = new ConfigUserLogic();
                 return configUserLogic.ExistsConfigUser(idUser);
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1506,9 +1496,9 @@ namespace Host
                 ConfigUserLogic configUserLogic = new ConfigUserLogic();
                 configUserLogic.NewConfigUser(idUser);
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1525,9 +1515,9 @@ namespace Host
                 List<StatisticUser> users = statisticUserLogic.GetBetterUsers();
                 return users;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1546,9 +1536,9 @@ namespace Host
                 bool value = statisticUserLogic.GetStatisticUser(idUser, numAchievement);
                 return value;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1571,9 +1561,9 @@ namespace Host
                 }
                 return added;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1596,9 +1586,9 @@ namespace Host
                 }
                 return added;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1622,9 +1612,9 @@ namespace Host
                 }
                 return added;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -1643,9 +1633,9 @@ namespace Host
                 exists = statisticUserLogic.ExistsStatisticUser(idUser);
                 return exists;
             }
-            catch (SystemException ex)
+            catch (SystemException)
             {
-                throw ex;
+                throw;
             }
         }
     }

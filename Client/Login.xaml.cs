@@ -25,8 +25,8 @@ namespace Client
     /// </summary>
     public partial class Login : Window
     {
-        public MemoryServer service;
-        string language = "es-MX";
+        MemoryServer service;
+        string language;
 
         /// <summary>
         /// Constructor de la clase Login en donde se inicializan diversos componentes

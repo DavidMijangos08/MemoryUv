@@ -23,9 +23,9 @@ namespace Client
     /// </summary>
     public partial class Personalize : Window
     {
-        UserGame userGame = new UserGame();
-        MemoryServer service = new MemoryServer();
-        string language = "es-MX";
+        UserGame userGame;
+        MemoryServer service;
+        string language;
 
         public Personalize(UserGame _user)
         {
@@ -34,8 +34,7 @@ namespace Client
             userGame = _user;
             try
             {
-                this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
-                //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Resources/Background/backgroundX.jpg")));
+                this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));              
             }
             catch (SystemException)
             {

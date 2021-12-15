@@ -24,10 +24,10 @@ namespace Client
     /// </summary>
     public partial class ChangePassword : Window
     {
-        public MemoryServer service;
+        MemoryServer service;
         string codex;
         UserGame user;
-        string language = "es-MX";
+        string language;
 
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace Client
         private bool ExistsEmptyFields(string code, string password, string passwordRepit)
         {
             bool exists = false;
-            if (string.IsNullOrEmpty(tbxCode.Text) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(passwordRepit))
+            if (string.IsNullOrEmpty(code) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(passwordRepit))
             {
                 if (language.Equals("es-MX"))
                 {
@@ -163,7 +163,11 @@ namespace Client
             bool exists = false;
             try
             {
-                MailAddress mailAdress = new MailAddress(email);
+                MailAddress address = new MailAddress(email);
+                if(address.Address == email)
+                {
+                    exists = false;
+                }
             }
             catch (FormatException)
             {

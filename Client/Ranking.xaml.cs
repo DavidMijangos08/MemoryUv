@@ -24,9 +24,9 @@ namespace Client
     public partial class Ranking : Window
     {
 
-        UserGame userGame = new UserGame();
+        UserGame userGame;
         MemoryServer service;
-        string language = "es-MX";
+        string language;
 
         /// <summary>
         /// Constructor de la clase Ranking en donde se inicializan los diversos componentes

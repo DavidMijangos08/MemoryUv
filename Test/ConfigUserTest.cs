@@ -40,7 +40,8 @@ namespace Test
             ConfigUserLogic configUserLogic = new ConfigUserLogic();
             ConfigUser configUser = configUserLogic.GetConfigUserById(5);
             string addressBackground = configUserLogic.GetBackgroundUser(configUser);
-            Assert.AreEqual(addressBackground, "Resources/Background/backgroundDefault.png");
+            string addressExpected = "Resources/Background/backgroundDefault.png";
+            Assert.AreEqual(addressBackground, addressExpected);
         }
 
         /// <summary>

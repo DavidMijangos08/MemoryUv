@@ -22,12 +22,10 @@ namespace Client
     /// </summary>
     public partial class Chat : Window, ChatService.IChatServiceCallback
     {
-        public string userName;
-        public ChatService.ChatServiceClient client;
-        public bool isDataDirty = false;
-        string language = "es-MX";
-
-        MemoryServer service;
+        string userName;
+        ChatService.ChatServiceClient client;
+        bool isDataDirty = false;
+        string language;
 
         /// <summary>
         /// Constructor de la clase Chat donde se inicializan los diversos componentes
