@@ -1,0 +1,10 @@
+﻿C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Logic\Authentication.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Logic\ConfigUserLogic.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Logic\FriendLogic.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Logic\FriendRequestLogic.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Logic\Properties\AssemblyInfo.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Logic\StatisticUserLogic.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Logic\UserLogic.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Logic\App.config
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Logic\log4net.config
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Logic\packages.config

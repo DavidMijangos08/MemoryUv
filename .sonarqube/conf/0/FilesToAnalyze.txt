@@ -1,0 +1,10 @@
+﻿C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\ConfigUser.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\Friend.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\FriendRequest.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\MemoryModel.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\Properties\AssemblyInfo.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\StatisticUser.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\UserGame.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\App.Config
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\packages.config
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\Properties\DataSources\User.datasource

@@ -1,0 +1,65 @@
+﻿C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\App.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\ChangePassword.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Domain\Card.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\FriendRequests.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Friends.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Game.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Home.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Achievement.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Personalize.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\PreGame.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Procesos.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Ranking.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Register.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Room.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Settings.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Chat.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Login.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Properties\AssemblyInfo.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\10.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\11.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Sound\GameSoundtrack.mp3
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Sound\song.wav
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Properties\Langs\Lang.es.resx
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Properties\Langs\Lang.resx
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Properties\Resources-US-en.resx
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Properties\Resources.resx
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\app.config
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\ChatService\item.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\ChatService\item1.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\ChatService\item2.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\ChatService\item3.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\ChatService\MemoryServer.wsdl
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\GameService\item.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\GameService\item1.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\GameService\item2.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\GameService\item3.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\GameService\MemoryServer.wsdl
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\PreGameService\item.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\PreGameService\item1.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\PreGameService\item2.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\PreGameService\item3.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\PreGameService\MemoryServer.wsdl
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\RoomService\item.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\RoomService\item1.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\RoomService\item2.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\RoomService\item3.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\RoomService\MemoryServer.wsdl
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\packages.config
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Properties\Settings.settings
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\GameService\item.disco
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\GameService\configuration91.svcinfo
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\GameService\configuration.svcinfo
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\GameService\Reference.svcmap
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\ChatService\item.disco
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\ChatService\configuration91.svcinfo
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\ChatService\configuration.svcinfo
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\ChatService\Reference.svcmap
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\RoomService\item.disco
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\RoomService\configuration91.svcinfo
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\RoomService\configuration.svcinfo
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\RoomService\Reference.svcmap
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\PreGameService\item.disco
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\PreGameService\configuration91.svcinfo
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\PreGameService\configuration.svcinfo
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\PreGameService\Reference.svcmap
