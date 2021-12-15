@@ -241,6 +241,34 @@ namespace Logic
         }
 
         /// <summary>
+        /// Método que permite verificar la existencia de la estadística de un usuario
+        /// </summary>
+        /// <param name="idUser"> Corresponde al id del usuario a verificar </param>
+        /// <returns> booleano con el resultado de la operación, true si existe, de lo contrario, false </returns>
+
+        public bool ExistsStatisticUser(int idUser)
+        {
+            bool exists = false;
+            try
+            {
+                using (var context = new MemoryModel())
+                {
+                    var coincidences = from StatisticUser in context.StatisticsUser where StatisticUser.idUser == idUser select StatisticUser;
+                    if (coincidences.Count() > 0)
+                    {
+                        exists = true;
+                    }
+                }
+            }
+            catch (SystemException ex)
+            {
+                log.Error(ex.Message, ex);
+                throw new SystemException();
+            }
+            return exists;
+        }
+
+        /// <summary>
         /// Enumerador que contiene dos estados (ÉXITO, FALLADO) para el retorno de diversos métodos de la lógica de estadísticas
         /// </summary>
 

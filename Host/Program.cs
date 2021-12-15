@@ -291,6 +291,9 @@ namespace Host
 
         [OperationContract]
         bool AddedStatisticUser(int idUser, string nametag);
+
+        [OperationContract]
+        bool ExistsStatisticUser(int idUser);
     }
 
     /// <summary>
@@ -1618,6 +1621,27 @@ namespace Host
                     added = true;
                 }
                 return added;
+            }
+            catch (SystemException ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Método que se comunica con la lógica del juego para verificar la existencia de una estadística de usuario
+        /// </summary>
+        /// <param name="idUser"> Corresponde al id del usuario a verificar </param>
+        /// <returns> booleano con el resultado de la operación, true si existe, de lo contrario, false </returns>
+
+        public bool ExistsStatisticUser(int idUser)
+        {
+            try
+            {
+                bool exists = false;
+                StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
+                exists = statisticUserLogic.ExistsStatisticUser(idUser);
+                return exists;
             }
             catch (SystemException ex)
             {
