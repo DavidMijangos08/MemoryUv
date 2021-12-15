@@ -26,6 +26,10 @@ namespace Client
     {
         UserGame userGame = new UserGame();
         MemoryServer service;
+
+        /// <summary>
+        /// Constructor de la clase Friends en donde se inicializan los diversos componentes
+        /// </summary>
         public Friends(UserGame _user)
         {
             userGame = _user;
@@ -42,6 +46,9 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que inicializa la lista de amigos
+        /// </summary>
         private void InitializeFriendsList()
         {
             try
@@ -60,6 +67,11 @@ namespace Client
             }       
         }
 
+        /// <summary>
+        /// Método que permite regresar a la ventana anterior
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ClicExit(object sender, RoutedEventArgs e)
         {
             Home windowHome = new Home(userGame);
@@ -67,6 +79,11 @@ namespace Client
             this.Close();
         }
 
+        /// <summary>
+        /// Método que envia solicitud de amistad
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ClicAddFriend(object sender, RoutedEventArgs e)
         {
             object itemSelected = listSearchUsers.SelectedItem;
@@ -98,6 +115,10 @@ namespace Client
             listSearchUsers.Items.Clear();
         }
 
+        /// <summary>
+        /// Método que valida la interaccion antes de enviar la solicitud de amistad
+        /// </summary>
+        /// <param name="addressee"> Corresponde al objeto del usuario </param>
         private bool ExistsRequestImpediment(UserGame addressee)
         {
             bool exists = false;
@@ -133,6 +154,11 @@ namespace Client
             return exists;
         }
 
+        /// <summary>
+        /// Método que busca a los amigos existentes
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ClicSearchFriend(object sender, RoutedEventArgs e)
         {
             if (!ExistsInvalidField())
@@ -151,6 +177,10 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que recupera las coincidencias y las ingresa a una lista
+        /// </summary>
+        /// <param name="coincidences"> Corresponde a la lista de usuarios similares a la busqueda </param>
         private void FillListSearchUsers(List<UserGame> coincidences)
         {
             for (int i = 0; i < coincidences.Count(); i++)
@@ -160,6 +190,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que elimina al usuario de tus amigos
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ClicRemoveFriend(object sender, RoutedEventArgs e)
         {
             object itemSelected = listFriends.SelectedItem;
@@ -188,6 +223,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que abre la ventana de solicitudes de amistad
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ClicRequests(object sender, RoutedEventArgs e)
         {
             FriendRequests windowFriendRequests = new FriendRequests(userGame);
@@ -195,6 +235,9 @@ namespace Client
             this.Close();
         }
 
+        /// <summary>
+        /// Método que comprueba si existen caracteres invalidos
+        /// </summary>
         private bool ExistsInvalidField()
         {
             bool exists = false;
@@ -216,6 +259,10 @@ namespace Client
             return exists;
         }
 
+        /// <summary>
+        /// Método que envia una alerta de error si llegara a ocurrir
+        /// </summary>
+        /// <param name="typeError"> Corresponde al tipo de error </param>
         private void SendAlert(TypeError typeError)
         {
             if (typeError == TypeError.EMPTYFIELD)
@@ -233,6 +280,9 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que muestra la alerta en caso de excepción
+        /// </summary>
         private void ShowExceptionAlert()
         {
             MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");

@@ -27,11 +27,20 @@ namespace Client
         public MemoryServer service;
         string codex;
         UserGame user;
+
+        /// <summary>
+        /// Constructor de la clase ChangePassword en donde se inicializan los diversos componentes
+        /// </summary>
         public ChangePassword()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Método que permite cerrar la ventana y regresar a la anterior.
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void CancelClick(object sender, RoutedEventArgs e)
         {
             Login login = new Login();
@@ -39,6 +48,11 @@ namespace Client
             this.Close();
         }
 
+        /// <summary>
+        /// Método que envia a modificar la contrasenia del usuario
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void SaveClick(object sender, RoutedEventArgs e)
         {
             string code = tbxCode.Text;
@@ -56,6 +70,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que envia el codigo generado al email del usuario
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void SendCodeClick(object sender, RoutedEventArgs e)
         {
             if (!ExistsInvalidEmail(tbxEmail.Text))
@@ -66,6 +85,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que conecta a la base de datos para modificar el atributo password
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void SendToModify(string password)
         {
             try
@@ -82,7 +106,12 @@ namespace Client
                 ShowExceptionAlert();
             }               
         }
-
+        /// <summary>
+        /// Método que verifica si existen campos vacios
+        /// </summary>
+        /// <param name="code"> Corresponde al campo de codigo </param>
+        /// <param name="password"> Corresponde al campo de contrasenia</param>
+        /// <param name="passwordRepit"> Corresponde al campo de repetir contrasenia</param>
         private bool ExistsEmptyFields(string code, string password, string passwordRepit)
         {
             bool exists = false;
@@ -94,6 +123,10 @@ namespace Client
             return exists;
         }
 
+        /// <summary>
+        /// Método que verifica si el email se encuentra registrado en la base de datos
+        /// </summary>
+        /// <param name="email"> Corresponde al campo de email </param>
         private bool ExistsInvalidEmail(string email)
         {
             bool exists = false;
@@ -140,6 +173,11 @@ namespace Client
             return exists;
         }
 
+        /// <summary>
+        /// Método que verifica si la contrasenia coincide con la repetida
+        /// </summary>
+        /// <param name="password"> Corresponde a la contrasenia </param>
+        /// <param name="passwordRepit"> Corresponde a la contrasenia repetida </param>
         private bool ExistsInvalidPassword(string password, string passwordRepit)
         {
             bool exists = false;
@@ -158,6 +196,10 @@ namespace Client
             return exists;
         }
 
+        /// <summary>
+        /// Método que verifica si existen caracteres invalidos
+        /// </summary>
+        /// <param name="password"> Corresponde al campo de contrasenia </param>
         private bool ExistsInvalidCharacters(string password)
         {
             bool exists = false;
@@ -174,6 +216,9 @@ namespace Client
             return exists;
         }
 
+        /// <summary>
+        /// Método que muestra la alerta en caso de excepción
+        /// </summary>
         private void ShowExceptionAlert()
         {
             MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");

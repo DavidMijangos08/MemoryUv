@@ -26,6 +26,11 @@ namespace Client
         public ChatService.ChatServiceClient client;
         public bool isDataDirty = false;
         MemoryServer service;
+
+        /// <summary>
+        /// Constructor de la clase Chat donde se inicializan los diversos componentes
+        /// </summary>
+        /// <param name="_username"> Corresponde a el nombre del usuario</param>
         public Chat(string _username)
         {
 
@@ -38,7 +43,7 @@ namespace Client
                 client.Join(userName);
                 lbId.Text = "Bienvenido " + userName;
                 service = new MemoryServer();
-                //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
+                //this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_username.id))));
             }
             catch (CommunicationException)
             {
@@ -46,12 +51,21 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que recibe el mensaje
+        /// </summary>
+        /// <param name="user"> Corresponde al usuario </param>
+        /// <param name="e"> Corresponde al mensaje </param>
         public void RecieveMessage(string user, string message)
         {
             string newMessage = $"{user} : {message}";
             messageDisplay.Items.Add(newMessage);
         }
 
+        /// <summary>
+        /// Método que actualiza los usuarios disponibles
+        /// </summary>
+        /// <param name="users"> Corresponde a un diccionario que colecciona usuarios </param>
         public void UsersUpdate(Dictionary<object, string>.ValueCollection users)
         {
             listUsersOnline.Items.Clear();
@@ -64,6 +78,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que envia el mensaje
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void BtnSendClick(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrEmpty(txtChat.Text))
@@ -101,6 +120,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que conecta a la base de datos para modificar el atributo password
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             isDataDirty = true;
@@ -117,6 +141,9 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que muestra la alerta en caso de excepción
+        /// </summary>
         private void ShowExceptionAlert()
         {
             MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");

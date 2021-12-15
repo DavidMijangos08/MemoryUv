@@ -32,6 +32,9 @@ namespace Client
         string section;
         string difficulty;
 
+        /// <summary>
+        /// Constructor de la clase Room en donde se inicializan los diversos componentes
+        /// </summary>
         public Room(UserGame _user)
         {
             usergame = _user;
@@ -43,7 +46,7 @@ namespace Client
                 client = new RoomService.RoomServiceClient(context);
                 client.ConnectWaitingRoom(usergame.nametag);
                 service = new MemoryServer();
-                // this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
+                this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));
             }
             catch (CommunicationException)
             {
@@ -55,6 +58,9 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Metodo donde se inicializa la lista de amigos
+        /// </summary>
         private void initializeListFriends()
         {
             try
@@ -73,6 +79,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que regresa a la ventana de Home
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ClicExit(object sender, RoutedEventArgs e)
         {
             try
@@ -88,6 +99,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que regresa a la ventana anterior
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ClicAdd(object sender, RoutedEventArgs e)
         {
             if(cbSection.SelectedItem != null && cbDifficulty.SelectedItem != null)
@@ -112,6 +128,11 @@ namespace Client
            
         }
 
+        /// <summary>
+        /// Método que acepta la invitacion de juego
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ClickAccept(object sender, RoutedEventArgs e)
         {
             try
@@ -139,11 +160,20 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que rechaza la invitacion de juego
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ClicRejeact(object sender, RoutedEventArgs e)
         {
             gridInvitation.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// Método que recive la invitacion de juego
+        /// </summary>
+        /// <param name="usergameApplicant"> Corresponde al usuario que envia la invitacion</param>
         public void RecieveInvitation(string usergameApplicant)
         {
             this.usergameApplicant = usergameApplicant;
@@ -152,6 +182,9 @@ namespace Client
             lbInvitation.Text = messageInvitation;
         }
 
+        /// <summary>
+        /// Método que recibe la respuesta de la invitacion de juego
+        /// </summary>
         public void RecieveAnswer()
         {
             try
@@ -177,12 +210,20 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que recarga la lista de amigos disponibles
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void RecharchClick(object sender, RoutedEventArgs e)
         {
             listFriends.Items.Clear();
             initializeListFriends();
         }
 
+        /// <summary>
+        /// Método que muestra la alerta en caso de excepción
+        /// </summary>
         private void ShowExceptionAlert()
         {
             MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");

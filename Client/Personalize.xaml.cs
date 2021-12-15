@@ -41,6 +41,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que regresa a la ventana anterior
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ExitClick(object sender, RoutedEventArgs e)
         {
             Home windowHome = new Home(userGame);
@@ -48,6 +53,11 @@ namespace Client
             this.Close();
         }
 
+        /// <summary>
+        /// Método que restablece el fondo del usuario al default
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void DefaultClick(object sender, RoutedEventArgs e)
         {
             try
@@ -55,7 +65,6 @@ namespace Client
                 this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Resources/Background/backgroundDefault.png")));
                 service.SetBackgroundUser(userGame.id, 0);
 
-                //this.Background = Brushes.Gray;
             }
             catch (SystemException)
             {
@@ -63,12 +72,14 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que establece el tema green 
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void GreenClick(object sender, RoutedEventArgs e)
         {
-            //Personalize per = new Personalize(userGame);
-            //  ImageBrush test = service.GetConfigUser(per);
-            //ImageBrush imageBrushed = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Resources/Background/backgroundGreen.png")));
-            //Background = test;
+            
             try
             {
                 this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Resources/Background/backgroundGreen.png")));
@@ -80,6 +91,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que establece el tema ice
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void IceClick(object sender, RoutedEventArgs e)
         {
             try
@@ -93,6 +109,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que establece el tema pink
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void PinkClick(object sender, RoutedEventArgs e)
         {
             try
@@ -106,6 +127,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que establece el tema red
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void RedClick(object sender, RoutedEventArgs e)
         {
             try
@@ -119,6 +145,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que establece el tema x
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void XClick(object sender, RoutedEventArgs e)
         {
             try
@@ -132,6 +163,9 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que muestra la alerta en caso de excepción
+        /// </summary>
         private void ShowExceptionAlert()
         {
             MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");

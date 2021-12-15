@@ -26,6 +26,9 @@ namespace Client
     {
         UserGame usergame = new UserGame();
         MemoryServer service;
+        /// <summary>
+        /// Constructor de la clase FriendRequests en donde se inicializan los diversos componentes
+        /// </summary>
         public FriendRequests(UserGame _user)
         {
             InitializeComponent();
@@ -42,6 +45,9 @@ namespace Client
             }          
         }
 
+        /// <summary>
+        /// Método que inicializa la lista de solicitudes
+        /// </summary>
         private void InitializeListRequests()
         {
             try
@@ -60,6 +66,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que acepta la solicitud de amistad
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ClicAcceptFriend(object sender, RoutedEventArgs e)
         {
             object itemSelected = listRequests.SelectedItem;
@@ -94,6 +105,11 @@ namespace Client
 
         }
 
+        /// <summary>
+        /// Método que rechaza la solicitud de amistad
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ClicRejectFriend(object sender, RoutedEventArgs e)
         {
             object itemSelected = listRequests.SelectedItem;
@@ -123,6 +139,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que regresa a la ventana anterior
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ClicExit(object sender, RoutedEventArgs e)
         {
             Friends windowFriends = new Friends(usergame);
@@ -130,6 +151,9 @@ namespace Client
             this.Close();
         }
 
+        /// <summary>
+        /// Método que muestra la alerta en caso de excepción
+        /// </summary>
         private void ShowExceptionAlert()
         {
             MessageBox.Show("Ocurrió un error en el sistema, intente más tarde.");
