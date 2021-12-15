@@ -63,7 +63,7 @@ namespace Client
         /// <summary>
         /// Metodo donde se inicializa la lista de amigos
         /// </summary>
-        private void initializeListFriends()
+        
         private void InitializeListFriends()
         {
             try
