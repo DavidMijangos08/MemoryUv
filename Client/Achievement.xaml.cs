@@ -27,6 +27,10 @@ namespace Client
         MemoryServer service;
         string language = "es-MX";
 
+        /// <summary>
+        /// Constructor de la clase Logros en donde se inicializan los diversos componentes
+        /// </summary>
+        /// <param name="_user"> Corresponde al usuario conectado al juego</param>
         public Logros(UserGame _user)
         {
             userGame = _user;
@@ -44,6 +48,9 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que inicializa la verificacion de los logros del usuario
+        /// </summary>
         private void InitializeArchievement()
         {
             service = new MemoryServer();
@@ -81,6 +88,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que permite cerrar la ventana y regresar a Home
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ExitClick(object sender, RoutedEventArgs e)
         {
             Home windowHome = new Home(userGame);
@@ -88,6 +100,9 @@ namespace Client
             this.Close();
         }
 
+        /// <summary>
+        /// Método que muestra la alerta en caso de excepción
+        /// </summary>
         private void ShowExceptionAlert()
         {
             if (language.Equals("es-MX"))

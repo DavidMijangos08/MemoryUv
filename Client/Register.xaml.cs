@@ -189,6 +189,10 @@ namespace Client
             return exists;
         }
 
+        /// <summary>
+        /// Método que verifica si el email es invalido
+        /// </summary>
+        /// <param name="email"> Corresponde al email ingresado</param>
         private Boolean ExistsInvalidEmail(string email)
         {
             bool exists = false;
@@ -211,6 +215,10 @@ namespace Client
             return exists;
         }
 
+        /// <summary>
+        /// Método que verifica si la contrasenia pose caracteres invalidos
+        /// </summary>
+        /// <param name="password"> Corresponde a la contrasenia ingresada  </param>
         private Boolean ExistsInvalidPassword(string password)
         {
             bool exists = false;
@@ -238,6 +246,10 @@ namespace Client
             return exists;
         }
 
+        /// <summary>
+        /// Método que verifica si el nametag pose caracteres invalidos
+        /// </summary>
+        /// <param name="nametag"> Corresponde al nametag ingresado </param>
         private Boolean ExistsInvalidNametag(string nametag)
         {
             bool exists = false;
@@ -281,6 +293,10 @@ namespace Client
             return exists;
         }
 
+        /// <summary>
+        /// Método que verifica si existe el email registrado en el sistema
+        /// </summary>
+        /// <param name="email"> Corresponde a la direccion de email ingresada </param>
         private Boolean ExistsEqualEmail(string email)
         {
             bool exists = false;
@@ -307,6 +323,9 @@ namespace Client
             return exists;
         }
 
+        /// <summary>
+        /// Método que muestra la alerta en caso de excepción
+        /// </summary>
         private void ShowExceptionAlert()
         {
             if (language.Equals("es-MX"))

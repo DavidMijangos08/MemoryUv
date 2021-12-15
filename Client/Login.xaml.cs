@@ -27,12 +27,21 @@ namespace Client
     {
         public MemoryServer service;
         string language = "es-MX";
+
+        /// <summary>
+        /// Constructor de la clase Login en donde se inicializan diversos componentes
+        /// </summary>
         public Login()
         {
             InitializeComponent();
             language = Properties.Settings.Default.languageCode;
         }
 
+        /// <summary>
+        /// Método que inicia el inicio de sesion
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ButtonLogin_Click(object sender, RoutedEventArgs e)
         {
             string email = Usuario.Text;
@@ -91,6 +100,10 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que verifica que no existan caracteres invalidos
+        /// </summary>
+        /// <param name="password"> Corresponde a la contrasenia ingresada </param>
         private bool ExistsInvalidPassword(string password)
         {
             bool exists = false;
@@ -110,6 +123,11 @@ namespace Client
             return exists;
         }
 
+        /// <summary>
+        /// Método que abre la ventana de crear nueva cuenta
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ButtonNewAccountClick(object sender, RoutedEventArgs e)
         {
             Register windowRegister = new Register();
@@ -117,6 +135,11 @@ namespace Client
             this.Close();
         }
 
+        /// <summary>
+        /// Método que abre la ventana CambiarContrasenia
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void SupportClick(object sender, RoutedEventArgs e)
         {
             ChangePassword windowChangePassword = new ChangePassword();
@@ -124,6 +147,9 @@ namespace Client
             this.Close();
         }
 
+        /// <summary>
+        /// Método que muestra la alerta en caso de excepción
+        /// </summary>
         private void ShowExceptionAlert()
         {
             if (language.Equals("es-MX"))
@@ -137,6 +163,12 @@ namespace Client
             this.Close();
         }
 
+        /// <summary>
+        /// Método que reinicia el programa en el idioma seleccionado
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
+        private void cbLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         private void CbLanguageSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbLanguage.SelectedIndex == 0)

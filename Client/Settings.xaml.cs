@@ -75,19 +75,11 @@ namespace Client
             this.Close();
         }       
 
-        private void FiltroVista(object sender, RoutedEventArgs e)
-        {
-            if (chbVista.IsEnabled)
-            {
-                //filtro.IsEnabled = true;
-            }
-            else
-            {
-                //filtro.IsEnabled = false;
-            }
-            
-        }
+        
 
+        /// <summary>
+        /// Método que muestra la alerta en caso de excepción
+        /// </summary>
         private void ShowExceptionAlert()
         {
             if (language.Equals("es-MX"))
@@ -101,7 +93,12 @@ namespace Client
             this.Close();
         }
 
-        private void IdiomsSelectionChanged(object sender, SelectionChangedEventArgs e)
+        /// <summary>
+        /// Método que permite cambiar el idioma del programa
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
+        private void Idiomas_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbLanguage.SelectedIndex == 0)
             {

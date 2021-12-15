@@ -30,6 +30,10 @@ namespace Client
         public RoomService.RoomServiceClient client;
         string usergameApplicant;
         string language = "es-MX";
+
+        /// <summary>
+        /// Constructor de la clase Home en donde se inicializan los diversos componentes
+        /// </summary>
         public Home(UserGame _user)
         {
             InitializeComponent();
@@ -56,6 +60,11 @@ namespace Client
             }          
         }
 
+        /// <summary>
+        /// Método que abre la ventana de chat
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ChatClick(object sender, RoutedEventArgs e)
         {
             try
@@ -70,6 +79,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que finaliza del programa
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ExitClick(object sender, RoutedEventArgs e)
         {
             try
@@ -89,6 +103,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que abre la ventana de configracion
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void SettingsClick(object sender, RoutedEventArgs e)
         {
             try
@@ -104,6 +123,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que abre la ventana de logros
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ArchievementClick(object sender, RoutedEventArgs e)
         {
             try
@@ -119,6 +143,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que abre la ventana de amigos
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void FriendsClick(object sender, RoutedEventArgs e)
         {
             try
@@ -134,6 +163,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que abre la ventana de ranking
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void RankingClick(object sender, RoutedEventArgs e)
         {
             try
@@ -149,6 +183,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que abre la ventana de Sala
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void RoomClick(object sender, RoutedEventArgs e)
         {
             try
@@ -164,6 +203,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que abre la ventana de personalizar
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void PersonalizeClick(object sender, RoutedEventArgs e)
         {
             try
@@ -179,6 +223,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que acepta la invitacion para unierse a una sala
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ClickAccept(object sender, RoutedEventArgs e)
         {
             try
@@ -206,11 +255,20 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que rechaza la solicitud de uniersea una sala
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ClicRejeact(object sender, RoutedEventArgs e)
         {
             gridInvitation.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// Método que recibe la invitacion para unirse a una sala
+        /// </summary>
+        /// <param name="usergameApplicant"> Corresponde al nombre del usuario </param>
         public void RecieveInvitation(string usergameApplicant)
         {
             this.usergameApplicant = usergameApplicant;
@@ -227,6 +285,9 @@ namespace Client
             lbInvitation.Text = messageInvitation;
         }
 
+        /// <summary>
+        /// Método que recibe la respuesta del jugador 
+        /// </summary>
         public void RecieveAnswer()
         {
             try
@@ -246,6 +307,9 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que muestra la alerta en caso de excepción
+        /// </summary>
         private void ShowExceptionAlert()
         {
             if (language.Equals("es-MX"))

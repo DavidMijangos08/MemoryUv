@@ -33,6 +33,13 @@ namespace Client
         string section;
         string difficulty;
         MemoryServer service;
+
+        /// <summary>
+        /// Constructor de la clase PreGame en donde se inicializan los diversos componentes
+        /// </summary>
+        /// <param name="receivedUsers" >Corresponde a la lista de usuarios de la sala</param>
+        /// <param name="section"> Corresponde a la seleccion del juego</param>
+        /// <param name="difficulty">Corresponde a la dificultad del juego</param>
         string language = "es-MX";
         public PreGame(List<UserGame> receivedUsers, string section, string difficulty)
         {
@@ -81,6 +88,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que regresa a la ventana anterior
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ExitClick(object sender, RoutedEventArgs e)
         {
             try
@@ -103,6 +115,11 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que inicia la ventana de juego
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ClicStartGame(object sender, RoutedEventArgs e)
         {
             try
@@ -120,6 +137,10 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que actualiza los estados de los usuarios en sala
+        /// </summary>
+        /// <param name="userPreGame"> Corresponde al dicionario donde se coleccionan los usuarios de la sala preGame </param>
         public void UpdateUsersRoom(Dictionary<object, string>.ValueCollection usersPreGame)
         {
             lbUsergame1.Text = "";
@@ -137,6 +158,9 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que recibe el acceso al juego
+        /// </summary>
         public void RecieveAccessGame()
         {
             try
@@ -152,6 +176,10 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que recibe la notificacion de sala cancelada
+        /// </summary>
+        /// <param name="userDisconnected"> Corresponde al usuario desconectado </param>
         public void RecieveExitNotification(string userDisconnected)
         {
             string message;
@@ -167,6 +195,11 @@ namespace Client
             lbNotification.Text = message;
         }
 
+        /// <summary>
+        /// Método que acepta y avanza a la sala
+        /// </summary>
+        /// <param name="sender"> Corresponde al objeto del método </param>
+        /// <param name="e"> Corresponde al evento del método </param>
         private void ClickAccept(object sender, RoutedEventArgs e)
         {
             try
@@ -182,12 +215,20 @@ namespace Client
             }
         }
 
+        /// <summary>
+        /// Método que recibe la configuracion del juego
+        /// </summary>
+        /// <param name="section"> Corresponde a la seccion seleccionada </param>
+        /// <param name="difficulty"> Corresponde a la dificultad seleccionada </param>
         public void ReceiveConfigurationGame(string section, string difficulty)
         {
             this.section = section;
             this.difficulty = difficulty;
         }
 
+        /// <summary>
+        /// Método que muestra la alerta en caso de excepción
+        /// </summary>
         private void ShowExceptionAlert()
         {
             if (language.Equals("es-MX"))
