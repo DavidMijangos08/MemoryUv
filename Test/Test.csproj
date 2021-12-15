@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticationTest.cs" />
+    <Compile Include="ConfigUserTest.cs" />
     <Compile Include="FriendLogicTest.cs" />
     <Compile Include="FriendRequestTest.cs" />
     <Compile Include="StatisticUserTest.cs" />

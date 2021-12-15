@@ -58,7 +58,6 @@ namespace Logic
             {
                 string background = "Resources/Background/backgroundIce.png";
                 return background;
-                //test
             }
             else if (confi.idBackground == 3)
             {
