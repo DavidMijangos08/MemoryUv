@@ -82,5 +82,14 @@ namespace Test
             }
             Assert.IsTrue(added);
         }
+
+        [TestMethod]
+        public void TestExistsStatisticUser()
+        {
+            StatisticUserLogic statisticUserLogic = new StatisticUserLogic();
+            bool exists = false;
+            exists = statisticUserLogic.ExistsStatisticUser(1);
+            Assert.IsTrue(exists);
+        }
     }
 }

@@ -51,6 +51,12 @@ namespace Client
                         {
                             service.NewConfigUser(user.id);
                         }
+
+                        if (!service.ExistsStatisticUser(user.id))
+                        {
+                            service.AddedStatisticUser(user.id, user.nametag);
+                        }
+
                         Home windowHome = new Home(user);
                         windowHome.Show();
                         this.Hide();
