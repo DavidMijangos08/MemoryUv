@@ -37,10 +37,10 @@ namespace Client
             InitializeComponent();
             language = Properties.Settings.Default.languageCode;
             InitializeArchievement();
+            service = new MemoryServer();
             try
             {
-                this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));
-                
+                this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));   
             }
             catch (SystemException)
             {
@@ -56,7 +56,7 @@ namespace Client
             service = new MemoryServer();
             try
             {
-                if (service.GetStatisticUser(userGame.id, 1) == true)
+                if (service.GetStatisticUser(userGame.id, 1))
                 {
                     lbAchievement1.IsEnabled = true;
                     imgAchievement1.Opacity = 100;

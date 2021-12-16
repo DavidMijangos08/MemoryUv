@@ -14,8 +14,8 @@
         <Label x:Name="lbSettings" Content="{x:Static p:Lang.lbSettings}" FontSize="40" HorizontalAlignment="Left" Margin="435,30,0,0" VerticalAlignment="Top" FontFamily="Segoe Script" FontWeight="Bold"/>
 
         <Label Content="{x:Static p:Lang.lbLanguage}" HorizontalAlignment="Left" Margin="435,127,0,0" VerticalAlignment="Top"/>
-        <Label Content="{x:Static p:Lang.lbSound}" HorizontalAlignment="Left" Margin="435,227,0,0" VerticalAlignment="Top"/>
-        <Label Content="{x:Static p:Lang.lbVisual}" HorizontalAlignment="Left"  Margin="435,179,0,0"  VerticalAlignment="Top"/>
+        <Label Content="{x:Static p:Lang.lbSound}" HorizontalAlignment="Left" Margin="435,227,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <Label Content="{x:Static p:Lang.lbVisual}" HorizontalAlignment="Left"  Margin="435,179,0,0"  VerticalAlignment="Top" Visibility="Hidden"/>
         <Label Content="{x:Static p:Lang.lbSound}" HorizontalAlignment="Left" Margin="435,227,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
         <Label Content="{x:Static p:Lang.lbVisual}" HorizontalAlignment="Left"  Margin="435,179,0,0"  VerticalAlignment="Top" Visibility="Hidden"/>
             <ComboBox x:Name="cbLanguage" HorizontalAlignment="Left" Margin="533,130,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="IdiomsSelectionChanged"     >

@@ -34,7 +34,8 @@ namespace Client
             userGame = _user;
             try
             {
-                this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(userGame.id))));              
+                service = new MemoryServer();
+                this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), service.GetBackgroundUser(_user.id))));              
             }
             catch (SystemException)
             {

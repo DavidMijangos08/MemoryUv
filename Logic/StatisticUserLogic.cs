@@ -62,14 +62,12 @@ namespace Logic
                             if (statisticuser.totalWins > 1)
                             {
                                 exists = true;
-                                
-                                return exists;
                             }                           
                         }
                     }
                     else if (numAchievement == 2)
                     {
-                        var concidences = (from StatisticUser in context.StatisticsUser where StatisticUser.idUser == idUser select StatisticUser);
+                        var concidences = from StatisticUser in context.StatisticsUser where StatisticUser.idUser == idUser select StatisticUser;
 
                         if (concidences.Count() > 0)
                         {
@@ -77,13 +75,12 @@ namespace Logic
                             if (statisticuser.totalWins > 10)
                             {
                                 exists = true;
-                                return exists;
                             }
                         }
                     }
                     else if (numAchievement == 3)
                     {
-                        var concidences = (from StatisticUser in context.StatisticsUser where StatisticUser.idUser == idUser select StatisticUser);
+                        var concidences = from StatisticUser in context.StatisticsUser where StatisticUser.idUser == idUser select StatisticUser;
 
                         if (concidences.Count() > 0)
                         {
@@ -103,20 +100,18 @@ namespace Logic
                         {
                             Friend statisticuser = concidences.First();
                             exists = true;
-                            return exists;
                         }
                     }
                     else if (numAchievement == 5)
                     {
-                        var concidences = (from StatisticUser in context.StatisticsUser where StatisticUser.idUser == idUser select StatisticUser);
+                        var concidences = from StatisticUser in context.StatisticsUser where StatisticUser.idUser == idUser select StatisticUser;
 
                         if (concidences.Count() > 0)
                         {
                             StatisticUser statisticuser = concidences.First();
-                            if (statisticuser.totalDefeat > 1)
+                            if (statisticuser.totalDefeat >= 1)
                             {
                                 exists = true;
-                                return exists;
                             }
 
                         }
