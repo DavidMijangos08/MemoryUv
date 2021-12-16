@@ -1,5 +1,0 @@
-﻿C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Host\Program.cs
-C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Host\Properties\AssemblyInfo.cs
-C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Host\App.config
-C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Host\log4net.config
-C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Host\packages.config

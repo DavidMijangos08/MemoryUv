@@ -1,10 +1,131 @@
-﻿C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\ConfigUser.cs
-C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\Friend.cs
-C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\FriendRequest.cs
-C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\MemoryModel.cs
-C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\Properties\AssemblyInfo.cs
-C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\StatisticUser.cs
-C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\UserGame.cs
-C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\App.Config
-C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\packages.config
-C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Data\Properties\DataSources\User.datasource
+﻿C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\App.xaml
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\App.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\ChangePassword.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Domain\Card.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\FriendRequests.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Friends.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Game.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Home.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Achievement.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Personalize.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\PreGame.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Procesos.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Ranking.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Register.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Room.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Settings.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Chat.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Login.xaml.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Properties\AssemblyInfo.cs
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\10.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\11.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Sound\GameSoundtrack.mp3
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Sound\song.wav
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Properties\Langs\Lang.resx
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Properties\Resources-US-en.resx
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Properties\Resources.resx
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Properties\Langs\Lang.es.resx
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\app.config
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\ChatService\item.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\ChatService\item1.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\ChatService\item2.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\ChatService\item3.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\ChatService\MemoryServer.wsdl
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\GameService\item.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\GameService\item1.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\GameService\item2.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\GameService\item3.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\GameService\MemoryServer.wsdl
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\PreGameService\item.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\PreGameService\item1.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\PreGameService\item2.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\PreGameService\item3.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\PreGameService\MemoryServer.wsdl
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\RoomService\item.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\RoomService\item1.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\RoomService\item2.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\RoomService\item3.xsd
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\RoomService\MemoryServer.wsdl
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\packages.config
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Properties\Settings.settings
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\GameService\item.disco
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\GameService\configuration91.svcinfo
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\GameService\configuration.svcinfo
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\GameService\Reference.svcmap
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\ChatService\item.disco
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\ChatService\configuration91.svcinfo
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\ChatService\configuration.svcinfo
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\ChatService\Reference.svcmap
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\RoomService\item.disco
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\RoomService\configuration91.svcinfo
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\RoomService\configuration.svcinfo
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\RoomService\Reference.svcmap
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\PreGameService\item.disco
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\PreGameService\configuration91.svcinfo
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\PreGameService\configuration.svcinfo
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Connected Services\PreGameService\Reference.svcmap
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\ChangePassword.xaml
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Chat.xaml
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\FriendRequests.xaml
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Friends.xaml
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Game.xaml
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Home.xaml
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Login.xaml
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Achievement.xaml
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Personalize.xaml
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\PreGame.xaml
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Procesos.xaml
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Ranking.xaml
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Register.xaml
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Room.xaml
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Settings.xaml
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Images\fondo1.gif
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Images\logro0.gif
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Images\achievement1.jpg
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Images\achievement2.jpg
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Images\achievement3.jpg
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Images\achievement4.jpg
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Images\achievement5.jpg
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Images\logro2.gif
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\1.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\2.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\3.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\4.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\5.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\6.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\7.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\8.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\9.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\12.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\13.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\14.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\15.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\16.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\17.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\AFEL\18.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Carreras\1.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Carreras\2.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Carreras\3.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Carreras\4.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Carreras\5.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Carreras\6.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Carreras\7.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Carreras\8.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Carreras\9.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Carreras\10.jpg
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Carreras\11.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Carreras\13.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Carreras\14.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Carreras\15.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Carreras\16.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Carreras\12.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Carreras\18.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Carreras\17.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Images\user0.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Images\vs0.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Background\backgroundDefault.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Background\backgroundGreen.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Background\backgroundIce.png
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Background\backgroundPink.jpg
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Background\backgroundRed.jpg
+C:\Users\kevin\source\repos\DavidMijangos08\MemoryUv\Client\Resources\Background\backgroundX.jpg
