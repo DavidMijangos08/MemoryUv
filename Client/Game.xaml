@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:Client"
         xmlns:p="clr-namespace:Client.Properties.Langs"
         mc:Ignorable="d"
-        Closing="WindowClosing"
         Title="Game" Height="700" Width="1200">
     <Grid Margin="0,0,0,-56">
         <Grid.Background>

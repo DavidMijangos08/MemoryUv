@@ -22,7 +22,6 @@ namespace Client
     public partial class Game : Window, GameService.IGameServiceCallback
     {
         MemoryServer service;
-        bool isDataDirty = false;
         string language;
         public GameService.GameServiceClient client;
         UserGame userConnected;
@@ -235,7 +234,7 @@ namespace Client
                 bool addedGameWon = service.AddOneWinGame(userConnected.id);
                 if (addedGameWon)
                 {
-                    this.Close();
+                    Close();
                     Home home = new Home(userConnected);
                     home.Show();
                 }
@@ -265,7 +264,7 @@ namespace Client
                 bool addedGameLosing = service.AddOneLoseGame(userConnected.id);
                 if (addedGameLosing)
                 {
-                    this.Close();
+                    Close();
                     Home home = new Home(userConnected);
                     home.Show();
                 }
@@ -1320,17 +1319,6 @@ namespace Client
                 MessageBox.Show("A system error occurred, please try again later.");
             }
             this.Close();
-        }
-
-        /// <summary>
-        /// Método que controla la salida del juego desde la X de la ventana
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-
-        private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            gridConfirmation.Visibility = Visibility.Visible;
         }
     }
 }
