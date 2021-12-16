@@ -23,15 +23,15 @@ namespace Client
     /// Lógica de interacción para Room.xaml
     /// </summary>
     public partial class Room : Window, RoomService.IRoomServiceCallback
-    { 
-        UserGame usergame = new UserGame();
+    {
+        UserGame usergame;
         MemoryServer service;
-        public RoomService.RoomServiceClient client;
+        RoomService.RoomServiceClient client;
         string usergameApplicant;
         string usergameInvited;
         string section;
         string difficulty;
-        string language = "es-MX";
+        string language;
 
         /// <summary>
         /// Constructor de la clase Room en donde se inicializan los diversos componentes

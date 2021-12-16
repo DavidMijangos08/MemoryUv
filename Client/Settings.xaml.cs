@@ -24,10 +24,10 @@ namespace Client
     /// </summary>
     public partial class Settings : Window
     {
-        
-        UserGame userGame = new UserGame();
+
+        UserGame userGame;
         MemoryServer service;
-        string language = "es-MX";
+        string language;
 
         public Settings(UserGame _user)
         {

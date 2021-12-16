@@ -22,11 +22,12 @@ namespace Client
     public partial class Game : Window, GameService.IGameServiceCallback
     {
         MemoryServer service;
-        string language = "es-MX";
+        bool isDataDirty = false;
+        string language;
         public GameService.GameServiceClient client;
-        UserGame userConnected = new UserGame();
-        UserGame userOpponent = new UserGame();
-        UserGame userAdmin = new UserGame();
+        UserGame userConnected;
+        UserGame userOpponent;
+        UserGame userAdmin;
         DispatcherTimer dispatcherTimer;
         int decrement;
         string section;
@@ -53,6 +54,7 @@ namespace Client
         {
             InitializeComponent();
             language = Properties.Settings.Default.languageCode;
+            this.section = section;
             try
             {
                 InstanceContext context = new InstanceContext(this);
@@ -70,7 +72,6 @@ namespace Client
             {
                 ShowExceptionAlert();
             }
-            this.section = section;
             lbUserAdminPoints.Text = pointsAdmin.ToString();
             lbUserOpponentPoints.Text = pointsOpponent.ToString();
             canvaGame.IsHitTestVisible = false;

@@ -14,7 +14,7 @@
                 <Label Content="{x:Static p:Lang.lbLogin}" FontSize="50" HorizontalAlignment="Center" Margin="271,10,294,-10" RenderTransformOrigin="0.255,-0.745" Width="147"  />
                 <TextBox Name="Usuario" FontSize="15" Margin="266,150,183.6,-87.2" />
 
-                <Button Name="ButtonLogin" Content="{x:Static p:Lang.btnLogin}" HorizontalAlignment="Right" Click="ButtonLogin_Click" Margin="0,283,176,-224" RenderTransformOrigin="0.5,0.503" Width="78"  >
+                <Button Name="ButtonLogin" Content="{x:Static p:Lang.btnLogin}" HorizontalAlignment="Right" Click="ButtonLoginClick" Margin="0,283,176,-224" RenderTransformOrigin="0.5,0.503" Width="78"  >
                     <Button.Effect>
                         <DropShadowEffect/>
                     </Button.Effect>

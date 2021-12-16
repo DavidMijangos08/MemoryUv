@@ -23,9 +23,9 @@ namespace Client
     /// </summary>
     public partial class Logros : Window
     {
-        UserGame userGame = new UserGame();
+        UserGame userGame;
         MemoryServer service;
-        string language = "es-MX";
+        string language;
 
         /// <summary>
         /// Constructor de la clase Logros en donde se inicializan los diversos componentes
