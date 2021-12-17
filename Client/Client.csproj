@@ -391,24 +391,24 @@
     <Resource Include="Resources\AFEL\18.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Carreras\1.png" />
-    <Resource Include="Resources\Carreras\2.png" />
-    <Resource Include="Resources\Carreras\3.png" />
-    <Resource Include="Resources\Carreras\4.png" />
-    <Resource Include="Resources\Carreras\5.png" />
-    <Resource Include="Resources\Carreras\6.png" />
-    <Resource Include="Resources\Carreras\7.png" />
-    <Resource Include="Resources\Carreras\8.png" />
-    <Resource Include="Resources\Carreras\9.png" />
-    <Resource Include="Resources\Carreras\10.jpg" />
-    <Resource Include="Resources\Carreras\11.png" />
-    <Resource Include="Resources\Carreras\13.png" />
-    <Resource Include="Resources\Carreras\14.png" />
-    <Resource Include="Resources\Carreras\15.png" />
-    <Resource Include="Resources\Carreras\16.png" />
-    <Resource Include="Resources\Carreras\12.png" />
-    <Resource Include="Resources\Carreras\18.png" />
-    <Resource Include="Resources\Carreras\17.png" />
+    <Resource Include="Resources\Carrera\1.png" />
+    <Resource Include="Resources\Carrera\2.png" />
+    <Resource Include="Resources\Carrera\3.png" />
+    <Resource Include="Resources\Carrera\4.png" />
+    <Resource Include="Resources\Carrera\5.png" />
+    <Resource Include="Resources\Carrera\6.png" />
+    <Resource Include="Resources\Carrera\7.png" />
+    <Resource Include="Resources\Carrera\8.png" />
+    <Resource Include="Resources\Carrera\9.png" />
+    <Resource Include="Resources\Carrera\10.jpg" />
+    <Resource Include="Resources\Carrera\11.png" />
+    <Resource Include="Resources\Carrera\13.png" />
+    <Resource Include="Resources\Carrera\14.png" />
+    <Resource Include="Resources\Carrera\15.png" />
+    <Resource Include="Resources\Carrera\16.png" />
+    <Resource Include="Resources\Carrera\12.png" />
+    <Resource Include="Resources\Carrera\18.png" />
+    <Resource Include="Resources\Carrera\17.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\user0.png" />

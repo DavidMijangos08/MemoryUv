@@ -113,15 +113,33 @@ namespace Client
             {
                 section = cbSection.Text;
                 difficulty = cbDifficulty.Text;
-                object itemSelected = listFriends.SelectedItem;
-                usergameInvited = itemSelected.ToString();
-                try
+                if (section.Equals("Study"))
                 {
-                    client.SendInvitation(usergame.nametag, usergameInvited);
+                    section = "Carrera";
                 }
-                catch (CommunicationException)
+                object itemSelected = listFriends.SelectedItem;
+                if(itemSelected != null)
                 {
-                    ShowExceptionAlert();
+                    usergameInvited = itemSelected.ToString();
+                    try
+                    {
+                        client.SendInvitation(usergame.nametag, usergameInvited);
+                    }
+                    catch (CommunicationException)
+                    {
+                        ShowExceptionAlert();
+                    }
+                }
+                else
+                {
+                    if (language.Equals("es-MX"))
+                    {
+                        MessageBox.Show("Debes seleccionar un amigo");
+                    }
+                    else
+                    {
+                        MessageBox.Show("You must select a friend");
+                    }
                 }
             }
             else
