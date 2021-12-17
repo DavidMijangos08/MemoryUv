@@ -72,7 +72,7 @@ namespace Logic
                         if (concidences.Count() > 0)
                         {
                             StatisticUser statisticuser = concidences.First();
-                            if (statisticuser.totalWins > 10)
+                            if (statisticuser.totalWins >= 10)
                             {
                                 exists = true;
                             }
@@ -85,7 +85,7 @@ namespace Logic
                         if (concidences.Count() > 0)
                         {
                             StatisticUser statisticuser = concidences.First();
-                            if (statisticuser.totalWins > 250)
+                            if (statisticuser.totalWins >= 250)
                             {
                                 exists = true;
                                 return exists;
@@ -96,7 +96,7 @@ namespace Logic
                     {
                         var concidences = (from Friend in context.Friends where Friend.idUser == idUser select Friend).ToList();
 
-                        if (concidences.Count() > 2)
+                        if (concidences.Count() >= 2)
                         {
                             Friend statisticuser = concidences.First();
                             exists = true;
