@@ -380,8 +380,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Resources\AFEL\10.png" />
-    <Content Include="Resources\AFEL\11.png" />
     <Resource Include="Resources\AFEL\12.png" />
     <Resource Include="Resources\AFEL\13.png" />
     <Resource Include="Resources\AFEL\14.png" />
@@ -400,7 +398,6 @@
     <Resource Include="Resources\Carrera\7.png" />
     <Resource Include="Resources\Carrera\8.png" />
     <Resource Include="Resources\Carrera\9.png" />
-    <Resource Include="Resources\Carrera\10.jpg" />
     <Resource Include="Resources\Carrera\11.png" />
     <Resource Include="Resources\Carrera\13.png" />
     <Resource Include="Resources\Carrera\14.png" />
@@ -440,6 +437,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Resource Include="Resources\AFEL\10.png" />
+    <Resource Include="Resources\AFEL\11.png" />
+    <Resource Include="Resources\Carrera\10.png" />
     <Content Include="Resources\Sound\GameSoundtrack.mp3" />
     <Content Include="Resources\Sound\song.wav" />
   </ItemGroup>
